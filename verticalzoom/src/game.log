@@ -1,0 +1,276 @@
+Block begin: blitManagerCreate...OK, time:  60.0 us
+Block begin: copCreate()
+	Block begin: copListCreate()
+		Addr: 0x223d1c
+		BLOCK mode
+	Block end: copListCreate(), time: >7min
+Block end: copCreate(), time: >7min
+Block begin: gameCreate()...OK, time:  40.4 us
+Hello, Amiga!nBlock begin: keyCreate()...OK, time:  54.4 us
+Block begin: gamePushState(cbCreate: 0x271188, cbLoop: 0x271772, cbDestroy: 0x271ddc)...OK, time:   2.527 ms
+Block begin: viewCreate(pTags: 0)
+	addr: 0x224874
+	Block begin: copListCreate()
+		Addr: 0x22488c
+		RAW mode, size: 1040 + WAIT(0xFFFF)
+	Block end: copListCreate(), time:   2.296 ms
+	Global CLUT mode enabled
+Block end: viewCreate(), time: >7min
+Block begin: vPortCreate(pTagList: 0)
+	Addr: 0x2249ec
+	Parent view: 0x224874
+	Offsets: 0x0
+	Dimensions: 320x256@4
+	No prev VPorts - added to head
+Block end: vPortCreate(), time: >7min
+Block begin: simpleBufferCreate(pTags: 0, ...)
+	Addr: 0x224a4c
+	Parent VPort: 0x2249ec
+	Bounds: 320x256
+	Block begin: bitmapCreate(uwWidth: 320, uwHeight: 256, ubDepth: 4, ubFlags: 1)
+		addr: 0x2249ac
+	Block end: bitmapCreate(), time: >7min
+	Block begin: cameraCreate(pVPort: 0x2249ec, uwPosX: 0, uwPosY: 0, uwMaxX: 320, uwMaxY: 256, isDblBfr: 0)
+		Addr: 0x224ad4
+		Resetting camera bounds...
+		Block begin: cameraReset(pManager: 0x224ad4, uwStartX: 0, uwStartY: 0, uwWidth: 320, uwHeight: 256, isDblBfr: 0)
+			Camera max coord: 0,0
+		Block end: cameraReset(), time:   3.955 ms
+		Attaching camera to VPort...
+		Manager 0x224ad4 attached to head of VP 0x2249ec
+	Block end: cameraCreate(), time:   9.943 ms
+	Copperlist offset: 0
+	Block begin: simpleBufferSetFront(pManager: 0x224a4c, pFront: 0x2249ac)
+		Modulo: 0
+		Setting copperlist 0x2248e4 at offs 0
+	Block end: simplebufferSetFront(), time:   6.460 ms
+	Manager 0x224a4c attached after manager 0x224ad4 of VP 0x2249ec
+Block end: simpleBufferCreate(), time: >7min
+Block begin: viewLoad(pView: 0x224874)...OK, time:   7.282 ms
+Impostato movearray a 1 all'indice 1
+Righe sotto consecutive : 0
+Imposto singolo mod alla riga : 2
+Impostato movearray a 1 all'indice 2
+Righe sotto consecutive : 1
+Imposto singolo mod alla riga : 3
+Mod aggiuntivo a zero per indice : 4
+Impostato movearray a 1 all'indice 4
+Righe sotto consecutive : 1
+Imposto singolo mod alla riga : 4
+Mod aggiuntivo a zero per indice : 5
+Righe sotto consecutive : 0
+Imposto singolo mod alla riga : 5
+Impostato movearray a 1 all'indice 5
+Righe sotto consecutive : 1
+Imposto singolo mod alla riga : 5
+Mod aggiuntivo a zero per indice : 6
+Righe sotto consecutive : 1
+Imposto singolo mod alla riga : 6
+Mod aggiuntivo a zero per indice : 7
+Impostato movearray a 1 all'indice 6
+Righe sotto consecutive : 1
+Imposto singolo mod alla riga : 6
+Mod aggiuntivo a zero per indice : 7
+Righe sotto consecutive : 2
+Imposto singolo mod alla riga : 7
+Mod aggiuntivo a zero per indice : 8
+Mod aggiuntivo a zero per indice : 9
+Impostato movearray a 1 all'indice 7
+Righe sotto consecutive : 1
+Imposto singolo mod alla riga : 7
+Mod aggiuntivo a zero per indice : 8
+Righe sotto consecutive : 3
+Imposto singolo mod alla riga : 8
+Mod aggiuntivo a zero per indice : 9
+Mod aggiuntivo a zero per indice : 10
+Mod aggiuntivo a zero per indice : 11
+Impostato movearray a 1 all'indice 8
+Righe sotto consecutive : 1
+Imposto singolo mod alla riga : 8
+Mod aggiuntivo a zero per indice : 9
+Righe sotto consecutive : 4
+Imposto singolo mod alla riga : 9
+Mod aggiuntivo a zero per indice : 10
+Mod aggiuntivo a zero per indice : 11
+Mod aggiuntivo a zero per indice : 12
+Mod aggiuntivo a zero per indice : 13
+Impostato movearray a 1 all'indice 9
+Righe sotto consecutive : 1
+Imposto singolo mod alla riga : 9
+Mod aggiuntivo a zero per indice : 10
+Righe sotto consecutive : 5
+Imposto singolo mod alla riga : 10
+Mod aggiuntivo a zero per indice : 11
+Mod aggiuntivo a zero per indice : 12
+Mod aggiuntivo a zero per indice : 13
+Mod aggiuntivo a zero per indice : 14
+Mod aggiuntivo a zero per indice : 15
+Impostato movearray a 1 all'indice 10
+Righe sotto consecutive : 1
+Imposto singolo mod alla riga : 10
+Mod aggiuntivo a zero per indice : 11
+Righe sotto consecutive : 6
+Imposto singolo mod alla riga : 11
+Mod aggiuntivo a zero per indice : 12
+Mod aggiuntivo a zero per indice : 13
+Mod aggiuntivo a zero per indice : 14
+Mod aggiuntivo a zero per indice : 15
+Mod aggiuntivo a zero per indice : 16
+Mod aggiuntivo a zero per indice : 17
+Impostato movearray a 1 all'indice 11
+Righe sotto consecutive : 1
+Imposto singolo mod alla riga : 11
+Mod aggiuntivo a zero per indice : 12
+Righe sotto consecutive : 7
+Imposto singolo mod alla riga : 12
+Mod aggiuntivo a zero per indice : 13
+Mod aggiuntivo a zero per indice : 14
+Mod aggiuntivo a zero per indice : 15
+Mod aggiuntivo a zero per indice : 16
+Mod aggiuntivo a zero per indice : 17
+Mod aggiuntivo a zero per indice : 18
+Mod aggiuntivo a zero per indice : 19
+Iimpostato movearray a 1 all'indice 13
+Righe sotto consecutive : 1
+Imposto singolo mod alla riga : 11
+Mod aggiuntivo a zero per indice : 12
+Righe sotto consecutive : 7
+Imposto singolo mod alla riga : 12
+Mod aggiuntivo a zero per indice : 13
+Mod aggiuntivo a zero per indice : 14
+Mod aggiuntivo a zero per indice : 15
+Mod aggiuntivo a zero per indice : 16
+Mod aggiuntivo a zero per indice : 17
+Mod aggiuntivo a zero per indice : 18
+Mod aggiuntivo a zero per indice : 19
+Righe sotto consecutive : 0
+Imposto singolo mod alla riga : 13
+Iimpostato movearray a 1 all'indice 12
+Righe sotto consecutive : 1
+Imposto singolo mod alla riga : 11
+Mod aggiuntivo a zero per indice : 12
+Righe sotto consecutive : 9
+Imposto singolo mod alla riga : 12
+Mod aggiuntivo a zero per indice : 13
+Mod aggiuntivo a zero per indice : 14
+Mod aggiuntivo a zero per indice : 15
+Mod aggiuntivo a zero per indice : 16
+Mod aggiuntivo a zero per indice : 17
+Mod aggiuntivo a zero per indice : 18
+Mod aggiuntivo a zero per indice : 19
+Mod aggiuntivo a zero per indice : 20
+Mod aggiuntivo a zero per indice : 21
+Iimpostato movearray a 1 all'indice 14
+Righe sotto consecutive : 1
+Imposto singolo mod alla riga : 11
+Mod aggiuntivo a zero per indice : 12
+Righe sotto consecutive : 10
+Imposto singolo mod alla riga : 12
+Mod aggiuntivo a zero per indice : 13
+Mod aggiuntivo a zero per indice : 14
+Mod aggiuntivo a zero per indice : 15
+Mod aggiuntivo a zero per indice : 16
+Mod aggiuntivo a zero per indice : 17
+Mod aggiuntivo a zero per indice : 18
+Mod aggiuntivo a zero per indice : 19
+Mod aggiuntivo a zero per indice : 20
+Mod aggiuntivo a zero per indice : 21
+Mod aggiuntivo a zero per indice : 22
+Iimpostato movearray a 1 all'indice 15
+Righe sotto consecutive : 1
+Imposto singolo mod alla riga : 11
+Mod aggiuntivo a zero per indice : 12
+Righe sotto consecutive : 11
+Imposto singolo mod alla riga : 12
+Mod aggiuntivo a zero per indice : 13
+Mod aggiuntivo a zero per indice : 14
+Mod aggiuntivo a zero per indice : 15
+Mod aggiuntivo a zero per indice : 16
+Mod aggiuntivo a zero per indice : 17
+Mod aggiuntivo a zero per indice : 18
+Mod aggiuntivo a zero per indice : 19
+Mod aggiuntivo a zero per indice : 20
+Mod aggiuntivo a zero per indice : 21
+Mod aggiuntivo a zero per indice : 22
+Mod aggiuntivo a zero per indice : 23
+Iimpostato movearray a 1 all'indice 16
+Righe sotto consecutive : 1
+Imposto singolo mod alla riga : 11
+Mod aggiuntivo a zero per indice : 12
+Righe sotto consecutive : 12
+Imposto singolo mod alla riga : 12
+Mod aggiuntivo a zero per indice : 13
+Mod aggiuntivo a zero per indice : 14
+Mod aggiuntivo a zero per indice : 15
+Mod aggiuntivo a zero per indice : 16
+Mod aggiuntivo a zero per indice : 17
+Mod aggiuntivo a zero per indice : 18
+Mod aggiuntivo a zero per indice : 19
+Mod aggiuntivo a zero per indice : 20
+Mod aggiuntivo a zero per indice : 21
+Mod aggiuntivo a zero per indice : 22
+Mod aggiuntivo a zero per indice : 23
+Mod aggiuntivo a zero per indice : 24
+Iimpostato movearray a 1 all'indice 17
+Righe sotto consecutive : 1
+Imposto singolo mod alla riga : 11
+Mod aggiuntivo a zero per indice : 12
+Righe sotto consecutive : 13
+Imposto singolo mod alla riga : 12
+Mod aggiuntivo a zero per indice : 13
+Mod aggiuntivo a zero per indice : 14
+Mod aggiuntivo a zero per indice : 15
+Mod aggiuntivo a zero per indice : 16
+Mod aggiuntivo a zero per indice : 17
+Mod aggiuntivo a zero per indice : 18
+Mod aggiuntivo a zero per indice : 19
+Mod aggiuntivo a zero per indice : 20
+Mod aggiuntivo a zero per indice : 21
+Mod aggiuntivo a zero per indice : 22
+Mod aggiuntivo a zero per indice : 23
+Mod aggiuntivo a zero per indice : 24
+Mod aggiuntivo a zero per indice : 25
+Iimpostato movearray a 1 all'indice 3
+Righe sotto consecutive : 16
+Imposto singolo mod alla riga : 11
+Mod aggiuntivo a zero per indice : 12
+Mod aggiuntivo a zero per indice : 13
+Mod aggiuntivo a zero per indice : 14
+Mod aggiuntivo a zero per indice : 15
+Mod aggiuntivo a zero per indice : 16
+Mod aggiuntivo a zero per indice : 17
+Mod aggiuntivo a zero per indice : 18
+Mod aggiuntivo a zero per indice : 19
+Mod aggiuntivo a zero per indice : 20
+Mod aggiuntivo a zero per indice : 21
+Mod aggiuntivo a zero per indice : 22
+Mod aggiuntivo a zero per indice : 23
+Mod aggiuntivo a zero per indice : 24
+Mod aggiuntivo a zero per indice : 25
+Mod aggiuntivo a zero per indice : 26
+Mod aggiuntivo a zero per indice : 27
+Block begin: keyDestroy()...OK, time: >7min
+Goodbye, Amiga
+alessio 2
+Block begin: viewDestroy(pView: 0x224874)
+	Block begin: viewLoad(pView: 0)...OK, time:  11.907 ms
+	Block begin: vPortDestroy(pVPort: 0x2249ec)
+		Parent extView: 0x224874
+		found VP: 0x2249ec... gotcha!
+		Block begin: Destroying managers
+			Destroying manager 128 @addr: 0x224ad4
+			cameraManagerDestroy...OK! 
+			Destroying manager 0 @addr: 0x224a4c
+			Block begin: simpleBufferDestroy()
+				Block begin: bitmapDestroy(pBitMap: 0x2249ac)...OK, time: >7min
+			Block end: simpleBufferDestroy(), time: >7min
+		Block end: Destroying managers, time: >7min
+	Block end: vPortDestroy(), time:   6.536 ms
+	Freeing copperlists...
+	Block begin: copListDestroy(pCopList: 0x22488c)...OK, time:  14.038 ms
+Block end: viewDestroy(), time:   6.050 ms
+Block begin: copDestroy()
+	Block begin: copListDestroy(pCopList: 0x223d1c)...OK, time: >7min
+Block end: copDestroy(), time: >7min
+Block begin: blitManagerDestroy...OK, time:  59.6 us
+Log closed successfully

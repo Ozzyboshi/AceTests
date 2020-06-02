@@ -1,0 +1,99 @@
+#### Vertical zoom su amiga classic
+Tempo fa mi sono imbattuto su questo articolo pubblicizzato sul canale telegram dei vampiri:
+https://www.stashofcode.fr/zoom-hardware-avec-bplxmod-et-bplcon1-sur-amiga/
+
+L'articolo tratta le routine di ZOOM effettuate utilizzando hardware Amiga che sono state utilizzate in molte demo, una su tutte World of commodore (spettacolare) che apre con un bellissimo zoom verticale e orizzontale di un immagine.
+Giusto per dare una idea : https://www.youtube.com/watch?v=u43uH-kQpzk&t=100s  
+
+Ho tentato con google translator di tradurre dal francese all'italiano quanto riportato dal sito stashofcode.fr, in parte penso di aver capito cosa c'è scritto ma alcune cose sono ancora molto nebulose per me.  
+Alla fine ho provato a inventarmi una tecnica tutta mia prefissandomi un obbiettivo, fare uno zoom verticale in e out di una immagine usando i bplXmod hardware di Amiga su di una copperlist.  
+Lo zoom verticale per ovvie ragioni è estremamente piu facile di quello orizzontale che per ora preferisco tralasciare e poi se ho capito bene ci sono delle limitazioni non da poco che mi invogliano piu che altro ad analizzare solo il verticale.  
+
+#### Come nascondere
+Seguendo i consigli di stashofcode voglio andare a nascondere le righe dell'immagine in maniera uniforme cercando di far perdere informazioni dell'immagine non in modo consecutivo che risulterebbe in un semplice taglio dell'immagine.
+Utilizzando il programmino di stashofcode in html5 (con il quale ho avuto non pochi problemi perché i moderni browsers non ne permettono l'esecuzione per via dei CORS) mi sono estratto un array che contiene l'ordine di righe da nascondere e lo ho copia/incollato nel mio programma.
+
+#### Codice
+Ok adesso basta discussioni e partiamo con uno pseudocodice che mi sono inventato.
+
+##### Parte 1, costruire una coppeerlist
+La copperlist che ho in mente è una in cui, oltre ai canonici puntamenti di bitplanes, azzeramenti di sprite, impostazione bplconX ecc debba andare ad aspettare l'inizio di ogni singola riga di cui si compone l'immagine.  
+L'immagine che ho scelto è di risoluzione 320X256 (una valchiria dell'utente dr procton) a 16 colori, quindi, la copperlist deve aspettare 256 posizioni + una per resettare bplmod nel caso 255 sia impostato. 
+
+Ogni riga dell'immagine ha quindi un corrispondente punto in copperlist dove si aspetta il suo inizio e questo punto inizia con:
+
+```
+XX07FFFE
+```
+
+Dove XX è il numero di riga partendo da zero + 0x2c (44 decimale)
+A seguito del wait la copperlist viene inizializzata con 2 istruzioni, la prima imposta bpl1mod a 0 la seconda bpl2mod a zero (per bitplanes pari e dispari).
+Una ulteriore istruzione viene aggiunta nel caso la posiione del pennello elettronico sia in 255-43 perché aspetti la fine della riga 255 per andare oltre essa, il che si tramuta con un DFFF.
+
+Quindi alla fine abbiamo 256*4 istruzioni in copperlist aggiuntive da dover gestire.
+
+##### Parte 2, semplifichiamo le cose con un array helper
+Per semplificare usiamo un array di appoggio di 256 bytes, ogni byte conterrà 0 se la riga deve essere mostrato e 1 se deve essere nascosta.
+Alla pressione di un tasto (ad esempio Z), verrà nascosta una riga andando in ordine dall'array copiato dal programma html5 in questo modo.
+
+```
+// Estraggo numero della riga da nascondere
+UWORD uwRowIndex = s_uwRawToHide[s_iHideCounter];
+
+// La contrassegno come da nascondere sull'array helper
+s_ubMoveArray[uwRowIndex]=1;
+// Incremento il contatore cosi che la prossima volta nasconderò la riga successiva
+s_iHideCounter++;
+
+// Dico al programma che dovà aggiornare la copperlist perché c'è una nuova riga da cancellare
+ubRefresh=1;
+```
+
+Per far riapparire le righe basta effettuare l'operazione inversa
+
+s_iHideCounter--;
+UWORD uwRowIndex = s_uwRawToHide[s_iHideCounter];
+s_ubMoveArray[uwRowIndex]=0;
+ubRefresh=1;
+
+Nel caso di riallargamento si da per scontato che la prima operazione sia di restringimento in quanto a default viene visualizzata l'immagine nella sua interezza (tutti e 256 le righe)
+
+##### Diwstrt e stop
+Contestualmente alla riduzione dell'immagine stashofcode ci consiglia caldamente di andare a ridurre pure la finestra video con i registri 
+
+DFF08E (DIWSTRT)
+
+DFF08E (DIWSTOP)
+
+Nel mio esperimento non voglio mantenere l'immagine centrata (almeno per ora) e voglio che l'immagine si centri nella parte alta dello schermo.
+Ne consegue che ogni volta che voglio ridurre dovrò agire sul primo byte di DIWSTOP decrementando di 1
+
+```
+s_ubDiwStop --;
+g_pCustom->diwstop =(s_ubDiwStop<<8)|0x00C1;
+```
+
+mentre per riallargare dovrò fare il contrario
+```
+s_ubDiwStop ++;
+g_pCustom->diwstop =(s_ubDiwStop<<8)|0x00C1;
+```
+
+##### Aggiornamento della copperlist
+Questa è la parte che secondo me è piu complessa, la logica è la seguente.
+Quando il pennello elettronico arriva a 2c Amiga inizia a leggere i dati della prima del bitplane dai vari registri.
+Mentre lo fa io posso agire su bplXmod aggiungendo 40 (ogni riga sono 320 bytes, dividendo per 8 ottengo i 40 bytes).
+In questo modo la riga successiva sarà saltata, se le righe da saltare sono 2 consecutive dovrò impostare 80, se sono 3 120 e cosi via.
+
+Quindi la mia routine di modifica copperlist sarà
+
+- ciclo che va da zero a 256 (per ogni riga dell'immagine) e inizializzo il contatore del pennello elettronico a zero (uwRayCounter)
+- controllo sull'array helper se la riga deve essere nascosta o meno
+- se no resetto bplXmod a zero e incremento uwRayCounter di 1
+- se si resetto lo bplXmod sulla riga indicata da uwRayCounter e poi conto quante righe consecutive dovrò andare a nascondere per calcolarmi bplxmod
+
+La formula del calcolo di bplxmod è questa
+bplXmod = 40 + Numero righe consecutive *40;
+
+una volta calcolato il nuovo modulo lo imposto sulla riga indicata dal pennello elettronico e resetto quelle consecutive
+
