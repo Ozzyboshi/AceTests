@@ -1,0 +1,584 @@
+Block begin: blitManagerCreate...OK, time:  87.6 us
+Block begin: copCreate()
+	Block begin: copListCreate()
+		Addr: 0x222f04
+		BLOCK mode
+	Block end: copListCreate(), time: >7min
+Block end: copCreate(), time: >7min
+Block begin: gameCreate()...OK, time:  39.2 us
+Block begin: keyCreate()...OK, time:  52.8 us
+Block begin: gamePushState(cbCreate: 0x2712ea, cbLoop: 0x2714b2, cbDestroy: 0x2715a0)...OK, time:   2.518 ms
+Block begin: viewCreate(pTags: 0)
+	addr: 0x223eec
+	Block begin: copListCreate()
+		Addr: 0x223f04
+		RAW mode, size: 106 + WAIT(0xFFFF)
+	Block end: copListCreate(), time: >7min
+	Global CLUT mode enabled
+Block end: viewCreate(), time:  10.863 ms
+Block begin: vPortCreate(pTagList: 0)
+	Addr: 0x224074
+	Parent view: 0x223eec
+	Offsets: 0x0
+	Dimensions: 320x256@1
+	No prev VPorts - added to head
+Block end: vPortCreate(), time: >7min
+Block begin: simpleBufferCreate(pTags: 0, ...)
+	Addr: 0x2240d4
+	Parent VPort: 0x224074
+	Bounds: 320x256
+	Block begin: bitmapCreate(uwWidth: 320, uwHeight: 256, ubDepth: 1, ubFlags: 1)
+		addr: 0x224034
+	Block end: bitmapCreate(), time:   9.854 ms
+	Block begin: bitmapCreate(uwWidth: 320, uwHeight: 256, ubDepth: 1, ubFlags: 1)
+		addr: 0x22411c
+	Block end: bitmapCreate(), time:  10.002 ms
+	Block begin: cameraCreate(pVPort: 0x224074, uwPosX: 0, uwPosY: 0, uwMaxX: 320, uwMaxY: 256, isDblBfr: 1)
+		Addr: 0x22416c
+		Resetting camera bounds...
+		Block begin: cameraReset(pManager: 0x22416c, uwStartX: 0, uwStartY: 0, uwWidth: 320, uwHeight: 256, isDblBfr: 1)
+			Camera max coord: 0,0
+		Block end: cameraReset(), time:   3.803 ms
+		Attaching camera to VPort...
+		Manager 0x22416c attached to head of VP 0x224074
+	Block end: cameraCreate(), time:   8.088 ms
+	Copperlist offset: 0
+	Block begin: simpleBufferSetFront(pManager: 0x2240d4, pFront: 0x224034)
+		Modulo: 0
+		Setting copperlist 0x223f84 at offs 0
+	Block end: simplebufferSetFront(), time:   6.208 ms
+	Manager 0x2240d4 attached after manager 0x22416c of VP 0x224074
+Block end: simpleBufferCreate(), time: 592.8 us
+Block begin: viewLoad(pView: 0x223eec)...OK, time: >7min
+preced3 0 = 149 
+preced4 0 = 149 
+preced 149 = 149 
+preced2 149 = 149 
+preced3 149 = 148 
+preced4 149 = 148 
+preced 148 = 148 
+preced2 148 = 148 
+preced3 148 = 148 
+preced4 148 = 148 
+preced 148 = 148 
+preced2 148 = 148 
+preced3 148 = 147 
+preced4 148 = 147 
+preced 147 = 147 
+preced2 147 = 147 
+preced3 147 = 147 
+preced4 147 = 147 
+preced 147 = 147 
+preced2 147 = 147 
+preced3 147 = 146 
+preced4 147 = 146 
+preced 146 = 146 
+preced2 146 = 146 
+preced3 146 = 146 
+preced4 146 = 146 
+preced 146 = 146 
+preced2 146 = 146 
+preced3 146 = 145 
+preced4 146 = 145 
+aaaaa 146
+preced 145 = 145 
+preced2 145 = 145 
+preced3 145 = 145 
+preced4 145 = 145 
+aaaaa 145
+preced 145 = 145 
+preced2 145 = 145 
+preced3 145 = 144 
+preced4 145 = 144 
+aaaaa 145
+preced 144 = 144 
+preced2 144 = 144 
+preced3 144 = 143 
+preced4 144 = 143 
+aaaaa 144
+preced 143 = 143 
+preced2 143 = 143 
+preced3 143 = 143 
+preced4 143 = 143 
+aaaaa 143
+preced 143 = 143 
+preced2 143 = 143 
+preced3 143 = 142 
+preced4 143 = 142 
+aaaaa 143
+preced 142 = 142 
+preced2 142 = 142 
+preced3 142 = 141 
+preced4 142 = 141 
+aaaaa 142
+preced 141 = 141 
+preced2 141 = 141 
+preced3 141 = 140 
+preced4 141 = 140 
+aaaaa 141
+preced 140 = 140 
+preced2 140 = 140 
+preced3 140 = 139 
+preced4 140 = 139 
+aaaaa 140
+preced 139 = 139 
+preced2 139 = 139 
+preced3 139 = 137 
+preced4 139 = 137 
+aaaaa 139
+preced 137 = 137 
+preced2 137 = 137 
+preced3 137 = 136 
+preced4 137 = 136 
+aaaaa 137
+preced 136 = 136 
+preced2 136 = 136 
+preced3 136 = 134 
+preced4 136 = 134 
+aaaaa 136
+preced 134 = 134 
+preced2 134 = 134 
+preced3 134 = 132 
+preced4 134 = 132 
+aaaaa 134
+preced 132 = 132 
+preced2 132 = 132 
+preced3 132 = 130 
+preced4 132 = 130 
+aaaaa 132
+preced 130 = 130 
+preced2 130 = 130 
+preced3 130 = 148 
+preced4 130 = 148 
+preced 148 = 148 
+preced2 148 = 148 
+preced3 148 = 148 
+preced4 148 = 148 
+preced 148 = 148 
+preced2 148 = 148 
+preced3 148 = 147 
+preced4 148 = 147 
+preced 147 = 147 
+preced2 147 = 147 
+preced3 147 = 147 
+preced4 147 = 147 
+preced 147 = 147 
+preced2 147 = 147 
+preced3 147 = 146 
+preced4 147 = 146 
+preced 146 = 146 
+preced2 146 = 146 
+preced3 146 = 146 
+preced4 146 = 146 
+preced 146 = 146 
+preced2 146 = 146 
+preced3 146 = 145 
+preced4 146 = 145 
+aaaaa 146
+preced 145 = 145 
+preced2 145 = 145 
+preced3 145 = 145 
+preced4 145 = 145 
+aaaaa 145
+preced 145 = 145 
+preced2 145 = 145 
+preced3 145 = 144 
+preced4 145 = 144 
+aaaaa 145
+preced 144 = 144 
+preced2 144 = 144 
+preced3 144 = 143 
+preced4 144 = 143 
+aaaaa 144
+preced 143 = 143 
+preced2 143 = 143 
+preced3 143 = 143 
+preced4 143 = 143 
+aaaaa 143
+preced 143 = 143 
+preced2 143 = 143 
+preced3 143 = 142 
+preced4 143 = 142 
+aaaaa 143
+preced 142 = 142 
+preced2 142 = 142 
+preced3 142 = 141 
+preced4 142 = 141 
+aaaaa 142
+preced 141 = 141 
+preced2 141 = 141 
+preced3 141 = 140 
+preced4 141 = 140 
+aaaaa 141
+preced 140 = 140 
+preced2 140 = 140 
+preced3 140 = 139 
+preced4 140 = 139 
+aaaaa 140
+preced 139 = 139 
+preced2 139 = 139 
+preced3 139 = 137 
+preced4 139 = 137 
+aaaaa 139
+preced 137 = 137 
+preced2 137 = 137 
+preced3 137 = 136 
+preced4 137 = 136 
+aaaaa 137
+preced 136 = 136 
+preced2 136 = 136 
+preced3 136 = 134 
+preced4 136 = 134 
+aaaaa 136
+preced 134 = 134 
+preced2 134 = 134 
+preced3 134 = 132 
+preced4 134 = 132 
+aaaaa 134
+preced 132 = 132 
+preced2 132 = 132 
+preced3 132 = 130 
+preced4 132 = 130 
+aaaaa 132
+preced 130 = 130 
+preced2 130 = 130 
+preced3 130 = 148 
+preced4 130 = 148 
+preced 148 = 148 
+preced2 148 = 148 
+preced3 148 = 148 
+preced4 148 = 148 
+preced 148 = 148 
+preced2 148 = 148 
+preced3 148 = 147 
+preced4 148 = 147 
+preced 147 = 147 
+preced2 147 = 147 
+preced3 147 = 147 
+preced4 147 = 147 
+preced 147 = 147 
+preced2 147 = 147 
+preced3 147 = 146 
+preced4 147 = 146 
+preced 146 = 146 
+preced2 146 = 146 
+preced3 146 = 146 
+preced4 146 = 146 
+preced 146 = 146 
+preced2 146 = 146 
+preced3 146 = 145 
+preced4 146 = 145 
+aaaaa 146
+preced 145 = 145 
+preced2 145 = 145 
+preced3 145 = 145 
+preced4 145 = 145 
+aaaaa 145
+preced 145 = 145 
+preced2 145 = 145 
+preced3 145 = 144 
+preced4 145 = 144 
+aaaaa 145
+preced 144 = 144 
+preced2 144 = 144 
+preced3 144 = 143 
+preced4 144 = 143 
+aaaaa 144
+preced 143 = 143 
+preced2 143 = 143 
+preced3 143 = 143 
+preced4 143 = 143 
+aaaaa 143
+preced 143 = 143 
+preced2 143 = 143 
+preced3 143 = 142 
+preced4 143 = 142 
+aaaaa 143
+preced 142 = 142 
+preced2 142 = 142 
+preced3 142 = 141 
+preced4 142 = 141 
+aaaaa 142
+preced 141 = 141 
+preced2 141 = 141 
+preced3 141 = 140 
+preced4 141 = 140 
+aaaaa 141
+preced 140 = 140 
+preced2 140 = 140 
+preced3 140 = 139 
+preced4 140 = 139 
+aaaaa 140
+preced 139 = 139 
+preced2 139 = 139 
+preced3 139 = 137 
+preced4 139 = 137 
+aaaaa 139
+preced 137 = 137 
+preced2 137 = 137 
+preced3 137 = 136 
+preced4 137 = 136 
+aaaaa 137
+preced 136 = 136 
+preced2 136 = 136 
+preced3 136 = 134 
+preced4 136 = 134 
+aaaaa 136
+preced 134 = 134 
+preced2 134 = 134 
+preced3 134 = 132 
+preced4 134 = 132 
+aaaaa 134
+preced 132 = 132 
+preced2 132 = 132 
+preced3 132 = 130 
+preced4 132 = 130 
+aaaaa 132
+preced 130 = 130 
+preced2 130 = 130 
+preced3 130 = 148 
+preced4 130 = 148 
+preced 148 = 148 
+preced2 148 = 148 
+preced3 148 = 148 
+preced4 148 = 148 
+preced 148 = 148 
+preced2 148 = 148 
+preced3 148 = 147 
+preced4 148 = 147 
+preced 147 = 147 
+preced2 147 = 147 
+preced3 147 = 147 
+preced4 147 = 147 
+preced 147 = 147 
+preced2 147 = 147 
+preced3 147 = 146 
+preced4 147 = 146 
+preced 146 = 146 
+preced2 146 = 146 
+preced3 146 = 146 
+preced4 146 = 146 
+preced 146 = 146 
+preced2 146 = 146 
+preced3 146 = 145 
+preced4 146 = 145 
+aaaaa 146
+preced 145 = 145 
+preced2 145 = 145 
+preced3 145 = 145 
+preced4 145 = 145 
+aaaaa 145
+preced 145 = 145 
+preced2 145 = 145 
+preced3 145 = 144 
+preced4 145 = 144 
+aaaaa 145
+preced 144 = 144 
+preced2 144 = 144 
+preced3 144 = 143 
+preced4 144 = 143 
+aaaaa 144
+preced 143 = 143 
+preced2 143 = 143 
+preced3 143 = 143 
+preced4 143 = 143 
+aaaaa 143
+preced 143 = 143 
+preced2 143 = 143 
+preced3 143 = 142 
+preced4 143 = 142 
+aaaaa 143
+preced 142 = 142 
+preced2 142 = 142 
+preced3 142 = 141 
+preced4 142 = 141 
+aaaaa 142
+preced 141 = 141 
+preced2 141 = 141 
+preced3 141 = 140 
+preced4 141 = 140 
+aaaaa 141
+preced 140 = 140 
+preced2 140 = 140 
+preced3 140 = 139 
+preced4 140 = 139 
+aaaaa 140
+preced 139 = 139 
+preced2 139 = 139 
+preced3 139 = 137 
+preced4 139 = 137 
+aaaaa 139
+preced 137 = 137 
+preced2 137 = 137 
+preced3 137 = 136 
+preced4 137 = 136 
+aaaaa 137
+preced 136 = 136 
+preced2 136 = 136 
+preced3 136 = 134 
+preced4 136 = 134 
+aaaaa 136
+preced 134 = 134 
+preced2 134 = 134 
+preced3 134 = 132 
+preced4 134 = 132 
+aaaaa 134
+preced 132 = 132 
+preced2 132 = 132 
+preced3 132 = 130 
+preced4 132 = 130 
+aaaaa 132
+preced 130 = 130 
+preced2 130 = 130 
+preced3 130 = 148 
+preced4 130 = 148 
+preced 148 = 148 
+preced2 148 = 148 
+preced3 148 = 148 
+preced4 148 = 148 
+preced 148 = 148 
+preced2 148 = 148 
+preced3 148 = 147 
+preced4 148 = 147 
+preced 147 = 147 
+preced2 147 = 147 
+preced3 147 = 147 
+preced4 147 = 147 
+preced 147 = 147 
+preced2 147 = 147 
+preced3 147 = 146 
+preced4 147 = 146 
+preced 146 = 146 
+preced2 146 = 146 
+preced3 146 = 146 
+preced4 146 = 146 
+preced 146 = 146 
+preced2 146 = 146 
+preced3 146 = 145 
+preced4 146 = 145 
+aaaaa 146
+preced 145 = 145 
+preced2 145 = 145 
+preced3 145 = 145 
+preced4 145 = 145 
+aaaaa 145
+preced 145 = 145 
+preced2 145 = 145 
+preced3 145 = 144 
+preced4 145 = 144 
+aaaaa 145
+preced 144 = 144 
+preced2 144 = 144 
+preced3 144 = 143 
+preced4 144 = 143 
+aaaaa 144
+preced 143 = 143 
+preced2 143 = 143 
+preced3 143 = 143 
+preced4 143 = 143 
+aaaaa 143
+preced 143 = 143 
+preced2 143 = 143 
+preced3 143 = 142 
+preced4 143 = 142 
+aaaaa 143
+preced 142 = 142 
+preced2 142 = 142 
+preced3 142 = 141 
+preced4 142 = 141 
+aaaaa 142
+preced 141 = 141 
+preced2 141 = 141 
+preced3 141 = 140 
+preced4 141 = 140 
+aaaaa 141
+preced 140 = 140 
+preced2 140 = 140 
+preced3 140 = 139 
+preced4 140 = 139 
+aaaaa 140
+preced 139 = 139 
+preced2 139 = 139 
+preced3 139 = 137 
+preced4 139 = 137 
+aaaaa 139
+preced 137 = 137 
+preced2 137 = 137 
+preced3 137 = 136 
+preced4 137 = 136 
+aaaaa 137
+preced 136 = 136 
+preced2 136 = 136 
+preced3 136 = 134 
+preced4 136 = 134 
+aaaaa 136
+preced 134 = 134 
+preced2 134 = 134 
+preced3 134 = 132 
+preced4 134 = 132 
+aaaaa 134
+preced 132 = 132 
+preced2 132 = 132 
+preced3 132 = 130 
+preced4 132 = 130 
+aaaaa 132
+preced 130 = 130 
+preced2 130 = 130 
+preced3 130 = 148 
+preced4 130 = 148 
+preced 148 = 148 
+preced2 148 = 148 
+preced3 148 = 148 
+preced4 148 = 148 
+preced 148 = 148 
+preced2 148 = 148 
+preced3 148 = 147 
+preced4 148 = 147 
+preced 147 = 147 
+preced2 147 = 147 
+preced3 147 = 147 
+preced4 147 = 147 
+preced 147 = 147 
+preced2 147 = 147 
+preced3 147 = 146 
+preced4 147 = 146 
+preced 146 = 146 
+preced2 146 = 146 
+preced3 146 = 146 
+preced4 146 = 146 
+preced 146 = 146 
+preced2 146 = 146 
+preced3 146 = 145 
+preced4 146 = 145 
+aaaaa 146
+preced 145 = 145 
+preced2 145 = 145 
+preced3 145 = 145 
+preced4 145 = 145 
+aaaaa 145
+preced 145 = 145 
+preced2 145 = 145 
+Block begin: keyDestroy()...OK, time: >7min
+Block begin: viewDestroy(pView: 0x223eec)
+	Block begin: viewLoad(pView: 0)...OK, time:  13.906 ms
+	Block begin: vPortDestroy(pVPort: 0x224074)
+		Parent extView: 0x223eec
+		found VP: 0x224074... gotcha!
+		Block begin: Destroying managers
+			Destroying manager 128 @addr: 0x22416c
+			cameraManagerDestroy...OK! 
+			Destroying manager 0 @addr: 0x2240d4
+			Block begin: simpleBufferDestroy()
+				Block begin: bitmapDestroy(pBitMap: 0x22411c)...OK, time:   5.509 ms
+				Block begin: bitmapDestroy(pBitMap: 0x224034)...OK, time:   5.414 ms
+			Block end: simpleBufferDestroy(), time: >7min
+		Block end: Destroying managers, time: >7min
+	Block end: vPortDestroy(), time:   9.544 ms
+	Freeing copperlists...
+	Block begin: copListDestroy(pCopList: 0x223f04)...OK, time:  12.344 ms
+Block end: viewDestroy(), time:   2.528 ms
+Block begin: copDestroy()
+	Block begin: copListDestroy(pCopList: 0x222f04)...OK, time: >7min
+Block end: copDestroy(), time: >7min
+Block begin: blitManagerDestroy...OK, time:  60.0 us
+Log closed successfully

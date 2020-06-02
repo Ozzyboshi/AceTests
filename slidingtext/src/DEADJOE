@@ -1,0 +1,34 @@
+
+*** These modified files were found in JOE when it aborted on Sun May 31 22:19:24 2020
+*** JOE was aborted by UNIX signal 1
+
+*** File '(Unnamed)'
+clientspe
+gatewaypo
+volumes
+env
+depe
+gfxbase
+section
+permit
+passwor
+$
+
+*** File '(Unnamed)'
+/usr/local/bin/ace_make_tool
+/usr/local/bin/ace_make_tool
+3dstarfield/src/3dstarfield.c
+/usr/local/bin/ace_make_tool
+/usr/local/bin/ace_make_tool
+/usr/local/bin/ace_make_tool
+/usr/local/bin/ace_make_tool
+/usr/local/bin/ace_make_tool
+src/radiallineshiddenpart.c:
+3dstarfield.c
+slidingtext.c
+
+*** File '* Startup Log *'
+Processing '/etc/joe/joerc'...
+Processing '/etc/joe/ftyperc'...
+Finished processing /etc/joe/ftyperc
+Finished processing /etc/joe/joerc
