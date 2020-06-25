@@ -1,0 +1,172 @@
+Block begin: blitManagerCreate...OK, time:  60.0 us
+Block begin: copCreate()
+	Block begin: copListCreate()
+		Addr: 0x2262a4
+		BLOCK mode
+	Block end: copListCreate(), time: >7min
+Block end: copCreate(), time: >7min
+Hello, Amiga!
+Block begin: keyCreate()...OK, time:  53.6 us
+Block begin: stateManagerCreate()...OK, time:   2.522 ms
+Block begin: stateCreate(cbCreate: 0x275b32, cbLoop: 0x275c22, cbDestroy: 0x275e9a, cbSuspend: 0, cbResume: 0, pPrev: 0)...OK, time:   2.721 ms
+Block begin: statePush(pStateManager: 0x22bf7c, pState: 0x22bf9c)
+	Block begin: viewCreate(pTags: 0)
+		addr: 0x22d2cc
+		Block begin: copListCreate()
+			Addr: 0x22d2f4
+			BLOCK mode
+		Block end: copListCreate(), time: >7min
+		Global CLUT mode enabled
+	Block end: viewCreate(), time:  10.554 ms
+	Block begin: vPortCreate(pTagList: 0)
+		Addr: 0x22d3e4
+		Parent view: 0x22d2cc
+		Offsets: 0x0
+		Dimensions: 320x256@1
+		No prev VPorts - added to head
+	Block end: vPortCreate(), time: >7min
+	Block begin: simpleBufferCreate(pTags: 0, ...)
+		Addr: 0x22d454
+		Parent VPort: 0x22d3e4
+		Bounds: 320x256
+		Block begin: bitmapCreate(uwWidth: 320, uwHeight: 256, ubDepth: 1, ubFlags: 1)
+			addr: 0x22d4f4
+		Block end: bitmapCreate(), time:  10.608 ms
+		Block begin: bitmapCreate(uwWidth: 320, uwHeight: 256, ubDepth: 1, ubFlags: 1)
+			addr: 0x22d524
+		Block end: bitmapCreate(), time:  10.946 ms
+		Block begin: cameraCreate(pVPort: 0x22d3e4, uwPosX: 0, uwPosY: 0, uwMaxX: 320, uwMaxY: 256, isDblBfr: 1)
+			Addr: 0x22d574
+			Resetting camera bounds...
+			Block begin: cameraReset(pManager: 0x22d574, uwStartX: 0, uwStartY: 0, uwWidth: 320, uwHeight: 256, isDblBfr: 1)
+				Camera max coord: 0,0
+			Block end: cameraReset(), time:   5.636 ms
+			Attaching camera to VPort...
+			Manager 0x22d574 attached to head of VP 0x22d3e4
+		Block end: cameraCreate(), time: >7min
+		Block begin: copBlockCreate(pCopList: 0x22d2f4, uwMaxCmds: 7, uwWaitX: 198, uwWaitY: 43)
+			pAddr: 0x22d5b4
+			Head: 0
+			Added as head, next: 0
+		Block end: copBlockCreate(), time: >7min
+		Block begin: simpleBufferSetFront(pManager: 0x22d454, pFront: 0x22d4f4)
+			Modulo: 0
+		Block end: simplebufferSetFront(), time:   3.938 ms
+		Manager 0x22d454 attached after manager 0x22d574 of VP 0x22d3e4
+	Block end: simpleBufferCreate(), time: >7min
+	Block begin: viewLoad(pView: 0x22d2cc)...OK, time: >7min
+Block end: statePush(), time: >7min
+alessioo ffffff97 (97) ef
+ugualealessioo ffffffe7 (e7) f7
+ugualealessio2 iterazione 0 - 2d
+alessioo 62 (62) be
+ugualealessio2 iterazione 1 - 15
+alessioo 11 (11) ef
+ugualealessio2 iterazione 2 - 0
+alessio2 iterazione 3 - 1
+alessio2 iterazione 4 - 0
+alessio2 iterazione 5 - 1
+alessioo 21 (21) fb
+ugualealessio2 iterazione 6 - 0
+alessio2 iterazione 7 - 1
+alessio2 iterazione 8 - ff
+alessio2 iterazione 9 - 1
+alessioo 2d (2d) be
+ugualealessio2 iterazione 10 - 0
+alessio2 iterazione 11 - 2
+alessio2 iterazione 12 - 0
+alessioo ffffffa2 (a2) fa
+ugualealessio2 iterazione 13 - 1
+alessio2 iterazione 14 - 0
+alessio2 iterazione 15 - 1
+alessio2 iterazione 16 - 0
+alessioo 41 (41) be
+ugualealessio2 iterazione 17 - 2
+alessio2 iterazione 18 - 1
+alessio2 iterazione 19 - 1
+alessio2 iterazione 20 - 0
+alessioo ffffff8b (8b) fa
+ugualealessio2 iterazione 21 - 2
+alessio2 iterazione 22 - 0
+alessio2 iterazione 23 - 1
+alessioo 56 (56) aa
+ugualealessio2 iterazione 24 - 0
+alessio2 iterazione 25 - 2
+alessio2 iterazione 26 - 0
+alessio2 iterazione 27 - 0
+alessioo ffffffd0 (d0) be
+ugualealessio2 iterazione 28 - 1
+alessio2 iterazione 29 - 1
+alessio2 iterazione 30 - 0
+alessioo ffffffa0 (a0) ea
+ugualealessio2 iterazione 31 - 2
+alessio2 iterazione 32 - 1
+alessio2 iterazione 33 - 1
+alessio2 iterazione 34 - 0
+alessioo 31 (31) ab
+ugualealessio2 iterazione 35 - 2
+alessio2 iterazione 36 - 1
+alessio2 iterazione 37 - 2
+alessioo 16 (16) 6a
+ugualealessio2 iterazione 38 - 1
+alessio2 iterazione 39 - 2
+alessio2 iterazione 40 - 0
+alessio2 iterazione 41 - 1
+alessioo ffffff8c (8c) aa
+ugualealessio2 iterazione 42 - 1
+alessio2 iterazione 43 - 2
+alessio2 iterazione 44 - 1
+alessioo 31 (31) a6
+ugualealessio2 iterazione 45 - 2
+alessio2 iterazione 46 - 1
+alessio2 iterazione 47 - 2
+alessioo 60 (60) a6
+ugualealessio2 iterazione 48 - 1
+alessio2 iterazione 49 - 1
+alessio2 iterazione 50 - 1
+alessio2 iterazione 51 - 2
+alessioo 6c (6c) 66
+ugualealessio2 iterazione 52 - 1
+alessio2 iterazione 53 - 2
+alessio2 iterazione 54 - 2
+alessioo 63 (63) 66
+ugualealessio2 iterazione 55 - 2
+alessio2 iterazione 56 - 1
+alessio2 iterazione 57 - 2
+alessioo 6c (6c) 66
+ugualealessio2 iterazione 58 - 1
+alessio2 iterazione 59 - 2
+alessio2 iterazione 60 - 2
+alessioo ffffffb0 (b0) 66
+ugualealessio2 iterazione 61 - 1
+Block begin: stateManagerDestroy(pStateManager: 0x22bf7c)
+	Block begin: statePopAll(pStateManager: 0x22bf7c)
+		Block begin: viewDestroy(pView: 0x22d2cc)
+			Block begin: viewLoad(pView: 0)...OK, time:   9.615 ms
+			Block begin: vPortDestroy(pVPort: 0x22d3e4)
+				Parent extView: 0x22d2cc
+				found VP: 0x22d3e4... gotcha!
+				Block begin: Destroying managers
+					Destroying manager 128 @addr: 0x22d574
+					cameraManagerDestroy...OK! 
+					Destroying manager 0 @addr: 0x22d454
+					Block begin: simpleBufferDestroy()
+						Block begin: copBlockDestroy(pCopList: 0x22d2f4, pBlock: 0x22d5b4)...OK, time:  14.288 ms
+						Block begin: bitmapDestroy(pBitMap: 0x22d4f4)...OK, time:   5.565 ms
+						Block begin: bitmapDestroy(pBitMap: 0x22d524)...OK, time:   5.442 ms
+					Block end: simpleBufferDestroy(), time: >7min
+				Block end: Destroying managers, time:   7.082 ms
+			Block end: vPortDestroy(), time:  11.544 ms
+			Freeing copperlists...
+			Block begin: copListDestroy(pCopList: 0x22d2f4)...OK, time: >7min
+		Block end: viewDestroy(), time:  10.273 ms
+	Block end: statePopAll(), time:  15.294 ms
+Block end: stateManagerDestroy(), time:   2.697 ms
+Block begin: stateDestroy(pState: 0x22bf9c)...OK, time:   2.382 ms
+Block begin: keyDestroy()...OK, time:  54.0 us
+Goodbye, Amiga!
+Block begin: copDestroy()
+	Block begin: copListDestroy(pCopList: 0x2262a4)...OK, time: >7min
+Block end: copDestroy(), time: >7min
+Block begin: blitManagerDestroy...OK, time:  59.2 us
+Log closed successfully
