@@ -3543,9 +3543,9 @@ fi
 
 #AC_SUBST(CFLAGS,'-m68000 -msoft-float -fomit-frame-pointer -s -noixemul -ffast-math -DAMIGA -DACE_DEBUG=ON -Wall -Wextra -O3')
 
-CFLAGS='-m68000 -msoft-float -fomit-frame-pointer -s -mcrt=nix13 -ffast-math -DAMIGA -Wall -Wextra -O3'
+# AC_SUBST(CFLAGS,'-m68000 -msoft-float -fomit-frame-pointer -s -mcrt=nix13 -ffast-math  -O3')
+CFLAGS='-m68000  -mcrt=nix13 -DAMIGA -Wall -Wextra -O3'
 
-# AC_SUBST(CFLAGS,'-m68000  -ffast-math -DAMIGA -Wall -Wextra -O3')
 
 # Need ace include dir to build the prject
 

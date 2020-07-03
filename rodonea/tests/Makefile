@@ -101,7 +101,7 @@ PROGRAMS = $(bin_PROGRAMS)
 am__dirstamp = $(am__leading_dot)dirstamp
 am_rododraw_OBJECTS = rodo.$(OBJEXT) ../src/matrix.$(OBJEXT)
 rododraw_OBJECTS = $(am_rododraw_OBJECTS)
-rododraw_LDADD = $(LDADD)
+rododraw_DEPENDENCIES = ../src/music_ptr_linkable.o
 AM_V_P = $(am__v_P_$(V))
 am__v_P_ = $(am__v_P_$(AM_DEFAULT_VERBOSITY))
 am__v_P_0 = false
@@ -167,7 +167,7 @@ AUTOMAKE = ${SHELL} /data/rodonea/missing automake-1.15
 AWK = mawk
 CC = m68k-amigaos-gcc
 CCDEPMODE = depmode=gcc3
-CFLAGS = -m68000 -msoft-float -fomit-frame-pointer -s -mcrt=nix13 -ffast-math -DAMIGA -Wall -Wextra -O3
+CFLAGS = -m68000  -mcrt=nix13 -DAMIGA -Wall -Wextra -O3
 CPP = m68k-amigaos-gcc -E
 CPPFLAGS = 
 CYGPATH_W = echo
@@ -250,6 +250,7 @@ target_alias =
 top_build_prefix = ../
 top_builddir = ..
 top_srcdir = ..
+rododraw_LDADD = ../src/music_ptr_linkable.o
 rododraw_SOURCES = rodo.c ../src/matrix.c 
 all: all-am
 

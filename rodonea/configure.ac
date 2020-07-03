@@ -8,8 +8,8 @@ AC_CONFIG_SRCDIR([src/main.c])-noixemul
 AC_PROG_CC([m68k-amigaos-gcc])
 #AC_SUBST(CFLAGS,'-m68000 -msoft-float -fomit-frame-pointer -s -noixemul -ffast-math -DAMIGA -DACE_DEBUG=ON -Wall -Wextra -O3')
 
-AC_SUBST(CFLAGS,'-m68000 -msoft-float -fomit-frame-pointer -s -mcrt=nix13 -ffast-math -DAMIGA -Wall -Wextra -O3')
-# AC_SUBST(CFLAGS,'-m68000  -ffast-math -DAMIGA -Wall -Wextra -O3')
+# AC_SUBST(CFLAGS,'-m68000 -msoft-float -fomit-frame-pointer -s -mcrt=nix13 -ffast-math  -O3')
+AC_SUBST(CFLAGS,'-m68000  -mcrt=nix13 -DAMIGA -Wall -Wextra -O3')
 
 # Need ace include dir to build the prject
 AC_CHECK_HEADERS([stdlib.h ace/managers/key.h ace/managers/game.h ace/utils/chunky.h ace/managers/viewport/simplebuffer.h],[have_ace_includes=yes],[have_ace_includes=no])

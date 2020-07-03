@@ -181,49 +181,49 @@ configure:3748: result: /bin/grep
 configure:3753: checking for egrep
 configure:3815: result: /bin/grep -E
 configure:3820: checking for ANSI C header files
-configure:3840: m68k-amigaos-gcc -c -m68000 -msoft-float -fomit-frame-pointer -s -mcrt=nix13 -ffast-math -DAMIGA -Wall -Wextra -O3  conftest.c >&5
+configure:3840: m68k-amigaos-gcc -c -m68000  -mcrt=nix13 -DAMIGA -Wall -Wextra -O3  conftest.c >&5
 configure:3840: $? = 0
 configure:3924: result: yes
 configure:3937: checking for sys/types.h
-configure:3937: m68k-amigaos-gcc -c -m68000 -msoft-float -fomit-frame-pointer -s -mcrt=nix13 -ffast-math -DAMIGA -Wall -Wextra -O3  conftest.c >&5
+configure:3937: m68k-amigaos-gcc -c -m68000  -mcrt=nix13 -DAMIGA -Wall -Wextra -O3  conftest.c >&5
 configure:3937: $? = 0
 configure:3937: result: yes
 configure:3937: checking for sys/stat.h
-configure:3937: m68k-amigaos-gcc -c -m68000 -msoft-float -fomit-frame-pointer -s -mcrt=nix13 -ffast-math -DAMIGA -Wall -Wextra -O3  conftest.c >&5
+configure:3937: m68k-amigaos-gcc -c -m68000  -mcrt=nix13 -DAMIGA -Wall -Wextra -O3  conftest.c >&5
 configure:3937: $? = 0
 configure:3937: result: yes
 configure:3937: checking for stdlib.h
-configure:3937: m68k-amigaos-gcc -c -m68000 -msoft-float -fomit-frame-pointer -s -mcrt=nix13 -ffast-math -DAMIGA -Wall -Wextra -O3  conftest.c >&5
+configure:3937: m68k-amigaos-gcc -c -m68000  -mcrt=nix13 -DAMIGA -Wall -Wextra -O3  conftest.c >&5
 configure:3937: $? = 0
 configure:3937: result: yes
 configure:3937: checking for string.h
-configure:3937: m68k-amigaos-gcc -c -m68000 -msoft-float -fomit-frame-pointer -s -mcrt=nix13 -ffast-math -DAMIGA -Wall -Wextra -O3  conftest.c >&5
+configure:3937: m68k-amigaos-gcc -c -m68000  -mcrt=nix13 -DAMIGA -Wall -Wextra -O3  conftest.c >&5
 configure:3937: $? = 0
 configure:3937: result: yes
 configure:3937: checking for memory.h
-configure:3937: m68k-amigaos-gcc -c -m68000 -msoft-float -fomit-frame-pointer -s -mcrt=nix13 -ffast-math -DAMIGA -Wall -Wextra -O3  conftest.c >&5
+configure:3937: m68k-amigaos-gcc -c -m68000  -mcrt=nix13 -DAMIGA -Wall -Wextra -O3  conftest.c >&5
 configure:3937: $? = 0
 configure:3937: result: yes
 configure:3937: checking for strings.h
-configure:3937: m68k-amigaos-gcc -c -m68000 -msoft-float -fomit-frame-pointer -s -mcrt=nix13 -ffast-math -DAMIGA -Wall -Wextra -O3  conftest.c >&5
+configure:3937: m68k-amigaos-gcc -c -m68000  -mcrt=nix13 -DAMIGA -Wall -Wextra -O3  conftest.c >&5
 configure:3937: $? = 0
 configure:3937: result: yes
 configure:3937: checking for inttypes.h
-configure:3937: m68k-amigaos-gcc -c -m68000 -msoft-float -fomit-frame-pointer -s -mcrt=nix13 -ffast-math -DAMIGA -Wall -Wextra -O3  conftest.c >&5
+configure:3937: m68k-amigaos-gcc -c -m68000  -mcrt=nix13 -DAMIGA -Wall -Wextra -O3  conftest.c >&5
 configure:3937: $? = 0
 configure:3937: result: yes
 configure:3937: checking for stdint.h
-configure:3937: m68k-amigaos-gcc -c -m68000 -msoft-float -fomit-frame-pointer -s -mcrt=nix13 -ffast-math -DAMIGA -Wall -Wextra -O3  conftest.c >&5
+configure:3937: m68k-amigaos-gcc -c -m68000  -mcrt=nix13 -DAMIGA -Wall -Wextra -O3  conftest.c >&5
 configure:3937: $? = 0
 configure:3937: result: yes
 configure:3937: checking for unistd.h
-configure:3937: m68k-amigaos-gcc -c -m68000 -msoft-float -fomit-frame-pointer -s -mcrt=nix13 -ffast-math -DAMIGA -Wall -Wextra -O3  conftest.c >&5
+configure:3937: m68k-amigaos-gcc -c -m68000  -mcrt=nix13 -DAMIGA -Wall -Wextra -O3  conftest.c >&5
 configure:3937: $? = 0
 configure:3937: result: yes
 configure:3952: checking for stdlib.h
 configure:3952: result: yes
 configure:3952: checking ace/managers/key.h usability
-configure:3952: m68k-amigaos-gcc -c -m68000 -msoft-float -fomit-frame-pointer -s -mcrt=nix13 -ffast-math -DAMIGA -Wall -Wextra -O3  conftest.c >&5
+configure:3952: m68k-amigaos-gcc -c -m68000  -mcrt=nix13 -DAMIGA -Wall -Wextra -O3  conftest.c >&5
 configure:3952: $? = 0
 configure:3952: result: yes
 configure:3952: checking ace/managers/key.h presence
@@ -233,7 +233,7 @@ configure:3952: result: yes
 configure:3952: checking for ace/managers/key.h
 configure:3952: result: yes
 configure:3952: checking ace/managers/game.h usability
-configure:3952: m68k-amigaos-gcc -c -m68000 -msoft-float -fomit-frame-pointer -s -mcrt=nix13 -ffast-math -DAMIGA -Wall -Wextra -O3  conftest.c >&5
+configure:3952: m68k-amigaos-gcc -c -m68000  -mcrt=nix13 -DAMIGA -Wall -Wextra -O3  conftest.c >&5
 configure:3952: $? = 0
 configure:3952: result: yes
 configure:3952: checking ace/managers/game.h presence
@@ -243,7 +243,7 @@ configure:3952: result: yes
 configure:3952: checking for ace/managers/game.h
 configure:3952: result: yes
 configure:3952: checking ace/utils/chunky.h usability
-configure:3952: m68k-amigaos-gcc -c -m68000 -msoft-float -fomit-frame-pointer -s -mcrt=nix13 -ffast-math -DAMIGA -Wall -Wextra -O3  conftest.c >&5
+configure:3952: m68k-amigaos-gcc -c -m68000  -mcrt=nix13 -DAMIGA -Wall -Wextra -O3  conftest.c >&5
 configure:3952: $? = 0
 configure:3952: result: yes
 configure:3952: checking ace/utils/chunky.h presence
@@ -253,7 +253,7 @@ configure:3952: result: yes
 configure:3952: checking for ace/utils/chunky.h
 configure:3952: result: yes
 configure:3952: checking ace/managers/viewport/simplebuffer.h usability
-configure:3952: m68k-amigaos-gcc -c -m68000 -msoft-float -fomit-frame-pointer -s -mcrt=nix13 -ffast-math -DAMIGA -Wall -Wextra -O3  conftest.c >&5
+configure:3952: m68k-amigaos-gcc -c -m68000  -mcrt=nix13 -DAMIGA -Wall -Wextra -O3  conftest.c >&5
 configure:3952: $? = 0
 configure:3952: result: yes
 configure:3952: checking ace/managers/viewport/simplebuffer.h presence
@@ -263,9 +263,9 @@ configure:3952: result: yes
 configure:3952: checking for ace/managers/viewport/simplebuffer.h
 configure:3952: result: yes
 configure:3968: checking for library containing viewCreate
-configure:3999: m68k-amigaos-gcc -o conftest -m68000 -msoft-float -fomit-frame-pointer -s -mcrt=nix13 -ffast-math -DAMIGA -Wall -Wextra -O3   conftest.c  >&5
-/opt/amiga/lib/gcc/m68k-amigaos/6.5.0b/../../../../m68k-amigaos/bin/ld: /tmp/cc0vgz67.o: in function `main':
-/tmp/cc0vgz67.o:(.text+0x2): undefined reference to `viewCreate'
+configure:3999: m68k-amigaos-gcc -o conftest -m68000  -mcrt=nix13 -DAMIGA -Wall -Wextra -O3   conftest.c  >&5
+/opt/amiga/lib/gcc/m68k-amigaos/6.5.0b/../../../../m68k-amigaos/bin/ld: /tmp/ccdhEdB9.o: in function `main':
+/tmp/ccdhEdB9.o:(.text+0x2): undefined reference to `viewCreate'
 collect2: error: ld returned 1 exit status
 configure:3999: $? = 1
 configure: failed program was:
@@ -309,7 +309,7 @@ configure: failed program was:
 |   ;
 |   return 0;
 | }
-configure:3999: m68k-amigaos-gcc -o conftest -m68000 -msoft-float -fomit-frame-pointer -s -mcrt=nix13 -ffast-math -DAMIGA -Wall -Wextra -O3   conftest.c -lacerelease   >&5
+configure:3999: m68k-amigaos-gcc -o conftest -m68000  -mcrt=nix13 -DAMIGA -Wall -Wextra -O3   conftest.c -lacerelease   >&5
 configure:3999: $? = 0
 configure:4016: result: -lacerelease
 configure:4032: checking for bitmap_conv
@@ -424,7 +424,7 @@ AUTOMAKE='${SHELL} /data/rodonea/missing automake-1.15'
 AWK='mawk'
 CC='m68k-amigaos-gcc'
 CCDEPMODE='depmode=gcc3'
-CFLAGS='-m68000 -msoft-float -fomit-frame-pointer -s -mcrt=nix13 -ffast-math -DAMIGA -Wall -Wextra -O3'
+CFLAGS='-m68000  -mcrt=nix13 -DAMIGA -Wall -Wextra -O3'
 CPP='m68k-amigaos-gcc -E'
 CPPFLAGS=''
 CYGPATH_W='echo'

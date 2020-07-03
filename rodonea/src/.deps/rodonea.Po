@@ -1,5 +1,22 @@
-rodonea.o: rodonea.c rodonea.h ../tests/huffman.h \
- /opt/amiga/m68k-amigaos/libnix/include/stdio.h \
+rodonea.o: rodonea.c rodonea.h /opt/amiga/include/ace/managers/key.h \
+ /opt/amiga/include/ace/types.h \
+ /opt/amiga/m68k-amigaos/ndk13-include/exec/types.h \
+ /opt/amiga/m68k-amigaos/ndk13-include/exec/interrupts.h \
+ /opt/amiga/m68k-amigaos/ndk13-include/exec/nodes.h \
+ /opt/amiga/m68k-amigaos/ndk13-include/exec/lists.h \
+ /opt/amiga/include/ace/managers/game.h \
+ /opt/amiga/include/ace/managers/system.h \
+ /opt/amiga/m68k-amigaos/ndk13-include/graphics/gfxbase.h \
+ /opt/amiga/m68k-amigaos/ndk13-include/exec/libraries.h \
+ /opt/amiga/m68k-amigaos/ndk13-include/graphics/monitor.h \
+ /opt/amiga/include/ace/utils/custom.h /opt/amiga/include/ace/macros.h \
+ /opt/amiga/m68k-amigaos/ndk13-include/hardware/custom.h \
+ /opt/amiga/include/ace/managers/viewport/simplebuffer.h \
+ /opt/amiga/include/ace/managers/viewport/camera.h \
+ /opt/amiga/include/ace/utils/extview.h \
+ /opt/amiga/include/ace/utils/tag.h \
+ /opt/amiga/lib/gcc/m68k-amigaos/6.5.0b/include/stdarg.h \
+ /opt/amiga/include/ace/managers/log.h \
  /opt/amiga/m68k-amigaos/libnix/include/string.h \
  /opt/amiga/m68k-amigaos/sys-include/sys/cdefs.h \
  /opt/amiga/m68k-amigaos/sys-include/machine/_default_types.h \
@@ -26,23 +43,6 @@ rodonea.o: rodonea.c rodonea.h ../tests/huffman.h \
  /opt/amiga/m68k-amigaos/sys-include/sys/sched.h \
  /opt/amiga/m68k-amigaos/sys-include/machine/types.h \
  /opt/amiga/m68k-amigaos/libnix/include/strsup.h \
- /opt/amiga/lib/gcc/m68k-amigaos/6.5.0b/include/stdarg.h \
- /opt/amiga/include/ace/managers/key.h /opt/amiga/include/ace/types.h \
- /opt/amiga/m68k-amigaos/ndk13-include/exec/types.h \
- /opt/amiga/m68k-amigaos/ndk13-include/exec/interrupts.h \
- /opt/amiga/m68k-amigaos/ndk13-include/exec/nodes.h \
- /opt/amiga/m68k-amigaos/ndk13-include/exec/lists.h \
- /opt/amiga/include/ace/managers/game.h \
- /opt/amiga/include/ace/managers/system.h \
- /opt/amiga/m68k-amigaos/ndk13-include/graphics/gfxbase.h \
- /opt/amiga/m68k-amigaos/ndk13-include/exec/libraries.h \
- /opt/amiga/m68k-amigaos/ndk13-include/graphics/monitor.h \
- /opt/amiga/include/ace/utils/custom.h /opt/amiga/include/ace/macros.h \
- /opt/amiga/m68k-amigaos/ndk13-include/hardware/custom.h \
- /opt/amiga/include/ace/managers/viewport/simplebuffer.h \
- /opt/amiga/include/ace/managers/viewport/camera.h \
- /opt/amiga/include/ace/utils/extview.h \
- /opt/amiga/include/ace/utils/tag.h /opt/amiga/include/ace/managers/log.h \
  /opt/amiga/include/ace/managers/timer.h \
  /opt/amiga/m68k-amigaos/ndk13-include/clib/exec_protos.h \
  /opt/amiga/m68k-amigaos/ndk13-include/exec/tasks.h \
@@ -55,6 +55,7 @@ rodonea.o: rodonea.c rodonea.h ../tests/huffman.h \
  /opt/amiga/m68k-amigaos/ndk13-include/hardware/intbits.h \
  /opt/amiga/include/ace/managers/memory.h \
  /opt/amiga/include/ace/utils/file.h \
+ /opt/amiga/m68k-amigaos/libnix/include/stdio.h \
  /opt/amiga/include/ace/managers/copper.h \
  /opt/amiga/m68k-amigaos/ndk13-include/hardware/dmabits.h \
  /opt/amiga/include/ace/utils/bitmap.h \
@@ -74,14 +75,63 @@ rodonea.o: rodonea.c rodonea.h ../tests/huffman.h \
  /opt/amiga/m68k-amigaos/ndk13-include/utility/tagitem.h \
  /opt/amiga/m68k-amigaos/ndk-include/graphics/scale.h \
  /opt/amiga/m68k-amigaos/ndk13-include/hardware/blit.h \
- /opt/amiga/include/ace/managers/blit.h ../_res/thegrbth.h rod3X1.h \
- ../_res/rodstart.h
+ /opt/amiga/include/ace/managers/blit.h ../tests/huffman.h \
+ ../_res/thegrbth.h ../_res/rodo1byte/rodo2X1_180_1byte_compressed.h \
+ ../_res/rodo1byte/rodo2X1_180_1byte_compressed_help.h \
+ ../_res/rodo1byte/rodo2X1_180_1byte_compressed_rot3.h \
+ ../_res/rodo1byte/rodo2X1_180_1byte_compressed_help_rot3.h \
+ ../_res/rodo1byte/rodo3X1_360_1byte_compressed_rot3.h \
+ ../_res/rodo1byte/rodo3X1_360_1byte_compressed_rot3_help.h \
+ ../_res/rodo1byte/rodo4X1_180_1byte_compressed.h \
+ ../_res/rodo1byte/rodo4X1_180_1byte_compressed_help.h \
+ ../_res/rodo1byte/rodo4X1_180_1byte_compressed_rot3.h \
+ ../_res/rodo1byte/rodo4X1_180_1byte_compressed_help_rot3.h \
+ ../_res/rodo1byte/rodo6X1_180_1byte_compressed.h \
+ ../_res/rodo1byte/rodo6X1_180_1byte_compressed_help.h \
+ ../_res/rodo1byte/rodo6X1_180_1byte_compressed_rot3.h \
+ ../_res/rodo1byte/rodo6X1_180_1byte_compressed_help_rot3.h fonts.h
 
 rodonea.h:
 
-../tests/huffman.h:
+/opt/amiga/include/ace/managers/key.h:
 
-/opt/amiga/m68k-amigaos/libnix/include/stdio.h:
+/opt/amiga/include/ace/types.h:
+
+/opt/amiga/m68k-amigaos/ndk13-include/exec/types.h:
+
+/opt/amiga/m68k-amigaos/ndk13-include/exec/interrupts.h:
+
+/opt/amiga/m68k-amigaos/ndk13-include/exec/nodes.h:
+
+/opt/amiga/m68k-amigaos/ndk13-include/exec/lists.h:
+
+/opt/amiga/include/ace/managers/game.h:
+
+/opt/amiga/include/ace/managers/system.h:
+
+/opt/amiga/m68k-amigaos/ndk13-include/graphics/gfxbase.h:
+
+/opt/amiga/m68k-amigaos/ndk13-include/exec/libraries.h:
+
+/opt/amiga/m68k-amigaos/ndk13-include/graphics/monitor.h:
+
+/opt/amiga/include/ace/utils/custom.h:
+
+/opt/amiga/include/ace/macros.h:
+
+/opt/amiga/m68k-amigaos/ndk13-include/hardware/custom.h:
+
+/opt/amiga/include/ace/managers/viewport/simplebuffer.h:
+
+/opt/amiga/include/ace/managers/viewport/camera.h:
+
+/opt/amiga/include/ace/utils/extview.h:
+
+/opt/amiga/include/ace/utils/tag.h:
+
+/opt/amiga/lib/gcc/m68k-amigaos/6.5.0b/include/stdarg.h:
+
+/opt/amiga/include/ace/managers/log.h:
 
 /opt/amiga/m68k-amigaos/libnix/include/string.h:
 
@@ -135,46 +185,6 @@ rodonea.h:
 
 /opt/amiga/m68k-amigaos/libnix/include/strsup.h:
 
-/opt/amiga/lib/gcc/m68k-amigaos/6.5.0b/include/stdarg.h:
-
-/opt/amiga/include/ace/managers/key.h:
-
-/opt/amiga/include/ace/types.h:
-
-/opt/amiga/m68k-amigaos/ndk13-include/exec/types.h:
-
-/opt/amiga/m68k-amigaos/ndk13-include/exec/interrupts.h:
-
-/opt/amiga/m68k-amigaos/ndk13-include/exec/nodes.h:
-
-/opt/amiga/m68k-amigaos/ndk13-include/exec/lists.h:
-
-/opt/amiga/include/ace/managers/game.h:
-
-/opt/amiga/include/ace/managers/system.h:
-
-/opt/amiga/m68k-amigaos/ndk13-include/graphics/gfxbase.h:
-
-/opt/amiga/m68k-amigaos/ndk13-include/exec/libraries.h:
-
-/opt/amiga/m68k-amigaos/ndk13-include/graphics/monitor.h:
-
-/opt/amiga/include/ace/utils/custom.h:
-
-/opt/amiga/include/ace/macros.h:
-
-/opt/amiga/m68k-amigaos/ndk13-include/hardware/custom.h:
-
-/opt/amiga/include/ace/managers/viewport/simplebuffer.h:
-
-/opt/amiga/include/ace/managers/viewport/camera.h:
-
-/opt/amiga/include/ace/utils/extview.h:
-
-/opt/amiga/include/ace/utils/tag.h:
-
-/opt/amiga/include/ace/managers/log.h:
-
 /opt/amiga/include/ace/managers/timer.h:
 
 /opt/amiga/m68k-amigaos/ndk13-include/clib/exec_protos.h:
@@ -198,6 +208,8 @@ rodonea.h:
 /opt/amiga/include/ace/managers/memory.h:
 
 /opt/amiga/include/ace/utils/file.h:
+
+/opt/amiga/m68k-amigaos/libnix/include/stdio.h:
 
 /opt/amiga/include/ace/managers/copper.h:
 
@@ -239,8 +251,36 @@ rodonea.h:
 
 /opt/amiga/include/ace/managers/blit.h:
 
+../tests/huffman.h:
+
 ../_res/thegrbth.h:
 
-rod3X1.h:
+../_res/rodo1byte/rodo2X1_180_1byte_compressed.h:
 
-../_res/rodstart.h:
+../_res/rodo1byte/rodo2X1_180_1byte_compressed_help.h:
+
+../_res/rodo1byte/rodo2X1_180_1byte_compressed_rot3.h:
+
+../_res/rodo1byte/rodo2X1_180_1byte_compressed_help_rot3.h:
+
+../_res/rodo1byte/rodo3X1_360_1byte_compressed_rot3.h:
+
+../_res/rodo1byte/rodo3X1_360_1byte_compressed_rot3_help.h:
+
+../_res/rodo1byte/rodo4X1_180_1byte_compressed.h:
+
+../_res/rodo1byte/rodo4X1_180_1byte_compressed_help.h:
+
+../_res/rodo1byte/rodo4X1_180_1byte_compressed_rot3.h:
+
+../_res/rodo1byte/rodo4X1_180_1byte_compressed_help_rot3.h:
+
+../_res/rodo1byte/rodo6X1_180_1byte_compressed.h:
+
+../_res/rodo1byte/rodo6X1_180_1byte_compressed_help.h:
+
+../_res/rodo1byte/rodo6X1_180_1byte_compressed_rot3.h:
+
+../_res/rodo1byte/rodo6X1_180_1byte_compressed_help_rot3.h:
+
+fonts.h:

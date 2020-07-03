@@ -24,6 +24,9 @@
    // return b.tv_secs * 1000 + b.tv_micro / 1000;
 //}
 
+long add (register long a __asm("d0"), register long b __asm("d1"));
+
+
 
 void decode_stream3(UWORD uwFrames, HuffNode* tree, unsigned padding);
 
@@ -36,6 +39,10 @@ static unsigned int iOutIndex = 0;
 
 int main()
 {
+    long aa = add(14,16);
+printf ("14 + 16 = %ld\n",aa);
+
+return 0;
    printf("Rod compressed size %d\n",rod3X1_compressed_size);
 
   // FILE* fin = fopen("out.Z", "rb");

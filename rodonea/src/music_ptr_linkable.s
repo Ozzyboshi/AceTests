@@ -11,6 +11,17 @@
 
 	Section	HYPERX,CODE_C
 
+_add:
+  	lsl.b     #$04,d0 ; Right shift 4 positions
+	rts
+	btst 	 #3,d0		  ; check if third bit is set
+	beq.s   finish
+	add.l	d1,d0
+finish:
+	rts
+
+	public _add
+
 _chan3played:
 	tst.w   mt_chan3temp
 	beq.s   chan3played
