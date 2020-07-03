@@ -451,7 +451,7 @@ void gameGsLoop(void)
   }
   scorri();
   ubTxtCounter++;
-  if (ubTxtCounter > 15)
+  if (ubTxtCounter > 7)
     ubTxtCounter = 0;
 
   vPortWaitForEnd(s_pVpMain);
@@ -916,11 +916,11 @@ void scorri()
 
   blitWait();
   //waitblit();
-  g_pCustom->bltcon0 = 0x19f0;
+  g_pCustom->bltcon0 = 0x29f0;
   g_pCustom->bltcon1 = 0x0002;
 
   g_pCustom->bltafwm = 0xffff;
-  g_pCustom->bltalwm = 0x7fff;
+  g_pCustom->bltalwm = 0x3fff;
 
   g_pCustom->bltamod = 0x0000;
   g_pCustom->bltbmod = 0x0000;
