@@ -190,7 +190,6 @@ void gameGsCreate(void)
   s_pVpMain = vPortCreate(0,
                           TAG_VPORT_VIEW, s_pView,
                           TAG_VPORT_BPP, 1, // 1 bits per pixel, 2 colors
-                          // We won't specify height here - viewport will take remaining space.
                           TAG_END);
 
 #ifdef RAWCOP
@@ -199,6 +198,7 @@ void gameGsCreate(void)
   s_pMainBuffer = simpleBufferCreate(0,
                                      TAG_SIMPLEBUFFER_VPORT, s_pVpMain, // Required: parent viewport
                                      TAG_SIMPLEBUFFER_BITMAP_FLAGS, BMF_CLEAR,
+                                     TAG_SIMPLEBUFFER_BOUND_WIDTH, 320+16 ,
                                      TAG_SIMPLEBUFFER_IS_DBLBUF, 1,
 #ifdef RAWCOP
                                      TAG_SIMPLEBUFFER_COPLIST_OFFSET, s_uwCopRawOffs, // Important in rawcop mode
@@ -440,6 +440,7 @@ void gameGsLoop(void)
       unDecompressorManagerIndex = -1;
   }
   //END DECOMPRESSION
+  
   static UBYTE ubTxtCounter = 0;
   if (ubTxtCounter == 0)
   {
@@ -463,7 +464,7 @@ void gameGsLoop(void)
   /*uwAngle=0;*/
   BYTE *pRodPointer = sg_pCurrRodonea + uwAngle * 360;
   //logWrite("angolo : %d\n",uwAngle);
-  blitWait();
+  //blitWait();
 
   //g_pCustom->color[0] = 0x0F0F;
 
@@ -501,7 +502,7 @@ void gameGsLoop(void)
     ubXData += bCompressedX;
     ubYData += bCompressedY;
 
-    *((UBYTE *)((ULONG)s_pMainBuffer->pBack->Planes[0]) + (40 * (ubYData + 48) + ((ubXData + 60) >> 3))) |= 1UL << ((~((ubXData + 60) & 7)) & 7);
+    *((UBYTE *)((ULONG)s_pMainBuffer->pBack->Planes[0]) + (42 * (ubYData + 48) + ((ubXData + 60) >> 3))) |= 1UL << ((~((ubXData + 60) & 7)) & 7);
 
     //*(firstBitplane + (40 * (ubYData) + ((ubXData) >> 3))) |= 1UL << ((~((ubXData) & 7)) & 7);
     /*UBYTE *primo = (UBYTE *)((ULONG)s_pMainBuffer->pBack->Planes[0]) + (40 * (ubYData + 28) + ((ubXData + 60) >> 3));
@@ -581,7 +582,7 @@ void blitClear(tSimpleBufferManager *buffer, UBYTE nBitplane)
   g_pCustom->bltdmod = 0x0000;
   g_pCustom->bltdpt = (UBYTE *)((ULONG)buffer->pBack->Planes[nBitplane] + 16 * 40);
   // g_pCustom->bltsize = 0x4014;
-  g_pCustom->bltsize = 0x3C14;
+  g_pCustom->bltsize = 0x3C15;
 
   return;
 }
@@ -898,7 +899,7 @@ void printCharToRight(char carToPrint)
   UBYTE *firstBitPlane = (UBYTE *)((ULONG)s_pMainBuffer->pFront->Planes[0]);
 
   // vogliamo stampare all'estrema destra quindi aggiungiamo 38
-  firstBitPlane += 38;
+  firstBitPlane += 40;
 
   for (int i = 0; i < 20; i++)
   {
@@ -907,31 +908,33 @@ void printCharToRight(char carToPrint)
     *firstBitPlane = (UBYTE)fonts_data[carToPrintOffset + 1];
     firstBitPlane++;
     carToPrintOffset += 2;
-    firstBitPlane += 38;
+    firstBitPlane += 40;
   }
 }
 
 void scorri()
 {
-
+  //return;
   blitWait();
-  //waitblit();
+  //waitblit(); 0x09FF; //
   g_pCustom->bltcon0 = 0x29f0;
   g_pCustom->bltcon1 = 0x0002;
 
-  g_pCustom->bltafwm = 0xffff;
-  g_pCustom->bltalwm = 0x3fff;
+  g_pCustom->bltafwm = 0x3fff;
+  g_pCustom->bltalwm = 0xffff;
 
   g_pCustom->bltamod = 0x0000;
   g_pCustom->bltbmod = 0x0000;
   g_pCustom->bltcmod = 0x0000;
   g_pCustom->bltdmod = 0x0000;
 
-  UBYTE *firstBitPlane = (UBYTE *)((ULONG)s_pMainBuffer->pFront->Planes[0]) + ((20 * 20 - 1) * 2);
-  UBYTE *firstBitPlane2 = (UBYTE *)((ULONG)s_pMainBuffer->pBack->Planes[0]) + ((20 * 20 - 1) * 2);
+  UBYTE *firstBitPlane = (UBYTE *)((ULONG)s_pMainBuffer->pFront->Planes[0] + 840);
+  UBYTE *firstBitPlane2 = (UBYTE *)((ULONG)s_pMainBuffer->pBack->Planes[0] + 840);
 
   g_pCustom->bltdpt = firstBitPlane2;
   g_pCustom->bltapt = firstBitPlane;
 
-  g_pCustom->bltsize = 0x0514;
+  g_pCustom->bltsize = 0x0515;
+
+  //g_pCustom->bltsize = 0x0295;
 }
