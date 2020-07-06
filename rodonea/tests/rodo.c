@@ -72,7 +72,7 @@ return 0;
    b3 = (padding & 0xff000000) >> 24u;
    padding = b0 | b1 | b2 | b3;
    printf("Paddig vale %d\n",padding);
-   construct_huffman(freq);
+   construct_huffman(freq,-1);
 
    //for (int i=0 ;i<259200;i++)   decode_stream3(1, tree, padding);
 
@@ -325,67 +325,87 @@ void decode_stream(FILE* fin, FILE* fout, HuffNode* tree, unsigned padding) {
     }
 }
 
-void construct_huffman(unsigned* freq_in) {
-    int count = 256;
-    unsigned freq[256];
-    
 
-    // Initialize data
-    for (int i = 0; i < 256; i++) 
+void construct_huffman(unsigned *freq_in,WORD stage)
+{
+  int count = 256;
+  static unsigned freq[256];
+
+  // Initialize data
+  if (stage!=1)
+  {
+    for (int i = 0; i < 256; i++)
     {
-        freq[i] = freq_in[i];
-        tree[i].data = i;
-        tree[i].left = NULL;
-        tree[i].right = NULL;
-        node[i] = &tree[i];
-   }
+      freq[i] = freq_in[i];
+      tree[i].data = i;
+      tree[i].left = NULL;
+      tree[i].right = NULL;
+      node[i] = &tree[i];
+    }
+  }
 
-    // Sort by frequency, decreasing order
-    /* WARNING: Although this Quick Sort is an unstable sort,
+  if (stage==0) return ;
+
+  // Sort by frequency, decreasing order
+  /* WARNING: Although this Quick Sort is an unstable sort,
      * it should at least give the same result for the same input frequency table,
      * therefore I'm leaving this code here
      */
+  {
+    unsigned top = 1;
+    lower[0] = 0, upper[0] = 256;
+    while (top > 0)
     {
-        unsigned top = 1;
-        lower[0] = 0, upper[0] = 256;
-        while (top > 0) {
-            top--;
-            int left = lower[top], right = upper[top];
-            int i = left, j = right - 1, flag = 0;
-            if (i >= j) // Nothing to sort
-                continue;
-            while (i < j) {
-                if (freq[i] < freq[j]) {
-                    unsigned t = freq[i]; freq[i] = freq[j]; freq[j] = t;
-                    HuffNode *p = node[i]; node[i] = node[j]; node[j] = p;
-                    flag = !flag;
-                }
-                flag ? i++ : j--;
-            }
-            lower[top] = left, upper[top] = i;
-            lower[top + 1] = i + 1, upper[top + 1] = right;
-            top += 2;
+      top--;
+      int left = lower[top], right = upper[top];
+      int i = left, j = right - 1, flag = 0;
+      if (i >= j) // Nothing to sort
+        continue;
+      while (i < j)
+      {
+        if (freq[i] < freq[j])
+        {
+          unsigned t = freq[i];
+          freq[i] = freq[j];
+          freq[j] = t;
+          HuffNode *p = node[i];
+          node[i] = node[j];
+          node[j] = p;
+          flag = !flag;
         }
+        flag ? i++ : j--;
+      }
+      lower[top] = left, upper[top] = i;
+      lower[top + 1] = i + 1, upper[top + 1] = right;
+      top += 2;
     }
+  }
 
-// Construct tree
-    while (count > 1) {
-        int pos = 512 - count;
-        HuffNode *parent = &tree[pos];
-        // Select lowest 2 by freq
-        int i = count - 2, j = count - 1;
-        // Create tree, lower freq left
-        parent->left = node[j]; parent->right = node[i];
-        node[j]->parent = node[i]->parent = parent;
-        node[i] = parent;
-        freq[i] += freq[j];
-        // Insert
-        for (; i > 0 && freq[i] > freq[i - 1]; i--) {
-            unsigned t = freq[i]; freq[i] = freq[i - 1]; freq[i - 1] = t;
-            HuffNode *p = node[i]; node[i] = node[i - 1]; node[i - 1] = p;
-        }
-        count--;
+  // Construct tree
+  while (count > 1)
+  {
+    int pos = 512 - count;
+    HuffNode *parent = &tree[pos];
+    // Select lowest 2 by freq
+    int i = count - 2, j = count - 1;
+    // Create tree, lower freq left
+    parent->left = node[j];
+    parent->right = node[i];
+    node[j]->parent = node[i]->parent = parent;
+    node[i] = parent;
+    freq[i] += freq[j];
+    // Insert
+    for (; i > 0 && freq[i] > freq[i - 1]; i--)
+    {
+      unsigned t = freq[i];
+      freq[i] = freq[i - 1];
+      freq[i - 1] = t;
+      HuffNode *p = node[i];
+      node[i] = node[i - 1];
+      node[i - 1] = p;
     }
-    // Now HEAD = node[0] = tree[511]
-    node[0]->parent = NULL;
+    count--;
+  }
+  // Now HEAD = node[0] = tree[511]
+  node[0]->parent = NULL;
 }

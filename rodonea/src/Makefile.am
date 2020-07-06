@@ -1,6 +1,6 @@
 bin_PROGRAMS = rodonea
 rodonea_LDADD = music_ptr_linkable.o
-rodonea_SOURCES = main.c rodonea.c
+rodonea_SOURCES = main.c rodonea.c demointro.c
 
 
 music_ptr_linkable.o: music_ptr_linkable.s

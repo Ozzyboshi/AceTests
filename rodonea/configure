@@ -4199,7 +4199,7 @@ ac_config_files="$ac_config_files Makefile src/Makefile tests/Makefile"
 
 # asm=vasmm68k_mot
 
-#AC_DEFINE([ACE_DEBUG], [ON], [Debug on])
+# AC_DEFINE([ACE_DEBUG], [ON], [Debug on])
 
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure

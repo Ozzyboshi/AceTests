@@ -18,4 +18,4 @@ static BYTE* g_HUFFMAN_COMPRESSED_DATA;
 void uncompress_file(const char* filename, const char* newname);
 void decode_stream(FILE* fin, FILE* fout, HuffNode* tree, unsigned padding);
 void decode_stream2(FILE* fin, FILE* fout, HuffNode* tree, unsigned padding);
-void construct_huffman(unsigned* freq_in);
+void construct_huffman(unsigned* freq_in,WORD);

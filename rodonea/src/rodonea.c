@@ -39,7 +39,8 @@
 
 #include "fonts.h"
 
-//#include "../_res/rodo1byte/test.h"
+#define COPRAWCOLOR(var,var2) copSetWait(&pBarCmds[ubCopIndex++].sWait, 7, var +25);\
+  copSetMove(&pBarCmds[ubCopIndex++].sMove, &g_pCustom->color[0], var2);
 
 #define DECOMPRESSION_CHUNK_SIZE 70
 
@@ -67,15 +68,13 @@ static BYTE *sg_bHELPERPOINTER;
 
 #define DECOMPRESSORMANAGERSIZE 7
 tRodDecompressorManager tDecompressorManager[DECOMPRESSORMANAGERSIZE] = {
- 
-
     {&rodo3X1_360_1byte_compressed_rot3_size, rodo3X1_360_1byte_compressed_rot3_data, rodo3X1_360_1byte_compressed_help_rot3_data, sg_bRODONEA128K, 360, 129600},
     {&rodo4X1_180_1byte_compressed_size, rodo4X1_180_1byte_compressed_data, rodo4X1_180_1byte_compressed_help_data, sg_bRODONEA64K, 180, 64800},
     {&rodo4X1_180_1byte_compressed_rot3_size, rodo4X1_180_1byte_compressed_rot3_data, rodo4X1_360_1byte_compressed_help_rot3_data, sg_bRODONEA64K_BACK, 180, 64800},
     {&rodo2X1_180_1byte_compressed_size, rodo2X1_180_1byte_compressed_data, rodo2X1_180_1byte_compressed_help_data, sg_bRODONEA64K, 180, 64800},
     {&rodo2X1_180_1byte_compressed_rot3_size, rodo2X1_180_1byte_compressed_rot3_data, rodo2X1_180_1byte_compressed_help_rot3_data, sg_bRODONEA64K_BACK, 180, 64800},
-     {&rodo6X1_360_1byte_compressed_size, rodo6X1_360_1byte_compressed_data, rodo6X1_180_1byte_compressed_help_data, sg_bRODONEA64K, 180, 64800},
-  {&rodo6X1_360_1byte_compressed_rot3_size, rodo6X1_360_1byte_compressed_rot3_data, rodo6X1_180_1byte_compressed_help_rot3_data, sg_bRODONEA64K_BACK, 180, 64800},
+    {&rodo6X1_360_1byte_compressed_size, rodo6X1_360_1byte_compressed_data, rodo6X1_180_1byte_compressed_help_data, sg_bRODONEA64K, 180, 64800},
+    {&rodo6X1_360_1byte_compressed_rot3_size, rodo6X1_360_1byte_compressed_rot3_data, rodo6X1_180_1byte_compressed_help_rot3_data, sg_bRODONEA64K_BACK, 180, 64800},
 
     // {&rodo2X1_180_1byte_compressed_size, rodo2X1_180_1byte_compressed_data, rodo2X1_180_1byte_compressed_help_data, sg_bRODONEA64K_BACK, 180, 64800},
     // {&rodo3X1_360_1byte_compressed_rot3_size,rodo3X1_360_1byte_compressed_rot3_data,rodo3X1_360_1byte_compressed_help_rot3_data,sg_bRODONEA128K,360,129600},
@@ -115,18 +114,15 @@ static UBYTE *ubRodonea;
 static unsigned padding;
 static UWORD uwFinalAngle;
 
-static char g_cPhrase[] = {"HELLOOO FOLKS, TIME FOR ANOTHER NOSENSE AMIGADEMO FROM OZZYBOSHI, THIS TIME THE SUBJECT IS A RODONEA, \
-A CURVE PLOTTED IN POLAR COORDINATED STUDIED BY FRANCESCO LUDOVICO GRANDI, AN ITALIAN MATH GENIUS WHO LIVED NEAR ME SOME CENTURIES AGO. \
-BECAUSE OF STOCK AMIGAS LIMITATIONS I CAN ONLY DISPLAY A FEW ROSES BUT MAYBE ONE DAY I WILL COME UP WITH A BETTER SOLUTION TO STORE AND DRAW MORE RODONEA DATA. \
+static char g_cPhrase[] = {"HELLO FLASHPARTY 2020 ONLINE ATTENDERS, THIS IS MY FIRST EVER APPEARANCE TO A DEMO COMPETITION, THE SUBJECT I PICKED IS THE \"RODONEA\", \
+A CURVE PLOTTED IN POLAR COORDINATES STUDIED BY FRANCESCO LUDOVICO GRANDI, AN ITALIAN MATH GENIUS WHO LIVED NEAR ME SOME CENTURIES AGO. \
+RODONEAS CAN BE EXPRESSED WITH THIS EQUATION:  RHO = R * SIN (OMEGA*THETA) WHERE R IS THE MAXIMUM DISTANCE FROM THE CENTER AND OMEGA DEFINES THE SHAPE OF THE ROSE. \
+BECAUSE OF STOCK AMIGAS LIMITATIONS I CAN ONLY DISPLAY A FEW ROSES WITH OMEGA EQUAL 1/2,1/3,1/4 AND 1/6, BUT MAYBE ONE DAY I WILL COME UP WITH A BETTER SOLUTION TO STORE AND DRAW MORE RODONEA DATA. \
 AS ALWAYS HAPPENS IN MY DEMOS I WANT TO GREET SOMEONE, THIS TIME THE FIRST ONE IS Z3K FOR HIS AWESOME ONLINE PRESENTATION ABOUT DEMOSCENE IN ITALY, \
-THE OTHER MENTIONS ARE FOR DR PROCTON, KAFFEINE AND FAROX WHO ALSO ATTENDED. \
+GREETINGS ALSO TO DR PROCTON, KAFFEINE AND FAROX WHO ALSO ATTENDED. \
 NEGATIVE MENTIONS FOR SOME FELLOW COUNTRYMAN FROM AMIGAPAGE.IT THAT FLAMED THE MEETING TOPIC, SORRY GUYS I REALLY DONT UNDERSTAND YOUR BEHAVIOUR BUT DONT WORRY I WONT BOTHER YOU AGAIN WITH OUR ONLINE PARTIES. \
 NEXT MEETING COULD BE AN INTERVIEW WITH A TRUE APOLLO MEMBER, I REALLY HOPE TO PERSUADE HIM TO GIVE US SOME OF HIS FREE TIME TO TALK ABOUT THE APOLLO TEAM AS SEEN FROM INSIDE. \
 WELL... I THINK THAT'S ALL FOR NOW, THIS SCROLL TEXT WILL REPEAT ITSELF ....                                                                                        \n"};
-
-//static UWORD s_uwBarY = 160;
-
-//UBYTE *firstBitplane;
 
 // START COMPRESSION VAR
 /*FILE* fin ;
@@ -152,7 +148,7 @@ void gameGsCreate(void)
   uwFinalAngle = tDecompressorManager[unDecompressorManagerIndex].uwFinalAngle;
 
   init_compression4();
-  construct_huffman(freq);
+  construct_huffman(freq, -1);
   decode_stream4(0, tDecompressorManager[unDecompressorManagerIndex].pDest);
   //decode_stream4(32400, tDecompressorManager[unDecompressorManagerIndex].pDest + 32400);
   /*sg_bHELPERPOINTER = (BYTE *)&rodo2X1_180_1byte_compressed_help_rot3_data[0];
@@ -168,10 +164,10 @@ void gameGsCreate(void)
   sg_pCurrRodonea = tDecompressorManager[unDecompressorManagerIndex].pDest;
 #define RAWCOP
 #ifdef RAWCOP
-  ULONG ulRawSize = (simpleBufferGetRawCopperlistInstructionCount(1) +
-                     22 * 2 + // 32 bars - each consists of WAIT + MOVE instruction
+  ULONG ulRawSize = (simpleBufferGetRawCopperlistInstructionCount(1) + 116
+                  /*   22 * 2 + // 32 bars - each consists of WAIT + MOVE instruction
                      1 +      // Final WAIT
-                     1        // Just to be sure
+                     1        // Just to be sure*/
   );
 #endif
 
@@ -198,7 +194,7 @@ void gameGsCreate(void)
   s_pMainBuffer = simpleBufferCreate(0,
                                      TAG_SIMPLEBUFFER_VPORT, s_pVpMain, // Required: parent viewport
                                      TAG_SIMPLEBUFFER_BITMAP_FLAGS, BMF_CLEAR,
-                                     TAG_SIMPLEBUFFER_BOUND_WIDTH, 320+16 ,
+                                     TAG_SIMPLEBUFFER_BOUND_WIDTH, 320 + 16,
                                      TAG_SIMPLEBUFFER_IS_DBLBUF, 1,
 #ifdef RAWCOP
                                      TAG_SIMPLEBUFFER_COPLIST_OFFSET, s_uwCopRawOffs, // Important in rawcop mode
@@ -229,76 +225,169 @@ void gameGsCreate(void)
   tCopBfr *pCopBfr = s_pView->pCopList->pBackBfr;
   tCopCmd *pBarCmds = &pCopBfr->pList[s_uwCopRawOffs];
 
-  copSetWait(&pBarCmds[0].sWait, 0, 44);
+  
+
+#if 1
+
+  UBYTE ubCopIndex = 6;
+  
+  copSetWait(&pBarCmds[0].sWait, 7, 44);
+  copSetMove(&pBarCmds[1].sMove, &g_pCustom->color[0], 0x0201);
+
+  copSetWait(&pBarCmds[2].sWait, 7, 45);
+  copSetMove(&pBarCmds[3].sMove, &g_pCustom->color[1], 0x0987);
+
+  copSetWait(&pBarCmds[4].sWait, 7, 65);
+  copSetMove(&pBarCmds[5].sMove, &g_pCustom->color[1], 0x0FFF);
+
+  COPRAWCOLOR(131,0x0302)
+  COPRAWCOLOR(132,0x0201)
+  COPRAWCOLOR(134,0x0302)
+  COPRAWCOLOR(136,0x0201)
+  COPRAWCOLOR(137,0x0302)
+  COPRAWCOLOR(138,0x0201)
+
+  COPRAWCOLOR(139,0x0302)
+  COPRAWCOLOR(142,0x0313)
+  COPRAWCOLOR(143,0x0302)
+
+  COPRAWCOLOR(145,0x0313)
+  COPRAWCOLOR(146,0x0302)
+
+  COPRAWCOLOR(148,0x0201)
+  COPRAWCOLOR(149,0x0313)
+  COPRAWCOLOR(151,0x0302)
+  COPRAWCOLOR(152,0x0313)
+  COPRAWCOLOR(153,0x0201)
+  COPRAWCOLOR(154,0x0313)
+
+  COPRAWCOLOR(156,0x0424)
+  COPRAWCOLOR(157,0x0313)
+  COPRAWCOLOR(158,0x0424)
+  COPRAWCOLOR(161,0x0313)
+  COPRAWCOLOR(162,0x0424)
+  COPRAWCOLOR(164,0x0525)
+
+  COPRAWCOLOR(165,0x0636)
+  COPRAWCOLOR(166,0x0525)
+
+  COPRAWCOLOR(167,0x0313)
+
+  COPRAWCOLOR(168,0x0525)
+
+  COPRAWCOLOR(169,0x0636)
+
+  COPRAWCOLOR(170,0x0525)
+  COPRAWCOLOR(171,0x0424)
+  COPRAWCOLOR(173,0x0313)
+  COPRAWCOLOR(174,0x0424)
+  COPRAWCOLOR(175,0x0525)
+  COPRAWCOLOR(176,0x0424)
+
+  COPRAWCOLOR(178,0x0313)
+  COPRAWCOLOR(179,0x0424)
+  COPRAWCOLOR(180,0x0313)
+  COPRAWCOLOR(181,0x0201)
+  COPRAWCOLOR(182,0x0313)
+  COPRAWCOLOR(184,0x0302)
+  COPRAWCOLOR(185,0x0313)
+  COPRAWCOLOR(188,0x0313)
+  COPRAWCOLOR(191,0x0302)
+  COPRAWCOLOR(193,0x0313)
+  COPRAWCOLOR(194,0x0302)
+  COPRAWCOLOR(197,0x0201)
+  COPRAWCOLOR(198,0x0302)
+  COPRAWCOLOR(199,0x0201)
+  COPRAWCOLOR(200,0x0302)
+  COPRAWCOLOR(202,0x0201)
+  COPRAWCOLOR(204,0x0302)
+  COPRAWCOLOR(205,0x0201)
+
+
+  /*copSetWait(&pBarCmds[10].sWait, 7, 139);
+  copSetMove(&pBarCmds[11].sMove, &g_pCustom->color[0], 0x0302);
+
+  copSetWait(&pBarCmds[10].sWait, 7, 142);
+  copSetMove(&pBarCmds[11].sMove, &g_pCustom->color[0], 0x0313);
+
+  copSetWait(&pBarCmds[10].sWait, 7, 143);
+  copSetMove(&pBarCmds[11].sMove, &g_pCustom->color[0], 0x0302);*/
+
+
+
+#endif
+#if 0
+
+  copSetWait(&pBarCmds[0].sWait, 7, 44);
   copSetMove(&pBarCmds[1].sMove, &g_pCustom->color[1], 0x0FF0);
 
-  copSetWait(&pBarCmds[2].sWait, 0, 64);
+  copSetWait(&pBarCmds[2].sWait, 7, 65);
   copSetMove(&pBarCmds[3].sMove, &g_pCustom->color[1], 0x0FFF);
 
-
-  copSetWait(&pBarCmds[4].sWait, 0, 100);
+  copSetWait(&pBarCmds[4].sWait, 7, 100);
   copSetMove(&pBarCmds[5].sMove, &g_pCustom->color[0], 0x0A47);
 
-  copSetWait(&pBarCmds[6].sWait, 0, 110);
+  copSetWait(&pBarCmds[6].sWait, 7, 110);
   copSetMove(&pBarCmds[7].sMove, &g_pCustom->color[0], 0x0837);
 
-  copSetWait(&pBarCmds[8].sWait, 0, 120);
+  copSetWait(&pBarCmds[8].sWait, 7, 120);
   copSetMove(&pBarCmds[9].sMove, &g_pCustom->color[0], 0x0637);
 
-  copSetWait(&pBarCmds[10].sWait, 0, 130);
+  copSetWait(&pBarCmds[10].sWait, 7, 130);
   copSetMove(&pBarCmds[11].sMove, &g_pCustom->color[0], 0x0536);
 
-  copSetWait(&pBarCmds[12].sWait, 0, 140);
+  copSetWait(&pBarCmds[12].sWait, 7, 140);
   copSetMove(&pBarCmds[13].sMove, &g_pCustom->color[0], 0x0325);
 
-  copSetWait(&pBarCmds[14].sWait, 0, 150);
+  copSetWait(&pBarCmds[14].sWait, 7, 150);
   copSetMove(&pBarCmds[15].sMove, &g_pCustom->color[0], 0x0225);
 
-  copSetWait(&pBarCmds[16].sWait, 0, 160);
+  copSetWait(&pBarCmds[16].sWait, 7, 160);
   copSetMove(&pBarCmds[17].sMove, &g_pCustom->color[0], 0x0024);
 
-  copSetWait(&pBarCmds[18].sWait, 0, 170);
+  copSetWait(&pBarCmds[18].sWait, 7, 170);
   copSetMove(&pBarCmds[19].sMove, &g_pCustom->color[0], 0x0023);
 
-  copSetWait(&pBarCmds[20].sWait, 0, 180);
+  copSetWait(&pBarCmds[20].sWait, 7, 180);
   copSetMove(&pBarCmds[21].sMove, &g_pCustom->color[0], 0x0012);
 
-  copSetWait(&pBarCmds[22].sWait, 0, 190);
+  copSetWait(&pBarCmds[22].sWait, 7, 190);
   copSetMove(&pBarCmds[23].sMove, &g_pCustom->color[0], 0x0111);
 
   // start inverse gradient
 
-  copSetWait(&pBarCmds[24].sWait, 0, 200);
+  copSetWait(&pBarCmds[24].sWait, 7, 200);
   copSetMove(&pBarCmds[25].sMove, &g_pCustom->color[0], 0x0111);
 
-  copSetWait(&pBarCmds[26].sWait, 0, 210);
+  copSetWait(&pBarCmds[26].sWait, 7, 210);
   copSetMove(&pBarCmds[27].sMove, &g_pCustom->color[0], 0x0012);
 
-  copSetWait(&pBarCmds[28].sWait, 0, 220);
+  copSetWait(&pBarCmds[28].sWait, 7, 220);
   copSetMove(&pBarCmds[29].sMove, &g_pCustom->color[0], 0x0023);
 
-  copSetWait(&pBarCmds[30].sWait, 0, 230);
+  copSetWait(&pBarCmds[30].sWait, 7, 230);
   copSetMove(&pBarCmds[31].sMove, &g_pCustom->color[0], 0x0024);
 
-  copSetWait(&pBarCmds[32].sWait, 0, 240);
+  copSetWait(&pBarCmds[32].sWait, 7, 240);
   copSetMove(&pBarCmds[33].sMove, &g_pCustom->color[0], 0x0225);
 
-  copSetWait(&pBarCmds[34].sWait, 0, 250);
+  copSetWait(&pBarCmds[34].sWait, 7, 250);
   copSetMove(&pBarCmds[35].sMove, &g_pCustom->color[0], 0x0325);
 
   copSetWait(&pBarCmds[36].sWait, 0xdf, 0xff);
 
-  copSetWait(&pBarCmds[37].sWait, 0, (UBYTE)260);
+  copSetWait(&pBarCmds[37].sWait, 7, (UBYTE)260);
   copSetMove(&pBarCmds[38].sMove, &g_pCustom->color[0], 0x0536);
 
-  copSetWait(&pBarCmds[39].sWait, 0, (UBYTE)270);
+  copSetWait(&pBarCmds[39].sWait, 7, (UBYTE)270);
   copSetMove(&pBarCmds[40].sMove, &g_pCustom->color[0], 0x0637);
 
-  copSetWait(&pBarCmds[41].sWait, 0, (UBYTE)280);
+  copSetWait(&pBarCmds[41].sWait, 7, (UBYTE)280);
   copSetMove(&pBarCmds[42].sMove, &g_pCustom->color[0], 0x0837);
 
-  copSetWait(&pBarCmds[43].sWait, 0, (UBYTE)290);
+  copSetWait(&pBarCmds[43].sWait, 7, (UBYTE)290);
   copSetMove(&pBarCmds[44].sMove, &g_pCustom->color[0], 0x0A47);
+#endif
 
   CopyMemQuick(
       s_pView->pCopList->pBackBfr->pList,
@@ -362,7 +451,7 @@ void gameGsLoop(void)
   if (nextStageReady == 0)
   {
     static ULONG ulDecompressedDataCounter = 0;
-    static UBYTE ubHuffmanConstructed = 0;
+    static WORD ubHuffmanConstructed = 0;
 
     if (ubDecompressionInitFlag == 0)
     {
@@ -397,13 +486,18 @@ void gameGsLoop(void)
     }
     else
     {
-      if (ubHuffmanConstructed == 0)
+      if (ubHuffmanConstructed <= 257)
       {
-        ubHuffmanConstructed = 1;
-        construct_huffman(freq);
+        //for (WORD lol =0 ;lol <= 3; lol++)
+        construct_huffman(freq, ubHuffmanConstructed);
+
+        //construct_huffman(freq,1);
+        /* construct_huffman(freq,2);*/
+        ubHuffmanConstructed++;
       }
       else
       {
+
         ulDecompressedDataCounter += decode_stream4(DECOMPRESSION_CHUNK_SIZE, tDecompressorManager[unDecompressorManagerIndex].pDest + ulDecompressedDataCounter);
         //logWrite ("decompression : %d/%d\n",ulDecompressedDataCounter,tDecompressorManager[unDecompressorManagerIndex].iDecompressedSize);
         //uwDecompressedDataCounter += decode_stream4(DECOMPRESSION_CHUNK_SIZE, sg_bRODONEA64K_BACK + uwDecompressedDataCounter);
@@ -440,7 +534,8 @@ void gameGsLoop(void)
       unDecompressorManagerIndex = -1;
   }
   //END DECOMPRESSION
-  
+
+#if 1
   static UBYTE ubTxtCounter = 0;
   if (ubTxtCounter == 0)
   {
@@ -450,12 +545,14 @@ void gameGsLoop(void)
     if (*s_pPhrasePointer == '\n')
       s_pPhrasePointer = &g_cPhrase[0];
   }
-  scorri();
+  //scorri();
   ubTxtCounter++;
   if (ubTxtCounter > 7)
     ubTxtCounter = 0;
+#endif
 
   vPortWaitForEnd(s_pVpMain);
+  scorri();
   mt_music();
 
   static UWORD a;
@@ -524,31 +621,10 @@ void gameGsLoop(void)
   }
 
   vPortWaitForEnd(s_pVpMain);
-
-  // blitClear(s_pMainBuffer, 0);
-  //blitClear(s_pMainBuffer, 0);
-
-  /*blitWait();
-  g_pCustom->bltcon0 = 0x0100;
-  g_pCustom->bltcon1 = 0x0000;
-  g_pCustom->bltafwm = 0xFFFF;
-  g_pCustom->bltalwm = 0xFFFF;
-  g_pCustom->bltamod = 0x0000;
-  g_pCustom->bltbmod = 0x0000;
-  g_pCustom->bltcmod = 0x0000;
-  g_pCustom->bltdmod = 0x0000;
-  g_pCustom->bltdpt = (UBYTE *)((ULONG)s_pMainBuffer->pBack->Planes[0]);
-  g_pCustom->bltsize = 0x4014;*/
-
+  //scorri();
   viewProcessManagers(s_pView);
-  //copProcessBlocks();
 
-  /*blitWait();
-    waitblit();*/
   copSwapBuffers();
-
-  //  wait1();
-  ///}
 }
 
 void gameGsDestroy(void)
@@ -580,9 +656,9 @@ void blitClear(tSimpleBufferManager *buffer, UBYTE nBitplane)
   g_pCustom->bltbmod = 0x0000;
   g_pCustom->bltcmod = 0x0000;
   g_pCustom->bltdmod = 0x0000;
-  g_pCustom->bltdpt = (UBYTE *)((ULONG)buffer->pBack->Planes[nBitplane] + 16 * 40);
+  g_pCustom->bltdpt = (UBYTE *)((ULONG)buffer->pBack->Planes[nBitplane] + 22 * 42);
   // g_pCustom->bltsize = 0x4014;
-  g_pCustom->bltsize = 0x3C15;
+  g_pCustom->bltsize = 0x3A55;
 
   return;
 }
@@ -704,102 +780,36 @@ ULONG decode_stream4(WORD uwFrames, BYTE *dest)
   }
   return uwCurFrames;
 }
-#if 0
-void decode_stream3(UWORD uwFrames, HuffNode *tree, unsigned padding)
+
+void construct_huffman(unsigned *freq_in, WORD stage)
 {
-  static int count = 0;
-  UWORD uwCurFrames = 0;
-
-  if (count == 0)
-  {
-    /*size_t startpos = ftell(fin); // should be 1028
-      fseek(fin, 0L, SEEK_END);
-      size_t endpos = ftell(fin); // last byte handling
-      fseek(fin, startpos, SEEK_SET);
-       count = endpos - startpos;*/
-    count = rod3X1_compressed_size - 1028;
-  }
-
-  static char buf = 0;
-  static BYTE nbuf = 0;
-  static BYTE bit = 0;
-  static HuffNode *p;
-  while (count > 0 || nbuf > 0)
-  {
-    // Start from tree top
-    p = tree + 510;
-    while (p->left || p->right)
-    {
-      // Prepare next bit if needed
-      if (nbuf == 0)
-      {
-        if (count <= 0)
-          return;
-
-        //buf = fgetc(fin);
-        buf = (BYTE)*ptrCompressedData;
-        /* logWrite("alessioo %hhx (%hhx) %hhx\n",buf,*ptrCompressedData,ptrCompressedData[1028]);
-                if (buf!=(BYTE)*ptrCompressedData) logWrite("diverso incredibile");
-                else logWrite("uguale");*/
-        ptrCompressedData++;
-
-        if (count == 1)
-        {
-          // Last bit
-          nbuf = 8 - padding;
-          if (nbuf == 0)
-          {
-            return;
-          }
-        }
-        else
-        {
-          nbuf = 8;
-        }
-        count--;
-      }
-      // p has child
-      bit = buf & 1;
-      buf >>= 1;
-      nbuf--;
-      if (bit == 0)
-        p = p->left;
-      else
-        p = p->right;
-    }
-    ubRodonea[iOutIndex] = (UBYTE)p->data;
-    //logWrite("alessio2 iterazione %d - %x\n",iOutIndex,ubRodonea[iOutIndex]);
-
-    iOutIndex++;
-    if (uwCurFrames > uwFrames)
-      return;
-    uwCurFrames++;
-    //fputc(p->data, fout);
-    //printf("####%x#####\n",p->data);
-  }
-}
-#endif
-
-void construct_huffman(unsigned *freq_in)
-{
-  int count = 256;
-  unsigned freq[256];
+  static int count = 256;
+  static unsigned freq[256];
 
   // Initialize data
-  for (int i = 0; i < 256; i++)
+  if (stage <= 0)
   {
-    freq[i] = freq_in[i];
-    tree[i].data = i;
-    tree[i].left = NULL;
-    tree[i].right = NULL;
-    node[i] = &tree[i];
+    count = 256;
+    //logWrite("imposto count che val vale2 %d perche stage è %d\n",count,stage);
+    for (int i = 0; i < 256; i++)
+    {
+      freq[i] = freq_in[i];
+      tree[i].data = i;
+      tree[i].left = NULL;
+      tree[i].right = NULL;
+      node[i] = &tree[i];
+    }
   }
+
+  if (stage == 0)
+    return;
 
   // Sort by frequency, decreasing order
   /* WARNING: Although this Quick Sort is an unstable sort,
      * it should at least give the same result for the same input frequency table,
      * therefore I'm leaving this code here
      */
+  if (stage == -1 || stage == 1)
   {
     unsigned top = 1;
     lower[0] = 0, upper[0] = 256;
@@ -830,7 +840,16 @@ void construct_huffman(unsigned *freq_in)
     }
   }
 
+  if (stage == 1)
+  {
+    count = 256;
+    return;
+    //logWrite("imposto count che val vale %d\n",count);
+  }
+
   // Construct tree
+  //if (stage!=-1) logWrite("count vale %d\n",count);
+
   while (count > 1)
   {
     int pos = 512 - count;
@@ -854,49 +873,22 @@ void construct_huffman(unsigned *freq_in)
       node[i - 1] = p;
     }
     count--;
+    if (stage != -1)
+    {
+      //logWrite("sco con count che vale %d\n",count);
+      return;
+    }
   }
   // Now HEAD = node[0] = tree[511]
   node[0]->parent = NULL;
 }
-#if 0 
-void init_compression()
-{
-  static int b0;
-  static int b1, b2, b3;
-  static unsigned freq[256];
-
-  if (tree != NULL)
-    FreeMem(ubRodonea, sizeof(HuffNode) * 512);
-  tree = (HuffNode *)AllocMem(sizeof(HuffNode) * 512, MEMF_CHIP | MEMF_CLEAR);
-  //tree = (HuffNode *)AllocMem(sizeof(HuffNode) * 512, MEMF_CHIP | MEMF_CLEAR);
-
-  for (int i = 0; i < 256; i++)
-  {
-    memcpy(&padding, ptrCompressedData, 4);
-    ptrCompressedData += 4;
-    b0 = (padding & 0x000000ff) << 24u;
-    b1 = (padding & 0x0000ff00) << 8u;
-    b2 = (padding & 0x00ff0000) >> 8u;
-    b3 = (padding & 0xff000000) >> 24u;
-    padding = b0 | b1 | b2 | b3;
-    freq[i] = padding;
-  }
-
-  memcpy(&padding, ptrCompressedData, 4);
-  ptrCompressedData += 4;
-  b0 = (padding & 0x000000ff) << 24u;
-  b1 = (padding & 0x0000ff00) << 8u;
-  b2 = (padding & 0x00ff0000) >> 8u;
-  b3 = (padding & 0xff000000) >> 24u;
-  padding = b0 | b1 | b2 | b3;
-  construct_huffman(freq);
-}
-#endif
 
 void printCharToRight(char carToPrint)
 {
   int carToPrintOffset = ((int)carToPrint - 0x20) * 40;
   UBYTE *firstBitPlane = (UBYTE *)((ULONG)s_pMainBuffer->pFront->Planes[0]);
+
+  firstBitPlane += 42;
 
   // vogliamo stampare all'estrema destra quindi aggiungiamo 38
   firstBitPlane += 40;
@@ -914,9 +906,7 @@ void printCharToRight(char carToPrint)
 
 void scorri()
 {
-  //return;
   blitWait();
-  //waitblit(); 0x09FF; //
   g_pCustom->bltcon0 = 0x29f0;
   g_pCustom->bltcon1 = 0x0002;
 
@@ -928,13 +918,15 @@ void scorri()
   g_pCustom->bltcmod = 0x0000;
   g_pCustom->bltdmod = 0x0000;
 
-  UBYTE *firstBitPlane = (UBYTE *)((ULONG)s_pMainBuffer->pFront->Planes[0] + 840);
-  UBYTE *firstBitPlane2 = (UBYTE *)((ULONG)s_pMainBuffer->pBack->Planes[0] + 840);
+  UBYTE *firstBitPlane = (UBYTE *)((ULONG)s_pMainBuffer->pFront->Planes[0] + 882);
+  UBYTE *firstBitPlane2 = (UBYTE *)((ULONG)s_pMainBuffer->pBack->Planes[0] + 882);
 
   g_pCustom->bltdpt = firstBitPlane2;
   g_pCustom->bltapt = firstBitPlane;
 
-  g_pCustom->bltsize = 0x0515;
+  g_pCustom->bltsize = 0x0555;
 
-  //g_pCustom->bltsize = 0x0295;
+  /*blitWait();
+  g_pCustom->bltdpt = firstBitPlane;
+  g_pCustom->bltapt = firstBitPlane;*/
 }
