@@ -1,4 +1,4 @@
-#include "demointro.h"
+#include "demointro2.h"
 
 #include <ace/managers/game.h>                  // For using gameClose
 #include <ace/managers/system.h>                // For systemUnuse and systemUse
@@ -7,7 +7,7 @@
 #include <ace/managers/blit.h>
 
 // Assets
-#include "../_res/VampireItalialogo.h"
+#include "../_res/rodoflash.h"
 
 static tVPort *s_pVpMain; // Viewport for playfield
 static tSimpleBufferManager *s_pMainBuffer;
@@ -16,9 +16,9 @@ static tView *s_pView; // View containing all the viewports
 
 static tVPort *s_pVpMain; // Viewport for playfield
 static tSimpleBufferManager *s_pMainBuffer;
-void copyToMainBpl(const unsigned char *, const UBYTE, const UBYTE);
+void copyToMainBpl2(const unsigned char *, const UBYTE, const UBYTE);
 
-void introGsCreate(void)
+void introGsCreate2(void)
 {
     // Create a view - first arg is always zero, then it's option-value
     s_pView = viewCreate(0,
@@ -36,17 +36,6 @@ void introGsCreate(void)
                                        TAG_SIMPLEBUFFER_BITMAP_FLAGS, BMF_CLEAR,
                                        TAG_END);
 
-    // Since we've set up global CLUT, palette will be loaded from first viewport
-    // Colors are 0x0RGB, each channel accepts values from 0 to 15 (0 to F).
-    /* s_pVpMain->pPalette[0] = 0x0000; // First color is also border color
-    s_pVpMain->pPalette[1] = 0x0600; // Gray
-    s_pVpMain->pPalette[2] = 0x0300; // Red - not max, a bit dark
-    s_pVpMain->pPalette[3] = 0x0900; // Blue - same brightness as red
-    s_pVpMain->pPalette[4] = 0x0200;
-    s_pVpMain->pPalette[5] = 0x0800;
-    s_pVpMain->pPalette[6] = 0x0500;
-    s_pVpMain->pPalette[7] = 0x0b00;*/
-
     s_pVpMain->pPalette[0] = 0x0000;
     s_pVpMain->pPalette[1] = 0x0000;
     s_pVpMain->pPalette[2] = 0x0000;
@@ -56,7 +45,7 @@ void introGsCreate(void)
     s_pVpMain->pPalette[6] = 0x0000;
     s_pVpMain->pPalette[7] = 0x0000;
 
-    copyToMainBpl(vampireitalialogo_data_fast, 0, 3);
+    copyToMainBpl2(rodoflash_data, 0, 3);
 
     // We don't need anything from OS anymore
     //systemUnuse();
@@ -66,20 +55,21 @@ void introGsCreate(void)
     viewLoad(s_pView);
 }
 
-void introGsLoop(void)
+void introGsLoop2(void)
 {
     static int iFrameNo = 0;
     static BYTE bDimCounter = 0;
     static BYTE bDimCounter2 = 15;
     if (bDimCounter <= 15)
     {
-        s_pVpMain->pPalette[1] = paletteColorDim(0x0600, bDimCounter);
-        s_pVpMain->pPalette[2] = paletteColorDim(0x0300, bDimCounter);
-        s_pVpMain->pPalette[3] = paletteColorDim(0x0900, bDimCounter);
-        s_pVpMain->pPalette[4] = paletteColorDim(0x0200, bDimCounter);
-        s_pVpMain->pPalette[5] = paletteColorDim(0x0800, bDimCounter);
-        s_pVpMain->pPalette[6] = paletteColorDim(0x0500, bDimCounter);
-        s_pVpMain->pPalette[7] = paletteColorDim(0x0b00, bDimCounter);
+        s_pVpMain->pPalette[0] = paletteColorDim(0x0321, bDimCounter);
+        s_pVpMain->pPalette[1] = paletteColorDim(0x0986, bDimCounter);
+        s_pVpMain->pPalette[2] = paletteColorDim(0x0CB9, bDimCounter);
+        s_pVpMain->pPalette[3] = paletteColorDim(0x0653, bDimCounter);
+        s_pVpMain->pPalette[4] = paletteColorDim(0x0BA7, bDimCounter);
+        s_pVpMain->pPalette[5] = paletteColorDim(0x0875, bDimCounter);
+        s_pVpMain->pPalette[6] = paletteColorDim(0x0442, bDimCounter);
+        s_pVpMain->pPalette[7] = paletteColorDim(0x0EDA, bDimCounter);
 
         if ((iFrameNo % 10) == 0)
             bDimCounter++;
@@ -89,13 +79,15 @@ void introGsLoop(void)
     {
         if (bDimCounter2 >= 0)
         {
-            s_pVpMain->pPalette[1] = paletteColorDim(0x0600, bDimCounter2);
-            s_pVpMain->pPalette[2] = paletteColorDim(0x0300, bDimCounter2);
-            s_pVpMain->pPalette[3] = paletteColorDim(0x0900, bDimCounter2);
-            s_pVpMain->pPalette[4] = paletteColorDim(0x0200, bDimCounter2);
-            s_pVpMain->pPalette[5] = paletteColorDim(0x0800, bDimCounter2);
-            s_pVpMain->pPalette[6] = paletteColorDim(0x0500, bDimCounter2);
-            s_pVpMain->pPalette[7] = paletteColorDim(0x0b00, bDimCounter2);
+            s_pVpMain->pPalette[0] = paletteColorDim(0x0321, bDimCounter2);
+            s_pVpMain->pPalette[1] = paletteColorDim(0x0986, bDimCounter2);
+            s_pVpMain->pPalette[2] = paletteColorDim(0x0CB9, bDimCounter2);
+            s_pVpMain->pPalette[3] = paletteColorDim(0x0653, bDimCounter2);
+            s_pVpMain->pPalette[4] = paletteColorDim(0x0BA7, bDimCounter2);
+            s_pVpMain->pPalette[5] = paletteColorDim(0x0875, bDimCounter2);
+            s_pVpMain->pPalette[6] = paletteColorDim(0x0442, bDimCounter2);
+            s_pVpMain->pPalette[7] = paletteColorDim(0x0EDA, bDimCounter2);
+
             if ((iFrameNo % 10) == 0)
                 bDimCounter2--;
         }
@@ -104,14 +96,14 @@ void introGsLoop(void)
     }
     if (bDimCounter2 < 0)
     {
-        statePush(g_pGameStateManager, g_pGameStates[1]);
+        statePush(g_pGameStateManager, g_pGameStates[2]);
     }
     iFrameNo++;
     viewUpdateCLUT(s_pView);
     vPortWaitForEnd(s_pVpMain);
 }
 
-void introGsDestroy(void)
+void introGsDestroy2(void)
 {
     // Cleanup when leaving this gamestate
     systemUse();
@@ -122,7 +114,7 @@ void introGsDestroy(void)
 
 // Function to copy data to a main bitplane
 // Pass ubMaxBitplanes = 0 to use all available bitplanes in the bitmap
-void copyToMainBpl(const unsigned char *pData, const UBYTE ubSlot, const UBYTE ubMaxBitplanes)
+void copyToMainBpl2(const unsigned char *pData, const UBYTE ubSlot, const UBYTE ubMaxBitplanes)
 {
     UBYTE ubBitplaneCounter;
     for (ubBitplaneCounter = 0; ubBitplaneCounter < s_pMainBuffer->pBack->Depth; ubBitplaneCounter++)
@@ -136,9 +128,9 @@ void copyToMainBpl(const unsigned char *pData, const UBYTE ubSlot, const UBYTE u
         g_pCustom->bltbmod = 0x0000;
         g_pCustom->bltcmod = 0x0000;
         g_pCustom->bltdmod = 0x0000;
-        g_pCustom->bltapt = (UBYTE *)((ULONG)&pData[40 * 224 * ubBitplaneCounter]);
+        g_pCustom->bltapt = (UBYTE *)((ULONG)&pData[40 * 256 * ubBitplaneCounter]);
         g_pCustom->bltdpt = (UBYTE *)((ULONG)s_pMainBuffer->pBack->Planes[ubBitplaneCounter] + (40 * ubSlot));
-        g_pCustom->bltsize = 0x3814;
+        g_pCustom->bltsize = 0x4014;
         if (ubMaxBitplanes > 0 && ubBitplaneCounter + 1 >= ubMaxBitplanes)
             return;
     }

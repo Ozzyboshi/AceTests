@@ -80,16 +80,19 @@ rodonea.o: rodonea.c rodonea.h /opt/amiga/include/ace/managers/key.h \
  ../_res/rodo1byte/rodo2X1_180_1byte_compressed_help.h \
  ../_res/rodo1byte/rodo2X1_180_1byte_compressed_rot3.h \
  ../_res/rodo1byte/rodo2X1_180_1byte_compressed_help_rot3.h \
- ../_res/rodo1byte/rodo3X1_360_1byte_compressed_rot3.h \
- ../_res/rodo1byte/rodo3X1_360_1byte_compressed_rot3_help.h \
+ ../_res/rodo1byte/rodo3X1_360_1byte_compressed_rot3_light.h \
+ ../_res/rodo1byte/rodo3X1_360_1byte_compressed_rot3_light_help.h \
  ../_res/rodo1byte/rodo4X1_180_1byte_compressed.h \
  ../_res/rodo1byte/rodo4X1_180_1byte_compressed_help.h \
  ../_res/rodo1byte/rodo4X1_180_1byte_compressed_rot3.h \
  ../_res/rodo1byte/rodo4X1_180_1byte_compressed_help_rot3.h \
- ../_res/rodo1byte/rodo6X1_180_1byte_compressed.h \
- ../_res/rodo1byte/rodo6X1_180_1byte_compressed_help.h \
  ../_res/rodo1byte/rodo6X1_180_1byte_compressed_rot3.h \
- ../_res/rodo1byte/rodo6X1_180_1byte_compressed_help_rot3.h fonts.h
+ ../_res/rodo1byte/rodo6X1_180_1byte_compressed_help_rot3.h \
+ ../_res/rodo1byte/rodo6X1_180_1byte_compressed_light.h \
+ ../_res/rodo1byte/rodo6X1_180_1byte_compressed_light_help.h \
+ ../_res/transitions/transition1.h ../_res/transitions/transition2.h \
+ ../_res/transitions/transition3.h ../_res/transitions/transition4.h \
+ fonts.h
 
 rodonea.h:
 
@@ -263,9 +266,9 @@ rodonea.h:
 
 ../_res/rodo1byte/rodo2X1_180_1byte_compressed_help_rot3.h:
 
-../_res/rodo1byte/rodo3X1_360_1byte_compressed_rot3.h:
+../_res/rodo1byte/rodo3X1_360_1byte_compressed_rot3_light.h:
 
-../_res/rodo1byte/rodo3X1_360_1byte_compressed_rot3_help.h:
+../_res/rodo1byte/rodo3X1_360_1byte_compressed_rot3_light_help.h:
 
 ../_res/rodo1byte/rodo4X1_180_1byte_compressed.h:
 
@@ -275,12 +278,20 @@ rodonea.h:
 
 ../_res/rodo1byte/rodo4X1_180_1byte_compressed_help_rot3.h:
 
-../_res/rodo1byte/rodo6X1_180_1byte_compressed.h:
-
-../_res/rodo1byte/rodo6X1_180_1byte_compressed_help.h:
-
 ../_res/rodo1byte/rodo6X1_180_1byte_compressed_rot3.h:
 
 ../_res/rodo1byte/rodo6X1_180_1byte_compressed_help_rot3.h:
+
+../_res/rodo1byte/rodo6X1_180_1byte_compressed_light.h:
+
+../_res/rodo1byte/rodo6X1_180_1byte_compressed_light_help.h:
+
+../_res/transitions/transition1.h:
+
+../_res/transitions/transition2.h:
+
+../_res/transitions/transition3.h:
+
+../_res/transitions/transition4.h:
 
 fonts.h:

@@ -99,7 +99,7 @@ CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_rodonea_OBJECTS = main.$(OBJEXT) rodonea.$(OBJEXT) \
-	demointro.$(OBJEXT)
+	demointro.$(OBJEXT) demointro2.$(OBJEXT)
 rodonea_OBJECTS = $(am_rodonea_OBJECTS)
 rodonea_DEPENDENCIES = music_ptr_linkable.o
 AM_V_P = $(am__v_P_@AM_V@)
@@ -251,7 +251,7 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 rodonea_LDADD = music_ptr_linkable.o
-rodonea_SOURCES = main.c rodonea.c demointro.c
+rodonea_SOURCES = main.c rodonea.c demointro.c demointro2.c
 all: all-am
 
 .SUFFIXES:
@@ -339,6 +339,7 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/demointro.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/demointro2.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/main.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/rodonea.Po@am__quote@
 

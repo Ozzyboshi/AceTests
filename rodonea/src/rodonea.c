@@ -8,13 +8,7 @@
 
 #include "../tests/huffman.h"
 
-/*#include "../src/customtrigonometry.h"
-#include "../tests/flower.h"*/
-
 #include "../_res/thegrbth.h"
-// togli per far funzionare #include "rod3X1.h"
-//#include "rodo2X1.h"
-//#include "../_res/rodstart.h"
 
 #include "../_res/rodo1byte/rodo2X1_180_1byte_compressed.h"
 #include "../_res/rodo1byte/rodo2X1_180_1byte_compressed_help.h"
@@ -22,8 +16,11 @@
 #include "../_res/rodo1byte/rodo2X1_180_1byte_compressed_rot3.h"
 #include "../_res/rodo1byte/rodo2X1_180_1byte_compressed_help_rot3.h"
 
-#include "../_res/rodo1byte/rodo3X1_360_1byte_compressed_rot3.h"
-#include "../_res/rodo1byte/rodo3X1_360_1byte_compressed_rot3_help.h"
+/*#include "../_res/rodo1byte/rodo3X1_360_1byte_compressed_rot3.h"
+#include "../_res/rodo1byte/rodo3X1_360_1byte_compressed_rot3_help.h"*/
+
+#include "../_res/rodo1byte/rodo3X1_360_1byte_compressed_rot3_light.h"
+#include "../_res/rodo1byte/rodo3X1_360_1byte_compressed_rot3_light_help.h"
 
 #include "../_res/rodo1byte/rodo4X1_180_1byte_compressed.h"
 #include "../_res/rodo1byte/rodo4X1_180_1byte_compressed_help.h"
@@ -31,18 +28,35 @@
 #include "../_res/rodo1byte/rodo4X1_180_1byte_compressed_rot3.h"
 #include "../_res/rodo1byte/rodo4X1_180_1byte_compressed_help_rot3.h"
 
-#include "../_res/rodo1byte/rodo6X1_180_1byte_compressed.h"
-#include "../_res/rodo1byte/rodo6X1_180_1byte_compressed_help.h"
+/*#include "../_res/rodo1byte/rodo6X1_180_1byte_compressed.h"
+#include "../_res/rodo1byte/rodo6X1_180_1byte_compressed_help.h" tteeeeeeeeeeeeest */
+
+/*#include "../_res/rodo1byte/rodo6X1_180_1byte_compressed_rotY.h"
+#include "../_res/rodo1byte/rodo6X1_180_1byte_compressed_help_rotY.h"*/
 
 #include "../_res/rodo1byte/rodo6X1_180_1byte_compressed_rot3.h"
 #include "../_res/rodo1byte/rodo6X1_180_1byte_compressed_help_rot3.h"
 
+// nuovo 
+#include "../_res/rodo1byte/rodo6X1_180_1byte_compressed_light.h"
+#include "../_res/rodo1byte/rodo6X1_180_1byte_compressed_light_help.h"
+
+
+// transitions
+
+#include "../_res/transitions/transition1.h"
+#include "../_res/transitions/transition2.h"
+#include "../_res/transitions/transition3.h"
+#include "../_res/transitions/transition4.h"
 #include "fonts.h"
 
-#define COPRAWCOLOR(var,var2) copSetWait(&pBarCmds[ubCopIndex++].sWait, 7, var +25);\
+#define CUSTOMCOPPERLIST
+
+#define COPRAWCOLOR(var, var2)                            \
+  copSetWait(&pBarCmds[ubCopIndex++].sWait, 7, var + 25); \
   copSetMove(&pBarCmds[ubCopIndex++].sMove, &g_pCustom->color[0], var2);
 
-#define DECOMPRESSION_CHUNK_SIZE 70
+#define DECOMPRESSION_CHUNK_SIZE 75
 
 typedef struct _tRodDecompressorManager
 {
@@ -52,7 +66,7 @@ typedef struct _tRodDecompressorManager
   BYTE *pDest;
   UWORD uwFinalAngle;
   const ULONG iDecompressedSize;
-
+  UBYTE *pTransition;
 } tRodDecompressorManager;
 
 // Global rodonea pointers
@@ -62,27 +76,44 @@ static BYTE *sg_pCurrRodoneaHelper;
 // RODONEA 64K
 static BYTE sg_bRODONEA64K[64800];
 static BYTE sg_bRODONEA64K_BACK[64800];
-static BYTE sg_bRODONEA128K[129600];
+//static BYTE sg_bRODONEA128K[129600];
 static BYTE *sg_bHELPERPOINTER;
 //static CHIP UWORD sg_bHELPERPOINTERINDEX = 0;
 
-#define DECOMPRESSORMANAGERSIZE 7
+#define DECOMPRESSORMANAGERSIZE 8
+#if 0
 tRodDecompressorManager tDecompressorManager[DECOMPRESSORMANAGERSIZE] = {
-    {&rodo3X1_360_1byte_compressed_rot3_size, rodo3X1_360_1byte_compressed_rot3_data, rodo3X1_360_1byte_compressed_help_rot3_data, sg_bRODONEA128K, 360, 129600},
-    {&rodo4X1_180_1byte_compressed_size, rodo4X1_180_1byte_compressed_data, rodo4X1_180_1byte_compressed_help_data, sg_bRODONEA64K, 180, 64800},
-    {&rodo4X1_180_1byte_compressed_rot3_size, rodo4X1_180_1byte_compressed_rot3_data, rodo4X1_360_1byte_compressed_help_rot3_data, sg_bRODONEA64K_BACK, 180, 64800},
-    {&rodo2X1_180_1byte_compressed_size, rodo2X1_180_1byte_compressed_data, rodo2X1_180_1byte_compressed_help_data, sg_bRODONEA64K, 180, 64800},
-    {&rodo2X1_180_1byte_compressed_rot3_size, rodo2X1_180_1byte_compressed_rot3_data, rodo2X1_180_1byte_compressed_help_rot3_data, sg_bRODONEA64K_BACK, 180, 64800},
-    {&rodo6X1_360_1byte_compressed_size, rodo6X1_360_1byte_compressed_data, rodo6X1_180_1byte_compressed_help_data, sg_bRODONEA64K, 180, 64800},
-    {&rodo6X1_360_1byte_compressed_rot3_size, rodo6X1_360_1byte_compressed_rot3_data, rodo6X1_180_1byte_compressed_help_rot3_data, sg_bRODONEA64K_BACK, 180, 64800},
-
-    // {&rodo2X1_180_1byte_compressed_size, rodo2X1_180_1byte_compressed_data, rodo2X1_180_1byte_compressed_help_data, sg_bRODONEA64K_BACK, 180, 64800},
-    // {&rodo3X1_360_1byte_compressed_rot3_size,rodo3X1_360_1byte_compressed_rot3_data,rodo3X1_360_1byte_compressed_help_rot3_data,sg_bRODONEA128K,360,129600},
+    {&rodo3X1_360_1byte_compressed_rot3_size, rodo3X1_360_1byte_compressed_rot3_data, rodo3X1_360_1byte_compressed_help_rot3_data, sg_bRODONEA128K, 360, 129600,0},
+    {&rodo4X1_180_1byte_compressed_size, rodo4X1_180_1byte_compressed_data, rodo4X1_180_1byte_compressed_help_data, sg_bRODONEA64K, 180, 64800,transition1_data},
+    {&rodo4X1_180_1byte_compressed_rot3_size, rodo4X1_180_1byte_compressed_rot3_data, rodo4X1_360_1byte_compressed_help_rot3_data, sg_bRODONEA64K_BACK, 180, 64800,0},
+    {&rodo2X1_180_1byte_compressed_size, rodo2X1_180_1byte_compressed_data, rodo2X1_180_1byte_compressed_help_data, sg_bRODONEA64K, 180, 64800,transition2_data},
+    {&rodo2X1_180_1byte_compressed_rot3_size, rodo2X1_180_1byte_compressed_rot3_data, rodo2X1_180_1byte_compressed_help_rot3_data, sg_bRODONEA64K_BACK, 180, 64800,0},
+    {&rodo6X1_360_1byte_compressed_size, rodo6X1_360_1byte_compressed_data, rodo6X1_180_1byte_compressed_help_data, sg_bRODONEA64K, 180, 64800,transition3_data},
+    //{&rodo6X1_180_1byte_compressed_rotY_size, rodo6X1_180_1byte_compressed_rotY_data, rodo6X1_180_1byte_compressed_help_rotY_data, sg_bRODONEA64K_BACK, 180, 64800},
+    {&rodo6X1_360_1byte_compressed_rot3_size, rodo6X1_360_1byte_compressed_rot3_data, rodo6X1_180_1byte_compressed_help_rot3_data, sg_bRODONEA64K_BACK, 180, 64800,0},
 };
+
+#else
+
+tRodDecompressorManager tDecompressorManager[DECOMPRESSORMANAGERSIZE] = {
+    {&rodo3X1_360_1byte_compressed_rot3_light_size, rodo3X1_360_1byte_compressed_rot3_light_data, rodo3X1_360_1byte_compressed_rot3_light_help_data, sg_bRODONEA64K_BACK, 180, 64800,0},
+    {&rodo4X1_180_1byte_compressed_size, rodo4X1_180_1byte_compressed_data, rodo4X1_180_1byte_compressed_help_data, sg_bRODONEA64K, 180, 64800,transition1_data},
+    {&rodo4X1_180_1byte_compressed_rot3_size, rodo4X1_180_1byte_compressed_rot3_data, rodo4X1_360_1byte_compressed_help_rot3_data, sg_bRODONEA64K_BACK, 180, 64800,0},
+    {&rodo2X1_180_1byte_compressed_size, rodo2X1_180_1byte_compressed_data, rodo2X1_180_1byte_compressed_help_data, sg_bRODONEA64K, 180, 64800,transition2_data},
+    {&rodo2X1_180_1byte_compressed_rot3_size, rodo2X1_180_1byte_compressed_rot3_data, rodo2X1_180_1byte_compressed_help_rot3_data, sg_bRODONEA64K_BACK, 180, 64800,0},
+    //{&rodo6X1_360_1byte_compressed_size, rodo6X1_360_1byte_compressed_data, rodo6X1_180_1byte_compressed_help_data, sg_bRODONEA64K, 180, 64800,transition3_data},
+    {&rodo6X1_180_1byte_compressed_light_size     , rodo6X1_180_1byte_compressed_light_data, rodo6X1_180_1byte_compressed_light_help_data, sg_bRODONEA64K, 180, 64800,transition3_data},
+    {&rodo6X1_360_1byte_compressed_rot3_size, rodo6X1_360_1byte_compressed_rot3_data, rodo6X1_180_1byte_compressed_help_rot3_data, sg_bRODONEA64K_BACK, 180, 64800,0},
+    {&rodo3X1_360_1byte_compressed_rot3_light_size, rodo3X1_360_1byte_compressed_rot3_light_data, rodo3X1_360_1byte_compressed_rot3_light_help_data, sg_bRODONEA64K, 180, 64800,transition4_data},
+};
+
+#endif 
+
+
+
 static BYTE unDecompressorManagerIndex = 0;
 
 long mt_init(const unsigned char *);
-//long mt_init();
 void mt_music();
 void mt_end();
 
@@ -94,34 +125,24 @@ ULONG decode_stream4(WORD, BYTE *);
 //long add(register long a __asm("d0"), register long b __asm("d1"));
 void printCharToRight(char);
 void scorri();
+UBYTE printSinglePoint(UBYTE);
 
-// All variables outside fns are global - can be accessed in any fn
-// Static means here that given var is only for this file, hence 's_' prefix
-// You can have many variables with same name in different files and they'll be
-// independent as long as they're static
-// * means pointer, hence 'p' prefix
 static tView *s_pView;    // View containing all the viewports
 static tVPort *s_pVpMain; // Viewport for playfield
 static tSimpleBufferManager *s_pMainBuffer;
 
-//static UBYTE vertexData[360*2*360];
-
-//static __attribute__((chip)) UBYTE ubRodonea[259200];
-static UBYTE *ubRodonea;
-
-//static unsigned int iOutIndex = 0;
+//static UBYTE *ubRodonea;
 
 static unsigned padding;
 static UWORD uwFinalAngle;
 
 static char g_cPhrase[] = {"HELLO FLASHPARTY 2020 ONLINE ATTENDERS, THIS IS MY FIRST EVER APPEARANCE TO A DEMO COMPETITION, THE SUBJECT I PICKED IS THE \"RODONEA\", \
-A CURVE PLOTTED IN POLAR COORDINATES STUDIED BY FRANCESCO LUDOVICO GRANDI, AN ITALIAN MATH GENIUS WHO LIVED NEAR ME SOME CENTURIES AGO. \
+A CURVE PLOTTED IN POLAR COORDINATES STUDIED BY LUIGI GUIDO (REAL NAME FRANCESCO LUDOVICO) GRANDI, AN ITALIAN MATH GENIUS WHO LIVED IN TUSCANY SOME CENTURIES AGO. \
 RODONEAS CAN BE EXPRESSED WITH THIS EQUATION:  RHO = R * SIN (OMEGA*THETA) WHERE R IS THE MAXIMUM DISTANCE FROM THE CENTER AND OMEGA DEFINES THE SHAPE OF THE ROSE. \
-BECAUSE OF STOCK AMIGAS LIMITATIONS I CAN ONLY DISPLAY A FEW ROSES WITH OMEGA EQUAL 1/2,1/3,1/4 AND 1/6, BUT MAYBE ONE DAY I WILL COME UP WITH A BETTER SOLUTION TO STORE AND DRAW MORE RODONEA DATA. \
+BECAUSE OF STOCK AMIGAS LIMITATIONS I CAN ONLY DISPLAY A FEW ROSES WITH OMEGA EQUAL 2/1,3/1,4/1 AND 6/1, BUT MAYBE ONE DAY I WILL COME UP WITH A BETTER SOLUTION TO STORE AND DRAW MORE RODONEA DATA. \
 AS ALWAYS HAPPENS IN MY DEMOS I WANT TO GREET SOMEONE, THIS TIME THE FIRST ONE IS Z3K FOR HIS AWESOME ONLINE PRESENTATION ABOUT DEMOSCENE IN ITALY, \
 GREETINGS ALSO TO DR PROCTON, KAFFEINE AND FAROX WHO ALSO ATTENDED. \
 NEGATIVE MENTIONS FOR SOME FELLOW COUNTRYMAN FROM AMIGAPAGE.IT THAT FLAMED THE MEETING TOPIC, SORRY GUYS I REALLY DONT UNDERSTAND YOUR BEHAVIOUR BUT DONT WORRY I WONT BOTHER YOU AGAIN WITH OUR ONLINE PARTIES. \
-NEXT MEETING COULD BE AN INTERVIEW WITH A TRUE APOLLO MEMBER, I REALLY HOPE TO PERSUADE HIM TO GIVE US SOME OF HIS FREE TIME TO TALK ABOUT THE APOLLO TEAM AS SEEN FROM INSIDE. \
 WELL... I THINK THAT'S ALL FOR NOW, THIS SCROLL TEXT WILL REPEAT ITSELF ....                                                                                        \n"};
 
 // START COMPRESSION VAR
@@ -131,6 +152,7 @@ WELL... I THINK THAT'S ALL FOR NOW, THIS SCROLL TEXT WILL REPEAT ITSELF ....    
 
 //static const unsigned char *ptrCompressedData = &rod3X1_compressed_data[0];
 static UWORD s_uwCopRawOffs;
+static UBYTE* sg_pTransition;
 
 void gameGsCreate(void)
 {
@@ -165,7 +187,7 @@ void gameGsCreate(void)
 #define RAWCOP
 #ifdef RAWCOP
   ULONG ulRawSize = (simpleBufferGetRawCopperlistInstructionCount(1) + 116
-                  /*   22 * 2 + // 32 bars - each consists of WAIT + MOVE instruction
+                     /*   22 * 2 + // 32 bars - each consists of WAIT + MOVE instruction
                      1 +      // Final WAIT
                      1        // Just to be sure*/
   );
@@ -225,12 +247,10 @@ void gameGsCreate(void)
   tCopBfr *pCopBfr = s_pView->pCopList->pBackBfr;
   tCopCmd *pBarCmds = &pCopBfr->pList[s_uwCopRawOffs];
 
-  
-
-#if 1
+#ifdef CUSTOMCOPPERLIST
 
   UBYTE ubCopIndex = 6;
-  
+
   copSetWait(&pBarCmds[0].sWait, 7, 44);
   copSetMove(&pBarCmds[1].sMove, &g_pCustom->color[0], 0x0201);
 
@@ -240,69 +260,68 @@ void gameGsCreate(void)
   copSetWait(&pBarCmds[4].sWait, 7, 65);
   copSetMove(&pBarCmds[5].sMove, &g_pCustom->color[1], 0x0FFF);
 
-  COPRAWCOLOR(131,0x0302)
-  COPRAWCOLOR(132,0x0201)
-  COPRAWCOLOR(134,0x0302)
-  COPRAWCOLOR(136,0x0201)
-  COPRAWCOLOR(137,0x0302)
-  COPRAWCOLOR(138,0x0201)
+  COPRAWCOLOR(131, 0x0302)
+  COPRAWCOLOR(132, 0x0201)
+  COPRAWCOLOR(134, 0x0302)
+  COPRAWCOLOR(136, 0x0201)
+  COPRAWCOLOR(137, 0x0302)
+  COPRAWCOLOR(138, 0x0201)
 
-  COPRAWCOLOR(139,0x0302)
-  COPRAWCOLOR(142,0x0313)
-  COPRAWCOLOR(143,0x0302)
+  COPRAWCOLOR(139, 0x0302)
+  COPRAWCOLOR(142, 0x0313)
+  COPRAWCOLOR(143, 0x0302)
 
-  COPRAWCOLOR(145,0x0313)
-  COPRAWCOLOR(146,0x0302)
+  COPRAWCOLOR(145, 0x0313)
+  COPRAWCOLOR(146, 0x0302)
 
-  COPRAWCOLOR(148,0x0201)
-  COPRAWCOLOR(149,0x0313)
-  COPRAWCOLOR(151,0x0302)
-  COPRAWCOLOR(152,0x0313)
-  COPRAWCOLOR(153,0x0201)
-  COPRAWCOLOR(154,0x0313)
+  COPRAWCOLOR(148, 0x0201)
+  COPRAWCOLOR(149, 0x0313)
+  COPRAWCOLOR(151, 0x0302)
+  COPRAWCOLOR(152, 0x0313)
+  COPRAWCOLOR(153, 0x0201)
+  COPRAWCOLOR(154, 0x0313)
 
-  COPRAWCOLOR(156,0x0424)
-  COPRAWCOLOR(157,0x0313)
-  COPRAWCOLOR(158,0x0424)
-  COPRAWCOLOR(161,0x0313)
-  COPRAWCOLOR(162,0x0424)
-  COPRAWCOLOR(164,0x0525)
+  COPRAWCOLOR(156, 0x0424)
+  COPRAWCOLOR(157, 0x0313)
+  COPRAWCOLOR(158, 0x0424)
+  COPRAWCOLOR(161, 0x0313)
+  COPRAWCOLOR(162, 0x0424)
+  COPRAWCOLOR(164, 0x0525)
 
-  COPRAWCOLOR(165,0x0636)
-  COPRAWCOLOR(166,0x0525)
+  COPRAWCOLOR(165, 0x0636)
+  COPRAWCOLOR(166, 0x0525)
 
-  COPRAWCOLOR(167,0x0313)
+  COPRAWCOLOR(167, 0x0313)
 
-  COPRAWCOLOR(168,0x0525)
+  COPRAWCOLOR(168, 0x0525)
 
-  COPRAWCOLOR(169,0x0636)
+  COPRAWCOLOR(169, 0x0636)
 
-  COPRAWCOLOR(170,0x0525)
-  COPRAWCOLOR(171,0x0424)
-  COPRAWCOLOR(173,0x0313)
-  COPRAWCOLOR(174,0x0424)
-  COPRAWCOLOR(175,0x0525)
-  COPRAWCOLOR(176,0x0424)
+  COPRAWCOLOR(170, 0x0525)
+  COPRAWCOLOR(171, 0x0424)
+  COPRAWCOLOR(173, 0x0313)
+  COPRAWCOLOR(174, 0x0424)
+  COPRAWCOLOR(175, 0x0525)
+  COPRAWCOLOR(176, 0x0424)
 
-  COPRAWCOLOR(178,0x0313)
-  COPRAWCOLOR(179,0x0424)
-  COPRAWCOLOR(180,0x0313)
-  COPRAWCOLOR(181,0x0201)
-  COPRAWCOLOR(182,0x0313)
-  COPRAWCOLOR(184,0x0302)
-  COPRAWCOLOR(185,0x0313)
-  COPRAWCOLOR(188,0x0313)
-  COPRAWCOLOR(191,0x0302)
-  COPRAWCOLOR(193,0x0313)
-  COPRAWCOLOR(194,0x0302)
-  COPRAWCOLOR(197,0x0201)
-  COPRAWCOLOR(198,0x0302)
-  COPRAWCOLOR(199,0x0201)
-  COPRAWCOLOR(200,0x0302)
-  COPRAWCOLOR(202,0x0201)
-  COPRAWCOLOR(204,0x0302)
-  COPRAWCOLOR(205,0x0201)
-
+  COPRAWCOLOR(178, 0x0313)
+  COPRAWCOLOR(179, 0x0424)
+  COPRAWCOLOR(180, 0x0313)
+  COPRAWCOLOR(181, 0x0201)
+  COPRAWCOLOR(182, 0x0313)
+  COPRAWCOLOR(184, 0x0302)
+  COPRAWCOLOR(185, 0x0313)
+  COPRAWCOLOR(188, 0x0313)
+  COPRAWCOLOR(191, 0x0302)
+  COPRAWCOLOR(193, 0x0313)
+  COPRAWCOLOR(194, 0x0302)
+  COPRAWCOLOR(197, 0x0201)
+  COPRAWCOLOR(198, 0x0302)
+  COPRAWCOLOR(199, 0x0201)
+  COPRAWCOLOR(200, 0x0302)
+  COPRAWCOLOR(202, 0x0201)
+  COPRAWCOLOR(204, 0x0302)
+  COPRAWCOLOR(205, 0x0201)
 
   /*copSetWait(&pBarCmds[10].sWait, 7, 139);
   copSetMove(&pBarCmds[11].sMove, &g_pCustom->color[0], 0x0302);
@@ -312,8 +331,6 @@ void gameGsCreate(void)
 
   copSetWait(&pBarCmds[10].sWait, 7, 143);
   copSetMove(&pBarCmds[11].sMove, &g_pCustom->color[0], 0x0302);*/
-
-
 
 #endif
 #if 0
@@ -415,23 +432,19 @@ void gameGsCreate(void)
 
   // Load the view
   viewLoad(s_pView);
-
-  /*UBYTE* firstBitPlane = (UBYTE *)((ULONG)s_pMainBuffer->pFront->Planes[1]);
-  *(firstBitPlane++)=0xFF;
-  *(firstBitPlane++)=0xFF;
-  *(firstBitPlane++)=0xFF;*/
-
-  //firstBitplane = (UBYTE *)((ULONG)s_pMainBuffer->pBack->Planes[0]);
 }
 
 void gameGsLoop(void)
 {
-  UWORD ubXData = 0;
-  UBYTE ubYData = 0;
+  UWORD ubXData = 60;
+  UBYTE ubYData = 48;
   static UBYTE ubDecompressionInitFlag = 0;
 
   static UBYTE nextStageReady = 0;
   static UWORD uwAngle = 0;
+  static UBYTE ubPrintSinglePoint = 1;
+
+  static BYTE bTransitionCounter = -1;
 
   /*logWrite("inizio debug\n");
   copDumpBfr(s_pView->pCopList->pFrontBfr);
@@ -444,7 +457,8 @@ void gameGsLoop(void)
     return;
   }
 
-  blitClear(s_pMainBuffer, 0);
+  if (ubPrintSinglePoint == 0)
+    blitClear(s_pMainBuffer, 0);
   mt_music();
 
   // START DECOMPRESSION NEXT RODO
@@ -528,7 +542,19 @@ void gameGsLoop(void)
 
     ubDecompressionInitFlag = 0;
     nextStageReady = 0;
-    //uwDecompressedDataCounter=0;
+
+    // If there is a transition i load the address and counter
+    if (tDecompressorManager[unDecompressorManagerIndex].pTransition)
+    {
+      bTransitionCounter=0;
+      sg_pTransition = tDecompressorManager[unDecompressorManagerIndex].pTransition;
+    }
+
+    // Single point mode after first rodo
+    /*if (unDecompressorManagerIndex == 1)
+    {
+      ubPrintSinglePoint = printSinglePoint(1);
+    }*/
 
     if (unDecompressorManagerIndex + 1 >= DECOMPRESSORMANAGERSIZE)
       unDecompressorManagerIndex = -1;
@@ -552,10 +578,62 @@ void gameGsLoop(void)
 #endif
 
   vPortWaitForEnd(s_pVpMain);
+#ifndef CUSTOMCOPPERLIST
+  g_pCustom->color[0] = 0x0F0F;
+#endif
   scorri();
   mt_music();
 
+  if (ubPrintSinglePoint != 0)
+  {
+    ubPrintSinglePoint = printSinglePoint(0);
+#ifndef CUSTOMCOPPERLIST
+    g_pCustom->color[0] = 0x0000;
+#endif
+    vPortWaitForEnd(s_pVpMain);
+    viewProcessManagers(s_pView);
+    copSwapBuffers();
+    return;
+  }
+
   static UWORD a;
+
+  // Check if we are transitioning (bTransitionCounter>=0)
+  if (bTransitionCounter>=0)
+  {
+
+    //uwAngle = (UWORD)bTransitionCounter;
+    //UBYTE *pRodTransitionPointer = transition1_data + bTransitionCounter * 720;
+    UBYTE *pRodTransitionPointer = sg_pTransition + bTransitionCounter * 720;
+    
+
+    // Draw the transition
+    a = 0;
+    while (a < 360)
+    {
+      UWORD uwTransitionX = ubXData + (*pRodTransitionPointer);
+      //UBYTE uwTransitionX = (*pRodTransitionPointer);
+      pRodTransitionPointer++;
+      UWORD uwTransitionY = ubYData + (*pRodTransitionPointer);
+
+      //if (uwTransitionX>0 && uwTransitionX<320)
+       *((UBYTE *)((ULONG)s_pMainBuffer->pBack->Planes[0]) + (42 * (uwTransitionY) + ((uwTransitionX) >> 3))) |= 1UL << ((~((uwTransitionX)&7)) & 7);
+      a++;
+      pRodTransitionPointer++;
+    }
+
+
+    bTransitionCounter++;
+
+    // If we are equal 44 transition is done and transitioncounter goes to sleep
+    if (bTransitionCounter>=44) bTransitionCounter=-1;
+    vPortWaitForEnd(s_pVpMain);
+    viewProcessManagers(s_pView);
+    copSwapBuffers();
+    return;
+  }
+
+  
   //ULONG b = uwAngle * 720;
   //BYTE *pRodPointer = &sg_bRODONEA64K[0 * 360];
   /*uwAngle=0;*/
@@ -599,7 +677,9 @@ void gameGsLoop(void)
     ubXData += bCompressedX;
     ubYData += bCompressedY;
 
-    *((UBYTE *)((ULONG)s_pMainBuffer->pBack->Planes[0]) + (42 * (ubYData + 48) + ((ubXData + 60) >> 3))) |= 1UL << ((~((ubXData + 60) & 7)) & 7);
+    //*((UBYTE *)((ULONG)s_pMainBuffer->pBack->Planes[0]) + (42 * (ubYData + 48) + ((ubXData + 60) >> 3))) |= 1UL << ((~((ubXData + 60) & 7)) & 7);
+
+    *((UBYTE *)((ULONG)s_pMainBuffer->pBack->Planes[0]) + (42 * (ubYData) + ((ubXData) >> 3))) |= 1UL << ((~((ubXData)&7)) & 7);
 
     //*(firstBitplane + (40 * (ubYData) + ((ubXData) >> 3))) |= 1UL << ((~((ubXData) & 7)) & 7);
     /*UBYTE *primo = (UBYTE *)((ULONG)s_pMainBuffer->pBack->Planes[0]) + (40 * (ubYData + 28) + ((ubXData + 60) >> 3));
@@ -610,7 +690,6 @@ void gameGsLoop(void)
     pRodPointer++;
     a++;
   }
-  // g_pCustom->color[0] = 0x0000;
 
   uwAngle++;
   if (uwAngle >= uwFinalAngle)
@@ -619,6 +698,10 @@ void gameGsLoop(void)
     //sg_bHELPERPOINTERINDEX = 0;
     sg_bHELPERPOINTER = sg_pCurrRodoneaHelper;
   }
+
+#ifndef CUSTOMCOPPERLIST
+  g_pCustom->color[0] = 0x0000;
+#endif
 
   vPortWaitForEnd(s_pVpMain);
   //scorri();
@@ -634,7 +717,7 @@ void gameGsDestroy(void)
   // Cleanup when leaving this gamestate
   systemUse();
 
-  FreeMem(ubRodonea, 259200);
+  //FreeMem(ubRodonea, 259200);
   FreeMem(tree, sizeof(HuffNode) * 512);
 
   //fclose(fout);
@@ -925,8 +1008,67 @@ void scorri()
   g_pCustom->bltapt = firstBitPlane;
 
   g_pCustom->bltsize = 0x0555;
+}
 
-  /*blitWait();
-  g_pCustom->bltdpt = firstBitPlane;
-  g_pCustom->bltapt = firstBitPlane;*/
+UBYTE printSinglePoint(UBYTE ubReset)
+{
+  static UWORD ubXData = 0;
+  static UBYTE ubYData = 0;
+  static UWORD uwCounter = 0;
+  static BYTE *pHelperPointer = NULL;
+  static BYTE *pRodPointer = NULL;
+
+  if (ubReset)
+  {
+    ubXData = 0;
+    ubYData = 0;
+    uwCounter = 0;
+    pHelperPointer = NULL;
+    pRodPointer = NULL;
+    return 1;
+  }
+
+  if (pHelperPointer == NULL)
+    pHelperPointer = sg_bHELPERPOINTER;
+  if (pRodPointer == NULL)
+    pRodPointer = sg_pCurrRodonea;
+
+  BYTE bCompressedX = (*pRodPointer) >> 4;
+  bCompressedX = bCompressedX & 0x0F;
+  BYTE bCompressedY = (*pRodPointer) & 0x0F;
+
+  if ((bCompressedX >> 3) == 1)
+  {
+    if (bCompressedX == 0b00001000)
+    {
+      bCompressedX = *pHelperPointer;
+      pHelperPointer++;
+    }
+    else
+      bCompressedX = 0b11110000 | bCompressedX;
+  }
+
+  if ((bCompressedY >> 3) == 1)
+  {
+
+    if (bCompressedY == 0b00001000)
+    {
+      bCompressedY = *pHelperPointer;
+      pHelperPointer++;
+    }
+    else
+      bCompressedY = 0b11110000 | bCompressedY;
+  }
+
+  ubXData += bCompressedX;
+  ubYData += bCompressedY;
+
+  *((UBYTE *)((ULONG)s_pMainBuffer->pBack->Planes[0]) + (42 * (ubYData + 48) + ((ubXData + 60) >> 3))) |= 1UL << ((~((ubXData + 60) & 7)) & 7);
+  *((UBYTE *)((ULONG)s_pMainBuffer->pFront->Planes[0]) + (42 * (ubYData + 48) + ((ubXData + 60) >> 3))) |= 1UL << ((~((ubXData + 60) & 7)) & 7);
+
+  pRodPointer++;
+  uwCounter++;
+  if (uwCounter >= 360)
+    return 0;
+  return 1;
 }

@@ -7,6 +7,7 @@
 // Without it compiler will yell about undeclared gameGsCreate etc
 #include "main.h"
 #include "demointro.h"
+#include "demointro2.h"
 #include "rodonea.h"
 
 tStateManager *g_pGameStateManager = 0;
@@ -18,7 +19,8 @@ void genericCreate(void)
                // Initialize gamestate
   g_pGameStateManager = stateManagerCreate();
   g_pGameStates[0] = stateCreate(introGsCreate, introGsLoop, introGsDestroy, 0, 0, 0);
-  g_pGameStates[1] = stateCreate(gameGsCreate, gameGsLoop, gameGsDestroy, 0, 0, 0);
+  g_pGameStates[1] = stateCreate(introGsCreate2, introGsLoop2, introGsDestroy2, 0, 0, 0);
+  g_pGameStates[2] = stateCreate(gameGsCreate, gameGsLoop, gameGsDestroy, 0, 0, 0);
  // g_pGameState = stateCreate(gameGsCreate, gameGsLoop, gameGsDestroy, 0, 0, 0);
 
 //g_pGameState = stateCreate(introGsCreate, introGsLoop, introGsDestroy, 0, 0, 0);
