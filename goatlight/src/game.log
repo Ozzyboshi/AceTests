@@ -1,0 +1,1513 @@
+Block begin: blitManagerCreate...OK, time:  60.0 us
+Block begin: copCreate()
+	Block begin: copListCreate()
+		Addr: 0x22be94
+		BLOCK mode
+	Block end: copListCreate(), time: >7min
+Block end: copCreate(), time:   3.913 ms
+Hello, Amiga!
+Block begin: keyCreate()...OK, time:  53.6 us
+Block begin: stateManagerCreate()...OK, time:   2.509 ms
+Block begin: stateCreate(cbCreate: 0x272fe8, cbLoop: 0x27381c, cbDestroy: 0x2739de, cbSuspend: 0, cbResume: 0, pPrev: 0)...OK, time: >7min
+Block begin: stateChange(pStateManager: 0x22c134, pState: 0x22d36c)
+	Block begin: viewCreate(pTags: 0)
+		addr: 0x22d39c
+		Block begin: copListCreate()
+			Addr: 0x22d42c
+			RAW mode, size: 39 + WAIT(0xFFFF)
+		Block end: copListCreate(), time:   3.508 ms
+		Global CLUT mode enabled
+	Block end: viewCreate(), time:   3.342 ms
+	Block begin: vPortCreate(pTagList: 0)
+		Addr: 0x22d774
+		Parent view: 0x22d39c
+		Offsets: 0x0
+		Dimensions: 320x256@3
+		No prev VPorts - added to head
+	Block end: vPortCreate(), time:  17.136 ms
+	Block begin: simpleBufferTestCreate(pTags: 0, ...)
+		Addr: 0x22d7d4
+		Parent VPort: 0x22d774
+		Bounds: 384x256
+		Block begin: bitmapCreate(uwWidth: 384, uwHeight: 256, ubDepth: 3, ubFlags: 1)
+			addr: 0x22d554
+		Block end: bitmapCreate(), time: >7min
+		Block begin: cameraCreate(pVPort: 0x22d774, uwPosX: 0, uwPosY: 0, uwMaxX: 384, uwMaxY: 256, isDblBfr: 0)
+			Addr: 0x22d82c
+			Resetting camera bounds...
+			Block begin: cameraReset(pManager: 0x22d82c, uwStartX: 0, uwStartY: 0, uwWidth: 384, uwHeight: 256, isDblBfr: 0)
+				Camera max coord: 64,0
+			Block end: cameraReset(), time:   4.696 ms
+			Attaching camera to VPort...
+			Manager 0x22d82c attached to head of VP 0x22d774
+		Block end: cameraCreate(), time: >7min
+		Copperlist offset: 0
+		Block begin: simpleBufferTestSetFront(pManager: 0x22d7d4, pFront: 0x22d554, isScrollX: 0)
+			Modulo: 8
+			Setting copperlist 0x22d464 at offs 0
+		Block end: simplebufferTestSetFront(), time: >7min
+		Manager 0x22d7d4 attached after manager 0x22d82c of VP 0x22d774
+	Block end: simpleBufferTestCreate(), time:   8.198 ms
+	Setting space (0-8-bytepos :0)
+	Setting space (1-8-bytepos :1)
+	Setting space (2-8-bytepos :2)
+	Setting space (3-8-bytepos :3)
+	Setting space (4-8-bytepos :4)
+	Setting space (5-8-bytepos :5)
+	Setting space (6-8-bytepos :6)
+	Setting space (7-8-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Setting bar (0-25-bytepos :0)
+	Setting bar (1-25-bytepos :1)
+	Setting bar (2-25-bytepos :2)
+	Setting bar (3-25-bytepos :3)
+	Setting bar (4-25-bytepos :4)
+	Setting bar (5-25-bytepos :5)
+	Setting bar (6-25-bytepos :6)
+	Setting bar (7-25-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Setting bar (8-25-bytepos :0)
+	Setting bar (9-25-bytepos :1)
+	Setting bar (10-25-bytepos :2)
+	Setting bar (11-25-bytepos :3)
+	Setting bar (12-25-bytepos :4)
+	Setting bar (13-25-bytepos :5)
+	Setting bar (14-25-bytepos :6)
+	Setting bar (15-25-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Setting bar (16-25-bytepos :0)
+	Setting bar (17-25-bytepos :1)
+	Setting bar (18-25-bytepos :2)
+	Setting bar (19-25-bytepos :3)
+	Setting bar (20-25-bytepos :4)
+	Setting bar (21-25-bytepos :5)
+	Setting bar (22-25-bytepos :6)
+	Setting bar (23-25-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Setting bar (24-25-bytepos :0)
+	Bar cycle ended, resetting counters and incrementing the wait space
+	Setting space (0-8-bytepos :1)
+	Setting space (1-8-bytepos :2)
+	Setting space (2-8-bytepos :3)
+	Setting space (3-8-bytepos :4)
+	Setting space (4-8-bytepos :5)
+	Setting space (5-8-bytepos :6)
+	Setting space (6-8-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Setting space (7-8-bytepos :0)
+	Setting bar (0-25-bytepos :1)
+	Setting bar (1-25-bytepos :2)
+	Setting bar (2-25-bytepos :3)
+	Setting bar (3-25-bytepos :4)
+	Setting bar (4-25-bytepos :5)
+	Setting bar (5-25-bytepos :6)
+	Setting bar (6-25-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Setting bar (7-25-bytepos :0)
+	Setting bar (8-25-bytepos :1)
+	Setting bar (9-25-bytepos :2)
+	Setting bar (10-25-bytepos :3)
+	Setting bar (11-25-bytepos :4)
+	Setting bar (12-25-bytepos :5)
+	Setting bar (13-25-bytepos :6)
+	Setting bar (14-25-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Setting bar (15-25-bytepos :0)
+	Setting bar (16-25-bytepos :1)
+	Setting bar (17-25-bytepos :2)
+	Setting bar (18-25-bytepos :3)
+	Setting bar (19-25-bytepos :4)
+	Setting bar (20-25-bytepos :5)
+	Setting bar (21-25-bytepos :6)
+	Setting bar (22-25-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Setting bar (23-25-bytepos :0)
+	Setting bar (24-25-bytepos :1)
+	Bar cycle ended, resetting counters and incrementing the wait space
+	Setting space (0-8-bytepos :2)
+	Setting space (1-8-bytepos :3)
+	Setting space (2-8-bytepos :4)
+	Setting space (3-8-bytepos :5)
+	Setting space (4-8-bytepos :6)
+	Setting space (5-8-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Setting space (6-8-bytepos :0)
+	Setting space (7-8-bytepos :1)
+	Setting bar (0-25-bytepos :2)
+	Setting bar (1-25-bytepos :3)
+	Setting bar (2-25-bytepos :4)
+	Setting bar (3-25-bytepos :5)
+	Setting bar (4-25-bytepos :6)
+	Setting bar (5-25-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Setting bar (6-25-bytepos :0)
+	Setting bar (7-25-bytepos :1)
+	Setting bar (8-25-bytepos :2)
+	Setting bar (9-25-bytepos :3)
+	Setting bar (10-25-bytepos :4)
+	Setting bar (11-25-bytepos :5)
+	Setting bar (12-25-bytepos :6)
+	Setting bar (13-25-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Setting bar (14-25-bytepos :0)
+	Setting bar (15-25-bytepos :1)
+	Setting bar (16-25-bytepos :2)
+	Setting bar (17-25-bytepos :3)
+	Setting bar (18-25-bytepos :4)
+	Setting bar (19-25-bytepos :5)
+	Setting bar (20-25-bytepos :6)
+	Setting bar (21-25-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Setting bar (22-25-bytepos :0)
+	Setting bar (23-25-bytepos :1)
+	Setting bar (24-25-bytepos :2)
+	Bar cycle ended, resetting counters and incrementing the wait space
+	Setting space (0-8-bytepos :3)
+	Setting space (1-8-bytepos :4)
+	Setting space (2-8-bytepos :5)
+	Setting space (3-8-bytepos :6)
+	Setting space (4-8-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Setting space (5-8-bytepos :0)
+	Setting space (6-8-bytepos :1)
+	Setting space (7-8-bytepos :2)
+	Setting bar (0-25-bytepos :3)
+	Setting bar (1-25-bytepos :4)
+	Setting bar (2-25-bytepos :5)
+	Setting bar (3-25-bytepos :6)
+	Setting bar (4-25-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Setting bar (5-25-bytepos :0)
+	Setting bar (6-25-bytepos :1)
+	Setting bar (7-25-bytepos :2)
+	Setting bar (8-25-bytepos :3)
+	Setting bar (9-25-bytepos :4)
+	Setting bar (10-25-bytepos :5)
+	Setting bar (11-25-bytepos :6)
+	Setting bar (12-25-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Setting bar (13-25-bytepos :0)
+	Setting bar (14-25-bytepos :1)
+	Setting bar (15-25-bytepos :2)
+	Setting bar (16-25-bytepos :3)
+	Setting bar (17-25-bytepos :4)
+	Setting bar (18-25-bytepos :5)
+	Setting bar (19-25-bytepos :6)
+	Setting bar (20-25-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Setting bar (21-25-bytepos :0)
+	Setting bar (22-25-bytepos :1)
+	Setting bar (23-25-bytepos :2)
+	Setting bar (24-25-bytepos :3)
+	Bar cycle ended, resetting counters and incrementing the wait space
+	Setting space (0-8-bytepos :4)
+	Setting space (1-8-bytepos :5)
+	Setting space (2-8-bytepos :6)
+	Setting space (3-8-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Setting space (4-8-bytepos :0)
+	Setting space (5-8-bytepos :1)
+	Setting space (6-8-bytepos :2)
+	Setting space (7-8-bytepos :3)
+	Setting bar (0-25-bytepos :4)
+	Setting bar (1-25-bytepos :5)
+	Setting bar (2-25-bytepos :6)
+	Setting bar (3-25-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Setting bar (4-25-bytepos :0)
+	Setting bar (5-25-bytepos :1)
+	Setting bar (6-25-bytepos :2)
+	Setting bar (7-25-bytepos :3)
+	Setting bar (8-25-bytepos :4)
+	Setting bar (9-25-bytepos :5)
+	Setting bar (10-25-bytepos :6)
+	Setting bar (11-25-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Setting bar (12-25-bytepos :0)
+	Setting bar (13-25-bytepos :1)
+	Setting bar (14-25-bytepos :2)
+	Setting bar (15-25-bytepos :3)
+	Setting bar (16-25-bytepos :4)
+	Setting bar (17-25-bytepos :5)
+	Setting bar (18-25-bytepos :6)
+	Setting bar (19-25-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Start right side... repositioning
+	Setting bar (0-25-bytepos :7)
+	Setting bar (1-25-bytepos :6)
+	Setting bar (2-25-bytepos :5)
+	Setting bar (3-25-bytepos :4)
+	Setting bar (4-25-bytepos :3)
+	Setting bar (5-25-bytepos :2)
+	Setting bar (6-25-bytepos :1)
+	Setting bar (7-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (8-25-bytepos :7)
+	Setting bar (9-25-bytepos :6)
+	Setting bar (10-25-bytepos :5)
+	Setting bar (11-25-bytepos :4)
+	Setting bar (12-25-bytepos :3)
+	Setting bar (13-25-bytepos :2)
+	Setting bar (14-25-bytepos :1)
+	Setting bar (15-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (16-25-bytepos :7)
+	Setting bar (17-25-bytepos :6)
+	Setting bar (18-25-bytepos :5)
+	Setting bar (19-25-bytepos :4)
+	Setting bar (20-25-bytepos :3)
+	Setting bar (21-25-bytepos :2)
+	Setting bar (22-25-bytepos :1)
+	Setting bar (23-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (24-25-bytepos :7)
+	Setting space (0-8-bytepos :6)
+	Setting space (1-8-bytepos :5)
+	Setting space (2-8-bytepos :4)
+	Setting space (3-8-bytepos :3)
+	Setting space (4-8-bytepos :2)
+	Setting space (5-8-bytepos :1)
+	Setting space (6-8-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting space (7-8-bytepos :7)
+	Bar cycle ended, resetting counters and incrementing the wait space
+	Setting bar (0-25-bytepos :6)
+	Setting bar (1-25-bytepos :5)
+	Setting bar (2-25-bytepos :4)
+	Setting bar (3-25-bytepos :3)
+	Setting bar (4-25-bytepos :2)
+	Setting bar (5-25-bytepos :1)
+	Setting bar (6-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (7-25-bytepos :7)
+	Setting bar (8-25-bytepos :6)
+	Setting bar (9-25-bytepos :5)
+	Setting bar (10-25-bytepos :4)
+	Setting bar (11-25-bytepos :3)
+	Setting bar (12-25-bytepos :2)
+	Setting bar (13-25-bytepos :1)
+	Setting bar (14-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (15-25-bytepos :7)
+	Setting bar (16-25-bytepos :6)
+	Setting bar (17-25-bytepos :5)
+	Setting bar (18-25-bytepos :4)
+	Setting bar (19-25-bytepos :3)
+	Setting bar (20-25-bytepos :2)
+	Setting bar (21-25-bytepos :1)
+	Setting bar (22-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (23-25-bytepos :7)
+	Setting bar (24-25-bytepos :6)
+	Setting space (0-8-bytepos :5)
+	Setting space (1-8-bytepos :4)
+	Setting space (2-8-bytepos :3)
+	Setting space (3-8-bytepos :2)
+	Setting space (4-8-bytepos :1)
+	Setting space (5-8-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting space (6-8-bytepos :7)
+	Setting space (7-8-bytepos :6)
+	Bar cycle ended, resetting counters and incrementing the wait space
+	Setting bar (0-25-bytepos :5)
+	Setting bar (1-25-bytepos :4)
+	Setting bar (2-25-bytepos :3)
+	Setting bar (3-25-bytepos :2)
+	Setting bar (4-25-bytepos :1)
+	Setting bar (5-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (6-25-bytepos :7)
+	Setting bar (7-25-bytepos :6)
+	Setting bar (8-25-bytepos :5)
+	Setting bar (9-25-bytepos :4)
+	Setting bar (10-25-bytepos :3)
+	Setting bar (11-25-bytepos :2)
+	Setting bar (12-25-bytepos :1)
+	Setting bar (13-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (14-25-bytepos :7)
+	Setting bar (15-25-bytepos :6)
+	Setting bar (16-25-bytepos :5)
+	Setting bar (17-25-bytepos :4)
+	Setting bar (18-25-bytepos :3)
+	Setting bar (19-25-bytepos :2)
+	Setting bar (20-25-bytepos :1)
+	Setting bar (21-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (22-25-bytepos :7)
+	Setting bar (23-25-bytepos :6)
+	Setting bar (24-25-bytepos :5)
+	Setting space (0-8-bytepos :4)
+	Setting space (1-8-bytepos :3)
+	Setting space (2-8-bytepos :2)
+	Setting space (3-8-bytepos :1)
+	Setting space (4-8-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting space (5-8-bytepos :7)
+	Setting space (6-8-bytepos :6)
+	Setting space (7-8-bytepos :5)
+	Bar cycle ended, resetting counters and incrementing the wait space
+	Setting bar (0-25-bytepos :4)
+	Setting bar (1-25-bytepos :3)
+	Setting bar (2-25-bytepos :2)
+	Setting bar (3-25-bytepos :1)
+	Setting bar (4-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (5-25-bytepos :7)
+	Setting bar (6-25-bytepos :6)
+	Setting bar (7-25-bytepos :5)
+	Setting bar (8-25-bytepos :4)
+	Setting bar (9-25-bytepos :3)
+	Setting bar (10-25-bytepos :2)
+	Setting bar (11-25-bytepos :1)
+	Setting bar (12-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (13-25-bytepos :7)
+	Setting bar (14-25-bytepos :6)
+	Setting bar (15-25-bytepos :5)
+	Setting bar (16-25-bytepos :4)
+	Setting bar (17-25-bytepos :3)
+	Setting bar (18-25-bytepos :2)
+	Setting bar (19-25-bytepos :1)
+	Setting bar (20-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (21-25-bytepos :7)
+	Setting bar (22-25-bytepos :6)
+	Setting bar (23-25-bytepos :5)
+	Setting bar (24-25-bytepos :4)
+	Setting space (0-8-bytepos :3)
+	Setting space (1-8-bytepos :2)
+	Setting space (2-8-bytepos :1)
+	Setting space (3-8-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting space (4-8-bytepos :7)
+	Setting space (5-8-bytepos :6)
+	Setting space (6-8-bytepos :5)
+	Setting space (7-8-bytepos :4)
+	Bar cycle ended, resetting counters and incrementing the wait space
+	Setting bar (0-25-bytepos :3)
+	Setting bar (1-25-bytepos :2)
+	Setting bar (2-25-bytepos :1)
+	Setting bar (3-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (4-25-bytepos :7)
+	Setting bar (5-25-bytepos :6)
+	Setting bar (6-25-bytepos :5)
+	Setting bar (7-25-bytepos :4)
+	Setting bar (8-25-bytepos :3)
+	Setting bar (9-25-bytepos :2)
+	Setting bar (10-25-bytepos :1)
+	Setting bar (11-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (12-25-bytepos :7)
+	Setting bar (13-25-bytepos :6)
+	Setting bar (14-25-bytepos :5)
+	Setting bar (15-25-bytepos :4)
+	Setting bar (16-25-bytepos :3)
+	Setting bar (17-25-bytepos :2)
+	Setting bar (18-25-bytepos :1)
+	Setting bar (19-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (20-25-bytepos :7)
+	Setting bar (21-25-bytepos :6)
+	Setting bar (22-25-bytepos :5)
+	Setting bar (23-25-bytepos :4)
+	Setting bar (24-25-bytepos :3)
+	Setting space (0-8-bytepos :2)
+	Setting space (1-8-bytepos :1)
+	Setting space (2-8-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting space (3-8-bytepos :7)
+	Setting space (4-8-bytepos :6)
+	Setting space (5-8-bytepos :5)
+	Setting space (6-8-bytepos :4)
+	Setting space (7-8-bytepos :3)
+	Bar cycle ended, resetting counters and incrementing the wait space
+	Setting bar (0-25-bytepos :2)
+	Setting bar (1-25-bytepos :1)
+	Setting bar (2-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (3-25-bytepos :7)
+	Setting bar (4-25-bytepos :6)
+	Setting bar (5-25-bytepos :5)
+	Setting bar (6-25-bytepos :4)
+	Setting bar (7-25-bytepos :3)
+	Setting bar (8-25-bytepos :2)
+	Setting bar (9-25-bytepos :1)
+	Setting bar (10-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (11-25-bytepos :7)
+	Setting bar (12-25-bytepos :6)
+	Setting bar (13-25-bytepos :5)
+	Setting bar (14-25-bytepos :4)
+	Setting bar (15-25-bytepos :3)
+	Setting bar (16-25-bytepos :2)
+	Setting bar (17-25-bytepos :1)
+	Setting bar (18-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (19-25-bytepos :7)
+	Setting bar (20-25-bytepos :6)
+	Setting bar (21-25-bytepos :5)
+	Setting bar (22-25-bytepos :4)
+	Setting bar (23-25-bytepos :3)
+	Setting bar (24-25-bytepos :2)
+	Setting space (0-8-bytepos :1)
+	Setting space (1-8-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting space (2-8-bytepos :7)
+	Setting space (3-8-bytepos :6)
+	Setting space (4-8-bytepos :5)
+	Setting space (5-8-bytepos :4)
+	Setting space (6-8-bytepos :3)
+	Setting space (7-8-bytepos :2)
+	Bar cycle ended, resetting counters and incrementing the wait space
+	Setting bar (0-25-bytepos :1)
+	Setting bar (1-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (2-25-bytepos :7)
+	Setting bar (3-25-bytepos :6)
+	Setting bar (4-25-bytepos :5)
+	Setting bar (5-25-bytepos :4)
+	Setting bar (6-25-bytepos :3)
+	Setting bar (7-25-bytepos :2)
+	Setting bar (8-25-bytepos :1)
+	Setting bar (9-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (10-25-bytepos :7)
+	Setting bar (11-25-bytepos :6)
+	Setting bar (12-25-bytepos :5)
+	Setting bar (13-25-bytepos :4)
+	Setting bar (14-25-bytepos :3)
+	Setting bar (15-25-bytepos :2)
+	Setting bar (16-25-bytepos :1)
+	Setting bar (17-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (18-25-bytepos :7)
+	Setting bar (19-25-bytepos :6)
+	Setting bar (20-25-bytepos :5)
+	Setting bar (21-25-bytepos :4)
+	Setting bar (22-25-bytepos :3)
+	Setting bar (23-25-bytepos :2)
+	Setting bar (24-25-bytepos :1)
+	Setting space (0-8-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting space (0-8-bytepos :0)
+	Setting space (1-8-bytepos :1)
+	Setting space (2-8-bytepos :2)
+	Setting space (3-8-bytepos :3)
+	Setting space (4-8-bytepos :4)
+	Setting space (5-8-bytepos :5)
+	Setting space (6-8-bytepos :6)
+	Setting space (7-8-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Setting bar (0-25-bytepos :0)
+	Setting bar (1-25-bytepos :1)
+	Setting bar (2-25-bytepos :2)
+	Setting bar (3-25-bytepos :3)
+	Setting bar (4-25-bytepos :4)
+	Setting bar (5-25-bytepos :5)
+	Setting bar (6-25-bytepos :6)
+	Setting bar (7-25-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Setting bar (8-25-bytepos :0)
+	Setting bar (9-25-bytepos :1)
+	Setting bar (10-25-bytepos :2)
+	Setting bar (11-25-bytepos :3)
+	Setting bar (12-25-bytepos :4)
+	Setting bar (13-25-bytepos :5)
+	Setting bar (14-25-bytepos :6)
+	Setting bar (15-25-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Setting bar (16-25-bytepos :0)
+	Setting bar (17-25-bytepos :1)
+	Setting bar (18-25-bytepos :2)
+	Setting bar (19-25-bytepos :3)
+	Setting bar (20-25-bytepos :4)
+	Setting bar (21-25-bytepos :5)
+	Setting bar (22-25-bytepos :6)
+	Setting bar (23-25-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Setting bar (24-25-bytepos :0)
+	Bar cycle ended, resetting counters and incrementing the wait space
+	Setting space (0-8-bytepos :1)
+	Setting space (1-8-bytepos :2)
+	Setting space (2-8-bytepos :3)
+	Setting space (3-8-bytepos :4)
+	Setting space (4-8-bytepos :5)
+	Setting space (5-8-bytepos :6)
+	Setting space (6-8-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Setting space (7-8-bytepos :0)
+	Setting bar (0-25-bytepos :1)
+	Setting bar (1-25-bytepos :2)
+	Setting bar (2-25-bytepos :3)
+	Setting bar (3-25-bytepos :4)
+	Setting bar (4-25-bytepos :5)
+	Setting bar (5-25-bytepos :6)
+	Setting bar (6-25-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Setting bar (7-25-bytepos :0)
+	Setting bar (8-25-bytepos :1)
+	Setting bar (9-25-bytepos :2)
+	Setting bar (10-25-bytepos :3)
+	Setting bar (11-25-bytepos :4)
+	Setting bar (12-25-bytepos :5)
+	Setting bar (13-25-bytepos :6)
+	Setting bar (14-25-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Setting bar (15-25-bytepos :0)
+	Setting bar (16-25-bytepos :1)
+	Setting bar (17-25-bytepos :2)
+	Setting bar (18-25-bytepos :3)
+	Setting bar (19-25-bytepos :4)
+	Setting bar (20-25-bytepos :5)
+	Setting bar (21-25-bytepos :6)
+	Setting bar (22-25-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Setting bar (23-25-bytepos :0)
+	Setting bar (24-25-bytepos :1)
+	Bar cycle ended, resetting counters and incrementing the wait space
+	Setting space (0-8-bytepos :2)
+	Setting space (1-8-bytepos :3)
+	Setting space (2-8-bytepos :4)
+	Setting space (3-8-bytepos :5)
+	Setting space (4-8-bytepos :6)
+	Setting space (5-8-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Setting space (6-8-bytepos :0)
+	Setting space (7-8-bytepos :1)
+	Setting bar (0-25-bytepos :2)
+	Setting bar (1-25-bytepos :3)
+	Setting bar (2-25-bytepos :4)
+	Setting bar (3-25-bytepos :5)
+	Setting bar (4-25-bytepos :6)
+	Setting bar (5-25-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Setting bar (6-25-bytepos :0)
+	Setting bar (7-25-bytepos :1)
+	Setting bar (8-25-bytepos :2)
+	Setting bar (9-25-bytepos :3)
+	Setting bar (10-25-bytepos :4)
+	Setting bar (11-25-bytepos :5)
+	Setting bar (12-25-bytepos :6)
+	Setting bar (13-25-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Setting bar (14-25-bytepos :0)
+	Setting bar (15-25-bytepos :1)
+	Setting bar (16-25-bytepos :2)
+	Setting bar (17-25-bytepos :3)
+	Setting bar (18-25-bytepos :4)
+	Setting bar (19-25-bytepos :5)
+	Setting bar (20-25-bytepos :6)
+	Setting bar (21-25-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Setting bar (22-25-bytepos :0)
+	Setting bar (23-25-bytepos :1)
+	Setting bar (24-25-bytepos :2)
+	Bar cycle ended, resetting counters and incrementing the wait space
+	Setting space (0-8-bytepos :3)
+	Setting space (1-8-bytepos :4)
+	Setting space (2-8-bytepos :5)
+	Setting space (3-8-bytepos :6)
+	Setting space (4-8-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Setting space (5-8-bytepos :0)
+	Setting space (6-8-bytepos :1)
+	Setting space (7-8-bytepos :2)
+	Setting bar (0-25-bytepos :3)
+	Setting bar (1-25-bytepos :4)
+	Setting bar (2-25-bytepos :5)
+	Setting bar (3-25-bytepos :6)
+	Setting bar (4-25-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Setting bar (5-25-bytepos :0)
+	Setting bar (6-25-bytepos :1)
+	Setting bar (7-25-bytepos :2)
+	Setting bar (8-25-bytepos :3)
+	Setting bar (9-25-bytepos :4)
+	Setting bar (10-25-bytepos :5)
+	Setting bar (11-25-bytepos :6)
+	Setting bar (12-25-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Setting bar (13-25-bytepos :0)
+	Setting bar (14-25-bytepos :1)
+	Setting bar (15-25-bytepos :2)
+	Setting bar (16-25-bytepos :3)
+	Setting bar (17-25-bytepos :4)
+	Setting bar (18-25-bytepos :5)
+	Setting bar (19-25-bytepos :6)
+	Setting bar (20-25-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Setting bar (21-25-bytepos :0)
+	Setting bar (22-25-bytepos :1)
+	Setting bar (23-25-bytepos :2)
+	Setting bar (24-25-bytepos :3)
+	Bar cycle ended, resetting counters and incrementing the wait space
+	Setting space (0-8-bytepos :4)
+	Setting space (1-8-bytepos :5)
+	Setting space (2-8-bytepos :6)
+	Setting space (3-8-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Setting space (4-8-bytepos :0)
+	Setting space (5-8-bytepos :1)
+	Setting space (6-8-bytepos :2)
+	Setting space (7-8-bytepos :3)
+	Setting bar (0-25-bytepos :4)
+	Setting bar (1-25-bytepos :5)
+	Setting bar (2-25-bytepos :6)
+	Setting bar (3-25-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Setting bar (4-25-bytepos :0)
+	Setting bar (5-25-bytepos :1)
+	Setting bar (6-25-bytepos :2)
+	Setting bar (7-25-bytepos :3)
+	Setting bar (8-25-bytepos :4)
+	Setting bar (9-25-bytepos :5)
+	Setting bar (10-25-bytepos :6)
+	Setting bar (11-25-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Setting bar (12-25-bytepos :0)
+	Setting bar (13-25-bytepos :1)
+	Setting bar (14-25-bytepos :2)
+	Setting bar (15-25-bytepos :3)
+	Setting bar (16-25-bytepos :4)
+	Setting bar (17-25-bytepos :5)
+	Setting bar (18-25-bytepos :6)
+	Setting bar (19-25-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Start right side... repositioning
+	Setting bar (0-25-bytepos :7)
+	Setting bar (1-25-bytepos :6)
+	Setting bar (2-25-bytepos :5)
+	Setting bar (3-25-bytepos :4)
+	Setting bar (4-25-bytepos :3)
+	Setting bar (5-25-bytepos :2)
+	Setting bar (6-25-bytepos :1)
+	Setting bar (7-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (8-25-bytepos :7)
+	Setting bar (9-25-bytepos :6)
+	Setting bar (10-25-bytepos :5)
+	Setting bar (11-25-bytepos :4)
+	Setting bar (12-25-bytepos :3)
+	Setting bar (13-25-bytepos :2)
+	Setting bar (14-25-bytepos :1)
+	Setting bar (15-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (16-25-bytepos :7)
+	Setting bar (17-25-bytepos :6)
+	Setting bar (18-25-bytepos :5)
+	Setting bar (19-25-bytepos :4)
+	Setting bar (20-25-bytepos :3)
+	Setting bar (21-25-bytepos :2)
+	Setting bar (22-25-bytepos :1)
+	Setting bar (23-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (24-25-bytepos :7)
+	Setting space (0-8-bytepos :6)
+	Setting space (1-8-bytepos :5)
+	Setting space (2-8-bytepos :4)
+	Setting space (3-8-bytepos :3)
+	Setting space (4-8-bytepos :2)
+	Setting space (5-8-bytepos :1)
+	Setting space (6-8-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting space (7-8-bytepos :7)
+	Bar cycle ended, resetting counters and incrementing the wait space
+	Setting bar (0-25-bytepos :6)
+	Setting bar (1-25-bytepos :5)
+	Setting bar (2-25-bytepos :4)
+	Setting bar (3-25-bytepos :3)
+	Setting bar (4-25-bytepos :2)
+	Setting bar (5-25-bytepos :1)
+	Setting bar (6-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (7-25-bytepos :7)
+	Setting bar (8-25-bytepos :6)
+	Setting bar (9-25-bytepos :5)
+	Setting bar (10-25-bytepos :4)
+	Setting bar (11-25-bytepos :3)
+	Setting bar (12-25-bytepos :2)
+	Setting bar (13-25-bytepos :1)
+	Setting bar (14-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (15-25-bytepos :7)
+	Setting bar (16-25-bytepos :6)
+	Setting bar (17-25-bytepos :5)
+	Setting bar (18-25-bytepos :4)
+	Setting bar (19-25-bytepos :3)
+	Setting bar (20-25-bytepos :2)
+	Setting bar (21-25-bytepos :1)
+	Setting bar (22-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (23-25-bytepos :7)
+	Setting bar (24-25-bytepos :6)
+	Setting space (0-8-bytepos :5)
+	Setting space (1-8-bytepos :4)
+	Setting space (2-8-bytepos :3)
+	Setting space (3-8-bytepos :2)
+	Setting space (4-8-bytepos :1)
+	Setting space (5-8-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting space (6-8-bytepos :7)
+	Setting space (7-8-bytepos :6)
+	Bar cycle ended, resetting counters and incrementing the wait space
+	Setting bar (0-25-bytepos :5)
+	Setting bar (1-25-bytepos :4)
+	Setting bar (2-25-bytepos :3)
+	Setting bar (3-25-bytepos :2)
+	Setting bar (4-25-bytepos :1)
+	Setting bar (5-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (6-25-bytepos :7)
+	Setting bar (7-25-bytepos :6)
+	Setting bar (8-25-bytepos :5)
+	Setting bar (9-25-bytepos :4)
+	Setting bar (10-25-bytepos :3)
+	Setting bar (11-25-bytepos :2)
+	Setting bar (12-25-bytepos :1)
+	Setting bar (13-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (14-25-bytepos :7)
+	Setting bar (15-25-bytepos :6)
+	Setting bar (16-25-bytepos :5)
+	Setting bar (17-25-bytepos :4)
+	Setting bar (18-25-bytepos :3)
+	Setting bar (19-25-bytepos :2)
+	Setting bar (20-25-bytepos :1)
+	Setting bar (21-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (22-25-bytepos :7)
+	Setting bar (23-25-bytepos :6)
+	Setting bar (24-25-bytepos :5)
+	Setting space (0-8-bytepos :4)
+	Setting space (1-8-bytepos :3)
+	Setting space (2-8-bytepos :2)
+	Setting space (3-8-bytepos :1)
+	Setting space (4-8-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting space (5-8-bytepos :7)
+	Setting space (6-8-bytepos :6)
+	Setting space (7-8-bytepos :5)
+	Bar cycle ended, resetting counters and incrementing the wait space
+	Setting bar (0-25-bytepos :4)
+	Setting bar (1-25-bytepos :3)
+	Setting bar (2-25-bytepos :2)
+	Setting bar (3-25-bytepos :1)
+	Setting bar (4-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (5-25-bytepos :7)
+	Setting bar (6-25-bytepos :6)
+	Setting bar (7-25-bytepos :5)
+	Setting bar (8-25-bytepos :4)
+	Setting bar (9-25-bytepos :3)
+	Setting bar (10-25-bytepos :2)
+	Setting bar (11-25-bytepos :1)
+	Setting bar (12-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (13-25-bytepos :7)
+	Setting bar (14-25-bytepos :6)
+	Setting bar (15-25-bytepos :5)
+	Setting bar (16-25-bytepos :4)
+	Setting bar (17-25-bytepos :3)
+	Setting bar (18-25-bytepos :2)
+	Setting bar (19-25-bytepos :1)
+	Setting bar (20-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (21-25-bytepos :7)
+	Setting bar (22-25-bytepos :6)
+	Setting bar (23-25-bytepos :5)
+	Setting bar (24-25-bytepos :4)
+	Setting space (0-8-bytepos :3)
+	Setting space (1-8-bytepos :2)
+	Setting space (2-8-bytepos :1)
+	Setting space (3-8-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting space (4-8-bytepos :7)
+	Setting space (5-8-bytepos :6)
+	Setting space (6-8-bytepos :5)
+	Setting space (7-8-bytepos :4)
+	Bar cycle ended, resetting counters and incrementing the wait space
+	Setting bar (0-25-bytepos :3)
+	Setting bar (1-25-bytepos :2)
+	Setting bar (2-25-bytepos :1)
+	Setting bar (3-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (4-25-bytepos :7)
+	Setting bar (5-25-bytepos :6)
+	Setting bar (6-25-bytepos :5)
+	Setting bar (7-25-bytepos :4)
+	Setting bar (8-25-bytepos :3)
+	Setting bar (9-25-bytepos :2)
+	Setting bar (10-25-bytepos :1)
+	Setting bar (11-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (12-25-bytepos :7)
+	Setting bar (13-25-bytepos :6)
+	Setting bar (14-25-bytepos :5)
+	Setting bar (15-25-bytepos :4)
+	Setting bar (16-25-bytepos :3)
+	Setting bar (17-25-bytepos :2)
+	Setting bar (18-25-bytepos :1)
+	Setting bar (19-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (20-25-bytepos :7)
+	Setting bar (21-25-bytepos :6)
+	Setting bar (22-25-bytepos :5)
+	Setting bar (23-25-bytepos :4)
+	Setting bar (24-25-bytepos :3)
+	Setting space (0-8-bytepos :2)
+	Setting space (1-8-bytepos :1)
+	Setting space (2-8-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting space (3-8-bytepos :7)
+	Setting space (4-8-bytepos :6)
+	Setting space (5-8-bytepos :5)
+	Setting space (6-8-bytepos :4)
+	Setting space (7-8-bytepos :3)
+	Bar cycle ended, resetting counters and incrementing the wait space
+	Setting bar (0-25-bytepos :2)
+	Setting bar (1-25-bytepos :1)
+	Setting bar (2-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (3-25-bytepos :7)
+	Setting bar (4-25-bytepos :6)
+	Setting bar (5-25-bytepos :5)
+	Setting bar (6-25-bytepos :4)
+	Setting bar (7-25-bytepos :3)
+	Setting bar (8-25-bytepos :2)
+	Setting bar (9-25-bytepos :1)
+	Setting bar (10-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (11-25-bytepos :7)
+	Setting bar (12-25-bytepos :6)
+	Setting bar (13-25-bytepos :5)
+	Setting bar (14-25-bytepos :4)
+	Setting bar (15-25-bytepos :3)
+	Setting bar (16-25-bytepos :2)
+	Setting bar (17-25-bytepos :1)
+	Setting bar (18-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (19-25-bytepos :7)
+	Setting bar (20-25-bytepos :6)
+	Setting bar (21-25-bytepos :5)
+	Setting bar (22-25-bytepos :4)
+	Setting bar (23-25-bytepos :3)
+	Setting bar (24-25-bytepos :2)
+	Setting space (0-8-bytepos :1)
+	Setting space (1-8-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting space (2-8-bytepos :7)
+	Setting space (3-8-bytepos :6)
+	Setting space (4-8-bytepos :5)
+	Setting space (5-8-bytepos :4)
+	Setting space (6-8-bytepos :3)
+	Setting space (7-8-bytepos :2)
+	Bar cycle ended, resetting counters and incrementing the wait space
+	Setting bar (0-25-bytepos :1)
+	Setting bar (1-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (2-25-bytepos :7)
+	Setting bar (3-25-bytepos :6)
+	Setting bar (4-25-bytepos :5)
+	Setting bar (5-25-bytepos :4)
+	Setting bar (6-25-bytepos :3)
+	Setting bar (7-25-bytepos :2)
+	Setting bar (8-25-bytepos :1)
+	Setting bar (9-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (10-25-bytepos :7)
+	Setting bar (11-25-bytepos :6)
+	Setting bar (12-25-bytepos :5)
+	Setting bar (13-25-bytepos :4)
+	Setting bar (14-25-bytepos :3)
+	Setting bar (15-25-bytepos :2)
+	Setting bar (16-25-bytepos :1)
+	Setting bar (17-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (18-25-bytepos :7)
+	Setting bar (19-25-bytepos :6)
+	Setting bar (20-25-bytepos :5)
+	Setting bar (21-25-bytepos :4)
+	Setting bar (22-25-bytepos :3)
+	Setting bar (23-25-bytepos :2)
+	Setting bar (24-25-bytepos :1)
+	Setting space (0-8-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting space (0-8-bytepos :0)
+	Setting space (1-8-bytepos :1)
+	Setting space (2-8-bytepos :2)
+	Setting space (3-8-bytepos :3)
+	Setting space (4-8-bytepos :4)
+	Setting space (5-8-bytepos :5)
+	Setting space (6-8-bytepos :6)
+	Setting space (7-8-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Setting bar (0-25-bytepos :0)
+	Setting bar (1-25-bytepos :1)
+	Setting bar (2-25-bytepos :2)
+	Setting bar (3-25-bytepos :3)
+	Setting bar (4-25-bytepos :4)
+	Setting bar (5-25-bytepos :5)
+	Setting bar (6-25-bytepos :6)
+	Setting bar (7-25-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Setting bar (8-25-bytepos :0)
+	Setting bar (9-25-bytepos :1)
+	Setting bar (10-25-bytepos :2)
+	Setting bar (11-25-bytepos :3)
+	Setting bar (12-25-bytepos :4)
+	Setting bar (13-25-bytepos :5)
+	Setting bar (14-25-bytepos :6)
+	Setting bar (15-25-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Setting bar (16-25-bytepos :0)
+	Setting bar (17-25-bytepos :1)
+	Setting bar (18-25-bytepos :2)
+	Setting bar (19-25-bytepos :3)
+	Setting bar (20-25-bytepos :4)
+	Setting bar (21-25-bytepos :5)
+	Setting bar (22-25-bytepos :6)
+	Setting bar (23-25-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Setting bar (24-25-bytepos :0)
+	Bar cycle ended, resetting counters and incrementing the wait space
+	Setting space (0-8-bytepos :1)
+	Setting space (1-8-bytepos :2)
+	Setting space (2-8-bytepos :3)
+	Setting space (3-8-bytepos :4)
+	Setting space (4-8-bytepos :5)
+	Setting space (5-8-bytepos :6)
+	Setting space (6-8-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Setting space (7-8-bytepos :0)
+	Setting bar (0-25-bytepos :1)
+	Setting bar (1-25-bytepos :2)
+	Setting bar (2-25-bytepos :3)
+	Setting bar (3-25-bytepos :4)
+	Setting bar (4-25-bytepos :5)
+	Setting bar (5-25-bytepos :6)
+	Setting bar (6-25-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Setting bar (7-25-bytepos :0)
+	Setting bar (8-25-bytepos :1)
+	Setting bar (9-25-bytepos :2)
+	Setting bar (10-25-bytepos :3)
+	Setting bar (11-25-bytepos :4)
+	Setting bar (12-25-bytepos :5)
+	Setting bar (13-25-bytepos :6)
+	Setting bar (14-25-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Setting bar (15-25-bytepos :0)
+	Setting bar (16-25-bytepos :1)
+	Setting bar (17-25-bytepos :2)
+	Setting bar (18-25-bytepos :3)
+	Setting bar (19-25-bytepos :4)
+	Setting bar (20-25-bytepos :5)
+	Setting bar (21-25-bytepos :6)
+	Setting bar (22-25-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Setting bar (23-25-bytepos :0)
+	Setting bar (24-25-bytepos :1)
+	Bar cycle ended, resetting counters and incrementing the wait space
+	Setting space (0-8-bytepos :2)
+	Setting space (1-8-bytepos :3)
+	Setting space (2-8-bytepos :4)
+	Setting space (3-8-bytepos :5)
+	Setting space (4-8-bytepos :6)
+	Setting space (5-8-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Setting space (6-8-bytepos :0)
+	Setting space (7-8-bytepos :1)
+	Setting bar (0-25-bytepos :2)
+	Setting bar (1-25-bytepos :3)
+	Setting bar (2-25-bytepos :4)
+	Setting bar (3-25-bytepos :5)
+	Setting bar (4-25-bytepos :6)
+	Setting bar (5-25-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Setting bar (6-25-bytepos :0)
+	Setting bar (7-25-bytepos :1)
+	Setting bar (8-25-bytepos :2)
+	Setting bar (9-25-bytepos :3)
+	Setting bar (10-25-bytepos :4)
+	Setting bar (11-25-bytepos :5)
+	Setting bar (12-25-bytepos :6)
+	Setting bar (13-25-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Setting bar (14-25-bytepos :0)
+	Setting bar (15-25-bytepos :1)
+	Setting bar (16-25-bytepos :2)
+	Setting bar (17-25-bytepos :3)
+	Setting bar (18-25-bytepos :4)
+	Setting bar (19-25-bytepos :5)
+	Setting bar (20-25-bytepos :6)
+	Setting bar (21-25-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Setting bar (22-25-bytepos :0)
+	Setting bar (23-25-bytepos :1)
+	Setting bar (24-25-bytepos :2)
+	Bar cycle ended, resetting counters and incrementing the wait space
+	Setting space (0-8-bytepos :3)
+	Setting space (1-8-bytepos :4)
+	Setting space (2-8-bytepos :5)
+	Setting space (3-8-bytepos :6)
+	Setting space (4-8-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Setting space (5-8-bytepos :0)
+	Setting space (6-8-bytepos :1)
+	Setting space (7-8-bytepos :2)
+	Setting bar (0-25-bytepos :3)
+	Setting bar (1-25-bytepos :4)
+	Setting bar (2-25-bytepos :5)
+	Setting bar (3-25-bytepos :6)
+	Setting bar (4-25-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Setting bar (5-25-bytepos :0)
+	Setting bar (6-25-bytepos :1)
+	Setting bar (7-25-bytepos :2)
+	Setting bar (8-25-bytepos :3)
+	Setting bar (9-25-bytepos :4)
+	Setting bar (10-25-bytepos :5)
+	Setting bar (11-25-bytepos :6)
+	Setting bar (12-25-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Setting bar (13-25-bytepos :0)
+	Setting bar (14-25-bytepos :1)
+	Setting bar (15-25-bytepos :2)
+	Setting bar (16-25-bytepos :3)
+	Setting bar (17-25-bytepos :4)
+	Setting bar (18-25-bytepos :5)
+	Setting bar (19-25-bytepos :6)
+	Setting bar (20-25-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Setting bar (21-25-bytepos :0)
+	Setting bar (22-25-bytepos :1)
+	Setting bar (23-25-bytepos :2)
+	Setting bar (24-25-bytepos :3)
+	Bar cycle ended, resetting counters and incrementing the wait space
+	Setting space (0-8-bytepos :4)
+	Setting space (1-8-bytepos :5)
+	Setting space (2-8-bytepos :6)
+	Setting space (3-8-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Setting space (4-8-bytepos :0)
+	Setting space (5-8-bytepos :1)
+	Setting space (6-8-bytepos :2)
+	Setting space (7-8-bytepos :3)
+	Setting bar (0-25-bytepos :4)
+	Setting bar (1-25-bytepos :5)
+	Setting bar (2-25-bytepos :6)
+	Setting bar (3-25-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Setting bar (4-25-bytepos :0)
+	Setting bar (5-25-bytepos :1)
+	Setting bar (6-25-bytepos :2)
+	Setting bar (7-25-bytepos :3)
+	Setting bar (8-25-bytepos :4)
+	Setting bar (9-25-bytepos :5)
+	Setting bar (10-25-bytepos :6)
+	Setting bar (11-25-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Setting bar (12-25-bytepos :0)
+	Setting bar (13-25-bytepos :1)
+	Setting bar (14-25-bytepos :2)
+	Setting bar (15-25-bytepos :3)
+	Setting bar (16-25-bytepos :4)
+	Setting bar (17-25-bytepos :5)
+	Setting bar (18-25-bytepos :6)
+	Setting bar (19-25-bytepos :7)
+	Byte ended!!! decrementing p_ubBitplane0Pointer
+	Start right side... repositioning
+	Setting bar (0-25-bytepos :7)
+	Setting bar (1-25-bytepos :6)
+	Setting bar (2-25-bytepos :5)
+	Setting bar (3-25-bytepos :4)
+	Setting bar (4-25-bytepos :3)
+	Setting bar (5-25-bytepos :2)
+	Setting bar (6-25-bytepos :1)
+	Setting bar (7-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (8-25-bytepos :7)
+	Setting bar (9-25-bytepos :6)
+	Setting bar (10-25-bytepos :5)
+	Setting bar (11-25-bytepos :4)
+	Setting bar (12-25-bytepos :3)
+	Setting bar (13-25-bytepos :2)
+	Setting bar (14-25-bytepos :1)
+	Setting bar (15-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (16-25-bytepos :7)
+	Setting bar (17-25-bytepos :6)
+	Setting bar (18-25-bytepos :5)
+	Setting bar (19-25-bytepos :4)
+	Setting bar (20-25-bytepos :3)
+	Setting bar (21-25-bytepos :2)
+	Setting bar (22-25-bytepos :1)
+	Setting bar (23-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (24-25-bytepos :7)
+	Setting space (0-8-bytepos :6)
+	Setting space (1-8-bytepos :5)
+	Setting space (2-8-bytepos :4)
+	Setting space (3-8-bytepos :3)
+	Setting space (4-8-bytepos :2)
+	Setting space (5-8-bytepos :1)
+	Setting space (6-8-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting space (7-8-bytepos :7)
+	Bar cycle ended, resetting counters and incrementing the wait space
+	Setting bar (0-25-bytepos :6)
+	Setting bar (1-25-bytepos :5)
+	Setting bar (2-25-bytepos :4)
+	Setting bar (3-25-bytepos :3)
+	Setting bar (4-25-bytepos :2)
+	Setting bar (5-25-bytepos :1)
+	Setting bar (6-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (7-25-bytepos :7)
+	Setting bar (8-25-bytepos :6)
+	Setting bar (9-25-bytepos :5)
+	Setting bar (10-25-bytepos :4)
+	Setting bar (11-25-bytepos :3)
+	Setting bar (12-25-bytepos :2)
+	Setting bar (13-25-bytepos :1)
+	Setting bar (14-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (15-25-bytepos :7)
+	Setting bar (16-25-bytepos :6)
+	Setting bar (17-25-bytepos :5)
+	Setting bar (18-25-bytepos :4)
+	Setting bar (19-25-bytepos :3)
+	Setting bar (20-25-bytepos :2)
+	Setting bar (21-25-bytepos :1)
+	Setting bar (22-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (23-25-bytepos :7)
+	Setting bar (24-25-bytepos :6)
+	Setting space (0-8-bytepos :5)
+	Setting space (1-8-bytepos :4)
+	Setting space (2-8-bytepos :3)
+	Setting space (3-8-bytepos :2)
+	Setting space (4-8-bytepos :1)
+	Setting space (5-8-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting space (6-8-bytepos :7)
+	Setting space (7-8-bytepos :6)
+	Bar cycle ended, resetting counters and incrementing the wait space
+	Setting bar (0-25-bytepos :5)
+	Setting bar (1-25-bytepos :4)
+	Setting bar (2-25-bytepos :3)
+	Setting bar (3-25-bytepos :2)
+	Setting bar (4-25-bytepos :1)
+	Setting bar (5-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (6-25-bytepos :7)
+	Setting bar (7-25-bytepos :6)
+	Setting bar (8-25-bytepos :5)
+	Setting bar (9-25-bytepos :4)
+	Setting bar (10-25-bytepos :3)
+	Setting bar (11-25-bytepos :2)
+	Setting bar (12-25-bytepos :1)
+	Setting bar (13-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (14-25-bytepos :7)
+	Setting bar (15-25-bytepos :6)
+	Setting bar (16-25-bytepos :5)
+	Setting bar (17-25-bytepos :4)
+	Setting bar (18-25-bytepos :3)
+	Setting bar (19-25-bytepos :2)
+	Setting bar (20-25-bytepos :1)
+	Setting bar (21-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (22-25-bytepos :7)
+	Setting bar (23-25-bytepos :6)
+	Setting bar (24-25-bytepos :5)
+	Setting space (0-8-bytepos :4)
+	Setting space (1-8-bytepos :3)
+	Setting space (2-8-bytepos :2)
+	Setting space (3-8-bytepos :1)
+	Setting space (4-8-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting space (5-8-bytepos :7)
+	Setting space (6-8-bytepos :6)
+	Setting space (7-8-bytepos :5)
+	Bar cycle ended, resetting counters and incrementing the wait space
+	Setting bar (0-25-bytepos :4)
+	Setting bar (1-25-bytepos :3)
+	Setting bar (2-25-bytepos :2)
+	Setting bar (3-25-bytepos :1)
+	Setting bar (4-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (5-25-bytepos :7)
+	Setting bar (6-25-bytepos :6)
+	Setting bar (7-25-bytepos :5)
+	Setting bar (8-25-bytepos :4)
+	Setting bar (9-25-bytepos :3)
+	Setting bar (10-25-bytepos :2)
+	Setting bar (11-25-bytepos :1)
+	Setting bar (12-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (13-25-bytepos :7)
+	Setting bar (14-25-bytepos :6)
+	Setting bar (15-25-bytepos :5)
+	Setting bar (16-25-bytepos :4)
+	Setting bar (17-25-bytepos :3)
+	Setting bar (18-25-bytepos :2)
+	Setting bar (19-25-bytepos :1)
+	Setting bar (20-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (21-25-bytepos :7)
+	Setting bar (22-25-bytepos :6)
+	Setting bar (23-25-bytepos :5)
+	Setting bar (24-25-bytepos :4)
+	Setting space (0-8-bytepos :3)
+	Setting space (1-8-bytepos :2)
+	Setting space (2-8-bytepos :1)
+	Setting space (3-8-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting space (4-8-bytepos :7)
+	Setting space (5-8-bytepos :6)
+	Setting space (6-8-bytepos :5)
+	Setting space (7-8-bytepos :4)
+	Bar cycle ended, resetting counters and incrementing the wait space
+	Setting bar (0-25-bytepos :3)
+	Setting bar (1-25-bytepos :2)
+	Setting bar (2-25-bytepos :1)
+	Setting bar (3-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (4-25-bytepos :7)
+	Setting bar (5-25-bytepos :6)
+	Setting bar (6-25-bytepos :5)
+	Setting bar (7-25-bytepos :4)
+	Setting bar (8-25-bytepos :3)
+	Setting bar (9-25-bytepos :2)
+	Setting bar (10-25-bytepos :1)
+	Setting bar (11-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (12-25-bytepos :7)
+	Setting bar (13-25-bytepos :6)
+	Setting bar (14-25-bytepos :5)
+	Setting bar (15-25-bytepos :4)
+	Setting bar (16-25-bytepos :3)
+	Setting bar (17-25-bytepos :2)
+	Setting bar (18-25-bytepos :1)
+	Setting bar (19-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (20-25-bytepos :7)
+	Setting bar (21-25-bytepos :6)
+	Setting bar (22-25-bytepos :5)
+	Setting bar (23-25-bytepos :4)
+	Setting bar (24-25-bytepos :3)
+	Setting space (0-8-bytepos :2)
+	Setting space (1-8-bytepos :1)
+	Setting space (2-8-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting space (3-8-bytepos :7)
+	Setting space (4-8-bytepos :6)
+	Setting space (5-8-bytepos :5)
+	Setting space (6-8-bytepos :4)
+	Setting space (7-8-bytepos :3)
+	Bar cycle ended, resetting counters and incrementing the wait space
+	Setting bar (0-25-bytepos :2)
+	Setting bar (1-25-bytepos :1)
+	Setting bar (2-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (3-25-bytepos :7)
+	Setting bar (4-25-bytepos :6)
+	Setting bar (5-25-bytepos :5)
+	Setting bar (6-25-bytepos :4)
+	Setting bar (7-25-bytepos :3)
+	Setting bar (8-25-bytepos :2)
+	Setting bar (9-25-bytepos :1)
+	Setting bar (10-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (11-25-bytepos :7)
+	Setting bar (12-25-bytepos :6)
+	Setting bar (13-25-bytepos :5)
+	Setting bar (14-25-bytepos :4)
+	Setting bar (15-25-bytepos :3)
+	Setting bar (16-25-bytepos :2)
+	Setting bar (17-25-bytepos :1)
+	Setting bar (18-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (19-25-bytepos :7)
+	Setting bar (20-25-bytepos :6)
+	Setting bar (21-25-bytepos :5)
+	Setting bar (22-25-bytepos :4)
+	Setting bar (23-25-bytepos :3)
+	Setting bar (24-25-bytepos :2)
+	Setting space (0-8-bytepos :1)
+	Setting space (1-8-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting space (2-8-bytepos :7)
+	Setting space (3-8-bytepos :6)
+	Setting space (4-8-bytepos :5)
+	Setting space (5-8-bytepos :4)
+	Setting space (6-8-bytepos :3)
+	Setting space (7-8-bytepos :2)
+	Bar cycle ended, resetting counters and incrementing the wait space
+	Setting bar (0-25-bytepos :1)
+	Setting bar (1-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (2-25-bytepos :7)
+	Setting bar (3-25-bytepos :6)
+	Setting bar (4-25-bytepos :5)
+	Setting bar (5-25-bytepos :4)
+	Setting bar (6-25-bytepos :3)
+	Setting bar (7-25-bytepos :2)
+	Setting bar (8-25-bytepos :1)
+	Setting bar (9-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (10-25-bytepos :7)
+	Setting bar (11-25-bytepos :6)
+	Setting bar (12-25-bytepos :5)
+	Setting bar (13-25-bytepos :4)
+	Setting bar (14-25-bytepos :3)
+	Setting bar (15-25-bytepos :2)
+	Setting bar (16-25-bytepos :1)
+	Setting bar (17-25-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Setting bar (18-25-bytepos :7)
+	Setting bar (19-25-bytepos :6)
+	Setting bar (20-25-bytepos :5)
+	Setting bar (21-25-bytepos :4)
+	Setting bar (22-25-bytepos :3)
+	Setting bar (23-25-bytepos :2)
+	Setting bar (24-25-bytepos :1)
+	Setting space (0-8-bytepos :0)
+	Byte ended!!! incrementing p_ubBitplane0Pointer
+	Block begin: viewLoad(pView: 0x22d39c)...OK, time: >7min
+Block end: stateChange(), time:  12.648 ms
+UpdateCamera2 input 1
+UpdateCamera2 shift  255
+Caso con fetch modificato a 30
+uwShiftPerspective: 255
+uwModPerspective: 6
+alessio: 0
+UpdateCamera2 input 2
+UpdateCamera2 shift  238
+Caso con fetch modificato a 30
+uwShiftPerspective: 238
+uwModPerspective: 6
+alessio: 0
+UpdateCamera2 input 3
+UpdateCamera2 shift  221
+Caso con fetch modificato a 30
+uwShiftPerspective: 221
+uwModPerspective: 6
+alessio: 0
+UpdateCamera2 input 4
+UpdateCamera2 shift  204
+Caso con fetch modificato a 30
+uwShiftPerspective: 204
+uwModPerspective: 6
+alessio: 0
+UpdateCamera2 input 5
+UpdateCamera2 shift  187
+Caso con fetch modificato a 30
+uwShiftPerspective: 187
+uwModPerspective: 6
+alessio: 0
+UpdateCamera2 input 6
+UpdateCamera2 shift  170
+Caso con fetch modificato a 30
+uwShiftPerspective: 170
+uwModPerspective: 6
+alessio: 0
+UpdateCamera2 input 7
+UpdateCamera2 shift  153
+Caso con fetch modificato a 30
+uwShiftPerspective: 153
+uwModPerspective: 6
+alessio: 0
+UpdateCamera2 input 8
+UpdateCamera2 shift  136
+Caso con fetch modificato a 30
+uwShiftPerspective: 136
+uwModPerspective: 6
+alessio: 0
+UpdateCamera2 input 9
+UpdateCamera2 shift  119
+Caso con fetch modificato a 30
+uwShiftPerspective: 119
+uwModPerspective: 6
+alessio: 0
+UpdateCamera2 input 10
+UpdateCamera2 shift  102
+Caso con fetch modificato a 30
+uwShiftPerspective: 102
+uwModPerspective: 6
+alessio: 0
+UpdateCamera2 input 11
+UpdateCamera2 shift  85
+Caso con fetch modificato a 30
+uwShiftPerspective: 85
+uwModPerspective: 6
+alessio: 0
+UpdateCamera2 input 12
+UpdateCamera2 shift  68
+Caso con fetch modificato a 30
+uwShiftPerspective: 68
+uwModPerspective: 6
+alessio: 0
+UpdateCamera2 input 13
+UpdateCamera2 shift  51
+Caso con fetch modificato a 30
+uwShiftPerspective: 51
+uwModPerspective: 6
+alessio: 0
+UpdateCamera2 input 14
+UpdateCamera2 shift  34
+Caso con fetch modificato a 30
+uwShiftPerspective: 34
+uwModPerspective: 6
+alessio: 0
+UpdateCamera2 input 15
+UpdateCamera2 shift  17
+Caso con fetch modificato a 30
+uwShiftPerspective: 17
+uwModPerspective: 6
+alessio: 0
+UpdateCamera2 input 16
+UpdateCamera2 shift  0
+Caso con fetch modificato a 30
+uwShiftPerspective: 0
+uwModPerspective: 6
+alessio: 1
+UpdateCamera2 input 17
+UpdateCamera2 shift  255
+Aggiungo 2
+Caso con fetch modificato a 30
+uwShiftPerspective: 238
+uwModPerspective: 6
+alessio: 1
+Block begin: stateManagerDestroy(pStateManager: 0x22c134)
+	Block begin: statePopAll(pStateManager: 0x22c134)
+		Block begin: viewDestroy(pView: 0x22d39c)
+			Block begin: viewLoad(pView: 0)...OK, time:  10.636 ms
+			Block begin: vPortDestroy(pVPort: 0x22d774)
+				Parent extView: 0x22d39c
+				found VP: 0x22d774... gotcha!
+				Block begin: Destroying managers
+					Destroying manager 128 @addr: 0x22d82c
+					cameraManagerDestroy...OK! 
+					Destroying manager 0 @addr: 0x22d7d4
+					Block begin: simpleBufferTestDestroy()
+						Block begin: bitmapDestroy(pBitMap: 0x22d554)...OK, time:  10.920 ms
+					Block end: simpleBufferTestDestroy(), time: >7min
+				Block end: Destroying managers, time: 951.2 us
+			Block end: vPortDestroy(), time: >7min
+			Freeing copperlists...
+			Block begin: copListDestroy(pCopList: 0x22d42c)...OK, time: >7min
+		Block end: viewDestroy(), time:  14.164 ms
+	Block end: statePopAll(), time: >7min
+Block end: stateManagerDestroy(), time:   4.086 ms
+Block begin: stateDestroy(pState: 0x22d36c)...OK, time:   2.386 ms
+Block begin: keyDestroy()...OK, time:  54.0 us
+Goodbye, Amiga!
+Block begin: copDestroy()
+	Block begin: copListDestroy(pCopList: 0x22be94)...OK, time: >7min
+Block end: copDestroy(), time: >7min
+Block begin: blitManagerDestroy...OK, time:  59.2 us
+Log closed successfully
