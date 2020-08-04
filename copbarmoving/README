@@ -1,0 +1,35 @@
+The goal of this demo is to move a copperbar with only one cpu instruction.
+
+Usually to create a copperbar we must write a copperlist where we tell the copper to wait for a specific Y position and set color 0 then wait for the next row and draw another color (usually a similar color to get a nice hue) and so on.
+To move the bar up and down the screen we must update each wait instruction adding or subtracting an offset, so for example if we have 100 waits (very big copperbar) we must change Y wait position for each frame (100 cpu instructions).
+But maybe there is a better way, why dont we just wait the first row (let's call it the master raw) and write a copperlist that waits the end of the line no matter what y position is the master raw?
+Thisk could be achieved by masking y positions in our copwait instructions.
+As you know, in the second work of the copper instruction, bit 14-8 there are some vertical position compare bits.
+In other words, with this bits you can MASK the vertical position and compare only X positions.
+This will lead us to this
+
+
+// wait for master row
+copSetWait(&pCopCmds[ubCopIndex++].sWait, 0x07, 0x34);
+copSetMove(&pCopCmds[ubCopIndex++].sMove, &g_pCustom->color[0], 0x0300);
+  
+// wait for master raw ending
+copSetWaitX(&pCopCmds[ubCopIndex++].sWait, 0xE1);
+  
+// wait for next raw beginning
+copSetWaitX(&pCopCmds[ubCopIndex++].sWait, 0x07);
+  
+//set another color
+copSetMove(&pCopCmds[ubCopIndex++].sMove, &g_pCustom->color[0], 0x0900);
+
+So, in order to move our bar we must just annotate ubCopIndex on the first wait (so we know where the master wait instruction is) and change the vertical wait.
+The following waits will follow the master because their waits are relative to the master.
+
+This is awesome!! right? 
+MMMMh actually it's not so awesome because this trick only works with y positions less than 127.
+The reason for this is the number of the compare vertical position inside the copper instruction.
+As i told you before these bits are stored on position 14-8, that means we only can mask 7 bits for the vertical position, the most significant bit cant be masked.
+Since numbers greater than 127 needs the 8th bit set and because we cant mask it, if you move the bar after 127 you will see that the slave waits wont wait next line because their value will be greater or equal vhpos.
+
+Use this trick only for moving at the top of the screen, for now I cant find a way to make it work after 127.
+That's all for now.
