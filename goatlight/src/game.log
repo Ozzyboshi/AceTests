@@ -1,1513 +1,1782 @@
-Block begin: blitManagerCreate...OK, time:  60.0 us
+Block begin: blitManagerCreate...OK, time:  86.8 us
 Block begin: copCreate()
 	Block begin: copListCreate()
-		Addr: 0x22be94
+		Addr: 0x225a0c
 		BLOCK mode
 	Block end: copListCreate(), time: >7min
-Block end: copCreate(), time:   3.913 ms
+Block end: copCreate(), time: >7min
 Hello, Amiga!
 Block begin: keyCreate()...OK, time:  53.6 us
-Block begin: stateManagerCreate()...OK, time:   2.509 ms
-Block begin: stateCreate(cbCreate: 0x272fe8, cbLoop: 0x27381c, cbDestroy: 0x2739de, cbSuspend: 0, cbResume: 0, pPrev: 0)...OK, time: >7min
-Block begin: stateChange(pStateManager: 0x22c134, pState: 0x22d36c)
+Block begin: stateManagerCreate()...OK, time: >7min
+Block begin: stateCreate(cbCreate: 0x273098, cbLoop: 0x273482, cbDestroy: 0x273644, cbSuspend: 0, cbResume: 0, pPrev: 0)...OK, time:   2.648 ms
+Block begin: stateChange(pStateManager: 0x225eec, pState: 0x226154)
 	Block begin: viewCreate(pTags: 0)
-		addr: 0x22d39c
+		addr: 0x226174
 		Block begin: copListCreate()
-			Addr: 0x22d42c
-			RAW mode, size: 39 + WAIT(0xFFFF)
-		Block end: copListCreate(), time:   3.508 ms
+			Addr: 0x22618c
+			RAW mode, size: 108 + WAIT(0xFFFF)
+		Block end: copListCreate(), time:   1.400 ms
 		Global CLUT mode enabled
-	Block end: viewCreate(), time:   3.342 ms
+	Block end: viewCreate(), time: >7min
 	Block begin: vPortCreate(pTagList: 0)
-		Addr: 0x22d774
-		Parent view: 0x22d39c
+		Addr: 0x22638c
+		Parent view: 0x226174
 		Offsets: 0x0
 		Dimensions: 320x256@3
 		No prev VPorts - added to head
-	Block end: vPortCreate(), time:  17.136 ms
+	Block end: vPortCreate(), time: >7min
 	Block begin: simpleBufferTestCreate(pTags: 0, ...)
-		Addr: 0x22d7d4
-		Parent VPort: 0x22d774
+		Addr: 0x2263ec
+		Parent VPort: 0x22638c
 		Bounds: 384x256
 		Block begin: bitmapCreate(uwWidth: 384, uwHeight: 256, ubDepth: 3, ubFlags: 1)
-			addr: 0x22d554
-		Block end: bitmapCreate(), time: >7min
-		Block begin: cameraCreate(pVPort: 0x22d774, uwPosX: 0, uwPosY: 0, uwMaxX: 384, uwMaxY: 256, isDblBfr: 0)
-			Addr: 0x22d82c
+			addr: 0x226434
+		Block end: bitmapCreate(), time: 171.6 us
+		Block begin: cameraCreate(pVPort: 0x22638c, uwPosX: 0, uwPosY: 0, uwMaxX: 384, uwMaxY: 256, isDblBfr: 0)
+			Addr: 0x2264a4
 			Resetting camera bounds...
-			Block begin: cameraReset(pManager: 0x22d82c, uwStartX: 0, uwStartY: 0, uwWidth: 384, uwHeight: 256, isDblBfr: 0)
+			Block begin: cameraReset(pManager: 0x2264a4, uwStartX: 0, uwStartY: 0, uwWidth: 384, uwHeight: 256, isDblBfr: 0)
 				Camera max coord: 64,0
-			Block end: cameraReset(), time:   4.696 ms
+			Block end: cameraReset(), time:   4.610 ms
 			Attaching camera to VPort...
-			Manager 0x22d82c attached to head of VP 0x22d774
+			Manager 0x2264a4 attached to head of VP 0x22638c
 		Block end: cameraCreate(), time: >7min
 		Copperlist offset: 0
-		Block begin: simpleBufferTestSetFront(pManager: 0x22d7d4, pFront: 0x22d554, isScrollX: 0)
+		Block begin: simpleBufferTestSetFront(pManager: 0x2263ec, pFront: 0x226434, isScrollX: 0)
 			Modulo: 8
-			Setting copperlist 0x22d464 at offs 0
-		Block end: simplebufferTestSetFront(), time: >7min
-		Manager 0x22d7d4 attached after manager 0x22d82c of VP 0x22d774
-	Block end: simpleBufferTestCreate(), time:   8.198 ms
-	Setting space (0-8-bytepos :0)
-	Setting space (1-8-bytepos :1)
-	Setting space (2-8-bytepos :2)
-	Setting space (3-8-bytepos :3)
-	Setting space (4-8-bytepos :4)
-	Setting space (5-8-bytepos :5)
-	Setting space (6-8-bytepos :6)
-	Setting space (7-8-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Setting bar (0-25-bytepos :0)
-	Setting bar (1-25-bytepos :1)
-	Setting bar (2-25-bytepos :2)
-	Setting bar (3-25-bytepos :3)
-	Setting bar (4-25-bytepos :4)
-	Setting bar (5-25-bytepos :5)
-	Setting bar (6-25-bytepos :6)
-	Setting bar (7-25-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Setting bar (8-25-bytepos :0)
-	Setting bar (9-25-bytepos :1)
-	Setting bar (10-25-bytepos :2)
-	Setting bar (11-25-bytepos :3)
-	Setting bar (12-25-bytepos :4)
-	Setting bar (13-25-bytepos :5)
-	Setting bar (14-25-bytepos :6)
-	Setting bar (15-25-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Setting bar (16-25-bytepos :0)
-	Setting bar (17-25-bytepos :1)
-	Setting bar (18-25-bytepos :2)
-	Setting bar (19-25-bytepos :3)
-	Setting bar (20-25-bytepos :4)
-	Setting bar (21-25-bytepos :5)
-	Setting bar (22-25-bytepos :6)
-	Setting bar (23-25-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Setting bar (24-25-bytepos :0)
-	Bar cycle ended, resetting counters and incrementing the wait space
-	Setting space (0-8-bytepos :1)
-	Setting space (1-8-bytepos :2)
-	Setting space (2-8-bytepos :3)
-	Setting space (3-8-bytepos :4)
-	Setting space (4-8-bytepos :5)
-	Setting space (5-8-bytepos :6)
-	Setting space (6-8-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Setting space (7-8-bytepos :0)
-	Setting bar (0-25-bytepos :1)
-	Setting bar (1-25-bytepos :2)
-	Setting bar (2-25-bytepos :3)
-	Setting bar (3-25-bytepos :4)
-	Setting bar (4-25-bytepos :5)
-	Setting bar (5-25-bytepos :6)
-	Setting bar (6-25-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Setting bar (7-25-bytepos :0)
-	Setting bar (8-25-bytepos :1)
-	Setting bar (9-25-bytepos :2)
-	Setting bar (10-25-bytepos :3)
-	Setting bar (11-25-bytepos :4)
-	Setting bar (12-25-bytepos :5)
-	Setting bar (13-25-bytepos :6)
-	Setting bar (14-25-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Setting bar (15-25-bytepos :0)
-	Setting bar (16-25-bytepos :1)
-	Setting bar (17-25-bytepos :2)
-	Setting bar (18-25-bytepos :3)
-	Setting bar (19-25-bytepos :4)
-	Setting bar (20-25-bytepos :5)
-	Setting bar (21-25-bytepos :6)
-	Setting bar (22-25-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Setting bar (23-25-bytepos :0)
-	Setting bar (24-25-bytepos :1)
-	Bar cycle ended, resetting counters and incrementing the wait space
-	Setting space (0-8-bytepos :2)
-	Setting space (1-8-bytepos :3)
-	Setting space (2-8-bytepos :4)
-	Setting space (3-8-bytepos :5)
-	Setting space (4-8-bytepos :6)
-	Setting space (5-8-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Setting space (6-8-bytepos :0)
-	Setting space (7-8-bytepos :1)
-	Setting bar (0-25-bytepos :2)
-	Setting bar (1-25-bytepos :3)
-	Setting bar (2-25-bytepos :4)
-	Setting bar (3-25-bytepos :5)
-	Setting bar (4-25-bytepos :6)
-	Setting bar (5-25-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Setting bar (6-25-bytepos :0)
-	Setting bar (7-25-bytepos :1)
-	Setting bar (8-25-bytepos :2)
-	Setting bar (9-25-bytepos :3)
-	Setting bar (10-25-bytepos :4)
-	Setting bar (11-25-bytepos :5)
-	Setting bar (12-25-bytepos :6)
-	Setting bar (13-25-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Setting bar (14-25-bytepos :0)
-	Setting bar (15-25-bytepos :1)
-	Setting bar (16-25-bytepos :2)
-	Setting bar (17-25-bytepos :3)
-	Setting bar (18-25-bytepos :4)
-	Setting bar (19-25-bytepos :5)
-	Setting bar (20-25-bytepos :6)
-	Setting bar (21-25-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Setting bar (22-25-bytepos :0)
-	Setting bar (23-25-bytepos :1)
-	Setting bar (24-25-bytepos :2)
-	Bar cycle ended, resetting counters and incrementing the wait space
-	Setting space (0-8-bytepos :3)
-	Setting space (1-8-bytepos :4)
-	Setting space (2-8-bytepos :5)
-	Setting space (3-8-bytepos :6)
-	Setting space (4-8-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Setting space (5-8-bytepos :0)
-	Setting space (6-8-bytepos :1)
-	Setting space (7-8-bytepos :2)
-	Setting bar (0-25-bytepos :3)
-	Setting bar (1-25-bytepos :4)
-	Setting bar (2-25-bytepos :5)
-	Setting bar (3-25-bytepos :6)
-	Setting bar (4-25-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Setting bar (5-25-bytepos :0)
-	Setting bar (6-25-bytepos :1)
-	Setting bar (7-25-bytepos :2)
-	Setting bar (8-25-bytepos :3)
-	Setting bar (9-25-bytepos :4)
-	Setting bar (10-25-bytepos :5)
-	Setting bar (11-25-bytepos :6)
-	Setting bar (12-25-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Setting bar (13-25-bytepos :0)
-	Setting bar (14-25-bytepos :1)
-	Setting bar (15-25-bytepos :2)
-	Setting bar (16-25-bytepos :3)
-	Setting bar (17-25-bytepos :4)
-	Setting bar (18-25-bytepos :5)
-	Setting bar (19-25-bytepos :6)
-	Setting bar (20-25-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Setting bar (21-25-bytepos :0)
-	Setting bar (22-25-bytepos :1)
-	Setting bar (23-25-bytepos :2)
-	Setting bar (24-25-bytepos :3)
-	Bar cycle ended, resetting counters and incrementing the wait space
-	Setting space (0-8-bytepos :4)
-	Setting space (1-8-bytepos :5)
-	Setting space (2-8-bytepos :6)
-	Setting space (3-8-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Setting space (4-8-bytepos :0)
-	Setting space (5-8-bytepos :1)
-	Setting space (6-8-bytepos :2)
-	Setting space (7-8-bytepos :3)
-	Setting bar (0-25-bytepos :4)
-	Setting bar (1-25-bytepos :5)
-	Setting bar (2-25-bytepos :6)
-	Setting bar (3-25-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Setting bar (4-25-bytepos :0)
-	Setting bar (5-25-bytepos :1)
-	Setting bar (6-25-bytepos :2)
-	Setting bar (7-25-bytepos :3)
-	Setting bar (8-25-bytepos :4)
-	Setting bar (9-25-bytepos :5)
-	Setting bar (10-25-bytepos :6)
-	Setting bar (11-25-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Setting bar (12-25-bytepos :0)
-	Setting bar (13-25-bytepos :1)
-	Setting bar (14-25-bytepos :2)
-	Setting bar (15-25-bytepos :3)
-	Setting bar (16-25-bytepos :4)
-	Setting bar (17-25-bytepos :5)
-	Setting bar (18-25-bytepos :6)
-	Setting bar (19-25-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Start right side... repositioning
-	Setting bar (0-25-bytepos :7)
-	Setting bar (1-25-bytepos :6)
-	Setting bar (2-25-bytepos :5)
-	Setting bar (3-25-bytepos :4)
-	Setting bar (4-25-bytepos :3)
-	Setting bar (5-25-bytepos :2)
-	Setting bar (6-25-bytepos :1)
-	Setting bar (7-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (8-25-bytepos :7)
-	Setting bar (9-25-bytepos :6)
-	Setting bar (10-25-bytepos :5)
-	Setting bar (11-25-bytepos :4)
-	Setting bar (12-25-bytepos :3)
-	Setting bar (13-25-bytepos :2)
-	Setting bar (14-25-bytepos :1)
-	Setting bar (15-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (16-25-bytepos :7)
-	Setting bar (17-25-bytepos :6)
-	Setting bar (18-25-bytepos :5)
-	Setting bar (19-25-bytepos :4)
-	Setting bar (20-25-bytepos :3)
-	Setting bar (21-25-bytepos :2)
-	Setting bar (22-25-bytepos :1)
-	Setting bar (23-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (24-25-bytepos :7)
-	Setting space (0-8-bytepos :6)
-	Setting space (1-8-bytepos :5)
-	Setting space (2-8-bytepos :4)
-	Setting space (3-8-bytepos :3)
-	Setting space (4-8-bytepos :2)
-	Setting space (5-8-bytepos :1)
-	Setting space (6-8-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting space (7-8-bytepos :7)
-	Bar cycle ended, resetting counters and incrementing the wait space
-	Setting bar (0-25-bytepos :6)
-	Setting bar (1-25-bytepos :5)
-	Setting bar (2-25-bytepos :4)
-	Setting bar (3-25-bytepos :3)
-	Setting bar (4-25-bytepos :2)
-	Setting bar (5-25-bytepos :1)
-	Setting bar (6-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (7-25-bytepos :7)
-	Setting bar (8-25-bytepos :6)
-	Setting bar (9-25-bytepos :5)
-	Setting bar (10-25-bytepos :4)
-	Setting bar (11-25-bytepos :3)
-	Setting bar (12-25-bytepos :2)
-	Setting bar (13-25-bytepos :1)
-	Setting bar (14-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (15-25-bytepos :7)
-	Setting bar (16-25-bytepos :6)
-	Setting bar (17-25-bytepos :5)
-	Setting bar (18-25-bytepos :4)
-	Setting bar (19-25-bytepos :3)
-	Setting bar (20-25-bytepos :2)
-	Setting bar (21-25-bytepos :1)
-	Setting bar (22-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (23-25-bytepos :7)
-	Setting bar (24-25-bytepos :6)
-	Setting space (0-8-bytepos :5)
-	Setting space (1-8-bytepos :4)
-	Setting space (2-8-bytepos :3)
-	Setting space (3-8-bytepos :2)
-	Setting space (4-8-bytepos :1)
-	Setting space (5-8-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting space (6-8-bytepos :7)
-	Setting space (7-8-bytepos :6)
-	Bar cycle ended, resetting counters and incrementing the wait space
-	Setting bar (0-25-bytepos :5)
-	Setting bar (1-25-bytepos :4)
-	Setting bar (2-25-bytepos :3)
-	Setting bar (3-25-bytepos :2)
-	Setting bar (4-25-bytepos :1)
-	Setting bar (5-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (6-25-bytepos :7)
-	Setting bar (7-25-bytepos :6)
-	Setting bar (8-25-bytepos :5)
-	Setting bar (9-25-bytepos :4)
-	Setting bar (10-25-bytepos :3)
-	Setting bar (11-25-bytepos :2)
-	Setting bar (12-25-bytepos :1)
-	Setting bar (13-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (14-25-bytepos :7)
-	Setting bar (15-25-bytepos :6)
-	Setting bar (16-25-bytepos :5)
-	Setting bar (17-25-bytepos :4)
-	Setting bar (18-25-bytepos :3)
-	Setting bar (19-25-bytepos :2)
-	Setting bar (20-25-bytepos :1)
-	Setting bar (21-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (22-25-bytepos :7)
-	Setting bar (23-25-bytepos :6)
-	Setting bar (24-25-bytepos :5)
-	Setting space (0-8-bytepos :4)
-	Setting space (1-8-bytepos :3)
-	Setting space (2-8-bytepos :2)
-	Setting space (3-8-bytepos :1)
-	Setting space (4-8-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting space (5-8-bytepos :7)
-	Setting space (6-8-bytepos :6)
-	Setting space (7-8-bytepos :5)
-	Bar cycle ended, resetting counters and incrementing the wait space
-	Setting bar (0-25-bytepos :4)
-	Setting bar (1-25-bytepos :3)
-	Setting bar (2-25-bytepos :2)
-	Setting bar (3-25-bytepos :1)
-	Setting bar (4-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (5-25-bytepos :7)
-	Setting bar (6-25-bytepos :6)
-	Setting bar (7-25-bytepos :5)
-	Setting bar (8-25-bytepos :4)
-	Setting bar (9-25-bytepos :3)
-	Setting bar (10-25-bytepos :2)
-	Setting bar (11-25-bytepos :1)
-	Setting bar (12-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (13-25-bytepos :7)
-	Setting bar (14-25-bytepos :6)
-	Setting bar (15-25-bytepos :5)
-	Setting bar (16-25-bytepos :4)
-	Setting bar (17-25-bytepos :3)
-	Setting bar (18-25-bytepos :2)
-	Setting bar (19-25-bytepos :1)
-	Setting bar (20-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (21-25-bytepos :7)
-	Setting bar (22-25-bytepos :6)
-	Setting bar (23-25-bytepos :5)
-	Setting bar (24-25-bytepos :4)
-	Setting space (0-8-bytepos :3)
-	Setting space (1-8-bytepos :2)
-	Setting space (2-8-bytepos :1)
-	Setting space (3-8-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting space (4-8-bytepos :7)
-	Setting space (5-8-bytepos :6)
-	Setting space (6-8-bytepos :5)
-	Setting space (7-8-bytepos :4)
-	Bar cycle ended, resetting counters and incrementing the wait space
-	Setting bar (0-25-bytepos :3)
-	Setting bar (1-25-bytepos :2)
-	Setting bar (2-25-bytepos :1)
-	Setting bar (3-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (4-25-bytepos :7)
-	Setting bar (5-25-bytepos :6)
-	Setting bar (6-25-bytepos :5)
-	Setting bar (7-25-bytepos :4)
-	Setting bar (8-25-bytepos :3)
-	Setting bar (9-25-bytepos :2)
-	Setting bar (10-25-bytepos :1)
-	Setting bar (11-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (12-25-bytepos :7)
-	Setting bar (13-25-bytepos :6)
-	Setting bar (14-25-bytepos :5)
-	Setting bar (15-25-bytepos :4)
-	Setting bar (16-25-bytepos :3)
-	Setting bar (17-25-bytepos :2)
-	Setting bar (18-25-bytepos :1)
-	Setting bar (19-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (20-25-bytepos :7)
-	Setting bar (21-25-bytepos :6)
-	Setting bar (22-25-bytepos :5)
-	Setting bar (23-25-bytepos :4)
-	Setting bar (24-25-bytepos :3)
-	Setting space (0-8-bytepos :2)
-	Setting space (1-8-bytepos :1)
-	Setting space (2-8-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting space (3-8-bytepos :7)
-	Setting space (4-8-bytepos :6)
-	Setting space (5-8-bytepos :5)
-	Setting space (6-8-bytepos :4)
-	Setting space (7-8-bytepos :3)
-	Bar cycle ended, resetting counters and incrementing the wait space
-	Setting bar (0-25-bytepos :2)
-	Setting bar (1-25-bytepos :1)
-	Setting bar (2-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (3-25-bytepos :7)
-	Setting bar (4-25-bytepos :6)
-	Setting bar (5-25-bytepos :5)
-	Setting bar (6-25-bytepos :4)
-	Setting bar (7-25-bytepos :3)
-	Setting bar (8-25-bytepos :2)
-	Setting bar (9-25-bytepos :1)
-	Setting bar (10-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (11-25-bytepos :7)
-	Setting bar (12-25-bytepos :6)
-	Setting bar (13-25-bytepos :5)
-	Setting bar (14-25-bytepos :4)
-	Setting bar (15-25-bytepos :3)
-	Setting bar (16-25-bytepos :2)
-	Setting bar (17-25-bytepos :1)
-	Setting bar (18-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (19-25-bytepos :7)
-	Setting bar (20-25-bytepos :6)
-	Setting bar (21-25-bytepos :5)
-	Setting bar (22-25-bytepos :4)
-	Setting bar (23-25-bytepos :3)
-	Setting bar (24-25-bytepos :2)
-	Setting space (0-8-bytepos :1)
-	Setting space (1-8-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting space (2-8-bytepos :7)
-	Setting space (3-8-bytepos :6)
-	Setting space (4-8-bytepos :5)
-	Setting space (5-8-bytepos :4)
-	Setting space (6-8-bytepos :3)
-	Setting space (7-8-bytepos :2)
-	Bar cycle ended, resetting counters and incrementing the wait space
-	Setting bar (0-25-bytepos :1)
-	Setting bar (1-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (2-25-bytepos :7)
-	Setting bar (3-25-bytepos :6)
-	Setting bar (4-25-bytepos :5)
-	Setting bar (5-25-bytepos :4)
-	Setting bar (6-25-bytepos :3)
-	Setting bar (7-25-bytepos :2)
-	Setting bar (8-25-bytepos :1)
-	Setting bar (9-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (10-25-bytepos :7)
-	Setting bar (11-25-bytepos :6)
-	Setting bar (12-25-bytepos :5)
-	Setting bar (13-25-bytepos :4)
-	Setting bar (14-25-bytepos :3)
-	Setting bar (15-25-bytepos :2)
-	Setting bar (16-25-bytepos :1)
-	Setting bar (17-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (18-25-bytepos :7)
-	Setting bar (19-25-bytepos :6)
-	Setting bar (20-25-bytepos :5)
-	Setting bar (21-25-bytepos :4)
-	Setting bar (22-25-bytepos :3)
-	Setting bar (23-25-bytepos :2)
-	Setting bar (24-25-bytepos :1)
-	Setting space (0-8-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting space (0-8-bytepos :0)
-	Setting space (1-8-bytepos :1)
-	Setting space (2-8-bytepos :2)
-	Setting space (3-8-bytepos :3)
-	Setting space (4-8-bytepos :4)
-	Setting space (5-8-bytepos :5)
-	Setting space (6-8-bytepos :6)
-	Setting space (7-8-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Setting bar (0-25-bytepos :0)
-	Setting bar (1-25-bytepos :1)
-	Setting bar (2-25-bytepos :2)
-	Setting bar (3-25-bytepos :3)
-	Setting bar (4-25-bytepos :4)
-	Setting bar (5-25-bytepos :5)
-	Setting bar (6-25-bytepos :6)
-	Setting bar (7-25-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Setting bar (8-25-bytepos :0)
-	Setting bar (9-25-bytepos :1)
-	Setting bar (10-25-bytepos :2)
-	Setting bar (11-25-bytepos :3)
-	Setting bar (12-25-bytepos :4)
-	Setting bar (13-25-bytepos :5)
-	Setting bar (14-25-bytepos :6)
-	Setting bar (15-25-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Setting bar (16-25-bytepos :0)
-	Setting bar (17-25-bytepos :1)
-	Setting bar (18-25-bytepos :2)
-	Setting bar (19-25-bytepos :3)
-	Setting bar (20-25-bytepos :4)
-	Setting bar (21-25-bytepos :5)
-	Setting bar (22-25-bytepos :6)
-	Setting bar (23-25-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Setting bar (24-25-bytepos :0)
-	Bar cycle ended, resetting counters and incrementing the wait space
-	Setting space (0-8-bytepos :1)
-	Setting space (1-8-bytepos :2)
-	Setting space (2-8-bytepos :3)
-	Setting space (3-8-bytepos :4)
-	Setting space (4-8-bytepos :5)
-	Setting space (5-8-bytepos :6)
-	Setting space (6-8-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Setting space (7-8-bytepos :0)
-	Setting bar (0-25-bytepos :1)
-	Setting bar (1-25-bytepos :2)
-	Setting bar (2-25-bytepos :3)
-	Setting bar (3-25-bytepos :4)
-	Setting bar (4-25-bytepos :5)
-	Setting bar (5-25-bytepos :6)
-	Setting bar (6-25-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Setting bar (7-25-bytepos :0)
-	Setting bar (8-25-bytepos :1)
-	Setting bar (9-25-bytepos :2)
-	Setting bar (10-25-bytepos :3)
-	Setting bar (11-25-bytepos :4)
-	Setting bar (12-25-bytepos :5)
-	Setting bar (13-25-bytepos :6)
-	Setting bar (14-25-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Setting bar (15-25-bytepos :0)
-	Setting bar (16-25-bytepos :1)
-	Setting bar (17-25-bytepos :2)
-	Setting bar (18-25-bytepos :3)
-	Setting bar (19-25-bytepos :4)
-	Setting bar (20-25-bytepos :5)
-	Setting bar (21-25-bytepos :6)
-	Setting bar (22-25-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Setting bar (23-25-bytepos :0)
-	Setting bar (24-25-bytepos :1)
-	Bar cycle ended, resetting counters and incrementing the wait space
-	Setting space (0-8-bytepos :2)
-	Setting space (1-8-bytepos :3)
-	Setting space (2-8-bytepos :4)
-	Setting space (3-8-bytepos :5)
-	Setting space (4-8-bytepos :6)
-	Setting space (5-8-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Setting space (6-8-bytepos :0)
-	Setting space (7-8-bytepos :1)
-	Setting bar (0-25-bytepos :2)
-	Setting bar (1-25-bytepos :3)
-	Setting bar (2-25-bytepos :4)
-	Setting bar (3-25-bytepos :5)
-	Setting bar (4-25-bytepos :6)
-	Setting bar (5-25-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Setting bar (6-25-bytepos :0)
-	Setting bar (7-25-bytepos :1)
-	Setting bar (8-25-bytepos :2)
-	Setting bar (9-25-bytepos :3)
-	Setting bar (10-25-bytepos :4)
-	Setting bar (11-25-bytepos :5)
-	Setting bar (12-25-bytepos :6)
-	Setting bar (13-25-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Setting bar (14-25-bytepos :0)
-	Setting bar (15-25-bytepos :1)
-	Setting bar (16-25-bytepos :2)
-	Setting bar (17-25-bytepos :3)
-	Setting bar (18-25-bytepos :4)
-	Setting bar (19-25-bytepos :5)
-	Setting bar (20-25-bytepos :6)
-	Setting bar (21-25-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Setting bar (22-25-bytepos :0)
-	Setting bar (23-25-bytepos :1)
-	Setting bar (24-25-bytepos :2)
-	Bar cycle ended, resetting counters and incrementing the wait space
-	Setting space (0-8-bytepos :3)
-	Setting space (1-8-bytepos :4)
-	Setting space (2-8-bytepos :5)
-	Setting space (3-8-bytepos :6)
-	Setting space (4-8-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Setting space (5-8-bytepos :0)
-	Setting space (6-8-bytepos :1)
-	Setting space (7-8-bytepos :2)
-	Setting bar (0-25-bytepos :3)
-	Setting bar (1-25-bytepos :4)
-	Setting bar (2-25-bytepos :5)
-	Setting bar (3-25-bytepos :6)
-	Setting bar (4-25-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Setting bar (5-25-bytepos :0)
-	Setting bar (6-25-bytepos :1)
-	Setting bar (7-25-bytepos :2)
-	Setting bar (8-25-bytepos :3)
-	Setting bar (9-25-bytepos :4)
-	Setting bar (10-25-bytepos :5)
-	Setting bar (11-25-bytepos :6)
-	Setting bar (12-25-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Setting bar (13-25-bytepos :0)
-	Setting bar (14-25-bytepos :1)
-	Setting bar (15-25-bytepos :2)
-	Setting bar (16-25-bytepos :3)
-	Setting bar (17-25-bytepos :4)
-	Setting bar (18-25-bytepos :5)
-	Setting bar (19-25-bytepos :6)
-	Setting bar (20-25-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Setting bar (21-25-bytepos :0)
-	Setting bar (22-25-bytepos :1)
-	Setting bar (23-25-bytepos :2)
-	Setting bar (24-25-bytepos :3)
-	Bar cycle ended, resetting counters and incrementing the wait space
-	Setting space (0-8-bytepos :4)
-	Setting space (1-8-bytepos :5)
-	Setting space (2-8-bytepos :6)
-	Setting space (3-8-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Setting space (4-8-bytepos :0)
-	Setting space (5-8-bytepos :1)
-	Setting space (6-8-bytepos :2)
-	Setting space (7-8-bytepos :3)
-	Setting bar (0-25-bytepos :4)
-	Setting bar (1-25-bytepos :5)
-	Setting bar (2-25-bytepos :6)
-	Setting bar (3-25-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Setting bar (4-25-bytepos :0)
-	Setting bar (5-25-bytepos :1)
-	Setting bar (6-25-bytepos :2)
-	Setting bar (7-25-bytepos :3)
-	Setting bar (8-25-bytepos :4)
-	Setting bar (9-25-bytepos :5)
-	Setting bar (10-25-bytepos :6)
-	Setting bar (11-25-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Setting bar (12-25-bytepos :0)
-	Setting bar (13-25-bytepos :1)
-	Setting bar (14-25-bytepos :2)
-	Setting bar (15-25-bytepos :3)
-	Setting bar (16-25-bytepos :4)
-	Setting bar (17-25-bytepos :5)
-	Setting bar (18-25-bytepos :6)
-	Setting bar (19-25-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Start right side... repositioning
-	Setting bar (0-25-bytepos :7)
-	Setting bar (1-25-bytepos :6)
-	Setting bar (2-25-bytepos :5)
-	Setting bar (3-25-bytepos :4)
-	Setting bar (4-25-bytepos :3)
-	Setting bar (5-25-bytepos :2)
-	Setting bar (6-25-bytepos :1)
-	Setting bar (7-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (8-25-bytepos :7)
-	Setting bar (9-25-bytepos :6)
-	Setting bar (10-25-bytepos :5)
-	Setting bar (11-25-bytepos :4)
-	Setting bar (12-25-bytepos :3)
-	Setting bar (13-25-bytepos :2)
-	Setting bar (14-25-bytepos :1)
-	Setting bar (15-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (16-25-bytepos :7)
-	Setting bar (17-25-bytepos :6)
-	Setting bar (18-25-bytepos :5)
-	Setting bar (19-25-bytepos :4)
-	Setting bar (20-25-bytepos :3)
-	Setting bar (21-25-bytepos :2)
-	Setting bar (22-25-bytepos :1)
-	Setting bar (23-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (24-25-bytepos :7)
-	Setting space (0-8-bytepos :6)
-	Setting space (1-8-bytepos :5)
-	Setting space (2-8-bytepos :4)
-	Setting space (3-8-bytepos :3)
-	Setting space (4-8-bytepos :2)
-	Setting space (5-8-bytepos :1)
-	Setting space (6-8-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting space (7-8-bytepos :7)
-	Bar cycle ended, resetting counters and incrementing the wait space
-	Setting bar (0-25-bytepos :6)
-	Setting bar (1-25-bytepos :5)
-	Setting bar (2-25-bytepos :4)
-	Setting bar (3-25-bytepos :3)
-	Setting bar (4-25-bytepos :2)
-	Setting bar (5-25-bytepos :1)
-	Setting bar (6-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (7-25-bytepos :7)
-	Setting bar (8-25-bytepos :6)
-	Setting bar (9-25-bytepos :5)
-	Setting bar (10-25-bytepos :4)
-	Setting bar (11-25-bytepos :3)
-	Setting bar (12-25-bytepos :2)
-	Setting bar (13-25-bytepos :1)
-	Setting bar (14-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (15-25-bytepos :7)
-	Setting bar (16-25-bytepos :6)
-	Setting bar (17-25-bytepos :5)
-	Setting bar (18-25-bytepos :4)
-	Setting bar (19-25-bytepos :3)
-	Setting bar (20-25-bytepos :2)
-	Setting bar (21-25-bytepos :1)
-	Setting bar (22-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (23-25-bytepos :7)
-	Setting bar (24-25-bytepos :6)
-	Setting space (0-8-bytepos :5)
-	Setting space (1-8-bytepos :4)
-	Setting space (2-8-bytepos :3)
-	Setting space (3-8-bytepos :2)
-	Setting space (4-8-bytepos :1)
-	Setting space (5-8-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting space (6-8-bytepos :7)
-	Setting space (7-8-bytepos :6)
-	Bar cycle ended, resetting counters and incrementing the wait space
-	Setting bar (0-25-bytepos :5)
-	Setting bar (1-25-bytepos :4)
-	Setting bar (2-25-bytepos :3)
-	Setting bar (3-25-bytepos :2)
-	Setting bar (4-25-bytepos :1)
-	Setting bar (5-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (6-25-bytepos :7)
-	Setting bar (7-25-bytepos :6)
-	Setting bar (8-25-bytepos :5)
-	Setting bar (9-25-bytepos :4)
-	Setting bar (10-25-bytepos :3)
-	Setting bar (11-25-bytepos :2)
-	Setting bar (12-25-bytepos :1)
-	Setting bar (13-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (14-25-bytepos :7)
-	Setting bar (15-25-bytepos :6)
-	Setting bar (16-25-bytepos :5)
-	Setting bar (17-25-bytepos :4)
-	Setting bar (18-25-bytepos :3)
-	Setting bar (19-25-bytepos :2)
-	Setting bar (20-25-bytepos :1)
-	Setting bar (21-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (22-25-bytepos :7)
-	Setting bar (23-25-bytepos :6)
-	Setting bar (24-25-bytepos :5)
-	Setting space (0-8-bytepos :4)
-	Setting space (1-8-bytepos :3)
-	Setting space (2-8-bytepos :2)
-	Setting space (3-8-bytepos :1)
-	Setting space (4-8-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting space (5-8-bytepos :7)
-	Setting space (6-8-bytepos :6)
-	Setting space (7-8-bytepos :5)
-	Bar cycle ended, resetting counters and incrementing the wait space
-	Setting bar (0-25-bytepos :4)
-	Setting bar (1-25-bytepos :3)
-	Setting bar (2-25-bytepos :2)
-	Setting bar (3-25-bytepos :1)
-	Setting bar (4-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (5-25-bytepos :7)
-	Setting bar (6-25-bytepos :6)
-	Setting bar (7-25-bytepos :5)
-	Setting bar (8-25-bytepos :4)
-	Setting bar (9-25-bytepos :3)
-	Setting bar (10-25-bytepos :2)
-	Setting bar (11-25-bytepos :1)
-	Setting bar (12-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (13-25-bytepos :7)
-	Setting bar (14-25-bytepos :6)
-	Setting bar (15-25-bytepos :5)
-	Setting bar (16-25-bytepos :4)
-	Setting bar (17-25-bytepos :3)
-	Setting bar (18-25-bytepos :2)
-	Setting bar (19-25-bytepos :1)
-	Setting bar (20-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (21-25-bytepos :7)
-	Setting bar (22-25-bytepos :6)
-	Setting bar (23-25-bytepos :5)
-	Setting bar (24-25-bytepos :4)
-	Setting space (0-8-bytepos :3)
-	Setting space (1-8-bytepos :2)
-	Setting space (2-8-bytepos :1)
-	Setting space (3-8-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting space (4-8-bytepos :7)
-	Setting space (5-8-bytepos :6)
-	Setting space (6-8-bytepos :5)
-	Setting space (7-8-bytepos :4)
-	Bar cycle ended, resetting counters and incrementing the wait space
-	Setting bar (0-25-bytepos :3)
-	Setting bar (1-25-bytepos :2)
-	Setting bar (2-25-bytepos :1)
-	Setting bar (3-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (4-25-bytepos :7)
-	Setting bar (5-25-bytepos :6)
-	Setting bar (6-25-bytepos :5)
-	Setting bar (7-25-bytepos :4)
-	Setting bar (8-25-bytepos :3)
-	Setting bar (9-25-bytepos :2)
-	Setting bar (10-25-bytepos :1)
-	Setting bar (11-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (12-25-bytepos :7)
-	Setting bar (13-25-bytepos :6)
-	Setting bar (14-25-bytepos :5)
-	Setting bar (15-25-bytepos :4)
-	Setting bar (16-25-bytepos :3)
-	Setting bar (17-25-bytepos :2)
-	Setting bar (18-25-bytepos :1)
-	Setting bar (19-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (20-25-bytepos :7)
-	Setting bar (21-25-bytepos :6)
-	Setting bar (22-25-bytepos :5)
-	Setting bar (23-25-bytepos :4)
-	Setting bar (24-25-bytepos :3)
-	Setting space (0-8-bytepos :2)
-	Setting space (1-8-bytepos :1)
-	Setting space (2-8-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting space (3-8-bytepos :7)
-	Setting space (4-8-bytepos :6)
-	Setting space (5-8-bytepos :5)
-	Setting space (6-8-bytepos :4)
-	Setting space (7-8-bytepos :3)
-	Bar cycle ended, resetting counters and incrementing the wait space
-	Setting bar (0-25-bytepos :2)
-	Setting bar (1-25-bytepos :1)
-	Setting bar (2-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (3-25-bytepos :7)
-	Setting bar (4-25-bytepos :6)
-	Setting bar (5-25-bytepos :5)
-	Setting bar (6-25-bytepos :4)
-	Setting bar (7-25-bytepos :3)
-	Setting bar (8-25-bytepos :2)
-	Setting bar (9-25-bytepos :1)
-	Setting bar (10-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (11-25-bytepos :7)
-	Setting bar (12-25-bytepos :6)
-	Setting bar (13-25-bytepos :5)
-	Setting bar (14-25-bytepos :4)
-	Setting bar (15-25-bytepos :3)
-	Setting bar (16-25-bytepos :2)
-	Setting bar (17-25-bytepos :1)
-	Setting bar (18-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (19-25-bytepos :7)
-	Setting bar (20-25-bytepos :6)
-	Setting bar (21-25-bytepos :5)
-	Setting bar (22-25-bytepos :4)
-	Setting bar (23-25-bytepos :3)
-	Setting bar (24-25-bytepos :2)
-	Setting space (0-8-bytepos :1)
-	Setting space (1-8-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting space (2-8-bytepos :7)
-	Setting space (3-8-bytepos :6)
-	Setting space (4-8-bytepos :5)
-	Setting space (5-8-bytepos :4)
-	Setting space (6-8-bytepos :3)
-	Setting space (7-8-bytepos :2)
-	Bar cycle ended, resetting counters and incrementing the wait space
-	Setting bar (0-25-bytepos :1)
-	Setting bar (1-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (2-25-bytepos :7)
-	Setting bar (3-25-bytepos :6)
-	Setting bar (4-25-bytepos :5)
-	Setting bar (5-25-bytepos :4)
-	Setting bar (6-25-bytepos :3)
-	Setting bar (7-25-bytepos :2)
-	Setting bar (8-25-bytepos :1)
-	Setting bar (9-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (10-25-bytepos :7)
-	Setting bar (11-25-bytepos :6)
-	Setting bar (12-25-bytepos :5)
-	Setting bar (13-25-bytepos :4)
-	Setting bar (14-25-bytepos :3)
-	Setting bar (15-25-bytepos :2)
-	Setting bar (16-25-bytepos :1)
-	Setting bar (17-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (18-25-bytepos :7)
-	Setting bar (19-25-bytepos :6)
-	Setting bar (20-25-bytepos :5)
-	Setting bar (21-25-bytepos :4)
-	Setting bar (22-25-bytepos :3)
-	Setting bar (23-25-bytepos :2)
-	Setting bar (24-25-bytepos :1)
-	Setting space (0-8-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting space (0-8-bytepos :0)
-	Setting space (1-8-bytepos :1)
-	Setting space (2-8-bytepos :2)
-	Setting space (3-8-bytepos :3)
-	Setting space (4-8-bytepos :4)
-	Setting space (5-8-bytepos :5)
-	Setting space (6-8-bytepos :6)
-	Setting space (7-8-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Setting bar (0-25-bytepos :0)
-	Setting bar (1-25-bytepos :1)
-	Setting bar (2-25-bytepos :2)
-	Setting bar (3-25-bytepos :3)
-	Setting bar (4-25-bytepos :4)
-	Setting bar (5-25-bytepos :5)
-	Setting bar (6-25-bytepos :6)
-	Setting bar (7-25-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Setting bar (8-25-bytepos :0)
-	Setting bar (9-25-bytepos :1)
-	Setting bar (10-25-bytepos :2)
-	Setting bar (11-25-bytepos :3)
-	Setting bar (12-25-bytepos :4)
-	Setting bar (13-25-bytepos :5)
-	Setting bar (14-25-bytepos :6)
-	Setting bar (15-25-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Setting bar (16-25-bytepos :0)
-	Setting bar (17-25-bytepos :1)
-	Setting bar (18-25-bytepos :2)
-	Setting bar (19-25-bytepos :3)
-	Setting bar (20-25-bytepos :4)
-	Setting bar (21-25-bytepos :5)
-	Setting bar (22-25-bytepos :6)
-	Setting bar (23-25-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Setting bar (24-25-bytepos :0)
-	Bar cycle ended, resetting counters and incrementing the wait space
-	Setting space (0-8-bytepos :1)
-	Setting space (1-8-bytepos :2)
-	Setting space (2-8-bytepos :3)
-	Setting space (3-8-bytepos :4)
-	Setting space (4-8-bytepos :5)
-	Setting space (5-8-bytepos :6)
-	Setting space (6-8-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Setting space (7-8-bytepos :0)
-	Setting bar (0-25-bytepos :1)
-	Setting bar (1-25-bytepos :2)
-	Setting bar (2-25-bytepos :3)
-	Setting bar (3-25-bytepos :4)
-	Setting bar (4-25-bytepos :5)
-	Setting bar (5-25-bytepos :6)
-	Setting bar (6-25-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Setting bar (7-25-bytepos :0)
-	Setting bar (8-25-bytepos :1)
-	Setting bar (9-25-bytepos :2)
-	Setting bar (10-25-bytepos :3)
-	Setting bar (11-25-bytepos :4)
-	Setting bar (12-25-bytepos :5)
-	Setting bar (13-25-bytepos :6)
-	Setting bar (14-25-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Setting bar (15-25-bytepos :0)
-	Setting bar (16-25-bytepos :1)
-	Setting bar (17-25-bytepos :2)
-	Setting bar (18-25-bytepos :3)
-	Setting bar (19-25-bytepos :4)
-	Setting bar (20-25-bytepos :5)
-	Setting bar (21-25-bytepos :6)
-	Setting bar (22-25-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Setting bar (23-25-bytepos :0)
-	Setting bar (24-25-bytepos :1)
-	Bar cycle ended, resetting counters and incrementing the wait space
-	Setting space (0-8-bytepos :2)
-	Setting space (1-8-bytepos :3)
-	Setting space (2-8-bytepos :4)
-	Setting space (3-8-bytepos :5)
-	Setting space (4-8-bytepos :6)
-	Setting space (5-8-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Setting space (6-8-bytepos :0)
-	Setting space (7-8-bytepos :1)
-	Setting bar (0-25-bytepos :2)
-	Setting bar (1-25-bytepos :3)
-	Setting bar (2-25-bytepos :4)
-	Setting bar (3-25-bytepos :5)
-	Setting bar (4-25-bytepos :6)
-	Setting bar (5-25-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Setting bar (6-25-bytepos :0)
-	Setting bar (7-25-bytepos :1)
-	Setting bar (8-25-bytepos :2)
-	Setting bar (9-25-bytepos :3)
-	Setting bar (10-25-bytepos :4)
-	Setting bar (11-25-bytepos :5)
-	Setting bar (12-25-bytepos :6)
-	Setting bar (13-25-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Setting bar (14-25-bytepos :0)
-	Setting bar (15-25-bytepos :1)
-	Setting bar (16-25-bytepos :2)
-	Setting bar (17-25-bytepos :3)
-	Setting bar (18-25-bytepos :4)
-	Setting bar (19-25-bytepos :5)
-	Setting bar (20-25-bytepos :6)
-	Setting bar (21-25-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Setting bar (22-25-bytepos :0)
-	Setting bar (23-25-bytepos :1)
-	Setting bar (24-25-bytepos :2)
-	Bar cycle ended, resetting counters and incrementing the wait space
-	Setting space (0-8-bytepos :3)
-	Setting space (1-8-bytepos :4)
-	Setting space (2-8-bytepos :5)
-	Setting space (3-8-bytepos :6)
-	Setting space (4-8-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Setting space (5-8-bytepos :0)
-	Setting space (6-8-bytepos :1)
-	Setting space (7-8-bytepos :2)
-	Setting bar (0-25-bytepos :3)
-	Setting bar (1-25-bytepos :4)
-	Setting bar (2-25-bytepos :5)
-	Setting bar (3-25-bytepos :6)
-	Setting bar (4-25-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Setting bar (5-25-bytepos :0)
-	Setting bar (6-25-bytepos :1)
-	Setting bar (7-25-bytepos :2)
-	Setting bar (8-25-bytepos :3)
-	Setting bar (9-25-bytepos :4)
-	Setting bar (10-25-bytepos :5)
-	Setting bar (11-25-bytepos :6)
-	Setting bar (12-25-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Setting bar (13-25-bytepos :0)
-	Setting bar (14-25-bytepos :1)
-	Setting bar (15-25-bytepos :2)
-	Setting bar (16-25-bytepos :3)
-	Setting bar (17-25-bytepos :4)
-	Setting bar (18-25-bytepos :5)
-	Setting bar (19-25-bytepos :6)
-	Setting bar (20-25-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Setting bar (21-25-bytepos :0)
-	Setting bar (22-25-bytepos :1)
-	Setting bar (23-25-bytepos :2)
-	Setting bar (24-25-bytepos :3)
-	Bar cycle ended, resetting counters and incrementing the wait space
-	Setting space (0-8-bytepos :4)
-	Setting space (1-8-bytepos :5)
-	Setting space (2-8-bytepos :6)
-	Setting space (3-8-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Setting space (4-8-bytepos :0)
-	Setting space (5-8-bytepos :1)
-	Setting space (6-8-bytepos :2)
-	Setting space (7-8-bytepos :3)
-	Setting bar (0-25-bytepos :4)
-	Setting bar (1-25-bytepos :5)
-	Setting bar (2-25-bytepos :6)
-	Setting bar (3-25-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Setting bar (4-25-bytepos :0)
-	Setting bar (5-25-bytepos :1)
-	Setting bar (6-25-bytepos :2)
-	Setting bar (7-25-bytepos :3)
-	Setting bar (8-25-bytepos :4)
-	Setting bar (9-25-bytepos :5)
-	Setting bar (10-25-bytepos :6)
-	Setting bar (11-25-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Setting bar (12-25-bytepos :0)
-	Setting bar (13-25-bytepos :1)
-	Setting bar (14-25-bytepos :2)
-	Setting bar (15-25-bytepos :3)
-	Setting bar (16-25-bytepos :4)
-	Setting bar (17-25-bytepos :5)
-	Setting bar (18-25-bytepos :6)
-	Setting bar (19-25-bytepos :7)
-	Byte ended!!! decrementing p_ubBitplane0Pointer
-	Start right side... repositioning
-	Setting bar (0-25-bytepos :7)
-	Setting bar (1-25-bytepos :6)
-	Setting bar (2-25-bytepos :5)
-	Setting bar (3-25-bytepos :4)
-	Setting bar (4-25-bytepos :3)
-	Setting bar (5-25-bytepos :2)
-	Setting bar (6-25-bytepos :1)
-	Setting bar (7-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (8-25-bytepos :7)
-	Setting bar (9-25-bytepos :6)
-	Setting bar (10-25-bytepos :5)
-	Setting bar (11-25-bytepos :4)
-	Setting bar (12-25-bytepos :3)
-	Setting bar (13-25-bytepos :2)
-	Setting bar (14-25-bytepos :1)
-	Setting bar (15-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (16-25-bytepos :7)
-	Setting bar (17-25-bytepos :6)
-	Setting bar (18-25-bytepos :5)
-	Setting bar (19-25-bytepos :4)
-	Setting bar (20-25-bytepos :3)
-	Setting bar (21-25-bytepos :2)
-	Setting bar (22-25-bytepos :1)
-	Setting bar (23-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (24-25-bytepos :7)
-	Setting space (0-8-bytepos :6)
-	Setting space (1-8-bytepos :5)
-	Setting space (2-8-bytepos :4)
-	Setting space (3-8-bytepos :3)
-	Setting space (4-8-bytepos :2)
-	Setting space (5-8-bytepos :1)
-	Setting space (6-8-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting space (7-8-bytepos :7)
-	Bar cycle ended, resetting counters and incrementing the wait space
-	Setting bar (0-25-bytepos :6)
-	Setting bar (1-25-bytepos :5)
-	Setting bar (2-25-bytepos :4)
-	Setting bar (3-25-bytepos :3)
-	Setting bar (4-25-bytepos :2)
-	Setting bar (5-25-bytepos :1)
-	Setting bar (6-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (7-25-bytepos :7)
-	Setting bar (8-25-bytepos :6)
-	Setting bar (9-25-bytepos :5)
-	Setting bar (10-25-bytepos :4)
-	Setting bar (11-25-bytepos :3)
-	Setting bar (12-25-bytepos :2)
-	Setting bar (13-25-bytepos :1)
-	Setting bar (14-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (15-25-bytepos :7)
-	Setting bar (16-25-bytepos :6)
-	Setting bar (17-25-bytepos :5)
-	Setting bar (18-25-bytepos :4)
-	Setting bar (19-25-bytepos :3)
-	Setting bar (20-25-bytepos :2)
-	Setting bar (21-25-bytepos :1)
-	Setting bar (22-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (23-25-bytepos :7)
-	Setting bar (24-25-bytepos :6)
-	Setting space (0-8-bytepos :5)
-	Setting space (1-8-bytepos :4)
-	Setting space (2-8-bytepos :3)
-	Setting space (3-8-bytepos :2)
-	Setting space (4-8-bytepos :1)
-	Setting space (5-8-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting space (6-8-bytepos :7)
-	Setting space (7-8-bytepos :6)
-	Bar cycle ended, resetting counters and incrementing the wait space
-	Setting bar (0-25-bytepos :5)
-	Setting bar (1-25-bytepos :4)
-	Setting bar (2-25-bytepos :3)
-	Setting bar (3-25-bytepos :2)
-	Setting bar (4-25-bytepos :1)
-	Setting bar (5-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (6-25-bytepos :7)
-	Setting bar (7-25-bytepos :6)
-	Setting bar (8-25-bytepos :5)
-	Setting bar (9-25-bytepos :4)
-	Setting bar (10-25-bytepos :3)
-	Setting bar (11-25-bytepos :2)
-	Setting bar (12-25-bytepos :1)
-	Setting bar (13-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (14-25-bytepos :7)
-	Setting bar (15-25-bytepos :6)
-	Setting bar (16-25-bytepos :5)
-	Setting bar (17-25-bytepos :4)
-	Setting bar (18-25-bytepos :3)
-	Setting bar (19-25-bytepos :2)
-	Setting bar (20-25-bytepos :1)
-	Setting bar (21-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (22-25-bytepos :7)
-	Setting bar (23-25-bytepos :6)
-	Setting bar (24-25-bytepos :5)
-	Setting space (0-8-bytepos :4)
-	Setting space (1-8-bytepos :3)
-	Setting space (2-8-bytepos :2)
-	Setting space (3-8-bytepos :1)
-	Setting space (4-8-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting space (5-8-bytepos :7)
-	Setting space (6-8-bytepos :6)
-	Setting space (7-8-bytepos :5)
-	Bar cycle ended, resetting counters and incrementing the wait space
-	Setting bar (0-25-bytepos :4)
-	Setting bar (1-25-bytepos :3)
-	Setting bar (2-25-bytepos :2)
-	Setting bar (3-25-bytepos :1)
-	Setting bar (4-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (5-25-bytepos :7)
-	Setting bar (6-25-bytepos :6)
-	Setting bar (7-25-bytepos :5)
-	Setting bar (8-25-bytepos :4)
-	Setting bar (9-25-bytepos :3)
-	Setting bar (10-25-bytepos :2)
-	Setting bar (11-25-bytepos :1)
-	Setting bar (12-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (13-25-bytepos :7)
-	Setting bar (14-25-bytepos :6)
-	Setting bar (15-25-bytepos :5)
-	Setting bar (16-25-bytepos :4)
-	Setting bar (17-25-bytepos :3)
-	Setting bar (18-25-bytepos :2)
-	Setting bar (19-25-bytepos :1)
-	Setting bar (20-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (21-25-bytepos :7)
-	Setting bar (22-25-bytepos :6)
-	Setting bar (23-25-bytepos :5)
-	Setting bar (24-25-bytepos :4)
-	Setting space (0-8-bytepos :3)
-	Setting space (1-8-bytepos :2)
-	Setting space (2-8-bytepos :1)
-	Setting space (3-8-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting space (4-8-bytepos :7)
-	Setting space (5-8-bytepos :6)
-	Setting space (6-8-bytepos :5)
-	Setting space (7-8-bytepos :4)
-	Bar cycle ended, resetting counters and incrementing the wait space
-	Setting bar (0-25-bytepos :3)
-	Setting bar (1-25-bytepos :2)
-	Setting bar (2-25-bytepos :1)
-	Setting bar (3-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (4-25-bytepos :7)
-	Setting bar (5-25-bytepos :6)
-	Setting bar (6-25-bytepos :5)
-	Setting bar (7-25-bytepos :4)
-	Setting bar (8-25-bytepos :3)
-	Setting bar (9-25-bytepos :2)
-	Setting bar (10-25-bytepos :1)
-	Setting bar (11-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (12-25-bytepos :7)
-	Setting bar (13-25-bytepos :6)
-	Setting bar (14-25-bytepos :5)
-	Setting bar (15-25-bytepos :4)
-	Setting bar (16-25-bytepos :3)
-	Setting bar (17-25-bytepos :2)
-	Setting bar (18-25-bytepos :1)
-	Setting bar (19-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (20-25-bytepos :7)
-	Setting bar (21-25-bytepos :6)
-	Setting bar (22-25-bytepos :5)
-	Setting bar (23-25-bytepos :4)
-	Setting bar (24-25-bytepos :3)
-	Setting space (0-8-bytepos :2)
-	Setting space (1-8-bytepos :1)
-	Setting space (2-8-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting space (3-8-bytepos :7)
-	Setting space (4-8-bytepos :6)
-	Setting space (5-8-bytepos :5)
-	Setting space (6-8-bytepos :4)
-	Setting space (7-8-bytepos :3)
-	Bar cycle ended, resetting counters and incrementing the wait space
-	Setting bar (0-25-bytepos :2)
-	Setting bar (1-25-bytepos :1)
-	Setting bar (2-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (3-25-bytepos :7)
-	Setting bar (4-25-bytepos :6)
-	Setting bar (5-25-bytepos :5)
-	Setting bar (6-25-bytepos :4)
-	Setting bar (7-25-bytepos :3)
-	Setting bar (8-25-bytepos :2)
-	Setting bar (9-25-bytepos :1)
-	Setting bar (10-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (11-25-bytepos :7)
-	Setting bar (12-25-bytepos :6)
-	Setting bar (13-25-bytepos :5)
-	Setting bar (14-25-bytepos :4)
-	Setting bar (15-25-bytepos :3)
-	Setting bar (16-25-bytepos :2)
-	Setting bar (17-25-bytepos :1)
-	Setting bar (18-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (19-25-bytepos :7)
-	Setting bar (20-25-bytepos :6)
-	Setting bar (21-25-bytepos :5)
-	Setting bar (22-25-bytepos :4)
-	Setting bar (23-25-bytepos :3)
-	Setting bar (24-25-bytepos :2)
-	Setting space (0-8-bytepos :1)
-	Setting space (1-8-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting space (2-8-bytepos :7)
-	Setting space (3-8-bytepos :6)
-	Setting space (4-8-bytepos :5)
-	Setting space (5-8-bytepos :4)
-	Setting space (6-8-bytepos :3)
-	Setting space (7-8-bytepos :2)
-	Bar cycle ended, resetting counters and incrementing the wait space
-	Setting bar (0-25-bytepos :1)
-	Setting bar (1-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (2-25-bytepos :7)
-	Setting bar (3-25-bytepos :6)
-	Setting bar (4-25-bytepos :5)
-	Setting bar (5-25-bytepos :4)
-	Setting bar (6-25-bytepos :3)
-	Setting bar (7-25-bytepos :2)
-	Setting bar (8-25-bytepos :1)
-	Setting bar (9-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (10-25-bytepos :7)
-	Setting bar (11-25-bytepos :6)
-	Setting bar (12-25-bytepos :5)
-	Setting bar (13-25-bytepos :4)
-	Setting bar (14-25-bytepos :3)
-	Setting bar (15-25-bytepos :2)
-	Setting bar (16-25-bytepos :1)
-	Setting bar (17-25-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Setting bar (18-25-bytepos :7)
-	Setting bar (19-25-bytepos :6)
-	Setting bar (20-25-bytepos :5)
-	Setting bar (21-25-bytepos :4)
-	Setting bar (22-25-bytepos :3)
-	Setting bar (23-25-bytepos :2)
-	Setting bar (24-25-bytepos :1)
-	Setting space (0-8-bytepos :0)
-	Byte ended!!! incrementing p_ubBitplane0Pointer
-	Block begin: viewLoad(pView: 0x22d39c)...OK, time: >7min
-Block end: stateChange(), time:  12.648 ms
+			Setting copperlist 0x2261d4 at offs 0
+		Block end: simplebufferTestSetFront(), time:   7.691 ms
+		Manager 0x2263ec attached after manager 0x2264a4 of VP 0x22638c
+	Block end: simpleBufferTestCreate(), time:   6.931 ms
+	setting wait for row 252
+	setting copperlist last row with wait 254 (0) 
+	setting wait for row 255
+	setting special wait to go under 255 (1) 
+	setting copperlist last row with wait 257 (3) 
+	setting wait for row 258
+	setting copperlist last row with wait 260 (6) 
+	setting wait for row 261
+	setting copperlist last row with wait 263 (9) 
+	setting wait for row 264
+	setting copperlist last row with wait 266 (12) 
+	setting wait for row 267
+	setting copperlist last row with wait 269 (15) 
+	setting wait for row 270
+	setting copperlist last row with wait 272 (18) 
+	setting wait for row 273
+	setting copperlist last row with wait 275 (21) 
+	setting wait for row 276
+	setting copperlist last row with wait 278 (24) 
+	setting wait for row 279
+	setting copperlist last row with wait 281 (27) 
+	setting wait for row 282
+	setting copperlist last row with wait 284 (30) 
+	setting wait for row 285
+	setting copperlist last row with wait 287 (33) 
+	Block begin: viewLoad(pView: 0x226174)...OK, time: >7min
+Block end: stateChange(), time: 198.335 ms
+UpdateCamera2 input 0
+UpdateCamera2 shift  0
 UpdateCamera2 input 1
 UpdateCamera2 shift  255
 Caso con fetch modificato a 30
-uwShiftPerspective: 255
-uwModPerspective: 6
-alessio: 0
+Row 0 has to be updated for bX 1 - incrementing its counter to 1
+pscrollflags set to 0
+abs - Processing row 0
+abs - Ok now we are on position 1 so we must absolute shift this perspective bar to the left for 0 positions: mods 0 and bpl1con to 0
+abs - New registers : mods : 6, bplcon1: 255
+abs - Here i should be moving the first chunk and in am not doing it!!!!!
+Row 1 has to be updated for bX 1 - incrementing its counter to 1
+pscrollflags set to 0
+abs - Processing row 1
+abs - Ok now we are on position 1 so we must absolute shift this perspective bar to the left for 0 positions: mods 0 and bpl1con to 0
+abs - New registers : mods : 6, bplcon1: 255
+Row 2 has to be updated for bX 1 - incrementing its counter to 1
+pscrollflags set to 0
+abs - Processing row 2
+abs - Ok now we are on position 1 so we must absolute shift this perspective bar to the left for 0 positions: mods 0 and bpl1con to 0
+abs - New registers : mods : 6, bplcon1: 255
+Row 3 has to be updated for bX 1 - incrementing its counter to 1
+pscrollflags set to 0
+abs - Processing row 3
+abs - Ok now we are on position 1 so we must absolute shift this perspective bar to the left for 0 positions: mods 0 and bpl1con to 0
+abs - New registers : mods : 6, bplcon1: 255
+Row 4 has to be updated for bX 1 - incrementing its counter to 1
+pscrollflags set to 0
+abs - Processing row 4
+abs - Ok now we are on position 1 so we must absolute shift this perspective bar to the left for 0 positions: mods 0 and bpl1con to 0
+abs - New registers : mods : 6, bplcon1: 255
+Row 5 has to be updated for bX 1 - incrementing its counter to 1
+pscrollflags set to 0
+abs - Processing row 5
+abs - Ok now we are on position 1 so we must absolute shift this perspective bar to the left for 0 positions: mods 0 and bpl1con to 0
+abs - New registers : mods : 6, bplcon1: 255
+Row 6 has to be updated for bX 1 - incrementing its counter to 1
+pscrollflags set to 1
+abs - Processing row 6
+abs - Ok now we are on position 1 so we must absolute shift this perspective bar to the left for 1 positions: mods 0 and bpl1con to 1
+abs - New registers : mods : 6, bplcon1: 238
+Row 7 has to be updated for bX 1 - incrementing its counter to 1
+pscrollflags set to 1
+abs - Processing row 7
+abs - Ok now we are on position 1 so we must absolute shift this perspective bar to the left for 1 positions: mods 0 and bpl1con to 1
+abs - New registers : mods : 6, bplcon1: 238
+Row 8 has to be updated for bX 1 - incrementing its counter to 1
+pscrollflags set to 1
+abs - Processing row 8
+abs - Ok now we are on position 1 so we must absolute shift this perspective bar to the left for 1 positions: mods 0 and bpl1con to 1
+abs - New registers : mods : 6, bplcon1: 238
+Row 9 has to be updated for bX 1 - incrementing its counter to 1
+pscrollflags set to 1
+abs - Processing row 9
+abs - Ok now we are on position 1 so we must absolute shift this perspective bar to the left for 1 positions: mods 0 and bpl1con to 1
+abs - New registers : mods : 6, bplcon1: 238
+Row 10 has to be updated for bX 1 - incrementing its counter to 1
+pscrollflags set to 1
+abs - Processing row 10
+abs - Ok now we are on position 1 so we must absolute shift this perspective bar to the left for 1 positions: mods 0 and bpl1con to 1
+abs - New registers : mods : 6, bplcon1: 238
+Row 11 has to be updated for bX 1 - incrementing its counter to 1
+pscrollflags set to 1
+abs - Processing row 11
+abs - Ok now we are on position 1 so we must absolute shift this perspective bar to the left for 1 positions: mods 0 and bpl1con to 1
+abs - New registers : mods : 6, bplcon1: 238
 UpdateCamera2 input 2
 UpdateCamera2 shift  238
 Caso con fetch modificato a 30
-uwShiftPerspective: 238
-uwModPerspective: 6
-alessio: 0
+Row 0 has NOT to be updated for bX 2 - counter still at 0
+pscrollflags set to 0
+abs - Processing row 0
+abs - Ok now we are on position 2 so we must absolute shift this perspective bar to the left for 1 positions: mods 0 and bpl1con to 1
+abs - New registers : mods : 6, bplcon1: 238
+abs - Here i should be moving the first chunk and in am not doing it!!!!!
+Row 1 has to be updated for bX 2 - incrementing its counter to 1
+pscrollflags set to 0
+abs - Processing row 1
+abs - Ok now we are on position 2 so we must absolute shift this perspective bar to the left for 1 positions: mods 0 and bpl1con to 1
+abs - New registers : mods : 6, bplcon1: 238
+Row 2 has to be updated for bX 2 - incrementing its counter to 1
+pscrollflags set to 0
+abs - Processing row 2
+abs - Ok now we are on position 2 so we must absolute shift this perspective bar to the left for 1 positions: mods 0 and bpl1con to 1
+abs - New registers : mods : 6, bplcon1: 238
+Row 3 has to be updated for bX 2 - incrementing its counter to 1
+pscrollflags set to 1
+abs - Processing row 3
+abs - Ok now we are on position 2 so we must absolute shift this perspective bar to the left for 2 positions: mods 0 and bpl1con to 2
+abs - New registers : mods : 6, bplcon1: 221
+Row 4 has to be updated for bX 2 - incrementing its counter to 1
+pscrollflags set to 1
+abs - Processing row 4
+abs - Ok now we are on position 2 so we must absolute shift this perspective bar to the left for 2 positions: mods 0 and bpl1con to 2
+abs - New registers : mods : 6, bplcon1: 221
+Row 5 has to be updated for bX 2 - incrementing its counter to 1
+pscrollflags set to 1
+abs - Processing row 5
+abs - Ok now we are on position 2 so we must absolute shift this perspective bar to the left for 2 positions: mods 0 and bpl1con to 2
+abs - New registers : mods : 6, bplcon1: 221
+Row 6 has to be updated for bX 2 - incrementing its counter to 2
+pscrollflags set to 1
+abs - Processing row 6
+abs - Ok now we are on position 2 so we must absolute shift this perspective bar to the left for 2 positions: mods 0 and bpl1con to 2
+abs - New registers : mods : 6, bplcon1: 221
+Row 7 has to be updated for bX 2 - incrementing its counter to 2
+pscrollflags set to 1
+abs - Processing row 7
+abs - Ok now we are on position 2 so we must absolute shift this perspective bar to the left for 2 positions: mods 0 and bpl1con to 2
+abs - New registers : mods : 6, bplcon1: 221
+Row 8 has to be updated for bX 2 - incrementing its counter to 2
+pscrollflags set to 1
+abs - Processing row 8
+abs - Ok now we are on position 2 so we must absolute shift this perspective bar to the left for 2 positions: mods 0 and bpl1con to 2
+abs - New registers : mods : 6, bplcon1: 221
+Row 9 has to be updated for bX 2 - incrementing its counter to 2
+pscrollflags set to 2
+abs - Processing row 9
+abs - Ok now we are on position 2 so we must absolute shift this perspective bar to the left for 3 positions: mods 0 and bpl1con to 3
+abs - New registers : mods : 6, bplcon1: 204
+Row 10 has to be updated for bX 2 - incrementing its counter to 2
+pscrollflags set to 2
+abs - Processing row 10
+abs - Ok now we are on position 2 so we must absolute shift this perspective bar to the left for 3 positions: mods 0 and bpl1con to 3
+abs - New registers : mods : 6, bplcon1: 204
+Row 11 has to be updated for bX 2 - incrementing its counter to 2
+pscrollflags set to 2
+abs - Processing row 11
+abs - Ok now we are on position 2 so we must absolute shift this perspective bar to the left for 3 positions: mods 0 and bpl1con to 3
+abs - New registers : mods : 6, bplcon1: 204
 UpdateCamera2 input 3
 UpdateCamera2 shift  221
 Caso con fetch modificato a 30
-uwShiftPerspective: 221
-uwModPerspective: 6
-alessio: 0
+Row 0 has NOT to be updated for bX 3 - counter still at 0
+pscrollflags set to 0
+abs - Processing row 0
+abs - Ok now we are on position 3 so we must absolute shift this perspective bar to the left for 2 positions: mods 0 and bpl1con to 2
+abs - New registers : mods : 6, bplcon1: 221
+abs - Here i should be moving the first chunk and in am not doing it!!!!!
+Row 1 has NOT to be updated for bX 3 - counter still at 0
+pscrollflags set to 0
+abs - Processing row 1
+abs - Ok now we are on position 3 so we must absolute shift this perspective bar to the left for 2 positions: mods 0 and bpl1con to 2
+abs - New registers : mods : 6, bplcon1: 221
+Row 2 has to be updated for bX 3 - incrementing its counter to 1
+pscrollflags set to 1
+abs - Processing row 2
+abs - Ok now we are on position 3 so we must absolute shift this perspective bar to the left for 3 positions: mods 0 and bpl1con to 3
+abs - New registers : mods : 6, bplcon1: 204
+Row 3 has to be updated for bX 3 - incrementing its counter to 2
+pscrollflags set to 1
+abs - Processing row 3
+abs - Ok now we are on position 3 so we must absolute shift this perspective bar to the left for 3 positions: mods 0 and bpl1con to 3
+abs - New registers : mods : 6, bplcon1: 204
+Row 4 has to be updated for bX 3 - incrementing its counter to 2
+pscrollflags set to 1
+abs - Processing row 4
+abs - Ok now we are on position 3 so we must absolute shift this perspective bar to the left for 3 positions: mods 0 and bpl1con to 3
+abs - New registers : mods : 6, bplcon1: 204
+Row 5 has to be updated for bX 3 - incrementing its counter to 2
+pscrollflags set to 1
+abs - Processing row 5
+abs - Ok now we are on position 3 so we must absolute shift this perspective bar to the left for 3 positions: mods 0 and bpl1con to 3
+abs - New registers : mods : 6, bplcon1: 204
+Row 6 has to be updated for bX 3 - incrementing its counter to 2
+pscrollflags set to 2
+abs - Processing row 6
+abs - Ok now we are on position 3 so we must absolute shift this perspective bar to the left for 4 positions: mods 0 and bpl1con to 4
+abs - New registers : mods : 6, bplcon1: 187
+Row 7 has to be updated for bX 3 - incrementing its counter to 2
+pscrollflags set to 2
+abs - Processing row 7
+abs - Ok now we are on position 3 so we must absolute shift this perspective bar to the left for 4 positions: mods 0 and bpl1con to 4
+abs - New registers : mods : 6, bplcon1: 187
+Row 8 has to be updated for bX 3 - incrementing its counter to 2
+pscrollflags set to 2
+abs - Processing row 8
+abs - Ok now we are on position 3 so we must absolute shift this perspective bar to the left for 4 positions: mods 0 and bpl1con to 4
+abs - New registers : mods : 6, bplcon1: 187
+Row 9 has to be updated for bX 3 - incrementing its counter to 3
+pscrollflags set to 2
+abs - Processing row 9
+abs - Ok now we are on position 3 so we must absolute shift this perspective bar to the left for 4 positions: mods 0 and bpl1con to 4
+abs - New registers : mods : 6, bplcon1: 187
+Row 10 has to be updated for bX 3 - incrementing its counter to 3
+pscrollflags set to 3
+abs - Processing row 10
+abs - Ok now we are on position 3 so we must absolute shift this perspective bar to the left for 5 positions: mods 0 and bpl1con to 5
+abs - New registers : mods : 6, bplcon1: 170
+Row 11 has to be updated for bX 3 - incrementing its counter to 3
+pscrollflags set to 3
+abs - Processing row 11
+abs - Ok now we are on position 3 so we must absolute shift this perspective bar to the left for 5 positions: mods 0 and bpl1con to 5
+abs - New registers : mods : 6, bplcon1: 170
 UpdateCamera2 input 4
 UpdateCamera2 shift  204
 Caso con fetch modificato a 30
-uwShiftPerspective: 204
-uwModPerspective: 6
-alessio: 0
+Row 0 has NOT to be updated for bX 4 - counter still at 0
+pscrollflags set to 0
+abs - Processing row 0
+abs - Ok now we are on position 4 so we must absolute shift this perspective bar to the left for 3 positions: mods 0 and bpl1con to 3
+abs - New registers : mods : 6, bplcon1: 204
+abs - Here i should be moving the first chunk and in am not doing it!!!!!
+Row 1 has NOT to be updated for bX 4 - counter still at 0
+pscrollflags set to 0
+abs - Processing row 1
+abs - Ok now we are on position 4 so we must absolute shift this perspective bar to the left for 3 positions: mods 0 and bpl1con to 3
+abs - New registers : mods : 6, bplcon1: 204
+Row 2 has NOT to be updated for bX 4 - counter still at 1
+pscrollflags set to 1
+abs - Processing row 2
+abs - Ok now we are on position 4 so we must absolute shift this perspective bar to the left for 4 positions: mods 0 and bpl1con to 4
+abs - New registers : mods : 6, bplcon1: 187
+Row 3 has to be updated for bX 4 - incrementing its counter to 2
+pscrollflags set to 1
+abs - Processing row 3
+abs - Ok now we are on position 4 so we must absolute shift this perspective bar to the left for 4 positions: mods 0 and bpl1con to 4
+abs - New registers : mods : 6, bplcon1: 187
+Row 4 has to be updated for bX 4 - incrementing its counter to 2
+pscrollflags set to 1
+abs - Processing row 4
+abs - Ok now we are on position 4 so we must absolute shift this perspective bar to the left for 4 positions: mods 0 and bpl1con to 4
+abs - New registers : mods : 6, bplcon1: 187
+Row 5 has to be updated for bX 4 - incrementing its counter to 2
+pscrollflags set to 2
+abs - Processing row 5
+abs - Ok now we are on position 4 so we must absolute shift this perspective bar to the left for 5 positions: mods 0 and bpl1con to 5
+abs - New registers : mods : 6, bplcon1: 170
+Row 6 has to be updated for bX 4 - incrementing its counter to 3
+pscrollflags set to 2
+abs - Processing row 6
+abs - Ok now we are on position 4 so we must absolute shift this perspective bar to the left for 5 positions: mods 0 and bpl1con to 5
+abs - New registers : mods : 6, bplcon1: 170
+Row 7 has to be updated for bX 4 - incrementing its counter to 3
+pscrollflags set to 3
+abs - Processing row 7
+abs - Ok now we are on position 4 so we must absolute shift this perspective bar to the left for 6 positions: mods 0 and bpl1con to 6
+abs - New registers : mods : 6, bplcon1: 153
+Row 8 has to be updated for bX 4 - incrementing its counter to 3
+pscrollflags set to 3
+abs - Processing row 8
+abs - Ok now we are on position 4 so we must absolute shift this perspective bar to the left for 6 positions: mods 0 and bpl1con to 6
+abs - New registers : mods : 6, bplcon1: 153
+Row 9 has to be updated for bX 4 - incrementing its counter to 3
+pscrollflags set to 3
+abs - Processing row 9
+abs - Ok now we are on position 4 so we must absolute shift this perspective bar to the left for 6 positions: mods 0 and bpl1con to 6
+abs - New registers : mods : 6, bplcon1: 153
+Row 10 has to be updated for bX 4 - incrementing its counter to 4
+pscrollflags set to 4
+abs - Processing row 10
+abs - Ok now we are on position 4 so we must absolute shift this perspective bar to the left for 7 positions: mods 0 and bpl1con to 7
+abs - New registers : mods : 6, bplcon1: 136
+Row 11 has to be updated for bX 4 - incrementing its counter to 4
+pscrollflags set to 4
+abs - Processing row 11
+abs - Ok now we are on position 4 so we must absolute shift this perspective bar to the left for 7 positions: mods 0 and bpl1con to 7
+abs - New registers : mods : 6, bplcon1: 136
 UpdateCamera2 input 5
 UpdateCamera2 shift  187
 Caso con fetch modificato a 30
-uwShiftPerspective: 187
-uwModPerspective: 6
-alessio: 0
+Row 0 has NOT to be updated for bX 5 - counter still at 0
+pscrollflags set to 0
+abs - Processing row 0
+abs - Ok now we are on position 5 so we must absolute shift this perspective bar to the left for 4 positions: mods 0 and bpl1con to 4
+abs - New registers : mods : 6, bplcon1: 187
+abs - Here i should be moving the first chunk and in am not doing it!!!!!
+Row 1 has NOT to be updated for bX 5 - counter still at 0
+pscrollflags set to 0
+abs - Processing row 1
+abs - Ok now we are on position 5 so we must absolute shift this perspective bar to the left for 4 positions: mods 0 and bpl1con to 4
+abs - New registers : mods : 6, bplcon1: 187
+Row 2 has NOT to be updated for bX 5 - counter still at 1
+pscrollflags set to 1
+abs - Processing row 2
+abs - Ok now we are on position 5 so we must absolute shift this perspective bar to the left for 5 positions: mods 0 and bpl1con to 5
+abs - New registers : mods : 6, bplcon1: 170
+Row 3 has NOT to be updated for bX 5 - counter still at 1
+pscrollflags set to 1
+abs - Processing row 3
+abs - Ok now we are on position 5 so we must absolute shift this perspective bar to the left for 5 positions: mods 0 and bpl1con to 5
+abs - New registers : mods : 6, bplcon1: 170
+Row 4 has to be updated for bX 5 - incrementing its counter to 2
+pscrollflags set to 2
+abs - Processing row 4
+abs - Ok now we are on position 5 so we must absolute shift this perspective bar to the left for 6 positions: mods 0 and bpl1con to 6
+abs - New registers : mods : 6, bplcon1: 153
+Row 5 has to be updated for bX 5 - incrementing its counter to 3
+pscrollflags set to 2
+abs - Processing row 5
+abs - Ok now we are on position 5 so we must absolute shift this perspective bar to the left for 6 positions: mods 0 and bpl1con to 6
+abs - New registers : mods : 6, bplcon1: 153
+Row 6 has to be updated for bX 5 - incrementing its counter to 3
+pscrollflags set to 3
+abs - Processing row 6
+abs - Ok now we are on position 5 so we must absolute shift this perspective bar to the left for 7 positions: mods 0 and bpl1con to 7
+abs - New registers : mods : 6, bplcon1: 136
+Row 7 has to be updated for bX 5 - incrementing its counter to 4
+pscrollflags set to 3
+abs - Processing row 7
+abs - Ok now we are on position 5 so we must absolute shift this perspective bar to the left for 7 positions: mods 0 and bpl1con to 7
+abs - New registers : mods : 6, bplcon1: 136
+Row 8 has to be updated for bX 5 - incrementing its counter to 4
+pscrollflags set to 4
+abs - Processing row 8
+abs - Ok now we are on position 5 so we must absolute shift this perspective bar to the left for 8 positions: mods 0 and bpl1con to 8
+abs - New registers : mods : 6, bplcon1: 119
+Row 9 has to be updated for bX 5 - incrementing its counter to 4
+pscrollflags set to 4
+abs - Processing row 9
+abs - Ok now we are on position 5 so we must absolute shift this perspective bar to the left for 8 positions: mods 0 and bpl1con to 8
+abs - New registers : mods : 6, bplcon1: 119
+Row 10 has to be updated for bX 5 - incrementing its counter to 5
+pscrollflags set to 5
+abs - Processing row 10
+abs - Ok now we are on position 5 so we must absolute shift this perspective bar to the left for 9 positions: mods 0 and bpl1con to 9
+abs - New registers : mods : 6, bplcon1: 102
+Row 11 has to be updated for bX 5 - incrementing its counter to 5
+pscrollflags set to 5
+abs - Processing row 11
+abs - Ok now we are on position 5 so we must absolute shift this perspective bar to the left for 9 positions: mods 0 and bpl1con to 9
+abs - New registers : mods : 6, bplcon1: 102
 UpdateCamera2 input 6
 UpdateCamera2 shift  170
 Caso con fetch modificato a 30
-uwShiftPerspective: 170
-uwModPerspective: 6
-alessio: 0
+Row 0 has NOT to be updated for bX 6 - counter still at 0
+pscrollflags set to 0
+abs - Processing row 0
+abs - Ok now we are on position 6 so we must absolute shift this perspective bar to the left for 5 positions: mods 0 and bpl1con to 5
+abs - New registers : mods : 6, bplcon1: 170
+abs - Here i should be moving the first chunk and in am not doing it!!!!!
+Row 1 has NOT to be updated for bX 6 - counter still at 0
+pscrollflags set to 1
+abs - Processing row 1
+abs - Ok now we are on position 6 so we must absolute shift this perspective bar to the left for 6 positions: mods 0 and bpl1con to 6
+abs - New registers : mods : 6, bplcon1: 153
+Row 2 has NOT to be updated for bX 6 - counter still at 1
+pscrollflags set to 1
+abs - Processing row 2
+abs - Ok now we are on position 6 so we must absolute shift this perspective bar to the left for 6 positions: mods 0 and bpl1con to 6
+abs - New registers : mods : 6, bplcon1: 153
+Row 3 has NOT to be updated for bX 6 - counter still at 1
+pscrollflags set to 2
+abs - Processing row 3
+abs - Ok now we are on position 6 so we must absolute shift this perspective bar to the left for 7 positions: mods 0 and bpl1con to 7
+abs - New registers : mods : 6, bplcon1: 136
+Row 4 has NOT to be updated for bX 6 - counter still at 2
+pscrollflags set to 2
+abs - Processing row 4
+abs - Ok now we are on position 6 so we must absolute shift this perspective bar to the left for 7 positions: mods 0 and bpl1con to 7
+abs - New registers : mods : 6, bplcon1: 136
+Row 5 has to be updated for bX 6 - incrementing its counter to 3
+pscrollflags set to 3
+abs - Processing row 5
+abs - Ok now we are on position 6 so we must absolute shift this perspective bar to the left for 8 positions: mods 0 and bpl1con to 8
+abs - New registers : mods : 6, bplcon1: 119
+Row 6 has to be updated for bX 6 - incrementing its counter to 4
+pscrollflags set to 3
+abs - Processing row 6
+abs - Ok now we are on position 6 so we must absolute shift this perspective bar to the left for 8 positions: mods 0 and bpl1con to 8
+abs - New registers : mods : 6, bplcon1: 119
+Row 7 has to be updated for bX 6 - incrementing its counter to 4
+pscrollflags set to 4
+abs - Processing row 7
+abs - Ok now we are on position 6 so we must absolute shift this perspective bar to the left for 9 positions: mods 0 and bpl1con to 9
+abs - New registers : mods : 6, bplcon1: 102
+Row 8 has to be updated for bX 6 - incrementing its counter to 5
+pscrollflags set to 4
+abs - Processing row 8
+abs - Ok now we are on position 6 so we must absolute shift this perspective bar to the left for 9 positions: mods 0 and bpl1con to 9
+abs - New registers : mods : 6, bplcon1: 102
+Row 9 has to be updated for bX 6 - incrementing its counter to 5
+pscrollflags set to 5
+abs - Processing row 9
+abs - Ok now we are on position 6 so we must absolute shift this perspective bar to the left for 10 positions: mods 0 and bpl1con to 10
+abs - New registers : mods : 6, bplcon1: 85
+Row 10 has to be updated for bX 6 - incrementing its counter to 6
+pscrollflags set to 5
+abs - Processing row 10
+abs - Ok now we are on position 6 so we must absolute shift this perspective bar to the left for 10 positions: mods 0 and bpl1con to 10
+abs - New registers : mods : 6, bplcon1: 85
+Row 11 has to be updated for bX 6 - incrementing its counter to 6
+pscrollflags set to 6
+abs - Processing row 11
+abs - Ok now we are on position 6 so we must absolute shift this perspective bar to the left for 11 positions: mods 0 and bpl1con to 11
+abs - New registers : mods : 6, bplcon1: 68
 UpdateCamera2 input 7
 UpdateCamera2 shift  153
 Caso con fetch modificato a 30
-uwShiftPerspective: 153
-uwModPerspective: 6
-alessio: 0
+Row 0 has NOT to be updated for bX 7 - counter still at 0
+pscrollflags set to 0
+abs - Processing row 0
+abs - Ok now we are on position 7 so we must absolute shift this perspective bar to the left for 6 positions: mods 0 and bpl1con to 6
+abs - New registers : mods : 6, bplcon1: 153
+abs - Here i should be moving the first chunk and in am not doing it!!!!!
+Row 1 has NOT to be updated for bX 7 - counter still at 1
+pscrollflags set to 1
+abs - Processing row 1
+abs - Ok now we are on position 7 so we must absolute shift this perspective bar to the left for 7 positions: mods 0 and bpl1con to 7
+abs - New registers : mods : 6, bplcon1: 136
+Row 2 has NOT to be updated for bX 7 - counter still at 1
+pscrollflags set to 1
+abs - Processing row 2
+abs - Ok now we are on position 7 so we must absolute shift this perspective bar to the left for 7 positions: mods 0 and bpl1con to 7
+abs - New registers : mods : 6, bplcon1: 136
+Row 3 has NOT to be updated for bX 7 - counter still at 2
+pscrollflags set to 2
+abs - Processing row 3
+abs - Ok now we are on position 7 so we must absolute shift this perspective bar to the left for 8 positions: mods 0 and bpl1con to 8
+abs - New registers : mods : 6, bplcon1: 119
+Row 4 has NOT to be updated for bX 7 - counter still at 2
+pscrollflags set to 3
+abs - Processing row 4
+abs - Ok now we are on position 7 so we must absolute shift this perspective bar to the left for 9 positions: mods 0 and bpl1con to 9
+abs - New registers : mods : 6, bplcon1: 102
+Row 5 has NOT to be updated for bX 7 - counter still at 3
+pscrollflags set to 3
+abs - Processing row 5
+abs - Ok now we are on position 7 so we must absolute shift this perspective bar to the left for 9 positions: mods 0 and bpl1con to 9
+abs - New registers : mods : 6, bplcon1: 102
+Row 6 has to be updated for bX 7 - incrementing its counter to 4
+pscrollflags set to 4
+abs - Processing row 6
+abs - Ok now we are on position 7 so we must absolute shift this perspective bar to the left for 10 positions: mods 0 and bpl1con to 10
+abs - New registers : mods : 6, bplcon1: 85
+Row 7 has to be updated for bX 7 - incrementing its counter to 5
+pscrollflags set to 4
+abs - Processing row 7
+abs - Ok now we are on position 7 so we must absolute shift this perspective bar to the left for 10 positions: mods 0 and bpl1con to 10
+abs - New registers : mods : 6, bplcon1: 85
+Row 8 has to be updated for bX 7 - incrementing its counter to 5
+pscrollflags set to 5
+abs - Processing row 8
+abs - Ok now we are on position 7 so we must absolute shift this perspective bar to the left for 11 positions: mods 0 and bpl1con to 11
+abs - New registers : mods : 6, bplcon1: 68
+Row 9 has to be updated for bX 7 - incrementing its counter to 6
+pscrollflags set to 6
+abs - Processing row 9
+abs - Ok now we are on position 7 so we must absolute shift this perspective bar to the left for 12 positions: mods 0 and bpl1con to 12
+abs - New registers : mods : 6, bplcon1: 51
+Row 10 has to be updated for bX 7 - incrementing its counter to 6
+pscrollflags set to 6
+abs - Processing row 10
+abs - Ok now we are on position 7 so we must absolute shift this perspective bar to the left for 12 positions: mods 0 and bpl1con to 12
+abs - New registers : mods : 6, bplcon1: 51
+Row 11 has to be updated for bX 7 - incrementing its counter to 7
+pscrollflags set to 7
+abs - Processing row 11
+abs - Ok now we are on position 7 so we must absolute shift this perspective bar to the left for 13 positions: mods 0 and bpl1con to 13
+abs - New registers : mods : 6, bplcon1: 34
 UpdateCamera2 input 8
 UpdateCamera2 shift  136
 Caso con fetch modificato a 30
-uwShiftPerspective: 136
-uwModPerspective: 6
-alessio: 0
+Row 0 has NOT to be updated for bX 8 - counter still at 0
+pscrollflags set to 0
+abs - Processing row 0
+abs - Ok now we are on position 8 so we must absolute shift this perspective bar to the left for 7 positions: mods 0 and bpl1con to 7
+abs - New registers : mods : 6, bplcon1: 136
+abs - Here i should be moving the first chunk and in am not doing it!!!!!
+Row 1 has NOT to be updated for bX 8 - counter still at 1
+pscrollflags set to 1
+abs - Processing row 1
+abs - Ok now we are on position 8 so we must absolute shift this perspective bar to the left for 8 positions: mods 0 and bpl1con to 8
+abs - New registers : mods : 6, bplcon1: 119
+Row 2 has NOT to be updated for bX 8 - counter still at 1
+pscrollflags set to 1
+abs - Processing row 2
+abs - Ok now we are on position 8 so we must absolute shift this perspective bar to the left for 8 positions: mods 0 and bpl1con to 8
+abs - New registers : mods : 6, bplcon1: 119
+Row 3 has NOT to be updated for bX 8 - counter still at 2
+pscrollflags set to 2
+abs - Processing row 3
+abs - Ok now we are on position 8 so we must absolute shift this perspective bar to the left for 9 positions: mods 0 and bpl1con to 9
+abs - New registers : mods : 6, bplcon1: 102
+Row 4 has NOT to be updated for bX 8 - counter still at 3
+pscrollflags set to 3
+abs - Processing row 4
+abs - Ok now we are on position 8 so we must absolute shift this perspective bar to the left for 10 positions: mods 0 and bpl1con to 10
+abs - New registers : mods : 6, bplcon1: 85
+Row 5 has NOT to be updated for bX 8 - counter still at 3
+pscrollflags set to 4
+abs - Processing row 5
+abs - Ok now we are on position 8 so we must absolute shift this perspective bar to the left for 11 positions: mods 0 and bpl1con to 11
+abs - New registers : mods : 6, bplcon1: 68
+Row 6 has NOT to be updated for bX 8 - counter still at 4
+pscrollflags set to 4
+abs - Processing row 6
+abs - Ok now we are on position 8 so we must absolute shift this perspective bar to the left for 11 positions: mods 0 and bpl1con to 11
+abs - New registers : mods : 6, bplcon1: 68
+Row 7 has to be updated for bX 8 - incrementing its counter to 5
+pscrollflags set to 5
+abs - Processing row 7
+abs - Ok now we are on position 8 so we must absolute shift this perspective bar to the left for 12 positions: mods 0 and bpl1con to 12
+abs - New registers : mods : 6, bplcon1: 51
+Row 8 has to be updated for bX 8 - incrementing its counter to 6
+pscrollflags set to 6
+abs - Processing row 8
+abs - Ok now we are on position 8 so we must absolute shift this perspective bar to the left for 13 positions: mods 0 and bpl1con to 13
+abs - New registers : mods : 6, bplcon1: 34
+Row 9 has to be updated for bX 8 - incrementing its counter to 7
+pscrollflags set to 7
+abs - Processing row 9
+abs - Ok now we are on position 8 so we must absolute shift this perspective bar to the left for 14 positions: mods 0 and bpl1con to 14
+abs - New registers : mods : 6, bplcon1: 17
+Row 10 has to be updated for bX 8 - incrementing its counter to 7
+pscrollflags set to 7
+abs - Processing row 10
+abs - Ok now we are on position 8 so we must absolute shift this perspective bar to the left for 14 positions: mods 0 and bpl1con to 14
+abs - New registers : mods : 6, bplcon1: 17
+Row 11 has to be updated for bX 8 - incrementing its counter to 8
+pscrollflags set to 8
+abs - Processing row 11
+abs - Ok now we are on position 8 so we must absolute shift this perspective bar to the left for 15 positions: mods 0 and bpl1con to 15
+abs - New registers : mods : 6, bplcon1: 0
 UpdateCamera2 input 9
 UpdateCamera2 shift  119
 Caso con fetch modificato a 30
-uwShiftPerspective: 119
-uwModPerspective: 6
-alessio: 0
+Row 0 has NOT to be updated for bX 9 - counter still at 0
+pscrollflags set to 0
+abs - Processing row 0
+abs - Ok now we are on position 9 so we must absolute shift this perspective bar to the left for 8 positions: mods 0 and bpl1con to 8
+abs - New registers : mods : 6, bplcon1: 119
+abs - Here i should be moving the first chunk and in am not doing it!!!!!
+Row 1 has NOT to be updated for bX 9 - counter still at 1
+pscrollflags set to 1
+abs - Processing row 1
+abs - Ok now we are on position 9 so we must absolute shift this perspective bar to the left for 9 positions: mods 0 and bpl1con to 9
+abs - New registers : mods : 6, bplcon1: 102
+Row 2 has NOT to be updated for bX 9 - counter still at 1
+pscrollflags set to 2
+abs - Processing row 2
+abs - Ok now we are on position 9 so we must absolute shift this perspective bar to the left for 10 positions: mods 0 and bpl1con to 10
+abs - New registers : mods : 6, bplcon1: 85
+Row 3 has NOT to be updated for bX 9 - counter still at 2
+pscrollflags set to 2
+abs - Processing row 3
+abs - Ok now we are on position 9 so we must absolute shift this perspective bar to the left for 10 positions: mods 0 and bpl1con to 10
+abs - New registers : mods : 6, bplcon1: 85
+Row 4 has NOT to be updated for bX 9 - counter still at 3
+pscrollflags set to 3
+abs - Processing row 4
+abs - Ok now we are on position 9 so we must absolute shift this perspective bar to the left for 11 positions: mods 0 and bpl1con to 11
+abs - New registers : mods : 6, bplcon1: 68
+Row 5 has NOT to be updated for bX 9 - counter still at 4
+pscrollflags set to 4
+abs - Processing row 5
+abs - Ok now we are on position 9 so we must absolute shift this perspective bar to the left for 12 positions: mods 0 and bpl1con to 12
+abs - New registers : mods : 6, bplcon1: 51
+Row 6 has NOT to be updated for bX 9 - counter still at 4
+pscrollflags set to 5
+abs - Processing row 6
+abs - Ok now we are on position 9 so we must absolute shift this perspective bar to the left for 13 positions: mods 0 and bpl1con to 13
+abs - New registers : mods : 6, bplcon1: 34
+Row 7 has NOT to be updated for bX 9 - counter still at 5
+pscrollflags set to 6
+abs - Processing row 7
+abs - Ok now we are on position 9 so we must absolute shift this perspective bar to the left for 14 positions: mods 0 and bpl1con to 14
+abs - New registers : mods : 6, bplcon1: 17
+Row 8 has to be updated for bX 9 - incrementing its counter to 7
+pscrollflags set to 7
+abs - Processing row 8
+abs - Ok now we are on position 9 so we must absolute shift this perspective bar to the left for 15 positions: mods 0 and bpl1con to 15
+abs - New registers : mods : 6, bplcon1: 0
+Row 9 has to be updated for bX 9 - incrementing its counter to 8
+pscrollflags set to 7
+abs - Processing row 9
+abs - Ok now we are on position 9 so we must absolute shift this perspective bar to the left for 15 positions: mods 0 and bpl1con to 15
+abs - New registers : mods : 6, bplcon1: 0
+Row 10 has to be updated for bX 9 - incrementing its counter to 8
+pscrollflags set to 8
+abs - Processing row 10
+abs - Ok now we are on position 9 so we must absolute shift this perspective bar to the left for 16 positions: mods 1 and bpl1con to 0
+abs - New registers : mods : 8, bplcon1: 255
+Row 11 has to be updated for bX 9 - incrementing its counter to 9
+pscrollflags set to 9
+abs - Processing row 11
+abs - Ok now we are on position 9 so we must absolute shift this perspective bar to the left for 17 positions: mods 1 and bpl1con to 1
+abs - New registers : mods : 6, bplcon1: 238
 UpdateCamera2 input 10
 UpdateCamera2 shift  102
 Caso con fetch modificato a 30
-uwShiftPerspective: 102
-uwModPerspective: 6
-alessio: 0
+Row 0 has NOT to be updated for bX 10 - counter still at 0
+pscrollflags set to 0
+abs - Processing row 0
+abs - Ok now we are on position 10 so we must absolute shift this perspective bar to the left for 9 positions: mods 0 and bpl1con to 9
+abs - New registers : mods : 6, bplcon1: 102
+abs - Here i should be moving the first chunk and in am not doing it!!!!!
+Row 1 has NOT to be updated for bX 10 - counter still at 1
+pscrollflags set to 1
+abs - Processing row 1
+abs - Ok now we are on position 10 so we must absolute shift this perspective bar to the left for 10 positions: mods 0 and bpl1con to 10
+abs - New registers : mods : 6, bplcon1: 85
+Row 2 has NOT to be updated for bX 10 - counter still at 2
+pscrollflags set to 2
+abs - Processing row 2
+abs - Ok now we are on position 10 so we must absolute shift this perspective bar to the left for 11 positions: mods 0 and bpl1con to 11
+abs - New registers : mods : 6, bplcon1: 68
+Row 3 has NOT to be updated for bX 10 - counter still at 2
+pscrollflags set to 3
+abs - Processing row 3
+abs - Ok now we are on position 10 so we must absolute shift this perspective bar to the left for 12 positions: mods 0 and bpl1con to 12
+abs - New registers : mods : 6, bplcon1: 51
+Row 4 has NOT to be updated for bX 10 - counter still at 3
+pscrollflags set to 4
+abs - Processing row 4
+abs - Ok now we are on position 10 so we must absolute shift this perspective bar to the left for 13 positions: mods 0 and bpl1con to 13
+abs - New registers : mods : 6, bplcon1: 34
+Row 5 has NOT to be updated for bX 10 - counter still at 4
+pscrollflags set to 5
+abs - Processing row 5
+abs - Ok now we are on position 10 so we must absolute shift this perspective bar to the left for 14 positions: mods 0 and bpl1con to 14
+abs - New registers : mods : 6, bplcon1: 17
+Row 6 has NOT to be updated for bX 10 - counter still at 5
+pscrollflags set to 6
+abs - Processing row 6
+abs - Ok now we are on position 10 so we must absolute shift this perspective bar to the left for 15 positions: mods 0 and bpl1con to 15
+abs - New registers : mods : 6, bplcon1: 0
+Row 7 has NOT to be updated for bX 10 - counter still at 6
+pscrollflags set to 6
+abs - Processing row 7
+abs - Ok now we are on position 10 so we must absolute shift this perspective bar to the left for 15 positions: mods 0 and bpl1con to 15
+abs - New registers : mods : 6, bplcon1: 0
+Row 8 has NOT to be updated for bX 10 - counter still at 7
+pscrollflags set to 7
+abs - Processing row 8
+abs - Ok now we are on position 10 so we must absolute shift this perspective bar to the left for 16 positions: mods 1 and bpl1con to 0
+abs - New registers : mods : 8, bplcon1: 255
+Row 9 has to be updated for bX 10 - incrementing its counter to 8
+pscrollflags set to 8
+abs - Processing row 9
+abs - Ok now we are on position 10 so we must absolute shift this perspective bar to the left for 17 positions: mods 1 and bpl1con to 1
+abs - New registers : mods : 6, bplcon1: 238
+Row 10 has to be updated for bX 10 - incrementing its counter to 9
+pscrollflags set to 9
+abs - Processing row 10
+abs - Ok now we are on position 10 so we must absolute shift this perspective bar to the left for 18 positions: mods 1 and bpl1con to 2
+abs - New registers : mods : 6, bplcon1: 221
+Row 11 has to be updated for bX 10 - incrementing its counter to 10
+pscrollflags set to 10
+abs - Processing row 11
+abs - Ok now we are on position 10 so we must absolute shift this perspective bar to the left for 19 positions: mods 1 and bpl1con to 3
+abs - New registers : mods : 6, bplcon1: 204
 UpdateCamera2 input 11
 UpdateCamera2 shift  85
 Caso con fetch modificato a 30
-uwShiftPerspective: 85
-uwModPerspective: 6
-alessio: 0
+Row 0 has NOT to be updated for bX 11 - counter still at 0
+pscrollflags set to 0
+abs - Processing row 0
+abs - Ok now we are on position 11 so we must absolute shift this perspective bar to the left for 10 positions: mods 0 and bpl1con to 10
+abs - New registers : mods : 6, bplcon1: 85
+abs - Here i should be moving the first chunk and in am not doing it!!!!!
+Row 1 has NOT to be updated for bX 11 - counter still at 1
+pscrollflags set to 1
+abs - Processing row 1
+abs - Ok now we are on position 11 so we must absolute shift this perspective bar to the left for 11 positions: mods 0 and bpl1con to 11
+abs - New registers : mods : 6, bplcon1: 68
+Row 2 has NOT to be updated for bX 11 - counter still at 2
+pscrollflags set to 2
+abs - Processing row 2
+abs - Ok now we are on position 11 so we must absolute shift this perspective bar to the left for 12 positions: mods 0 and bpl1con to 12
+abs - New registers : mods : 6, bplcon1: 51
+Row 3 has NOT to be updated for bX 11 - counter still at 3
+pscrollflags set to 3
+abs - Processing row 3
+abs - Ok now we are on position 11 so we must absolute shift this perspective bar to the left for 13 positions: mods 0 and bpl1con to 13
+abs - New registers : mods : 6, bplcon1: 34
+Row 4 has NOT to be updated for bX 11 - counter still at 4
+pscrollflags set to 4
+abs - Processing row 4
+abs - Ok now we are on position 11 so we must absolute shift this perspective bar to the left for 14 positions: mods 0 and bpl1con to 14
+abs - New registers : mods : 6, bplcon1: 17
+Row 5 has NOT to be updated for bX 11 - counter still at 5
+pscrollflags set to 5
+abs - Processing row 5
+abs - Ok now we are on position 11 so we must absolute shift this perspective bar to the left for 15 positions: mods 0 and bpl1con to 15
+abs - New registers : mods : 6, bplcon1: 0
+Row 6 has NOT to be updated for bX 11 - counter still at 6
+pscrollflags set to 6
+abs - Processing row 6
+abs - Ok now we are on position 11 so we must absolute shift this perspective bar to the left for 16 positions: mods 1 and bpl1con to 0
+abs - New registers : mods : 8, bplcon1: 255
+Row 7 has NOT to be updated for bX 11 - counter still at 6
+pscrollflags set to 7
+abs - Processing row 7
+abs - Ok now we are on position 11 so we must absolute shift this perspective bar to the left for 17 positions: mods 1 and bpl1con to 1
+abs - New registers : mods : 6, bplcon1: 238
+Row 8 has NOT to be updated for bX 11 - counter still at 7
+pscrollflags set to 8
+abs - Processing row 8
+abs - Ok now we are on position 11 so we must absolute shift this perspective bar to the left for 18 positions: mods 1 and bpl1con to 2
+abs - New registers : mods : 6, bplcon1: 221
+Row 9 has NOT to be updated for bX 11 - counter still at 8
+pscrollflags set to 9
+abs - Processing row 9
+abs - Ok now we are on position 11 so we must absolute shift this perspective bar to the left for 19 positions: mods 1 and bpl1con to 3
+abs - New registers : mods : 6, bplcon1: 204
+Row 10 has to be updated for bX 11 - incrementing its counter to 10
+pscrollflags set to 10
+abs - Processing row 10
+abs - Ok now we are on position 11 so we must absolute shift this perspective bar to the left for 20 positions: mods 1 and bpl1con to 4
+abs - New registers : mods : 6, bplcon1: 187
+Row 11 has to be updated for bX 11 - incrementing its counter to 11
+pscrollflags set to 11
+abs - Processing row 11
+abs - Ok now we are on position 11 so we must absolute shift this perspective bar to the left for 21 positions: mods 1 and bpl1con to 5
+abs - New registers : mods : 6, bplcon1: 170
 UpdateCamera2 input 12
 UpdateCamera2 shift  68
 Caso con fetch modificato a 30
-uwShiftPerspective: 68
-uwModPerspective: 6
-alessio: 0
+Row 0 has NOT to be updated for bX 12 - counter still at 0
+pscrollflags set to 0
+abs - Processing row 0
+abs - Ok now we are on position 12 so we must absolute shift this perspective bar to the left for 11 positions: mods 0 and bpl1con to 11
+abs - New registers : mods : 6, bplcon1: 68
+abs - Here i should be moving the first chunk and in am not doing it!!!!!
+Row 1 has NOT to be updated for bX 12 - counter still at 1
+pscrollflags set to 1
+abs - Processing row 1
+abs - Ok now we are on position 12 so we must absolute shift this perspective bar to the left for 12 positions: mods 0 and bpl1con to 12
+abs - New registers : mods : 6, bplcon1: 51
+Row 2 has NOT to be updated for bX 12 - counter still at 2
+pscrollflags set to 2
+abs - Processing row 2
+abs - Ok now we are on position 12 so we must absolute shift this perspective bar to the left for 13 positions: mods 0 and bpl1con to 13
+abs - New registers : mods : 6, bplcon1: 34
+Row 3 has NOT to be updated for bX 12 - counter still at 3
+pscrollflags set to 3
+abs - Processing row 3
+abs - Ok now we are on position 12 so we must absolute shift this perspective bar to the left for 14 positions: mods 0 and bpl1con to 14
+abs - New registers : mods : 6, bplcon1: 17
+Row 4 has NOT to be updated for bX 12 - counter still at 4
+pscrollflags set to 4
+abs - Processing row 4
+abs - Ok now we are on position 12 so we must absolute shift this perspective bar to the left for 15 positions: mods 0 and bpl1con to 15
+abs - New registers : mods : 6, bplcon1: 0
+Row 5 has NOT to be updated for bX 12 - counter still at 5
+pscrollflags set to 5
+abs - Processing row 5
+abs - Ok now we are on position 12 so we must absolute shift this perspective bar to the left for 16 positions: mods 1 and bpl1con to 0
+abs - New registers : mods : 8, bplcon1: 255
+Row 6 has NOT to be updated for bX 12 - counter still at 6
+pscrollflags set to 7
+abs - Processing row 6
+abs - Ok now we are on position 12 so we must absolute shift this perspective bar to the left for 18 positions: mods 1 and bpl1con to 2
+abs - New registers : mods : 6, bplcon1: 221
+Row 7 has NOT to be updated for bX 12 - counter still at 7
+pscrollflags set to 8
+abs - Processing row 7
+abs - Ok now we are on position 12 so we must absolute shift this perspective bar to the left for 19 positions: mods 1 and bpl1con to 3
+abs - New registers : mods : 6, bplcon1: 204
+Row 8 has NOT to be updated for bX 12 - counter still at 8
+pscrollflags set to 9
+abs - Processing row 8
+abs - Ok now we are on position 12 so we must absolute shift this perspective bar to the left for 20 positions: mods 1 and bpl1con to 4
+abs - New registers : mods : 6, bplcon1: 187
+Row 9 has NOT to be updated for bX 12 - counter still at 9
+pscrollflags set to 10
+abs - Processing row 9
+abs - Ok now we are on position 12 so we must absolute shift this perspective bar to the left for 21 positions: mods 1 and bpl1con to 5
+abs - New registers : mods : 6, bplcon1: 170
+Row 10 has NOT to be updated for bX 12 - counter still at 10
+pscrollflags set to 11
+abs - Processing row 10
+abs - Ok now we are on position 12 so we must absolute shift this perspective bar to the left for 22 positions: mods 1 and bpl1con to 6
+abs - New registers : mods : 6, bplcon1: 153
+Row 11 has to be updated for bX 12 - incrementing its counter to 12
+pscrollflags set to 12
+abs - Processing row 11
+abs - Ok now we are on position 12 so we must absolute shift this perspective bar to the left for 23 positions: mods 1 and bpl1con to 7
+abs - New registers : mods : 6, bplcon1: 136
 UpdateCamera2 input 13
 UpdateCamera2 shift  51
 Caso con fetch modificato a 30
-uwShiftPerspective: 51
-uwModPerspective: 6
-alessio: 0
+Row 0 has NOT to be updated for bX 13 - counter still at 0
+pscrollflags set to 0
+abs - Processing row 0
+abs - Ok now we are on position 13 so we must absolute shift this perspective bar to the left for 12 positions: mods 0 and bpl1con to 12
+abs - New registers : mods : 6, bplcon1: 51
+abs - Here i should be moving the first chunk and in am not doing it!!!!!
+Row 1 has NOT to be updated for bX 13 - counter still at 1
+pscrollflags set to 1
+abs - Processing row 1
+abs - Ok now we are on position 13 so we must absolute shift this perspective bar to the left for 13 positions: mods 0 and bpl1con to 13
+abs - New registers : mods : 6, bplcon1: 34
+Row 2 has NOT to be updated for bX 13 - counter still at 2
+pscrollflags set to 2
+abs - Processing row 2
+abs - Ok now we are on position 13 so we must absolute shift this perspective bar to the left for 14 positions: mods 0 and bpl1con to 14
+abs - New registers : mods : 6, bplcon1: 17
+Row 3 has NOT to be updated for bX 13 - counter still at 3
+pscrollflags set to 4
+abs - Processing row 3
+abs - Ok now we are on position 13 so we must absolute shift this perspective bar to the left for 16 positions: mods 1 and bpl1con to 0
+abs - New registers : mods : 8, bplcon1: 255
+Row 4 has NOT to be updated for bX 13 - counter still at 4
+pscrollflags set to 5
+abs - Processing row 4
+abs - Ok now we are on position 13 so we must absolute shift this perspective bar to the left for 17 positions: mods 1 and bpl1con to 1
+abs - New registers : mods : 6, bplcon1: 238
+Row 5 has NOT to be updated for bX 13 - counter still at 5
+pscrollflags set to 6
+abs - Processing row 5
+abs - Ok now we are on position 13 so we must absolute shift this perspective bar to the left for 18 positions: mods 1 and bpl1con to 2
+abs - New registers : mods : 6, bplcon1: 221
+Row 6 has NOT to be updated for bX 13 - counter still at 7
+pscrollflags set to 7
+abs - Processing row 6
+abs - Ok now we are on position 13 so we must absolute shift this perspective bar to the left for 19 positions: mods 1 and bpl1con to 3
+abs - New registers : mods : 6, bplcon1: 204
+Row 7 has NOT to be updated for bX 13 - counter still at 8
+pscrollflags set to 8
+abs - Processing row 7
+abs - Ok now we are on position 13 so we must absolute shift this perspective bar to the left for 20 positions: mods 1 and bpl1con to 4
+abs - New registers : mods : 6, bplcon1: 187
+Row 8 has NOT to be updated for bX 13 - counter still at 9
+pscrollflags set to 10
+abs - Processing row 8
+abs - Ok now we are on position 13 so we must absolute shift this perspective bar to the left for 22 positions: mods 1 and bpl1con to 6
+abs - New registers : mods : 6, bplcon1: 153
+Row 9 has NOT to be updated for bX 13 - counter still at 10
+pscrollflags set to 11
+abs - Processing row 9
+abs - Ok now we are on position 13 so we must absolute shift this perspective bar to the left for 23 positions: mods 1 and bpl1con to 7
+abs - New registers : mods : 6, bplcon1: 136
+Row 10 has NOT to be updated for bX 13 - counter still at 11
+pscrollflags set to 12
+abs - Processing row 10
+abs - Ok now we are on position 13 so we must absolute shift this perspective bar to the left for 24 positions: mods 1 and bpl1con to 8
+abs - New registers : mods : 6, bplcon1: 119
+Row 11 has NOT to be updated for bX 13 - counter still at 12
+pscrollflags set to 13
+abs - Processing row 11
+abs - Ok now we are on position 13 so we must absolute shift this perspective bar to the left for 25 positions: mods 1 and bpl1con to 9
+abs - New registers : mods : 6, bplcon1: 102
 UpdateCamera2 input 14
 UpdateCamera2 shift  34
 Caso con fetch modificato a 30
-uwShiftPerspective: 34
-uwModPerspective: 6
-alessio: 0
+Row 0 has NOT to be updated for bX 14 - counter still at 0
+pscrollflags set to 0
+abs - Processing row 0
+abs - Ok now we are on position 14 so we must absolute shift this perspective bar to the left for 13 positions: mods 0 and bpl1con to 13
+abs - New registers : mods : 6, bplcon1: 34
+abs - Here i should be moving the first chunk and in am not doing it!!!!!
+Row 1 has NOT to be updated for bX 14 - counter still at 1
+pscrollflags set to 1
+abs - Processing row 1
+abs - Ok now we are on position 14 so we must absolute shift this perspective bar to the left for 14 positions: mods 0 and bpl1con to 14
+abs - New registers : mods : 6, bplcon1: 17
+Row 2 has NOT to be updated for bX 14 - counter still at 2
+pscrollflags set to 3
+abs - Processing row 2
+abs - Ok now we are on position 14 so we must absolute shift this perspective bar to the left for 16 positions: mods 1 and bpl1con to 0
+abs - New registers : mods : 8, bplcon1: 255
+Row 3 has NOT to be updated for bX 14 - counter still at 4
+pscrollflags set to 4
+abs - Processing row 3
+abs - Ok now we are on position 14 so we must absolute shift this perspective bar to the left for 17 positions: mods 1 and bpl1con to 1
+abs - New registers : mods : 6, bplcon1: 238
+Row 4 has NOT to be updated for bX 14 - counter still at 5
+pscrollflags set to 5
+abs - Processing row 4
+abs - Ok now we are on position 14 so we must absolute shift this perspective bar to the left for 18 positions: mods 1 and bpl1con to 2
+abs - New registers : mods : 6, bplcon1: 221
+Row 5 has NOT to be updated for bX 14 - counter still at 6
+pscrollflags set to 6
+abs - Processing row 5
+abs - Ok now we are on position 14 so we must absolute shift this perspective bar to the left for 19 positions: mods 1 and bpl1con to 3
+abs - New registers : mods : 6, bplcon1: 204
+Row 6 has NOT to be updated for bX 14 - counter still at 7
+pscrollflags set to 8
+abs - Processing row 6
+abs - Ok now we are on position 14 so we must absolute shift this perspective bar to the left for 21 positions: mods 1 and bpl1con to 5
+abs - New registers : mods : 6, bplcon1: 170
+Row 7 has NOT to be updated for bX 14 - counter still at 8
+pscrollflags set to 9
+abs - Processing row 7
+abs - Ok now we are on position 14 so we must absolute shift this perspective bar to the left for 22 positions: mods 1 and bpl1con to 6
+abs - New registers : mods : 6, bplcon1: 153
+Row 8 has NOT to be updated for bX 14 - counter still at 10
+pscrollflags set to 10
+abs - Processing row 8
+abs - Ok now we are on position 14 so we must absolute shift this perspective bar to the left for 23 positions: mods 1 and bpl1con to 7
+abs - New registers : mods : 6, bplcon1: 136
+Row 9 has NOT to be updated for bX 14 - counter still at 11
+pscrollflags set to 12
+abs - Processing row 9
+abs - Ok now we are on position 14 so we must absolute shift this perspective bar to the left for 25 positions: mods 1 and bpl1con to 9
+abs - New registers : mods : 6, bplcon1: 102
+Row 10 has NOT to be updated for bX 14 - counter still at 12
+pscrollflags set to 13
+abs - Processing row 10
+abs - Ok now we are on position 14 so we must absolute shift this perspective bar to the left for 26 positions: mods 1 and bpl1con to 10
+abs - New registers : mods : 6, bplcon1: 85
+Row 11 has NOT to be updated for bX 14 - counter still at 13
+pscrollflags set to 14
+abs - Processing row 11
+abs - Ok now we are on position 14 so we must absolute shift this perspective bar to the left for 27 positions: mods 1 and bpl1con to 11
+abs - New registers : mods : 6, bplcon1: 68
 UpdateCamera2 input 15
 UpdateCamera2 shift  17
 Caso con fetch modificato a 30
-uwShiftPerspective: 17
-uwModPerspective: 6
-alessio: 0
+Row 0 has NOT to be updated for bX 15 - counter still at 0
+pscrollflags set to 0
+abs - Processing row 0
+abs - Ok now we are on position 15 so we must absolute shift this perspective bar to the left for 14 positions: mods 0 and bpl1con to 14
+abs - New registers : mods : 6, bplcon1: 17
+abs - Here i should be moving the first chunk and in am not doing it!!!!!
+Row 1 has NOT to be updated for bX 15 - counter still at 1
+pscrollflags set to 2
+abs - Processing row 1
+abs - Ok now we are on position 15 so we must absolute shift this perspective bar to the left for 16 positions: mods 1 and bpl1con to 0
+abs - New registers : mods : 8, bplcon1: 255
+Row 2 has NOT to be updated for bX 15 - counter still at 3
+pscrollflags set to 3
+abs - Processing row 2
+abs - Ok now we are on position 15 so we must absolute shift this perspective bar to the left for 17 positions: mods 1 and bpl1con to 1
+abs - New registers : mods : 6, bplcon1: 238
+Row 3 has NOT to be updated for bX 15 - counter still at 4
+pscrollflags set to 4
+abs - Processing row 3
+abs - Ok now we are on position 15 so we must absolute shift this perspective bar to the left for 18 positions: mods 1 and bpl1con to 2
+abs - New registers : mods : 6, bplcon1: 221
+Row 4 has NOT to be updated for bX 15 - counter still at 5
+pscrollflags set to 6
+abs - Processing row 4
+abs - Ok now we are on position 15 so we must absolute shift this perspective bar to the left for 20 positions: mods 1 and bpl1con to 4
+abs - New registers : mods : 6, bplcon1: 187
+Row 5 has NOT to be updated for bX 15 - counter still at 6
+pscrollflags set to 7
+abs - Processing row 5
+abs - Ok now we are on position 15 so we must absolute shift this perspective bar to the left for 21 positions: mods 1 and bpl1con to 5
+abs - New registers : mods : 6, bplcon1: 170
+Row 6 has NOT to be updated for bX 15 - counter still at 8
+pscrollflags set to 8
+abs - Processing row 6
+abs - Ok now we are on position 15 so we must absolute shift this perspective bar to the left for 22 positions: mods 1 and bpl1con to 6
+abs - New registers : mods : 6, bplcon1: 153
+Row 7 has NOT to be updated for bX 15 - counter still at 9
+pscrollflags set to 10
+abs - Processing row 7
+abs - Ok now we are on position 15 so we must absolute shift this perspective bar to the left for 24 positions: mods 1 and bpl1con to 8
+abs - New registers : mods : 6, bplcon1: 119
+Row 8 has NOT to be updated for bX 15 - counter still at 10
+pscrollflags set to 11
+abs - Processing row 8
+abs - Ok now we are on position 15 so we must absolute shift this perspective bar to the left for 25 positions: mods 1 and bpl1con to 9
+abs - New registers : mods : 6, bplcon1: 102
+Row 9 has NOT to be updated for bX 15 - counter still at 12
+pscrollflags set to 12
+abs - Processing row 9
+abs - Ok now we are on position 15 so we must absolute shift this perspective bar to the left for 26 positions: mods 1 and bpl1con to 10
+abs - New registers : mods : 6, bplcon1: 85
+Row 10 has NOT to be updated for bX 15 - counter still at 13
+pscrollflags set to 15
+abs - Processing row 10
+abs - Ok now we are on position 15 so we must absolute shift this perspective bar to the left for 29 positions: mods 1 and bpl1con to 13
+abs - New registers : mods : 6, bplcon1: 34
+Row 11 has NOT to be updated for bX 15 - counter still at 14
+pscrollflags set to 16
+abs - Processing row 11
+abs - Ok now we are on position 15 so we must absolute shift this perspective bar to the left for 30 positions: mods 1 and bpl1con to 14
+abs - New registers : mods : 6, bplcon1: 17
 UpdateCamera2 input 16
 UpdateCamera2 shift  0
 Caso con fetch modificato a 30
-uwShiftPerspective: 0
-uwModPerspective: 6
-alessio: 1
+Row 0 has NOT to be updated for bX 16 - counter still at 0
+pscrollflags set to 0
+abs - Processing row 0
+abs - Ok now we are on position 16 so we must absolute shift this perspective bar to the left for 15 positions: mods 0 and bpl1con to 15
+abs - New registers : mods : 6, bplcon1: 0
+abs - Here i should be moving the first chunk and in am not doing it!!!!!
+Row 1 has NOT to be updated for bX 16 - counter still at 2
+pscrollflags set to 2
+abs - Processing row 1
+abs - Ok now we are on position 16 so we must absolute shift this perspective bar to the left for 17 positions: mods 1 and bpl1con to 1
+abs - New registers : mods : 8, bplcon1: 238
+Row 2 has NOT to be updated for bX 16 - counter still at 3
+pscrollflags set to 4
+abs - Processing row 2
+abs - Ok now we are on position 16 so we must absolute shift this perspective bar to the left for 19 positions: mods 1 and bpl1con to 3
+abs - New registers : mods : 6, bplcon1: 204
+Row 3 has NOT to be updated for bX 16 - counter still at 4
+pscrollflags set to 5
+abs - Processing row 3
+abs - Ok now we are on position 16 so we must absolute shift this perspective bar to the left for 20 positions: mods 1 and bpl1con to 4
+abs - New registers : mods : 6, bplcon1: 187
+Row 4 has NOT to be updated for bX 16 - counter still at 6
+pscrollflags set to 6
+abs - Processing row 4
+abs - Ok now we are on position 16 so we must absolute shift this perspective bar to the left for 21 positions: mods 1 and bpl1con to 5
+abs - New registers : mods : 6, bplcon1: 170
+Row 5 has NOT to be updated for bX 16 - counter still at 7
+pscrollflags set to 7
+abs - Processing row 5
+abs - Ok now we are on position 16 so we must absolute shift this perspective bar to the left for 22 positions: mods 1 and bpl1con to 6
+abs - New registers : mods : 6, bplcon1: 153
+Row 6 has NOT to be updated for bX 16 - counter still at 8
+pscrollflags set to 9
+abs - Processing row 6
+abs - Ok now we are on position 16 so we must absolute shift this perspective bar to the left for 24 positions: mods 1 and bpl1con to 8
+abs - New registers : mods : 6, bplcon1: 119
+Row 7 has NOT to be updated for bX 16 - counter still at 10
+pscrollflags set to 10
+abs - Processing row 7
+abs - Ok now we are on position 16 so we must absolute shift this perspective bar to the left for 25 positions: mods 1 and bpl1con to 9
+abs - New registers : mods : 6, bplcon1: 102
+Row 8 has NOT to be updated for bX 16 - counter still at 11
+pscrollflags set to 12
+abs - Processing row 8
+abs - Ok now we are on position 16 so we must absolute shift this perspective bar to the left for 27 positions: mods 1 and bpl1con to 11
+abs - New registers : mods : 6, bplcon1: 68
+Row 9 has NOT to be updated for bX 16 - counter still at 12
+pscrollflags set to 13
+abs - Processing row 9
+abs - Ok now we are on position 16 so we must absolute shift this perspective bar to the left for 28 positions: mods 1 and bpl1con to 12
+abs - New registers : mods : 6, bplcon1: 51
+Row 10 has NOT to be updated for bX 16 - counter still at 15
+pscrollflags set to 15
+abs - Processing row 10
+abs - Ok now we are on position 16 so we must absolute shift this perspective bar to the left for 30 positions: mods 1 and bpl1con to 14
+abs - New registers : mods : 6, bplcon1: 17
+Row 11 has NOT to be updated for bX 16 - counter still at 16
+pscrollflags set to 16
+abs - Processing row 11
+abs - Ok now we are on position 16 so we must absolute shift this perspective bar to the left for 31 positions: mods 1 and bpl1con to 15
+abs - New registers : mods : 6, bplcon1: 0
 UpdateCamera2 input 17
 UpdateCamera2 shift  255
 Aggiungo 2
 Caso con fetch modificato a 30
-uwShiftPerspective: 238
-uwModPerspective: 6
-alessio: 1
-Block begin: stateManagerDestroy(pStateManager: 0x22c134)
-	Block begin: statePopAll(pStateManager: 0x22c134)
-		Block begin: viewDestroy(pView: 0x22d39c)
-			Block begin: viewLoad(pView: 0)...OK, time:  10.636 ms
-			Block begin: vPortDestroy(pVPort: 0x22d774)
-				Parent extView: 0x22d39c
-				found VP: 0x22d774... gotcha!
+Row 0 has NOT to be updated for bX 17 - counter still at 0
+pscrollflags set to 0
+abs - Processing row 0
+abs - Ok now we are on position 17 so we must absolute shift this perspective bar to the left for 0 positions: mods 0 and bpl1con to 0
+abs - New registers : mods : 6, bplcon1: 255
+abs - Here i should be moving the first chunk and in am not doing it!!!!!
+Row 1 has NOT to be updated for bX 17 - counter still at 2
+pscrollflags set to 2
+abs - Processing row 1
+abs - Ok now we are on position 17 so we must absolute shift this perspective bar to the left for 2 positions: mods 0 and bpl1con to 2
+abs - New registers : mods : 6, bplcon1: 221
+Row 2 has NOT to be updated for bX 17 - counter still at 4
+pscrollflags set to 3
+abs - Processing row 2
+abs - Ok now we are on position 17 so we must absolute shift this perspective bar to the left for 3 positions: mods 0 and bpl1con to 3
+abs - New registers : mods : 6, bplcon1: 204
+Row 3 has NOT to be updated for bX 17 - counter still at 5
+pscrollflags set to 5
+abs - Processing row 3
+abs - Ok now we are on position 17 so we must absolute shift this perspective bar to the left for 5 positions: mods 0 and bpl1con to 5
+abs - New registers : mods : 6, bplcon1: 170
+Row 4 has NOT to be updated for bX 17 - counter still at 6
+pscrollflags set to 6
+abs - Processing row 4
+abs - Ok now we are on position 17 so we must absolute shift this perspective bar to the left for 6 positions: mods 0 and bpl1con to 6
+abs - New registers : mods : 6, bplcon1: 153
+Row 5 has NOT to be updated for bX 17 - counter still at 7
+pscrollflags set to 8
+abs - Processing row 5
+abs - Ok now we are on position 17 so we must absolute shift this perspective bar to the left for 8 positions: mods 0 and bpl1con to 8
+abs - New registers : mods : 6, bplcon1: 119
+Row 6 has NOT to be updated for bX 17 - counter still at 9
+pscrollflags set to 10
+abs - Processing row 6
+abs - Ok now we are on position 17 so we must absolute shift this perspective bar to the left for 10 positions: mods 0 and bpl1con to 10
+abs - New registers : mods : 6, bplcon1: 85
+Row 7 has NOT to be updated for bX 17 - counter still at 10
+pscrollflags set to 11
+abs - Processing row 7
+abs - Ok now we are on position 17 so we must absolute shift this perspective bar to the left for 11 positions: mods 0 and bpl1con to 11
+abs - New registers : mods : 6, bplcon1: 68
+Row 8 has NOT to be updated for bX 17 - counter still at 12
+pscrollflags set to 13
+abs - Processing row 8
+abs - Ok now we are on position 17 so we must absolute shift this perspective bar to the left for 13 positions: mods 0 and bpl1con to 13
+abs - New registers : mods : 6, bplcon1: 34
+Row 9 has NOT to be updated for bX 17 - counter still at 13
+pscrollflags set to 14
+abs - Processing row 9
+abs - Ok now we are on position 17 so we must absolute shift this perspective bar to the left for 14 positions: mods 0 and bpl1con to 14
+abs - New registers : mods : 6, bplcon1: 17
+Row 10 has NOT to be updated for bX 17 - counter still at 15
+pscrollflags set to 16
+abs - Processing row 10
+abs - Ok now we are on position 17 so we must absolute shift this perspective bar to the left for 16 positions: mods 1 and bpl1con to 0
+abs - New registers : mods : 8, bplcon1: 255
+Row 11 has NOT to be updated for bX 17 - counter still at 16
+pscrollflags set to 17
+abs - Processing row 11
+abs - Ok now we are on position 17 so we must absolute shift this perspective bar to the left for 17 positions: mods 1 and bpl1con to 1
+abs - New registers : mods : 6, bplcon1: 238
+UpdateCamera2 input 18
+UpdateCamera2 shift  238
+Aggiungo 2
+Caso con fetch modificato a 30
+Row 0 has NOT to be updated for bX 18 - counter still at 0
+pscrollflags set to 0
+abs - Processing row 0
+abs - Ok now we are on position 18 so we must absolute shift this perspective bar to the left for 1 positions: mods 0 and bpl1con to 1
+abs - New registers : mods : 6, bplcon1: 238
+abs - Here i should be moving the first chunk and in am not doing it!!!!!
+Row 1 has NOT to be updated for bX 18 - counter still at 2
+pscrollflags set to 2
+abs - Processing row 1
+abs - Ok now we are on position 18 so we must absolute shift this perspective bar to the left for 3 positions: mods 0 and bpl1con to 3
+abs - New registers : mods : 6, bplcon1: 204
+Row 2 has NOT to be updated for bX 18 - counter still at 3
+pscrollflags set to 4
+abs - Processing row 2
+abs - Ok now we are on position 18 so we must absolute shift this perspective bar to the left for 5 positions: mods 0 and bpl1con to 5
+abs - New registers : mods : 6, bplcon1: 170
+Row 3 has NOT to be updated for bX 18 - counter still at 5
+pscrollflags set to 5
+abs - Processing row 3
+abs - Ok now we are on position 18 so we must absolute shift this perspective bar to the left for 6 positions: mods 0 and bpl1con to 6
+abs - New registers : mods : 6, bplcon1: 153
+Row 4 has NOT to be updated for bX 18 - counter still at 6
+pscrollflags set to 8
+abs - Processing row 4
+abs - Ok now we are on position 18 so we must absolute shift this perspective bar to the left for 9 positions: mods 0 and bpl1con to 9
+abs - New registers : mods : 6, bplcon1: 102
+Row 5 has NOT to be updated for bX 18 - counter still at 8
+pscrollflags set to 9
+abs - Processing row 5
+abs - Ok now we are on position 18 so we must absolute shift this perspective bar to the left for 10 positions: mods 0 and bpl1con to 10
+abs - New registers : mods : 6, bplcon1: 85
+Row 6 has NOT to be updated for bX 18 - counter still at 10
+pscrollflags set to 11
+abs - Processing row 6
+abs - Ok now we are on position 18 so we must absolute shift this perspective bar to the left for 12 positions: mods 0 and bpl1con to 12
+abs - New registers : mods : 6, bplcon1: 51
+Row 7 has NOT to be updated for bX 18 - counter still at 11
+pscrollflags set to 13
+abs - Processing row 7
+abs - Ok now we are on position 18 so we must absolute shift this perspective bar to the left for 14 positions: mods 0 and bpl1con to 14
+abs - New registers : mods : 6, bplcon1: 17
+Row 8 has NOT to be updated for bX 18 - counter still at 13
+pscrollflags set to 14
+abs - Processing row 8
+abs - Ok now we are on position 18 so we must absolute shift this perspective bar to the left for 15 positions: mods 0 and bpl1con to 15
+abs - New registers : mods : 6, bplcon1: 0
+Row 9 has NOT to be updated for bX 18 - counter still at 14
+pscrollflags set to 16
+abs - Processing row 9
+abs - Ok now we are on position 18 so we must absolute shift this perspective bar to the left for 17 positions: mods 1 and bpl1con to 1
+abs - New registers : mods : 8, bplcon1: 238
+Row 10 has NOT to be updated for bX 18 - counter still at 16
+pscrollflags set to 18
+abs - Processing row 10
+abs - Ok now we are on position 18 so we must absolute shift this perspective bar to the left for 19 positions: mods 1 and bpl1con to 3
+abs - New registers : mods : 6, bplcon1: 204
+Row 11 has NOT to be updated for bX 18 - counter still at 17
+pscrollflags set to 19
+abs - Processing row 11
+abs - Ok now we are on position 18 so we must absolute shift this perspective bar to the left for 20 positions: mods 1 and bpl1con to 4
+abs - New registers : mods : 6, bplcon1: 187
+UpdateCamera2 input 19
+UpdateCamera2 shift  221
+Aggiungo 2
+Caso con fetch modificato a 30
+Row 0 has NOT to be updated for bX 19 - counter still at 0
+pscrollflags set to 0
+abs - Processing row 0
+abs - Ok now we are on position 19 so we must absolute shift this perspective bar to the left for 2 positions: mods 0 and bpl1con to 2
+abs - New registers : mods : 6, bplcon1: 221
+abs - Here i should be moving the first chunk and in am not doing it!!!!!
+Row 1 has NOT to be updated for bX 19 - counter still at 2
+pscrollflags set to 2
+abs - Processing row 1
+abs - Ok now we are on position 19 so we must absolute shift this perspective bar to the left for 4 positions: mods 0 and bpl1con to 4
+abs - New registers : mods : 6, bplcon1: 187
+Row 2 has NOT to be updated for bX 19 - counter still at 4
+pscrollflags set to 4
+abs - Processing row 2
+abs - Ok now we are on position 19 so we must absolute shift this perspective bar to the left for 6 positions: mods 0 and bpl1con to 6
+abs - New registers : mods : 6, bplcon1: 153
+Row 3 has NOT to be updated for bX 19 - counter still at 5
+pscrollflags set to 6
+abs - Processing row 3
+abs - Ok now we are on position 19 so we must absolute shift this perspective bar to the left for 8 positions: mods 0 and bpl1con to 8
+abs - New registers : mods : 6, bplcon1: 119
+Row 4 has NOT to be updated for bX 19 - counter still at 8
+pscrollflags set to 8
+abs - Processing row 4
+abs - Ok now we are on position 19 so we must absolute shift this perspective bar to the left for 10 positions: mods 0 and bpl1con to 10
+abs - New registers : mods : 6, bplcon1: 85
+Row 5 has NOT to be updated for bX 19 - counter still at 9
+pscrollflags set to 9
+abs - Processing row 5
+abs - Ok now we are on position 19 so we must absolute shift this perspective bar to the left for 11 positions: mods 0 and bpl1con to 11
+abs - New registers : mods : 6, bplcon1: 68
+Row 6 has NOT to be updated for bX 19 - counter still at 11
+pscrollflags set to 11
+abs - Processing row 6
+abs - Ok now we are on position 19 so we must absolute shift this perspective bar to the left for 13 positions: mods 0 and bpl1con to 13
+abs - New registers : mods : 6, bplcon1: 34
+Row 7 has NOT to be updated for bX 19 - counter still at 13
+pscrollflags set to 13
+abs - Processing row 7
+abs - Ok now we are on position 19 so we must absolute shift this perspective bar to the left for 15 positions: mods 0 and bpl1con to 15
+abs - New registers : mods : 6, bplcon1: 0
+Row 8 has NOT to be updated for bX 19 - counter still at 14
+pscrollflags set to 15
+abs - Processing row 8
+abs - Ok now we are on position 19 so we must absolute shift this perspective bar to the left for 17 positions: mods 1 and bpl1con to 1
+abs - New registers : mods : 8, bplcon1: 238
+Row 9 has NOT to be updated for bX 19 - counter still at 16
+pscrollflags set to 17
+abs - Processing row 9
+abs - Ok now we are on position 19 so we must absolute shift this perspective bar to the left for 19 positions: mods 1 and bpl1con to 3
+abs - New registers : mods : 6, bplcon1: 204
+Row 10 has NOT to be updated for bX 19 - counter still at 18
+pscrollflags set to 19
+abs - Processing row 10
+abs - Ok now we are on position 19 so we must absolute shift this perspective bar to the left for 21 positions: mods 1 and bpl1con to 5
+abs - New registers : mods : 6, bplcon1: 170
+Row 11 has NOT to be updated for bX 19 - counter still at 19
+pscrollflags set to 20
+abs - Processing row 11
+abs - Ok now we are on position 19 so we must absolute shift this perspective bar to the left for 22 positions: mods 1 and bpl1con to 6
+abs - New registers : mods : 6, bplcon1: 153
+UpdateCamera2 input 20
+UpdateCamera2 shift  204
+Aggiungo 2
+Caso con fetch modificato a 30
+Row 0 has NOT to be updated for bX 20 - counter still at 0
+pscrollflags set to 0
+abs - Processing row 0
+abs - Ok now we are on position 20 so we must absolute shift this perspective bar to the left for 3 positions: mods 0 and bpl1con to 3
+abs - New registers : mods : 6, bplcon1: 204
+abs - Here i should be moving the first chunk and in am not doing it!!!!!
+Row 1 has NOT to be updated for bX 20 - counter still at 2
+pscrollflags set to 2
+abs - Processing row 1
+abs - Ok now we are on position 20 so we must absolute shift this perspective bar to the left for 5 positions: mods 0 and bpl1con to 5
+abs - New registers : mods : 6, bplcon1: 170
+Row 2 has NOT to be updated for bX 20 - counter still at 4
+pscrollflags set to 4
+abs - Processing row 2
+abs - Ok now we are on position 20 so we must absolute shift this perspective bar to the left for 7 positions: mods 0 and bpl1con to 7
+abs - New registers : mods : 6, bplcon1: 136
+Row 3 has NOT to be updated for bX 20 - counter still at 6
+pscrollflags set to 6
+abs - Processing row 3
+abs - Ok now we are on position 20 so we must absolute shift this perspective bar to the left for 9 positions: mods 0 and bpl1con to 9
+abs - New registers : mods : 6, bplcon1: 102
+Row 4 has NOT to be updated for bX 20 - counter still at 8
+pscrollflags set to 8
+abs - Processing row 4
+abs - Ok now we are on position 20 so we must absolute shift this perspective bar to the left for 11 positions: mods 0 and bpl1con to 11
+abs - New registers : mods : 6, bplcon1: 68
+Row 5 has NOT to be updated for bX 20 - counter still at 9
+pscrollflags set to 10
+abs - Processing row 5
+abs - Ok now we are on position 20 so we must absolute shift this perspective bar to the left for 13 positions: mods 0 and bpl1con to 13
+abs - New registers : mods : 6, bplcon1: 34
+Row 6 has NOT to be updated for bX 20 - counter still at 11
+pscrollflags set to 12
+abs - Processing row 6
+abs - Ok now we are on position 20 so we must absolute shift this perspective bar to the left for 15 positions: mods 0 and bpl1con to 15
+abs - New registers : mods : 6, bplcon1: 0
+Row 7 has NOT to be updated for bX 20 - counter still at 13
+pscrollflags set to 14
+abs - Processing row 7
+abs - Ok now we are on position 20 so we must absolute shift this perspective bar to the left for 17 positions: mods 1 and bpl1con to 1
+abs - New registers : mods : 8, bplcon1: 238
+Row 8 has NOT to be updated for bX 20 - counter still at 15
+pscrollflags set to 16
+abs - Processing row 8
+abs - Ok now we are on position 20 so we must absolute shift this perspective bar to the left for 19 positions: mods 1 and bpl1con to 3
+abs - New registers : mods : 6, bplcon1: 204
+Row 9 has NOT to be updated for bX 20 - counter still at 17
+pscrollflags set to 18
+abs - Processing row 9
+abs - Ok now we are on position 20 so we must absolute shift this perspective bar to the left for 21 positions: mods 1 and bpl1con to 5
+abs - New registers : mods : 6, bplcon1: 170
+Row 10 has NOT to be updated for bX 20 - counter still at 19
+pscrollflags set to 20
+abs - Processing row 10
+abs - Ok now we are on position 20 so we must absolute shift this perspective bar to the left for 23 positions: mods 1 and bpl1con to 7
+abs - New registers : mods : 6, bplcon1: 136
+Row 11 has NOT to be updated for bX 20 - counter still at 20
+pscrollflags set to 22
+abs - Processing row 11
+abs - Ok now we are on position 20 so we must absolute shift this perspective bar to the left for 25 positions: mods 1 and bpl1con to 9
+abs - New registers : mods : 6, bplcon1: 102
+UpdateCamera2 input 21
+UpdateCamera2 shift  187
+Aggiungo 2
+Caso con fetch modificato a 30
+Row 0 has NOT to be updated for bX 21 - counter still at 0
+pscrollflags set to 0
+abs - Processing row 0
+abs - Ok now we are on position 21 so we must absolute shift this perspective bar to the left for 4 positions: mods 0 and bpl1con to 4
+abs - New registers : mods : 6, bplcon1: 187
+abs - Here i should be moving the first chunk and in am not doing it!!!!!
+Row 1 has NOT to be updated for bX 21 - counter still at 2
+pscrollflags set to 2
+abs - Processing row 1
+abs - Ok now we are on position 21 so we must absolute shift this perspective bar to the left for 6 positions: mods 0 and bpl1con to 6
+abs - New registers : mods : 6, bplcon1: 153
+Row 2 has NOT to be updated for bX 21 - counter still at 4
+pscrollflags set to 4
+abs - Processing row 2
+abs - Ok now we are on position 21 so we must absolute shift this perspective bar to the left for 8 positions: mods 0 and bpl1con to 8
+abs - New registers : mods : 6, bplcon1: 119
+Row 3 has NOT to be updated for bX 21 - counter still at 6
+pscrollflags set to 6
+abs - Processing row 3
+abs - Ok now we are on position 21 so we must absolute shift this perspective bar to the left for 10 positions: mods 0 and bpl1con to 10
+abs - New registers : mods : 6, bplcon1: 85
+Row 4 has NOT to be updated for bX 21 - counter still at 8
+pscrollflags set to 8
+abs - Processing row 4
+abs - Ok now we are on position 21 so we must absolute shift this perspective bar to the left for 12 positions: mods 0 and bpl1con to 12
+abs - New registers : mods : 6, bplcon1: 51
+Row 5 has NOT to be updated for bX 21 - counter still at 10
+pscrollflags set to 10
+abs - Processing row 5
+abs - Ok now we are on position 21 so we must absolute shift this perspective bar to the left for 14 positions: mods 0 and bpl1con to 14
+abs - New registers : mods : 6, bplcon1: 17
+Row 6 has NOT to be updated for bX 21 - counter still at 12
+pscrollflags set to 13
+abs - Processing row 6
+abs - Ok now we are on position 21 so we must absolute shift this perspective bar to the left for 17 positions: mods 1 and bpl1con to 1
+abs - New registers : mods : 8, bplcon1: 238
+Row 7 has NOT to be updated for bX 21 - counter still at 14
+pscrollflags set to 15
+abs - Processing row 7
+abs - Ok now we are on position 21 so we must absolute shift this perspective bar to the left for 19 positions: mods 1 and bpl1con to 3
+abs - New registers : mods : 6, bplcon1: 204
+Row 8 has NOT to be updated for bX 21 - counter still at 16
+pscrollflags set to 17
+abs - Processing row 8
+abs - Ok now we are on position 21 so we must absolute shift this perspective bar to the left for 21 positions: mods 1 and bpl1con to 5
+abs - New registers : mods : 6, bplcon1: 170
+Row 9 has NOT to be updated for bX 21 - counter still at 18
+pscrollflags set to 19
+abs - Processing row 9
+abs - Ok now we are on position 21 so we must absolute shift this perspective bar to the left for 23 positions: mods 1 and bpl1con to 7
+abs - New registers : mods : 6, bplcon1: 136
+Row 10 has NOT to be updated for bX 21 - counter still at 20
+pscrollflags set to 21
+abs - Processing row 10
+abs - Ok now we are on position 21 so we must absolute shift this perspective bar to the left for 25 positions: mods 1 and bpl1con to 9
+abs - New registers : mods : 6, bplcon1: 102
+Row 11 has NOT to be updated for bX 21 - counter still at 22
+pscrollflags set to 23
+abs - Processing row 11
+abs - Ok now we are on position 21 so we must absolute shift this perspective bar to the left for 27 positions: mods 1 and bpl1con to 11
+abs - New registers : mods : 6, bplcon1: 68
+UpdateCamera2 input 22
+UpdateCamera2 shift  170
+Aggiungo 2
+Caso con fetch modificato a 30
+Row 0 has NOT to be updated for bX 22 - counter still at 0
+pscrollflags set to 0
+abs - Processing row 0
+abs - Ok now we are on position 22 so we must absolute shift this perspective bar to the left for 5 positions: mods 0 and bpl1con to 5
+abs - New registers : mods : 6, bplcon1: 170
+abs - Here i should be moving the first chunk and in am not doing it!!!!!
+Row 1 has NOT to be updated for bX 22 - counter still at 2
+pscrollflags set to 2
+abs - Processing row 1
+abs - Ok now we are on position 22 so we must absolute shift this perspective bar to the left for 7 positions: mods 0 and bpl1con to 7
+abs - New registers : mods : 6, bplcon1: 136
+Row 2 has NOT to be updated for bX 22 - counter still at 4
+pscrollflags set to 4
+abs - Processing row 2
+abs - Ok now we are on position 22 so we must absolute shift this perspective bar to the left for 9 positions: mods 0 and bpl1con to 9
+abs - New registers : mods : 6, bplcon1: 102
+Row 3 has NOT to be updated for bX 22 - counter still at 6
+pscrollflags set to 6
+abs - Processing row 3
+abs - Ok now we are on position 22 so we must absolute shift this perspective bar to the left for 11 positions: mods 0 and bpl1con to 11
+abs - New registers : mods : 6, bplcon1: 68
+Row 4 has NOT to be updated for bX 22 - counter still at 8
+pscrollflags set to 8
+abs - Processing row 4
+abs - Ok now we are on position 22 so we must absolute shift this perspective bar to the left for 13 positions: mods 0 and bpl1con to 13
+abs - New registers : mods : 6, bplcon1: 34
+Row 5 has NOT to be updated for bX 22 - counter still at 10
+pscrollflags set to 11
+abs - Processing row 5
+abs - Ok now we are on position 22 so we must absolute shift this perspective bar to the left for 16 positions: mods 1 and bpl1con to 0
+abs - New registers : mods : 8, bplcon1: 255
+Row 6 has NOT to be updated for bX 22 - counter still at 13
+pscrollflags set to 13
+abs - Processing row 6
+abs - Ok now we are on position 22 so we must absolute shift this perspective bar to the left for 18 positions: mods 1 and bpl1con to 2
+abs - New registers : mods : 6, bplcon1: 221
+Row 7 has NOT to be updated for bX 22 - counter still at 15
+pscrollflags set to 15
+abs - Processing row 7
+abs - Ok now we are on position 22 so we must absolute shift this perspective bar to the left for 20 positions: mods 1 and bpl1con to 4
+abs - New registers : mods : 6, bplcon1: 187
+Row 8 has NOT to be updated for bX 22 - counter still at 17
+pscrollflags set to 18
+abs - Processing row 8
+abs - Ok now we are on position 22 so we must absolute shift this perspective bar to the left for 23 positions: mods 1 and bpl1con to 7
+abs - New registers : mods : 6, bplcon1: 136
+Row 9 has NOT to be updated for bX 22 - counter still at 19
+pscrollflags set to 20
+abs - Processing row 9
+abs - Ok now we are on position 22 so we must absolute shift this perspective bar to the left for 25 positions: mods 1 and bpl1con to 9
+abs - New registers : mods : 6, bplcon1: 102
+Row 10 has NOT to be updated for bX 22 - counter still at 21
+pscrollflags set to 22
+abs - Processing row 10
+abs - Ok now we are on position 22 so we must absolute shift this perspective bar to the left for 27 positions: mods 1 and bpl1con to 11
+abs - New registers : mods : 6, bplcon1: 68
+Row 11 has NOT to be updated for bX 22 - counter still at 23
+pscrollflags set to 24
+abs - Processing row 11
+abs - Ok now we are on position 22 so we must absolute shift this perspective bar to the left for 29 positions: mods 1 and bpl1con to 13
+abs - New registers : mods : 6, bplcon1: 34
+UpdateCamera2 input 23
+UpdateCamera2 shift  153
+Aggiungo 2
+Caso con fetch modificato a 30
+Row 0 has NOT to be updated for bX 23 - counter still at 0
+pscrollflags set to 0
+abs - Processing row 0
+abs - Ok now we are on position 23 so we must absolute shift this perspective bar to the left for 6 positions: mods 0 and bpl1con to 6
+abs - New registers : mods : 6, bplcon1: 153
+abs - Here i should be moving the first chunk and in am not doing it!!!!!
+Row 1 has NOT to be updated for bX 23 - counter still at 2
+pscrollflags set to 2
+abs - Processing row 1
+abs - Ok now we are on position 23 so we must absolute shift this perspective bar to the left for 8 positions: mods 0 and bpl1con to 8
+abs - New registers : mods : 6, bplcon1: 119
+Row 2 has NOT to be updated for bX 23 - counter still at 4
+pscrollflags set to 4
+abs - Processing row 2
+abs - Ok now we are on position 23 so we must absolute shift this perspective bar to the left for 10 positions: mods 0 and bpl1con to 10
+abs - New registers : mods : 6, bplcon1: 85
+Row 3 has NOT to be updated for bX 23 - counter still at 6
+pscrollflags set to 6
+abs - Processing row 3
+abs - Ok now we are on position 23 so we must absolute shift this perspective bar to the left for 12 positions: mods 0 and bpl1con to 12
+abs - New registers : mods : 6, bplcon1: 51
+Row 4 has NOT to be updated for bX 23 - counter still at 8
+pscrollflags set to 9
+abs - Processing row 4
+abs - Ok now we are on position 23 so we must absolute shift this perspective bar to the left for 15 positions: mods 0 and bpl1con to 15
+abs - New registers : mods : 6, bplcon1: 0
+Row 5 has NOT to be updated for bX 23 - counter still at 11
+pscrollflags set to 11
+abs - Processing row 5
+abs - Ok now we are on position 23 so we must absolute shift this perspective bar to the left for 17 positions: mods 1 and bpl1con to 1
+abs - New registers : mods : 8, bplcon1: 238
+Row 6 has NOT to be updated for bX 23 - counter still at 13
+pscrollflags set to 13
+abs - Processing row 6
+abs - Ok now we are on position 23 so we must absolute shift this perspective bar to the left for 19 positions: mods 1 and bpl1con to 3
+abs - New registers : mods : 6, bplcon1: 204
+Row 7 has NOT to be updated for bX 23 - counter still at 15
+pscrollflags set to 16
+abs - Processing row 7
+abs - Ok now we are on position 23 so we must absolute shift this perspective bar to the left for 22 positions: mods 1 and bpl1con to 6
+abs - New registers : mods : 6, bplcon1: 153
+Row 8 has NOT to be updated for bX 23 - counter still at 18
+pscrollflags set to 19
+abs - Processing row 8
+abs - Ok now we are on position 23 so we must absolute shift this perspective bar to the left for 25 positions: mods 1 and bpl1con to 9
+abs - New registers : mods : 6, bplcon1: 102
+Row 9 has NOT to be updated for bX 23 - counter still at 20
+pscrollflags set to 21
+abs - Processing row 9
+abs - Ok now we are on position 23 so we must absolute shift this perspective bar to the left for 27 positions: mods 1 and bpl1con to 11
+abs - New registers : mods : 6, bplcon1: 68
+Row 10 has NOT to be updated for bX 23 - counter still at 22
+pscrollflags set to 23
+abs - Processing row 10
+abs - Ok now we are on position 23 so we must absolute shift this perspective bar to the left for 29 positions: mods 1 and bpl1con to 13
+abs - New registers : mods : 6, bplcon1: 34
+Row 11 has NOT to be updated for bX 23 - counter still at 24
+pscrollflags set to 25
+abs - Processing row 11
+abs - Ok now we are on position 23 so we must absolute shift this perspective bar to the left for 31 positions: mods 1 and bpl1con to 15
+abs - New registers : mods : 6, bplcon1: 0
+UpdateCamera2 input 24
+UpdateCamera2 shift  136
+Aggiungo 2
+Caso con fetch modificato a 30
+Row 0 has NOT to be updated for bX 24 - counter still at 0
+pscrollflags set to 0
+abs - Processing row 0
+abs - Ok now we are on position 24 so we must absolute shift this perspective bar to the left for 7 positions: mods 0 and bpl1con to 7
+abs - New registers : mods : 6, bplcon1: 136
+abs - Here i should be moving the first chunk and in am not doing it!!!!!
+Row 1 has NOT to be updated for bX 24 - counter still at 2
+pscrollflags set to 2
+abs - Processing row 1
+abs - Ok now we are on position 24 so we must absolute shift this perspective bar to the left for 9 positions: mods 0 and bpl1con to 9
+abs - New registers : mods : 6, bplcon1: 102
+Row 2 has NOT to be updated for bX 24 - counter still at 4
+pscrollflags set to 4
+abs - Processing row 2
+abs - Ok now we are on position 24 so we must absolute shift this perspective bar to the left for 11 positions: mods 0 and bpl1con to 11
+abs - New registers : mods : 6, bplcon1: 68
+Row 3 has NOT to be updated for bX 24 - counter still at 6
+pscrollflags set to 7
+abs - Processing row 3
+abs - Ok now we are on position 24 so we must absolute shift this perspective bar to the left for 14 positions: mods 0 and bpl1con to 14
+abs - New registers : mods : 6, bplcon1: 17
+Row 4 has NOT to be updated for bX 24 - counter still at 9
+pscrollflags set to 9
+abs - Processing row 4
+abs - Ok now we are on position 24 so we must absolute shift this perspective bar to the left for 16 positions: mods 1 and bpl1con to 0
+abs - New registers : mods : 8, bplcon1: 255
+Row 5 has NOT to be updated for bX 24 - counter still at 11
+pscrollflags set to 11
+abs - Processing row 5
+abs - Ok now we are on position 24 so we must absolute shift this perspective bar to the left for 18 positions: mods 1 and bpl1con to 2
+abs - New registers : mods : 6, bplcon1: 221
+Row 6 has NOT to be updated for bX 24 - counter still at 13
+pscrollflags set to 14
+abs - Processing row 6
+abs - Ok now we are on position 24 so we must absolute shift this perspective bar to the left for 21 positions: mods 1 and bpl1con to 5
+abs - New registers : mods : 6, bplcon1: 170
+Row 7 has NOT to be updated for bX 24 - counter still at 16
+pscrollflags set to 16
+abs - Processing row 7
+abs - Ok now we are on position 24 so we must absolute shift this perspective bar to the left for 23 positions: mods 1 and bpl1con to 7
+abs - New registers : mods : 6, bplcon1: 136
+Row 8 has NOT to be updated for bX 24 - counter still at 19
+pscrollflags set to 19
+abs - Processing row 8
+abs - Ok now we are on position 24 so we must absolute shift this perspective bar to the left for 26 positions: mods 1 and bpl1con to 10
+abs - New registers : mods : 6, bplcon1: 85
+Row 9 has NOT to be updated for bX 24 - counter still at 21
+pscrollflags set to 21
+abs - Processing row 9
+abs - Ok now we are on position 24 so we must absolute shift this perspective bar to the left for 28 positions: mods 1 and bpl1con to 12
+abs - New registers : mods : 6, bplcon1: 51
+Row 10 has NOT to be updated for bX 24 - counter still at 23
+pscrollflags set to 23
+abs - Processing row 10
+abs - Ok now we are on position 24 so we must absolute shift this perspective bar to the left for 30 positions: mods 1 and bpl1con to 14
+abs - New registers : mods : 6, bplcon1: 17
+Row 11 has NOT to be updated for bX 24 - counter still at 25
+pscrollflags set to 25
+abs - Processing row 11
+abs - Ok now we are on position 24 so we must absolute shift this perspective bar to the left for 32 positions: mods 2 and bpl1con to 0
+abs - New registers : mods : 8, bplcon1: 255
+UpdateCamera2 input 25
+UpdateCamera2 shift  119
+Aggiungo 2
+Caso con fetch modificato a 30
+Row 0 has NOT to be updated for bX 25 - counter still at 0
+pscrollflags set to 0
+abs - Processing row 0
+abs - Ok now we are on position 25 so we must absolute shift this perspective bar to the left for 8 positions: mods 0 and bpl1con to 8
+abs - New registers : mods : 6, bplcon1: 119
+abs - Here i should be moving the first chunk and in am not doing it!!!!!
+Row 1 has NOT to be updated for bX 25 - counter still at 2
+pscrollflags set to 2
+abs - Processing row 1
+abs - Ok now we are on position 25 so we must absolute shift this perspective bar to the left for 10 positions: mods 0 and bpl1con to 10
+abs - New registers : mods : 6, bplcon1: 85
+Row 2 has NOT to be updated for bX 25 - counter still at 4
+pscrollflags set to 5
+abs - Processing row 2
+abs - Ok now we are on position 25 so we must absolute shift this perspective bar to the left for 13 positions: mods 0 and bpl1con to 13
+abs - New registers : mods : 6, bplcon1: 34
+Row 3 has NOT to be updated for bX 25 - counter still at 7
+pscrollflags set to 7
+abs - Processing row 3
+abs - Ok now we are on position 25 so we must absolute shift this perspective bar to the left for 15 positions: mods 0 and bpl1con to 15
+abs - New registers : mods : 6, bplcon1: 0
+Row 4 has NOT to be updated for bX 25 - counter still at 9
+pscrollflags set to 10
+abs - Processing row 4
+abs - Ok now we are on position 25 so we must absolute shift this perspective bar to the left for 18 positions: mods 1 and bpl1con to 2
+abs - New registers : mods : 8, bplcon1: 221
+Row 5 has NOT to be updated for bX 25 - counter still at 11
+pscrollflags set to 12
+abs - Processing row 5
+abs - Ok now we are on position 25 so we must absolute shift this perspective bar to the left for 20 positions: mods 1 and bpl1con to 4
+abs - New registers : mods : 6, bplcon1: 187
+Row 6 has NOT to be updated for bX 25 - counter still at 14
+pscrollflags set to 14
+abs - Processing row 6
+abs - Ok now we are on position 25 so we must absolute shift this perspective bar to the left for 22 positions: mods 1 and bpl1con to 6
+abs - New registers : mods : 6, bplcon1: 153
+Row 7 has NOT to be updated for bX 25 - counter still at 16
+pscrollflags set to 17
+abs - Processing row 7
+abs - Ok now we are on position 25 so we must absolute shift this perspective bar to the left for 25 positions: mods 1 and bpl1con to 9
+abs - New registers : mods : 6, bplcon1: 102
+Row 8 has NOT to be updated for bX 25 - counter still at 19
+pscrollflags set to 19
+abs - Processing row 8
+abs - Ok now we are on position 25 so we must absolute shift this perspective bar to the left for 27 positions: mods 1 and bpl1con to 11
+abs - New registers : mods : 6, bplcon1: 68
+Row 9 has NOT to be updated for bX 25 - counter still at 21
+pscrollflags set to 22
+abs - Processing row 9
+abs - Ok now we are on position 25 so we must absolute shift this perspective bar to the left for 30 positions: mods 1 and bpl1con to 14
+abs - New registers : mods : 6, bplcon1: 17
+Row 10 has NOT to be updated for bX 25 - counter still at 23
+pscrollflags set to 25
+abs - Processing row 10
+abs - Ok now we are on position 25 so we must absolute shift this perspective bar to the left for 33 positions: mods 2 and bpl1con to 1
+abs - New registers : mods : 8, bplcon1: 238
+Row 11 has NOT to be updated for bX 25 - counter still at 25
+pscrollflags set to 27
+abs - Processing row 11
+abs - Ok now we are on position 25 so we must absolute shift this perspective bar to the left for 35 positions: mods 2 and bpl1con to 3
+abs - New registers : mods : 6, bplcon1: 204
+UpdateCamera2 input 26
+UpdateCamera2 shift  102
+Aggiungo 2
+Caso con fetch modificato a 30
+Row 0 has NOT to be updated for bX 26 - counter still at 0
+pscrollflags set to 0
+abs - Processing row 0
+abs - Ok now we are on position 26 so we must absolute shift this perspective bar to the left for 9 positions: mods 0 and bpl1con to 9
+abs - New registers : mods : 6, bplcon1: 102
+abs - Here i should be moving the first chunk and in am not doing it!!!!!
+Row 1 has NOT to be updated for bX 26 - counter still at 2
+pscrollflags set to 2
+abs - Processing row 1
+abs - Ok now we are on position 26 so we must absolute shift this perspective bar to the left for 11 positions: mods 0 and bpl1con to 11
+abs - New registers : mods : 6, bplcon1: 68
+Row 2 has NOT to be updated for bX 26 - counter still at 5
+pscrollflags set to 5
+abs - Processing row 2
+abs - Ok now we are on position 26 so we must absolute shift this perspective bar to the left for 14 positions: mods 0 and bpl1con to 14
+abs - New registers : mods : 6, bplcon1: 17
+Row 3 has NOT to be updated for bX 26 - counter still at 7
+pscrollflags set to 7
+abs - Processing row 3
+abs - Ok now we are on position 26 so we must absolute shift this perspective bar to the left for 16 positions: mods 1 and bpl1con to 0
+abs - New registers : mods : 8, bplcon1: 255
+Row 4 has NOT to be updated for bX 26 - counter still at 10
+pscrollflags set to 11
+abs - Processing row 4
+abs - Ok now we are on position 26 so we must absolute shift this perspective bar to the left for 20 positions: mods 1 and bpl1con to 4
+abs - New registers : mods : 6, bplcon1: 187
+Row 5 has NOT to be updated for bX 26 - counter still at 12
+pscrollflags set to 13
+abs - Processing row 5
+abs - Ok now we are on position 26 so we must absolute shift this perspective bar to the left for 22 positions: mods 1 and bpl1con to 6
+abs - New registers : mods : 6, bplcon1: 153
+Row 6 has NOT to be updated for bX 26 - counter still at 14
+pscrollflags set to 16
+abs - Processing row 6
+abs - Ok now we are on position 26 so we must absolute shift this perspective bar to the left for 25 positions: mods 1 and bpl1con to 9
+abs - New registers : mods : 6, bplcon1: 102
+Row 7 has NOT to be updated for bX 26 - counter still at 17
+pscrollflags set to 19
+abs - Processing row 7
+abs - Ok now we are on position 26 so we must absolute shift this perspective bar to the left for 28 positions: mods 1 and bpl1con to 12
+abs - New registers : mods : 6, bplcon1: 51
+Row 8 has NOT to be updated for bX 26 - counter still at 19
+pscrollflags set to 21
+abs - Processing row 8
+abs - Ok now we are on position 26 so we must absolute shift this perspective bar to the left for 30 positions: mods 1 and bpl1con to 14
+abs - New registers : mods : 6, bplcon1: 17
+Row 9 has NOT to be updated for bX 26 - counter still at 22
+pscrollflags set to 24
+abs - Processing row 9
+abs - Ok now we are on position 26 so we must absolute shift this perspective bar to the left for 33 positions: mods 2 and bpl1con to 1
+abs - New registers : mods : 8, bplcon1: 238
+Row 10 has NOT to be updated for bX 26 - counter still at 25
+pscrollflags set to 26
+abs - Processing row 10
+abs - Ok now we are on position 26 so we must absolute shift this perspective bar to the left for 35 positions: mods 2 and bpl1con to 3
+abs - New registers : mods : 6, bplcon1: 204
+Row 11 has NOT to be updated for bX 26 - counter still at 27
+pscrollflags set to 28
+abs - Processing row 11
+abs - Ok now we are on position 26 so we must absolute shift this perspective bar to the left for 37 positions: mods 2 and bpl1con to 5
+abs - New registers : mods : 6, bplcon1: 170
+Block begin: stateManagerDestroy(pStateManager: 0x225eec)
+	Block begin: statePopAll(pStateManager: 0x225eec)
+		Block begin: viewDestroy(pView: 0x226174)
+			Block begin: viewLoad(pView: 0)...OK, time:  10.623 ms
+			Block begin: vPortDestroy(pVPort: 0x22638c)
+				Parent extView: 0x226174
+				found VP: 0x22638c... gotcha!
 				Block begin: Destroying managers
-					Destroying manager 128 @addr: 0x22d82c
+					Destroying manager 128 @addr: 0x2264a4
 					cameraManagerDestroy...OK! 
-					Destroying manager 0 @addr: 0x22d7d4
+					Destroying manager 0 @addr: 0x2263ec
 					Block begin: simpleBufferTestDestroy()
-						Block begin: bitmapDestroy(pBitMap: 0x22d554)...OK, time:  10.920 ms
+						Block begin: bitmapDestroy(pBitMap: 0x226434)...OK, time: >7min
 					Block end: simpleBufferTestDestroy(), time: >7min
-				Block end: Destroying managers, time: 951.2 us
-			Block end: vPortDestroy(), time: >7min
+				Block end: Destroying managers, time:   1.522 ms
+			Block end: vPortDestroy(), time:   4.787 ms
 			Freeing copperlists...
-			Block begin: copListDestroy(pCopList: 0x22d42c)...OK, time: >7min
-		Block end: viewDestroy(), time:  14.164 ms
-	Block end: statePopAll(), time: >7min
-Block end: stateManagerDestroy(), time:   4.086 ms
-Block begin: stateDestroy(pState: 0x22d36c)...OK, time:   2.386 ms
-Block begin: keyDestroy()...OK, time:  54.0 us
+			Block begin: copListDestroy(pCopList: 0x22618c)...OK, time: >7min
+		Block end: viewDestroy(), time:   5.802 ms
+	Block end: statePopAll(), time:   8.885 ms
+Block end: stateManagerDestroy(), time:  15.458 ms
+Block begin: stateDestroy(pState: 0x226154)...OK, time:   2.710 ms
+Block begin: keyDestroy()...OK, time:  53.2 us
 Goodbye, Amiga!
 Block begin: copDestroy()
-	Block begin: copListDestroy(pCopList: 0x22be94)...OK, time: >7min
-Block end: copDestroy(), time: >7min
-Block begin: blitManagerDestroy...OK, time:  59.2 us
+	Block begin: copListDestroy(pCopList: 0x225a0c)...OK, time:   6.835 ms
+Block end: copDestroy(), time:  14.628 ms
+Block begin: blitManagerDestroy...OK, time:  60.0 us
 Log closed successfully

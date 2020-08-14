@@ -75,7 +75,11 @@ goatlight.o: goatlight.c goatlight.h \
  /opt/amiga/m68k-amigaos/ndk-include/graphics/sprite.h \
  /opt/amiga/m68k-amigaos/ndk-include/graphics/text.h \
  /opt/amiga/m68k-amigaos/ndk-include/graphics/scale.h \
- /opt/amiga/m68k-amigaos/ndk-include/hardware/blit.h simplebuffertest.h
+ /opt/amiga/m68k-amigaos/ndk-include/hardware/blit.h \
+ /opt/amiga/include/ace/managers/blit.h \
+ /opt/amiga/include/fixmath/fix16.h \
+ /opt/amiga/m68k-amigaos/sys-include/stdint.h \
+ /opt/amiga/m68k-amigaos/sys-include/sys/_intsup.h simplebuffertest.h
 
 goatlight.h:
 
@@ -236,5 +240,13 @@ goatlight.h:
 /opt/amiga/m68k-amigaos/ndk-include/graphics/scale.h:
 
 /opt/amiga/m68k-amigaos/ndk-include/hardware/blit.h:
+
+/opt/amiga/include/ace/managers/blit.h:
+
+/opt/amiga/include/fixmath/fix16.h:
+
+/opt/amiga/m68k-amigaos/sys-include/stdint.h:
+
+/opt/amiga/m68k-amigaos/sys-include/sys/_intsup.h:
 
 simplebuffertest.h:
