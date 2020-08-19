@@ -1,53 +1,53 @@
-Block begin: blitManagerCreate...OK, time:  86.8 us
+Block begin: blitManagerCreate...OK, time:  60.0 us
 Block begin: copCreate()
 	Block begin: copListCreate()
-		Addr: 0x225a0c
+		Addr: 0x22705c
 		BLOCK mode
 	Block end: copListCreate(), time: >7min
 Block end: copCreate(), time: >7min
 Hello, Amiga!
-Block begin: keyCreate()...OK, time:  53.6 us
-Block begin: stateManagerCreate()...OK, time: >7min
-Block begin: stateCreate(cbCreate: 0x273098, cbLoop: 0x273482, cbDestroy: 0x273644, cbSuspend: 0, cbResume: 0, pPrev: 0)...OK, time:   2.648 ms
-Block begin: stateChange(pStateManager: 0x225eec, pState: 0x226154)
+Block begin: keyCreate()...OK, time:  80.4 us
+Block begin: stateManagerCreate()...OK, time:   2.546 ms
+Block begin: stateCreate(cbCreate: 0x27600c, cbLoop: 0x276544, cbDestroy: 0x276914, cbSuspend: 0, cbResume: 0, pPrev: 0)...OK, time:   2.506 ms
+Block begin: stateChange(pStateManager: 0x227c2c, pState: 0x227fd4)
 	Block begin: viewCreate(pTags: 0)
-		addr: 0x226174
+		addr: 0x228004
 		Block begin: copListCreate()
-			Addr: 0x22618c
-			RAW mode, size: 108 + WAIT(0xFFFF)
-		Block end: copListCreate(), time:   1.400 ms
+			Addr: 0x22802c
+			RAW mode, size: 149 + WAIT(0xFFFF)
+		Block end: copListCreate(), time:   1.033 ms
 		Global CLUT mode enabled
 	Block end: viewCreate(), time: >7min
 	Block begin: vPortCreate(pTagList: 0)
-		Addr: 0x22638c
-		Parent view: 0x226174
+		Addr: 0x22a014
+		Parent view: 0x228004
 		Offsets: 0x0
-		Dimensions: 320x256@3
+		Dimensions: 320x256@4
 		No prev VPorts - added to head
-	Block end: vPortCreate(), time: >7min
+	Block end: vPortCreate(), time: 147.6 us
 	Block begin: simpleBufferTestCreate(pTags: 0, ...)
-		Addr: 0x2263ec
-		Parent VPort: 0x22638c
+		Addr: 0x228734
+		Parent VPort: 0x22a014
 		Bounds: 384x256
-		Block begin: bitmapCreate(uwWidth: 384, uwHeight: 256, ubDepth: 3, ubFlags: 1)
-			addr: 0x226434
-		Block end: bitmapCreate(), time: 171.6 us
-		Block begin: cameraCreate(pVPort: 0x22638c, uwPosX: 0, uwPosY: 0, uwMaxX: 384, uwMaxY: 256, isDblBfr: 0)
-			Addr: 0x2264a4
+		Block begin: bitmapCreate(uwWidth: 384, uwHeight: 256, ubDepth: 4, ubFlags: 1)
+			addr: 0x2286b4
+		Block end: bitmapCreate(), time: >7min
+		Block begin: cameraCreate(pVPort: 0x22a014, uwPosX: 0, uwPosY: 0, uwMaxX: 384, uwMaxY: 256, isDblBfr: 0)
+			Addr: 0x228b54
 			Resetting camera bounds...
-			Block begin: cameraReset(pManager: 0x2264a4, uwStartX: 0, uwStartY: 0, uwWidth: 384, uwHeight: 256, isDblBfr: 0)
+			Block begin: cameraReset(pManager: 0x228b54, uwStartX: 0, uwStartY: 0, uwWidth: 384, uwHeight: 256, isDblBfr: 0)
 				Camera max coord: 64,0
-			Block end: cameraReset(), time:   4.610 ms
+			Block end: cameraReset(), time:   4.633 ms
 			Attaching camera to VPort...
-			Manager 0x2264a4 attached to head of VP 0x22638c
+			Manager 0x228b54 attached to head of VP 0x22a014
 		Block end: cameraCreate(), time: >7min
 		Copperlist offset: 0
-		Block begin: simpleBufferTestSetFront(pManager: 0x2263ec, pFront: 0x226434, isScrollX: 0)
+		Block begin: simpleBufferTestSetFront(pManager: 0x228734, pFront: 0x2286b4, isScrollX: 0)
 			Modulo: 8
-			Setting copperlist 0x2261d4 at offs 0
-		Block end: simplebufferTestSetFront(), time:   7.691 ms
-		Manager 0x2263ec attached after manager 0x2264a4 of VP 0x22638c
-	Block end: simpleBufferTestCreate(), time:   6.931 ms
+			Setting copperlist 0x2282dc at offs 0
+		Block end: simplebufferTestSetFront(), time: >7min
+		Manager 0x228734 attached after manager 0x228b54 of VP 0x22a014
+	Block end: simpleBufferTestCreate(), time: >7min
 	setting wait for row 252
 	setting copperlist last row with wait 254 (0) 
 	setting wait for row 255
@@ -72,1711 +72,420 @@ Block begin: stateChange(pStateManager: 0x225eec, pState: 0x226154)
 	setting wait for row 282
 	setting copperlist last row with wait 284 (30) 
 	setting wait for row 285
+	setting palette change for back at 11 
 	setting copperlist last row with wait 287 (33) 
-	Block begin: viewLoad(pView: 0x226174)...OK, time: >7min
-Block end: stateChange(), time: 198.335 ms
-UpdateCamera2 input 0
-UpdateCamera2 shift  0
+	setting wait for row 288
+	setting copperlist last row with wait 290 (36) 
+	setting wait for row 291
+	setting copperlist last row with wait 293 (39) 
+	Block begin: viewLoad(pView: 0x228004)...OK, time: >7min
+Block end: stateChange(), time: 355.298 ms
+Block begin: copDumpBfr(pBfr: 0x22819c)
+	Alloc size: 600, cmd count: 150
+	@0x14af4: 2BC7FFFE - WAIT: 198,43
+	@0x14af8: 009400D0 - MOVE: 094 := 00D0
+	@0x14afc: 00920038 - MOVE: 092 := 0038
+	@0x14b00: 01080008 - MOVE: 108 := 0008
+	@0x14b04: 010A0008 - MOVE: 10A := 0008
+	@0x14b08: 01020000 - MOVE: 102 := 0000
+	@0x14b0c: 00E00001 - MOVE: 0E0 := 0001
+	@0x14b10: 00E2F034 - MOVE: 0E2 := F034
+	@0x14b14: 00E40001 - MOVE: 0E4 := 0001
+	@0x14b18: 00E6C02C - MOVE: 0E6 := C02C
+	@0x14b1c: 00E80001 - MOVE: 0E8 := 0001
+	@0x14b20: 00EA9024 - MOVE: 0EA := 9024
+	@0x14b24: 00EC0001 - MOVE: 0EC := 0001
+	@0x14b28: 00EE601C - MOVE: 0EE := 601C
+	@0x14b2c: 2B01FFFE - WAIT: 0,43
+	@0x14b30: 01820F00 - MOVE: 182 := 0F00
+	@0x14b34: 018400F0 - MOVE: 184 := 00F0
+	@0x14b38: 018608BC - MOVE: 186 := 08BC
+	@0x14b3c: 01880000 - MOVE: 188 := 0000
+	@0x14b40: 018A0F00 - MOVE: 18A := 0F00
+	@0x14b44: 018C00F0 - MOVE: 18C := 00F0
+	@0x14b48: 018E08BC - MOVE: 18E := 08BC
+	@0x14b4c: 01900000 - MOVE: 190 := 0000
+	@0x14b50: 01920F00 - MOVE: 192 := 0F00
+	@0x14b54: 019400F0 - MOVE: 194 := 00F0
+	@0x14b58: 019608BC - MOVE: 196 := 08BC
+	@0x14b5c: 01980000 - MOVE: 198 := 0000
+	@0x14b60: C801FFFE - WAIT: 0,200
+	@0x14b64: 01800000 - MOVE: 180 := 0000
+	@0x14b68: FB01FFFE - WAIT: 0,251
+	@0x14b6c: 01820F00 - MOVE: 182 := 0F00
+	@0x14b70: 018400F0 - MOVE: 184 := 00F0
+	@0x14b74: 0186087D - MOVE: 186 := 087D
+	@0x14b78: 01880000 - MOVE: 188 := 0000
+	@0x14b7c: 018A0F00 - MOVE: 18A := 0F00
+	@0x14b80: 018C00F0 - MOVE: 18C := 00F0
+	@0x14b84: 018E087D - MOVE: 18E := 087D
+	@0x14b88: 01900000 - MOVE: 190 := 0000
+	@0x14b8c: 01920F00 - MOVE: 192 := 0F00
+	@0x14b90: 019400F0 - MOVE: 194 := 00F0
+	@0x14b94: 0196087D - MOVE: 196 := 087D
+	@0x14b98: 01980000 - MOVE: 198 := 0000
+	@0x14b9c: 019E0000 - MOVE: 19E := 0000
+	@0x14ba0: 019E0000 - MOVE: 19E := 0000
+	@0x14ba4: FC01FFFE - WAIT: 0,252
+	@0x14ba8: 01020000 - MOVE: 102 := 0000
+	@0x14bac: 01080008 - MOVE: 108 := 0008
+	@0x14bb0: 010A0008 - MOVE: 10A := 0008
+	@0x14bb4: FE01FFFE - WAIT: 0,254
+	@0x14bb8: 01800888 - MOVE: 180 := 0888
+	@0x14bbc: 01800888 - MOVE: 180 := 0888
+	@0x14bc0: FF01FFFE - WAIT: 0,255
+	@0x14bc4: 01020000 - MOVE: 102 := 0000
+	@0x14bc8: 01080008 - MOVE: 108 := 0008
+	@0x14bcc: 010A0008 - MOVE: 10A := 0008
+	@0x14bd0: FFDFFFFE - WAIT: 222,255
+	@0x14bd4: 0101FFFE - WAIT: 0,1
+	@0x14bd8: 01800000 - MOVE: 180 := 0000
+	@0x14bdc: 01800000 - MOVE: 180 := 0000
+	@0x14be0: 0201FFFE - WAIT: 0,2
+	@0x14be4: 01020000 - MOVE: 102 := 0000
+	@0x14be8: 01080008 - MOVE: 108 := 0008
+	@0x14bec: 010A0008 - MOVE: 10A := 0008
+	@0x14bf0: 0401FFFE - WAIT: 0,4
+	@0x14bf4: 01800888 - MOVE: 180 := 0888
+	@0x14bf8: 01800888 - MOVE: 180 := 0888
+	@0x14bfc: 0501FFFE - WAIT: 0,5
+	@0x14c00: 01020000 - MOVE: 102 := 0000
+	@0x14c04: 01080008 - MOVE: 108 := 0008
+	@0x14c08: 010A0008 - MOVE: 10A := 0008
+	@0x14c0c: 0701FFFE - WAIT: 0,7
+	@0x14c10: 01800000 - MOVE: 180 := 0000
+	@0x14c14: 01800000 - MOVE: 180 := 0000
+	@0x14c18: 0801FFFE - WAIT: 0,8
+	@0x14c1c: 01020000 - MOVE: 102 := 0000
+	@0x14c20: 01080008 - MOVE: 108 := 0008
+	@0x14c24: 010A0008 - MOVE: 10A := 0008
+	@0x14c28: 0A01FFFE - WAIT: 0,10
+	@0x14c2c: 01800888 - MOVE: 180 := 0888
+	@0x14c30: 01800888 - MOVE: 180 := 0888
+	@0x14c34: 0B01FFFE - WAIT: 0,11
+	@0x14c38: 01020000 - MOVE: 102 := 0000
+	@0x14c3c: 01080008 - MOVE: 108 := 0008
+	@0x14c40: 010A0008 - MOVE: 10A := 0008
+	@0x14c44: 0D01FFFE - WAIT: 0,13
+	@0x14c48: 01800000 - MOVE: 180 := 0000
+	@0x14c4c: 01800000 - MOVE: 180 := 0000
+	@0x14c50: 0E01FFFE - WAIT: 0,14
+	@0x14c54: 01020000 - MOVE: 102 := 0000
+	@0x14c58: 01080008 - MOVE: 108 := 0008
+	@0x14c5c: 010A0008 - MOVE: 10A := 0008
+	@0x14c60: 1001FFFE - WAIT: 0,16
+	@0x14c64: 01800888 - MOVE: 180 := 0888
+	@0x14c68: 01800888 - MOVE: 180 := 0888
+	@0x14c6c: 1101FFFE - WAIT: 0,17
+	@0x14c70: 01020000 - MOVE: 102 := 0000
+	@0x14c74: 01080008 - MOVE: 108 := 0008
+	@0x14c78: 010A0008 - MOVE: 10A := 0008
+	@0x14c7c: 1301FFFE - WAIT: 0,19
+	@0x14c80: 01800000 - MOVE: 180 := 0000
+	@0x14c84: 01800000 - MOVE: 180 := 0000
+	@0x14c88: 1401FFFE - WAIT: 0,20
+	@0x14c8c: 01020000 - MOVE: 102 := 0000
+	@0x14c90: 01080008 - MOVE: 108 := 0008
+	@0x14c94: 010A0008 - MOVE: 10A := 0008
+	@0x14c98: 1601FFFE - WAIT: 0,22
+	@0x14c9c: 01800888 - MOVE: 180 := 0888
+	@0x14ca0: 01800888 - MOVE: 180 := 0888
+	@0x14ca4: 1701FFFE - WAIT: 0,23
+	@0x14ca8: 01020000 - MOVE: 102 := 0000
+	@0x14cac: 01080008 - MOVE: 108 := 0008
+	@0x14cb0: 010A0008 - MOVE: 10A := 0008
+	@0x14cb4: 1901FFFE - WAIT: 0,25
+	@0x14cb8: 01800000 - MOVE: 180 := 0000
+	@0x14cbc: 01800000 - MOVE: 180 := 0000
+	@0x14cc0: 1A01FFFE - WAIT: 0,26
+	@0x14cc4: 01020000 - MOVE: 102 := 0000
+	@0x14cc8: 01080008 - MOVE: 108 := 0008
+	@0x14ccc: 010A0008 - MOVE: 10A := 0008
+	@0x14cd0: 1C01FFFE - WAIT: 0,28
+	@0x14cd4: 01800888 - MOVE: 180 := 0888
+	@0x14cd8: 01800888 - MOVE: 180 := 0888
+	@0x14cdc: 1D01FFFE - WAIT: 0,29
+	@0x14ce0: 01020000 - MOVE: 102 := 0000
+	@0x14ce4: 01080008 - MOVE: 108 := 0008
+	@0x14ce8: 010A0008 - MOVE: 10A := 0008
+	@0x14cec: 01860444 - MOVE: 186 := 0444
+	@0x14cf0: 018E0444 - MOVE: 18E := 0444
+	@0x14cf4: 01960444 - MOVE: 196 := 0444
+	@0x14cf8: 1F01FFFE - WAIT: 0,31
+	@0x14cfc: 01800000 - MOVE: 180 := 0000
+	@0x14d00: 01800000 - MOVE: 180 := 0000
+	@0x14d04: 2001FFFE - WAIT: 0,32
+	@0x14d08: 01020000 - MOVE: 102 := 0000
+	@0x14d0c: 01080008 - MOVE: 108 := 0008
+	@0x14d10: 010A0008 - MOVE: 10A := 0008
+	@0x14d14: 2201FFFE - WAIT: 0,34
+	@0x14d18: 01800888 - MOVE: 180 := 0888
+	@0x14d1c: 01800888 - MOVE: 180 := 0888
+	@0x14d20: 2301FFFE - WAIT: 0,35
+	@0x14d24: 01020000 - MOVE: 102 := 0000
+	@0x14d28: 01080008 - MOVE: 108 := 0008
+	@0x14d2c: 010A0008 - MOVE: 10A := 0008
+	@0x14d30: 2501FFFE - WAIT: 0,37
+	@0x14d34: 01800000 - MOVE: 180 := 0000
+	@0x14d38: 01800000 - MOVE: 180 := 0000
+	@0x14d3c: 2B01FFFE - WAIT: 0,43
+	@0x14d40: 01800000 - MOVE: 180 := 0000
+	@0x14d44: 00000000 - MOVE: 000 := 0000
+	@0x14d48: FFFFFFFE - WAIT: 254,255
+Block end: copDumpBfr, time:   8.321 ms
+Block begin: copDumpBfr(pBfr: 0x2282dc)
+	Alloc size: 600, cmd count: 150
+	@0x15dbc: 2BC7FFFE - WAIT: 198,43
+	@0x15dc0: 009400D0 - MOVE: 094 := 00D0
+	@0x15dc4: 00920038 - MOVE: 092 := 0038
+	@0x15dc8: 01080008 - MOVE: 108 := 0008
+	@0x15dcc: 010A0008 - MOVE: 10A := 0008
+	@0x15dd0: 01020000 - MOVE: 102 := 0000
+	@0x15dd4: 00E00001 - MOVE: 0E0 := 0001
+	@0x15dd8: 00E2F034 - MOVE: 0E2 := F034
+	@0x15ddc: 00E40001 - MOVE: 0E4 := 0001
+	@0x15de0: 00E6C02C - MOVE: 0E6 := C02C
+	@0x15de4: 00E80001 - MOVE: 0E8 := 0001
+	@0x15de8: 00EA9024 - MOVE: 0EA := 9024
+	@0x15dec: 00EC0001 - MOVE: 0EC := 0001
+	@0x15df0: 00EE601C - MOVE: 0EE := 601C
+	@0x15df4: 2B01FFFE - WAIT: 0,43
+	@0x15df8: 01820F00 - MOVE: 182 := 0F00
+	@0x15dfc: 018400F0 - MOVE: 184 := 00F0
+	@0x15e00: 018608BC - MOVE: 186 := 08BC
+	@0x15e04: 01880000 - MOVE: 188 := 0000
+	@0x15e08: 018A0F00 - MOVE: 18A := 0F00
+	@0x15e0c: 018C00F0 - MOVE: 18C := 00F0
+	@0x15e10: 018E08BC - MOVE: 18E := 08BC
+	@0x15e14: 01900000 - MOVE: 190 := 0000
+	@0x15e18: 01920F00 - MOVE: 192 := 0F00
+	@0x15e1c: 019400F0 - MOVE: 194 := 00F0
+	@0x15e20: 019608BC - MOVE: 196 := 08BC
+	@0x15e24: 01980000 - MOVE: 198 := 0000
+	@0x15e28: C801FFFE - WAIT: 0,200
+	@0x15e2c: 01800000 - MOVE: 180 := 0000
+	@0x15e30: FB01FFFE - WAIT: 0,251
+	@0x15e34: 01820F00 - MOVE: 182 := 0F00
+	@0x15e38: 018400F0 - MOVE: 184 := 00F0
+	@0x15e3c: 0186087D - MOVE: 186 := 087D
+	@0x15e40: 01880000 - MOVE: 188 := 0000
+	@0x15e44: 018A0F00 - MOVE: 18A := 0F00
+	@0x15e48: 018C00F0 - MOVE: 18C := 00F0
+	@0x15e4c: 018E087D - MOVE: 18E := 087D
+	@0x15e50: 01900000 - MOVE: 190 := 0000
+	@0x15e54: 01920F00 - MOVE: 192 := 0F00
+	@0x15e58: 019400F0 - MOVE: 194 := 00F0
+	@0x15e5c: 0196087D - MOVE: 196 := 087D
+	@0x15e60: 01980000 - MOVE: 198 := 0000
+	@0x15e64: 019E0000 - MOVE: 19E := 0000
+	@0x15e68: 019E0000 - MOVE: 19E := 0000
+	@0x15e6c: FC01FFFE - WAIT: 0,252
+	@0x15e70: 01020000 - MOVE: 102 := 0000
+	@0x15e74: 01080008 - MOVE: 108 := 0008
+	@0x15e78: 010A0008 - MOVE: 10A := 0008
+	@0x15e7c: FE01FFFE - WAIT: 0,254
+	@0x15e80: 01800888 - MOVE: 180 := 0888
+	@0x15e84: 01800888 - MOVE: 180 := 0888
+	@0x15e88: FF01FFFE - WAIT: 0,255
+	@0x15e8c: 01020000 - MOVE: 102 := 0000
+	@0x15e90: 01080008 - MOVE: 108 := 0008
+	@0x15e94: 010A0008 - MOVE: 10A := 0008
+	@0x15e98: FFDFFFFE - WAIT: 222,255
+	@0x15e9c: 0101FFFE - WAIT: 0,1
+	@0x15ea0: 01800000 - MOVE: 180 := 0000
+	@0x15ea4: 01800000 - MOVE: 180 := 0000
+	@0x15ea8: 0201FFFE - WAIT: 0,2
+	@0x15eac: 01020000 - MOVE: 102 := 0000
+	@0x15eb0: 01080008 - MOVE: 108 := 0008
+	@0x15eb4: 010A0008 - MOVE: 10A := 0008
+	@0x15eb8: 0401FFFE - WAIT: 0,4
+	@0x15ebc: 01800888 - MOVE: 180 := 0888
+	@0x15ec0: 01800888 - MOVE: 180 := 0888
+	@0x15ec4: 0501FFFE - WAIT: 0,5
+	@0x15ec8: 01020000 - MOVE: 102 := 0000
+	@0x15ecc: 01080008 - MOVE: 108 := 0008
+	@0x15ed0: 010A0008 - MOVE: 10A := 0008
+	@0x15ed4: 0701FFFE - WAIT: 0,7
+	@0x15ed8: 01800000 - MOVE: 180 := 0000
+	@0x15edc: 01800000 - MOVE: 180 := 0000
+	@0x15ee0: 0801FFFE - WAIT: 0,8
+	@0x15ee4: 01020000 - MOVE: 102 := 0000
+	@0x15ee8: 01080008 - MOVE: 108 := 0008
+	@0x15eec: 010A0008 - MOVE: 10A := 0008
+	@0x15ef0: 0A01FFFE - WAIT: 0,10
+	@0x15ef4: 01800888 - MOVE: 180 := 0888
+	@0x15ef8: 01800888 - MOVE: 180 := 0888
+	@0x15efc: 0B01FFFE - WAIT: 0,11
+	@0x15f00: 01020000 - MOVE: 102 := 0000
+	@0x15f04: 01080008 - MOVE: 108 := 0008
+	@0x15f08: 010A0008 - MOVE: 10A := 0008
+	@0x15f0c: 0D01FFFE - WAIT: 0,13
+	@0x15f10: 01800000 - MOVE: 180 := 0000
+	@0x15f14: 01800000 - MOVE: 180 := 0000
+	@0x15f18: 0E01FFFE - WAIT: 0,14
+	@0x15f1c: 01020000 - MOVE: 102 := 0000
+	@0x15f20: 01080008 - MOVE: 108 := 0008
+	@0x15f24: 010A0008 - MOVE: 10A := 0008
+	@0x15f28: 1001FFFE - WAIT: 0,16
+	@0x15f2c: 01800888 - MOVE: 180 := 0888
+	@0x15f30: 01800888 - MOVE: 180 := 0888
+	@0x15f34: 1101FFFE - WAIT: 0,17
+	@0x15f38: 01020000 - MOVE: 102 := 0000
+	@0x15f3c: 01080008 - MOVE: 108 := 0008
+	@0x15f40: 010A0008 - MOVE: 10A := 0008
+	@0x15f44: 1301FFFE - WAIT: 0,19
+	@0x15f48: 01800000 - MOVE: 180 := 0000
+	@0x15f4c: 01800000 - MOVE: 180 := 0000
+	@0x15f50: 1401FFFE - WAIT: 0,20
+	@0x15f54: 01020000 - MOVE: 102 := 0000
+	@0x15f58: 01080008 - MOVE: 108 := 0008
+	@0x15f5c: 010A0008 - MOVE: 10A := 0008
+	@0x15f60: 1601FFFE - WAIT: 0,22
+	@0x15f64: 01800888 - MOVE: 180 := 0888
+	@0x15f68: 01800888 - MOVE: 180 := 0888
+	@0x15f6c: 1701FFFE - WAIT: 0,23
+	@0x15f70: 01020000 - MOVE: 102 := 0000
+	@0x15f74: 01080008 - MOVE: 108 := 0008
+	@0x15f78: 010A0008 - MOVE: 10A := 0008
+	@0x15f7c: 1901FFFE - WAIT: 0,25
+	@0x15f80: 01800000 - MOVE: 180 := 0000
+	@0x15f84: 01800000 - MOVE: 180 := 0000
+	@0x15f88: 1A01FFFE - WAIT: 0,26
+	@0x15f8c: 01020000 - MOVE: 102 := 0000
+	@0x15f90: 01080008 - MOVE: 108 := 0008
+	@0x15f94: 010A0008 - MOVE: 10A := 0008
+	@0x15f98: 1C01FFFE - WAIT: 0,28
+	@0x15f9c: 01800888 - MOVE: 180 := 0888
+	@0x15fa0: 01800888 - MOVE: 180 := 0888
+	@0x15fa4: 1D01FFFE - WAIT: 0,29
+	@0x15fa8: 01020000 - MOVE: 102 := 0000
+	@0x15fac: 01080008 - MOVE: 108 := 0008
+	@0x15fb0: 010A0008 - MOVE: 10A := 0008
+	@0x15fb4: 01860444 - MOVE: 186 := 0444
+	@0x15fb8: 018E0444 - MOVE: 18E := 0444
+	@0x15fbc: 01960444 - MOVE: 196 := 0444
+	@0x15fc0: 1F01FFFE - WAIT: 0,31
+	@0x15fc4: 01800000 - MOVE: 180 := 0000
+	@0x15fc8: 01800000 - MOVE: 180 := 0000
+	@0x15fcc: 2001FFFE - WAIT: 0,32
+	@0x15fd0: 01020000 - MOVE: 102 := 0000
+	@0x15fd4: 01080008 - MOVE: 108 := 0008
+	@0x15fd8: 010A0008 - MOVE: 10A := 0008
+	@0x15fdc: 2201FFFE - WAIT: 0,34
+	@0x15fe0: 01800888 - MOVE: 180 := 0888
+	@0x15fe4: 01800888 - MOVE: 180 := 0888
+	@0x15fe8: 2301FFFE - WAIT: 0,35
+	@0x15fec: 01020000 - MOVE: 102 := 0000
+	@0x15ff0: 01080008 - MOVE: 108 := 0008
+	@0x15ff4: 010A0008 - MOVE: 10A := 0008
+	@0x15ff8: 2501FFFE - WAIT: 0,37
+	@0x15ffc: 01800000 - MOVE: 180 := 0000
+	@0x16000: 01800000 - MOVE: 180 := 0000
+	@0x16004: 2B01FFFE - WAIT: 0,43
+	@0x16008: 01800000 - MOVE: 180 := 0000
+	@0x1600c: 00000000 - MOVE: 000 := 0000
+	@0x16010: FFFFFFFE - WAIT: 254,255
+Block end: copDumpBfr, time:   1.318 ms
 UpdateCamera2 input 1
 UpdateCamera2 shift  255
 Caso con fetch modificato a 30
-Row 0 has to be updated for bX 1 - incrementing its counter to 1
+Row 0 has NOT to be updated for bX 1 - counter still at 0
 pscrollflags set to 0
 abs - Processing row 0
 abs - Ok now we are on position 1 so we must absolute shift this perspective bar to the left for 0 positions: mods 0 and bpl1con to 0
 abs - New registers : mods : 6, bplcon1: 255
 abs - Here i should be moving the first chunk and in am not doing it!!!!!
-Row 1 has to be updated for bX 1 - incrementing its counter to 1
+Row 1 has NOT to be updated for bX 1 - counter still at 0
 pscrollflags set to 0
 abs - Processing row 1
 abs - Ok now we are on position 1 so we must absolute shift this perspective bar to the left for 0 positions: mods 0 and bpl1con to 0
 abs - New registers : mods : 6, bplcon1: 255
-Row 2 has to be updated for bX 1 - incrementing its counter to 1
+Row 2 has NOT to be updated for bX 1 - counter still at 0
 pscrollflags set to 0
 abs - Processing row 2
 abs - Ok now we are on position 1 so we must absolute shift this perspective bar to the left for 0 positions: mods 0 and bpl1con to 0
 abs - New registers : mods : 6, bplcon1: 255
-Row 3 has to be updated for bX 1 - incrementing its counter to 1
+Row 3 has NOT to be updated for bX 1 - counter still at 0
 pscrollflags set to 0
 abs - Processing row 3
 abs - Ok now we are on position 1 so we must absolute shift this perspective bar to the left for 0 positions: mods 0 and bpl1con to 0
 abs - New registers : mods : 6, bplcon1: 255
-Row 4 has to be updated for bX 1 - incrementing its counter to 1
+Row 4 has NOT to be updated for bX 1 - counter still at 0
 pscrollflags set to 0
 abs - Processing row 4
 abs - Ok now we are on position 1 so we must absolute shift this perspective bar to the left for 0 positions: mods 0 and bpl1con to 0
 abs - New registers : mods : 6, bplcon1: 255
-Row 5 has to be updated for bX 1 - incrementing its counter to 1
+Row 5 has NOT to be updated for bX 1 - counter still at 0
 pscrollflags set to 0
 abs - Processing row 5
 abs - Ok now we are on position 1 so we must absolute shift this perspective bar to the left for 0 positions: mods 0 and bpl1con to 0
 abs - New registers : mods : 6, bplcon1: 255
-Row 6 has to be updated for bX 1 - incrementing its counter to 1
+Row 6 has NOT to be updated for bX 1 - counter still at 0
 pscrollflags set to 1
 abs - Processing row 6
 abs - Ok now we are on position 1 so we must absolute shift this perspective bar to the left for 1 positions: mods 0 and bpl1con to 1
 abs - New registers : mods : 6, bplcon1: 238
-Row 7 has to be updated for bX 1 - incrementing its counter to 1
+Row 7 has NOT to be updated for bX 1 - counter still at 0
 pscrollflags set to 1
 abs - Processing row 7
 abs - Ok now we are on position 1 so we must absolute shift this perspective bar to the left for 1 positions: mods 0 and bpl1con to 1
 abs - New registers : mods : 6, bplcon1: 238
-Row 8 has to be updated for bX 1 - incrementing its counter to 1
+Row 8 has NOT to be updated for bX 1 - counter still at 0
 pscrollflags set to 1
 abs - Processing row 8
 abs - Ok now we are on position 1 so we must absolute shift this perspective bar to the left for 1 positions: mods 0 and bpl1con to 1
 abs - New registers : mods : 6, bplcon1: 238
-Row 9 has to be updated for bX 1 - incrementing its counter to 1
+Row 9 has NOT to be updated for bX 1 - counter still at 0
 pscrollflags set to 1
 abs - Processing row 9
 abs - Ok now we are on position 1 so we must absolute shift this perspective bar to the left for 1 positions: mods 0 and bpl1con to 1
 abs - New registers : mods : 6, bplcon1: 238
-Row 10 has to be updated for bX 1 - incrementing its counter to 1
+Row 10 has NOT to be updated for bX 1 - counter still at 0
 pscrollflags set to 1
 abs - Processing row 10
 abs - Ok now we are on position 1 so we must absolute shift this perspective bar to the left for 1 positions: mods 0 and bpl1con to 1
 abs - New registers : mods : 6, bplcon1: 238
-Row 11 has to be updated for bX 1 - incrementing its counter to 1
+Row 11 has NOT to be updated for bX 1 - counter still at 0
 pscrollflags set to 1
 abs - Processing row 11
 abs - Ok now we are on position 1 so we must absolute shift this perspective bar to the left for 1 positions: mods 0 and bpl1con to 1
 abs - New registers : mods : 6, bplcon1: 238
-UpdateCamera2 input 2
-UpdateCamera2 shift  238
-Caso con fetch modificato a 30
-Row 0 has NOT to be updated for bX 2 - counter still at 0
-pscrollflags set to 0
-abs - Processing row 0
-abs - Ok now we are on position 2 so we must absolute shift this perspective bar to the left for 1 positions: mods 0 and bpl1con to 1
+Row 12 has NOT to be updated for bX 1 - counter still at 0
+pscrollflags set to 1
+abs - Processing row 12
+abs - Ok now we are on position 1 so we must absolute shift this perspective bar to the left for 1 positions: mods 0 and bpl1con to 1
 abs - New registers : mods : 6, bplcon1: 238
-abs - Here i should be moving the first chunk and in am not doing it!!!!!
-Row 1 has to be updated for bX 2 - incrementing its counter to 1
-pscrollflags set to 0
-abs - Processing row 1
-abs - Ok now we are on position 2 so we must absolute shift this perspective bar to the left for 1 positions: mods 0 and bpl1con to 1
+Row 13 has NOT to be updated for bX 1 - counter still at 0
+pscrollflags set to 1
+abs - Processing row 13
+abs - Ok now we are on position 1 so we must absolute shift this perspective bar to the left for 1 positions: mods 0 and bpl1con to 1
 abs - New registers : mods : 6, bplcon1: 238
-Row 2 has to be updated for bX 2 - incrementing its counter to 1
-pscrollflags set to 0
-abs - Processing row 2
-abs - Ok now we are on position 2 so we must absolute shift this perspective bar to the left for 1 positions: mods 0 and bpl1con to 1
-abs - New registers : mods : 6, bplcon1: 238
-Row 3 has to be updated for bX 2 - incrementing its counter to 1
-pscrollflags set to 1
-abs - Processing row 3
-abs - Ok now we are on position 2 so we must absolute shift this perspective bar to the left for 2 positions: mods 0 and bpl1con to 2
-abs - New registers : mods : 6, bplcon1: 221
-Row 4 has to be updated for bX 2 - incrementing its counter to 1
-pscrollflags set to 1
-abs - Processing row 4
-abs - Ok now we are on position 2 so we must absolute shift this perspective bar to the left for 2 positions: mods 0 and bpl1con to 2
-abs - New registers : mods : 6, bplcon1: 221
-Row 5 has to be updated for bX 2 - incrementing its counter to 1
-pscrollflags set to 1
-abs - Processing row 5
-abs - Ok now we are on position 2 so we must absolute shift this perspective bar to the left for 2 positions: mods 0 and bpl1con to 2
-abs - New registers : mods : 6, bplcon1: 221
-Row 6 has to be updated for bX 2 - incrementing its counter to 2
-pscrollflags set to 1
-abs - Processing row 6
-abs - Ok now we are on position 2 so we must absolute shift this perspective bar to the left for 2 positions: mods 0 and bpl1con to 2
-abs - New registers : mods : 6, bplcon1: 221
-Row 7 has to be updated for bX 2 - incrementing its counter to 2
-pscrollflags set to 1
-abs - Processing row 7
-abs - Ok now we are on position 2 so we must absolute shift this perspective bar to the left for 2 positions: mods 0 and bpl1con to 2
-abs - New registers : mods : 6, bplcon1: 221
-Row 8 has to be updated for bX 2 - incrementing its counter to 2
-pscrollflags set to 1
-abs - Processing row 8
-abs - Ok now we are on position 2 so we must absolute shift this perspective bar to the left for 2 positions: mods 0 and bpl1con to 2
-abs - New registers : mods : 6, bplcon1: 221
-Row 9 has to be updated for bX 2 - incrementing its counter to 2
-pscrollflags set to 2
-abs - Processing row 9
-abs - Ok now we are on position 2 so we must absolute shift this perspective bar to the left for 3 positions: mods 0 and bpl1con to 3
-abs - New registers : mods : 6, bplcon1: 204
-Row 10 has to be updated for bX 2 - incrementing its counter to 2
-pscrollflags set to 2
-abs - Processing row 10
-abs - Ok now we are on position 2 so we must absolute shift this perspective bar to the left for 3 positions: mods 0 and bpl1con to 3
-abs - New registers : mods : 6, bplcon1: 204
-Row 11 has to be updated for bX 2 - incrementing its counter to 2
-pscrollflags set to 2
-abs - Processing row 11
-abs - Ok now we are on position 2 so we must absolute shift this perspective bar to the left for 3 positions: mods 0 and bpl1con to 3
-abs - New registers : mods : 6, bplcon1: 204
-UpdateCamera2 input 3
-UpdateCamera2 shift  221
-Caso con fetch modificato a 30
-Row 0 has NOT to be updated for bX 3 - counter still at 0
-pscrollflags set to 0
-abs - Processing row 0
-abs - Ok now we are on position 3 so we must absolute shift this perspective bar to the left for 2 positions: mods 0 and bpl1con to 2
-abs - New registers : mods : 6, bplcon1: 221
-abs - Here i should be moving the first chunk and in am not doing it!!!!!
-Row 1 has NOT to be updated for bX 3 - counter still at 0
-pscrollflags set to 0
-abs - Processing row 1
-abs - Ok now we are on position 3 so we must absolute shift this perspective bar to the left for 2 positions: mods 0 and bpl1con to 2
-abs - New registers : mods : 6, bplcon1: 221
-Row 2 has to be updated for bX 3 - incrementing its counter to 1
-pscrollflags set to 1
-abs - Processing row 2
-abs - Ok now we are on position 3 so we must absolute shift this perspective bar to the left for 3 positions: mods 0 and bpl1con to 3
-abs - New registers : mods : 6, bplcon1: 204
-Row 3 has to be updated for bX 3 - incrementing its counter to 2
-pscrollflags set to 1
-abs - Processing row 3
-abs - Ok now we are on position 3 so we must absolute shift this perspective bar to the left for 3 positions: mods 0 and bpl1con to 3
-abs - New registers : mods : 6, bplcon1: 204
-Row 4 has to be updated for bX 3 - incrementing its counter to 2
-pscrollflags set to 1
-abs - Processing row 4
-abs - Ok now we are on position 3 so we must absolute shift this perspective bar to the left for 3 positions: mods 0 and bpl1con to 3
-abs - New registers : mods : 6, bplcon1: 204
-Row 5 has to be updated for bX 3 - incrementing its counter to 2
-pscrollflags set to 1
-abs - Processing row 5
-abs - Ok now we are on position 3 so we must absolute shift this perspective bar to the left for 3 positions: mods 0 and bpl1con to 3
-abs - New registers : mods : 6, bplcon1: 204
-Row 6 has to be updated for bX 3 - incrementing its counter to 2
-pscrollflags set to 2
-abs - Processing row 6
-abs - Ok now we are on position 3 so we must absolute shift this perspective bar to the left for 4 positions: mods 0 and bpl1con to 4
-abs - New registers : mods : 6, bplcon1: 187
-Row 7 has to be updated for bX 3 - incrementing its counter to 2
-pscrollflags set to 2
-abs - Processing row 7
-abs - Ok now we are on position 3 so we must absolute shift this perspective bar to the left for 4 positions: mods 0 and bpl1con to 4
-abs - New registers : mods : 6, bplcon1: 187
-Row 8 has to be updated for bX 3 - incrementing its counter to 2
-pscrollflags set to 2
-abs - Processing row 8
-abs - Ok now we are on position 3 so we must absolute shift this perspective bar to the left for 4 positions: mods 0 and bpl1con to 4
-abs - New registers : mods : 6, bplcon1: 187
-Row 9 has to be updated for bX 3 - incrementing its counter to 3
-pscrollflags set to 2
-abs - Processing row 9
-abs - Ok now we are on position 3 so we must absolute shift this perspective bar to the left for 4 positions: mods 0 and bpl1con to 4
-abs - New registers : mods : 6, bplcon1: 187
-Row 10 has to be updated for bX 3 - incrementing its counter to 3
-pscrollflags set to 3
-abs - Processing row 10
-abs - Ok now we are on position 3 so we must absolute shift this perspective bar to the left for 5 positions: mods 0 and bpl1con to 5
-abs - New registers : mods : 6, bplcon1: 170
-Row 11 has to be updated for bX 3 - incrementing its counter to 3
-pscrollflags set to 3
-abs - Processing row 11
-abs - Ok now we are on position 3 so we must absolute shift this perspective bar to the left for 5 positions: mods 0 and bpl1con to 5
-abs - New registers : mods : 6, bplcon1: 170
-UpdateCamera2 input 4
-UpdateCamera2 shift  204
-Caso con fetch modificato a 30
-Row 0 has NOT to be updated for bX 4 - counter still at 0
-pscrollflags set to 0
-abs - Processing row 0
-abs - Ok now we are on position 4 so we must absolute shift this perspective bar to the left for 3 positions: mods 0 and bpl1con to 3
-abs - New registers : mods : 6, bplcon1: 204
-abs - Here i should be moving the first chunk and in am not doing it!!!!!
-Row 1 has NOT to be updated for bX 4 - counter still at 0
-pscrollflags set to 0
-abs - Processing row 1
-abs - Ok now we are on position 4 so we must absolute shift this perspective bar to the left for 3 positions: mods 0 and bpl1con to 3
-abs - New registers : mods : 6, bplcon1: 204
-Row 2 has NOT to be updated for bX 4 - counter still at 1
-pscrollflags set to 1
-abs - Processing row 2
-abs - Ok now we are on position 4 so we must absolute shift this perspective bar to the left for 4 positions: mods 0 and bpl1con to 4
-abs - New registers : mods : 6, bplcon1: 187
-Row 3 has to be updated for bX 4 - incrementing its counter to 2
-pscrollflags set to 1
-abs - Processing row 3
-abs - Ok now we are on position 4 so we must absolute shift this perspective bar to the left for 4 positions: mods 0 and bpl1con to 4
-abs - New registers : mods : 6, bplcon1: 187
-Row 4 has to be updated for bX 4 - incrementing its counter to 2
-pscrollflags set to 1
-abs - Processing row 4
-abs - Ok now we are on position 4 so we must absolute shift this perspective bar to the left for 4 positions: mods 0 and bpl1con to 4
-abs - New registers : mods : 6, bplcon1: 187
-Row 5 has to be updated for bX 4 - incrementing its counter to 2
-pscrollflags set to 2
-abs - Processing row 5
-abs - Ok now we are on position 4 so we must absolute shift this perspective bar to the left for 5 positions: mods 0 and bpl1con to 5
-abs - New registers : mods : 6, bplcon1: 170
-Row 6 has to be updated for bX 4 - incrementing its counter to 3
-pscrollflags set to 2
-abs - Processing row 6
-abs - Ok now we are on position 4 so we must absolute shift this perspective bar to the left for 5 positions: mods 0 and bpl1con to 5
-abs - New registers : mods : 6, bplcon1: 170
-Row 7 has to be updated for bX 4 - incrementing its counter to 3
-pscrollflags set to 3
-abs - Processing row 7
-abs - Ok now we are on position 4 so we must absolute shift this perspective bar to the left for 6 positions: mods 0 and bpl1con to 6
-abs - New registers : mods : 6, bplcon1: 153
-Row 8 has to be updated for bX 4 - incrementing its counter to 3
-pscrollflags set to 3
-abs - Processing row 8
-abs - Ok now we are on position 4 so we must absolute shift this perspective bar to the left for 6 positions: mods 0 and bpl1con to 6
-abs - New registers : mods : 6, bplcon1: 153
-Row 9 has to be updated for bX 4 - incrementing its counter to 3
-pscrollflags set to 3
-abs - Processing row 9
-abs - Ok now we are on position 4 so we must absolute shift this perspective bar to the left for 6 positions: mods 0 and bpl1con to 6
-abs - New registers : mods : 6, bplcon1: 153
-Row 10 has to be updated for bX 4 - incrementing its counter to 4
-pscrollflags set to 4
-abs - Processing row 10
-abs - Ok now we are on position 4 so we must absolute shift this perspective bar to the left for 7 positions: mods 0 and bpl1con to 7
-abs - New registers : mods : 6, bplcon1: 136
-Row 11 has to be updated for bX 4 - incrementing its counter to 4
-pscrollflags set to 4
-abs - Processing row 11
-abs - Ok now we are on position 4 so we must absolute shift this perspective bar to the left for 7 positions: mods 0 and bpl1con to 7
-abs - New registers : mods : 6, bplcon1: 136
-UpdateCamera2 input 5
-UpdateCamera2 shift  187
-Caso con fetch modificato a 30
-Row 0 has NOT to be updated for bX 5 - counter still at 0
-pscrollflags set to 0
-abs - Processing row 0
-abs - Ok now we are on position 5 so we must absolute shift this perspective bar to the left for 4 positions: mods 0 and bpl1con to 4
-abs - New registers : mods : 6, bplcon1: 187
-abs - Here i should be moving the first chunk and in am not doing it!!!!!
-Row 1 has NOT to be updated for bX 5 - counter still at 0
-pscrollflags set to 0
-abs - Processing row 1
-abs - Ok now we are on position 5 so we must absolute shift this perspective bar to the left for 4 positions: mods 0 and bpl1con to 4
-abs - New registers : mods : 6, bplcon1: 187
-Row 2 has NOT to be updated for bX 5 - counter still at 1
-pscrollflags set to 1
-abs - Processing row 2
-abs - Ok now we are on position 5 so we must absolute shift this perspective bar to the left for 5 positions: mods 0 and bpl1con to 5
-abs - New registers : mods : 6, bplcon1: 170
-Row 3 has NOT to be updated for bX 5 - counter still at 1
-pscrollflags set to 1
-abs - Processing row 3
-abs - Ok now we are on position 5 so we must absolute shift this perspective bar to the left for 5 positions: mods 0 and bpl1con to 5
-abs - New registers : mods : 6, bplcon1: 170
-Row 4 has to be updated for bX 5 - incrementing its counter to 2
-pscrollflags set to 2
-abs - Processing row 4
-abs - Ok now we are on position 5 so we must absolute shift this perspective bar to the left for 6 positions: mods 0 and bpl1con to 6
-abs - New registers : mods : 6, bplcon1: 153
-Row 5 has to be updated for bX 5 - incrementing its counter to 3
-pscrollflags set to 2
-abs - Processing row 5
-abs - Ok now we are on position 5 so we must absolute shift this perspective bar to the left for 6 positions: mods 0 and bpl1con to 6
-abs - New registers : mods : 6, bplcon1: 153
-Row 6 has to be updated for bX 5 - incrementing its counter to 3
-pscrollflags set to 3
-abs - Processing row 6
-abs - Ok now we are on position 5 so we must absolute shift this perspective bar to the left for 7 positions: mods 0 and bpl1con to 7
-abs - New registers : mods : 6, bplcon1: 136
-Row 7 has to be updated for bX 5 - incrementing its counter to 4
-pscrollflags set to 3
-abs - Processing row 7
-abs - Ok now we are on position 5 so we must absolute shift this perspective bar to the left for 7 positions: mods 0 and bpl1con to 7
-abs - New registers : mods : 6, bplcon1: 136
-Row 8 has to be updated for bX 5 - incrementing its counter to 4
-pscrollflags set to 4
-abs - Processing row 8
-abs - Ok now we are on position 5 so we must absolute shift this perspective bar to the left for 8 positions: mods 0 and bpl1con to 8
-abs - New registers : mods : 6, bplcon1: 119
-Row 9 has to be updated for bX 5 - incrementing its counter to 4
-pscrollflags set to 4
-abs - Processing row 9
-abs - Ok now we are on position 5 so we must absolute shift this perspective bar to the left for 8 positions: mods 0 and bpl1con to 8
-abs - New registers : mods : 6, bplcon1: 119
-Row 10 has to be updated for bX 5 - incrementing its counter to 5
-pscrollflags set to 5
-abs - Processing row 10
-abs - Ok now we are on position 5 so we must absolute shift this perspective bar to the left for 9 positions: mods 0 and bpl1con to 9
-abs - New registers : mods : 6, bplcon1: 102
-Row 11 has to be updated for bX 5 - incrementing its counter to 5
-pscrollflags set to 5
-abs - Processing row 11
-abs - Ok now we are on position 5 so we must absolute shift this perspective bar to the left for 9 positions: mods 0 and bpl1con to 9
-abs - New registers : mods : 6, bplcon1: 102
-UpdateCamera2 input 6
-UpdateCamera2 shift  170
-Caso con fetch modificato a 30
-Row 0 has NOT to be updated for bX 6 - counter still at 0
-pscrollflags set to 0
-abs - Processing row 0
-abs - Ok now we are on position 6 so we must absolute shift this perspective bar to the left for 5 positions: mods 0 and bpl1con to 5
-abs - New registers : mods : 6, bplcon1: 170
-abs - Here i should be moving the first chunk and in am not doing it!!!!!
-Row 1 has NOT to be updated for bX 6 - counter still at 0
-pscrollflags set to 1
-abs - Processing row 1
-abs - Ok now we are on position 6 so we must absolute shift this perspective bar to the left for 6 positions: mods 0 and bpl1con to 6
-abs - New registers : mods : 6, bplcon1: 153
-Row 2 has NOT to be updated for bX 6 - counter still at 1
-pscrollflags set to 1
-abs - Processing row 2
-abs - Ok now we are on position 6 so we must absolute shift this perspective bar to the left for 6 positions: mods 0 and bpl1con to 6
-abs - New registers : mods : 6, bplcon1: 153
-Row 3 has NOT to be updated for bX 6 - counter still at 1
-pscrollflags set to 2
-abs - Processing row 3
-abs - Ok now we are on position 6 so we must absolute shift this perspective bar to the left for 7 positions: mods 0 and bpl1con to 7
-abs - New registers : mods : 6, bplcon1: 136
-Row 4 has NOT to be updated for bX 6 - counter still at 2
-pscrollflags set to 2
-abs - Processing row 4
-abs - Ok now we are on position 6 so we must absolute shift this perspective bar to the left for 7 positions: mods 0 and bpl1con to 7
-abs - New registers : mods : 6, bplcon1: 136
-Row 5 has to be updated for bX 6 - incrementing its counter to 3
-pscrollflags set to 3
-abs - Processing row 5
-abs - Ok now we are on position 6 so we must absolute shift this perspective bar to the left for 8 positions: mods 0 and bpl1con to 8
-abs - New registers : mods : 6, bplcon1: 119
-Row 6 has to be updated for bX 6 - incrementing its counter to 4
-pscrollflags set to 3
-abs - Processing row 6
-abs - Ok now we are on position 6 so we must absolute shift this perspective bar to the left for 8 positions: mods 0 and bpl1con to 8
-abs - New registers : mods : 6, bplcon1: 119
-Row 7 has to be updated for bX 6 - incrementing its counter to 4
-pscrollflags set to 4
-abs - Processing row 7
-abs - Ok now we are on position 6 so we must absolute shift this perspective bar to the left for 9 positions: mods 0 and bpl1con to 9
-abs - New registers : mods : 6, bplcon1: 102
-Row 8 has to be updated for bX 6 - incrementing its counter to 5
-pscrollflags set to 4
-abs - Processing row 8
-abs - Ok now we are on position 6 so we must absolute shift this perspective bar to the left for 9 positions: mods 0 and bpl1con to 9
-abs - New registers : mods : 6, bplcon1: 102
-Row 9 has to be updated for bX 6 - incrementing its counter to 5
-pscrollflags set to 5
-abs - Processing row 9
-abs - Ok now we are on position 6 so we must absolute shift this perspective bar to the left for 10 positions: mods 0 and bpl1con to 10
-abs - New registers : mods : 6, bplcon1: 85
-Row 10 has to be updated for bX 6 - incrementing its counter to 6
-pscrollflags set to 5
-abs - Processing row 10
-abs - Ok now we are on position 6 so we must absolute shift this perspective bar to the left for 10 positions: mods 0 and bpl1con to 10
-abs - New registers : mods : 6, bplcon1: 85
-Row 11 has to be updated for bX 6 - incrementing its counter to 6
-pscrollflags set to 6
-abs - Processing row 11
-abs - Ok now we are on position 6 so we must absolute shift this perspective bar to the left for 11 positions: mods 0 and bpl1con to 11
-abs - New registers : mods : 6, bplcon1: 68
-UpdateCamera2 input 7
-UpdateCamera2 shift  153
-Caso con fetch modificato a 30
-Row 0 has NOT to be updated for bX 7 - counter still at 0
-pscrollflags set to 0
-abs - Processing row 0
-abs - Ok now we are on position 7 so we must absolute shift this perspective bar to the left for 6 positions: mods 0 and bpl1con to 6
-abs - New registers : mods : 6, bplcon1: 153
-abs - Here i should be moving the first chunk and in am not doing it!!!!!
-Row 1 has NOT to be updated for bX 7 - counter still at 1
-pscrollflags set to 1
-abs - Processing row 1
-abs - Ok now we are on position 7 so we must absolute shift this perspective bar to the left for 7 positions: mods 0 and bpl1con to 7
-abs - New registers : mods : 6, bplcon1: 136
-Row 2 has NOT to be updated for bX 7 - counter still at 1
-pscrollflags set to 1
-abs - Processing row 2
-abs - Ok now we are on position 7 so we must absolute shift this perspective bar to the left for 7 positions: mods 0 and bpl1con to 7
-abs - New registers : mods : 6, bplcon1: 136
-Row 3 has NOT to be updated for bX 7 - counter still at 2
-pscrollflags set to 2
-abs - Processing row 3
-abs - Ok now we are on position 7 so we must absolute shift this perspective bar to the left for 8 positions: mods 0 and bpl1con to 8
-abs - New registers : mods : 6, bplcon1: 119
-Row 4 has NOT to be updated for bX 7 - counter still at 2
-pscrollflags set to 3
-abs - Processing row 4
-abs - Ok now we are on position 7 so we must absolute shift this perspective bar to the left for 9 positions: mods 0 and bpl1con to 9
-abs - New registers : mods : 6, bplcon1: 102
-Row 5 has NOT to be updated for bX 7 - counter still at 3
-pscrollflags set to 3
-abs - Processing row 5
-abs - Ok now we are on position 7 so we must absolute shift this perspective bar to the left for 9 positions: mods 0 and bpl1con to 9
-abs - New registers : mods : 6, bplcon1: 102
-Row 6 has to be updated for bX 7 - incrementing its counter to 4
-pscrollflags set to 4
-abs - Processing row 6
-abs - Ok now we are on position 7 so we must absolute shift this perspective bar to the left for 10 positions: mods 0 and bpl1con to 10
-abs - New registers : mods : 6, bplcon1: 85
-Row 7 has to be updated for bX 7 - incrementing its counter to 5
-pscrollflags set to 4
-abs - Processing row 7
-abs - Ok now we are on position 7 so we must absolute shift this perspective bar to the left for 10 positions: mods 0 and bpl1con to 10
-abs - New registers : mods : 6, bplcon1: 85
-Row 8 has to be updated for bX 7 - incrementing its counter to 5
-pscrollflags set to 5
-abs - Processing row 8
-abs - Ok now we are on position 7 so we must absolute shift this perspective bar to the left for 11 positions: mods 0 and bpl1con to 11
-abs - New registers : mods : 6, bplcon1: 68
-Row 9 has to be updated for bX 7 - incrementing its counter to 6
-pscrollflags set to 6
-abs - Processing row 9
-abs - Ok now we are on position 7 so we must absolute shift this perspective bar to the left for 12 positions: mods 0 and bpl1con to 12
-abs - New registers : mods : 6, bplcon1: 51
-Row 10 has to be updated for bX 7 - incrementing its counter to 6
-pscrollflags set to 6
-abs - Processing row 10
-abs - Ok now we are on position 7 so we must absolute shift this perspective bar to the left for 12 positions: mods 0 and bpl1con to 12
-abs - New registers : mods : 6, bplcon1: 51
-Row 11 has to be updated for bX 7 - incrementing its counter to 7
-pscrollflags set to 7
-abs - Processing row 11
-abs - Ok now we are on position 7 so we must absolute shift this perspective bar to the left for 13 positions: mods 0 and bpl1con to 13
-abs - New registers : mods : 6, bplcon1: 34
-UpdateCamera2 input 8
-UpdateCamera2 shift  136
-Caso con fetch modificato a 30
-Row 0 has NOT to be updated for bX 8 - counter still at 0
-pscrollflags set to 0
-abs - Processing row 0
-abs - Ok now we are on position 8 so we must absolute shift this perspective bar to the left for 7 positions: mods 0 and bpl1con to 7
-abs - New registers : mods : 6, bplcon1: 136
-abs - Here i should be moving the first chunk and in am not doing it!!!!!
-Row 1 has NOT to be updated for bX 8 - counter still at 1
-pscrollflags set to 1
-abs - Processing row 1
-abs - Ok now we are on position 8 so we must absolute shift this perspective bar to the left for 8 positions: mods 0 and bpl1con to 8
-abs - New registers : mods : 6, bplcon1: 119
-Row 2 has NOT to be updated for bX 8 - counter still at 1
-pscrollflags set to 1
-abs - Processing row 2
-abs - Ok now we are on position 8 so we must absolute shift this perspective bar to the left for 8 positions: mods 0 and bpl1con to 8
-abs - New registers : mods : 6, bplcon1: 119
-Row 3 has NOT to be updated for bX 8 - counter still at 2
-pscrollflags set to 2
-abs - Processing row 3
-abs - Ok now we are on position 8 so we must absolute shift this perspective bar to the left for 9 positions: mods 0 and bpl1con to 9
-abs - New registers : mods : 6, bplcon1: 102
-Row 4 has NOT to be updated for bX 8 - counter still at 3
-pscrollflags set to 3
-abs - Processing row 4
-abs - Ok now we are on position 8 so we must absolute shift this perspective bar to the left for 10 positions: mods 0 and bpl1con to 10
-abs - New registers : mods : 6, bplcon1: 85
-Row 5 has NOT to be updated for bX 8 - counter still at 3
-pscrollflags set to 4
-abs - Processing row 5
-abs - Ok now we are on position 8 so we must absolute shift this perspective bar to the left for 11 positions: mods 0 and bpl1con to 11
-abs - New registers : mods : 6, bplcon1: 68
-Row 6 has NOT to be updated for bX 8 - counter still at 4
-pscrollflags set to 4
-abs - Processing row 6
-abs - Ok now we are on position 8 so we must absolute shift this perspective bar to the left for 11 positions: mods 0 and bpl1con to 11
-abs - New registers : mods : 6, bplcon1: 68
-Row 7 has to be updated for bX 8 - incrementing its counter to 5
-pscrollflags set to 5
-abs - Processing row 7
-abs - Ok now we are on position 8 so we must absolute shift this perspective bar to the left for 12 positions: mods 0 and bpl1con to 12
-abs - New registers : mods : 6, bplcon1: 51
-Row 8 has to be updated for bX 8 - incrementing its counter to 6
-pscrollflags set to 6
-abs - Processing row 8
-abs - Ok now we are on position 8 so we must absolute shift this perspective bar to the left for 13 positions: mods 0 and bpl1con to 13
-abs - New registers : mods : 6, bplcon1: 34
-Row 9 has to be updated for bX 8 - incrementing its counter to 7
-pscrollflags set to 7
-abs - Processing row 9
-abs - Ok now we are on position 8 so we must absolute shift this perspective bar to the left for 14 positions: mods 0 and bpl1con to 14
-abs - New registers : mods : 6, bplcon1: 17
-Row 10 has to be updated for bX 8 - incrementing its counter to 7
-pscrollflags set to 7
-abs - Processing row 10
-abs - Ok now we are on position 8 so we must absolute shift this perspective bar to the left for 14 positions: mods 0 and bpl1con to 14
-abs - New registers : mods : 6, bplcon1: 17
-Row 11 has to be updated for bX 8 - incrementing its counter to 8
-pscrollflags set to 8
-abs - Processing row 11
-abs - Ok now we are on position 8 so we must absolute shift this perspective bar to the left for 15 positions: mods 0 and bpl1con to 15
-abs - New registers : mods : 6, bplcon1: 0
-UpdateCamera2 input 9
-UpdateCamera2 shift  119
-Caso con fetch modificato a 30
-Row 0 has NOT to be updated for bX 9 - counter still at 0
-pscrollflags set to 0
-abs - Processing row 0
-abs - Ok now we are on position 9 so we must absolute shift this perspective bar to the left for 8 positions: mods 0 and bpl1con to 8
-abs - New registers : mods : 6, bplcon1: 119
-abs - Here i should be moving the first chunk and in am not doing it!!!!!
-Row 1 has NOT to be updated for bX 9 - counter still at 1
-pscrollflags set to 1
-abs - Processing row 1
-abs - Ok now we are on position 9 so we must absolute shift this perspective bar to the left for 9 positions: mods 0 and bpl1con to 9
-abs - New registers : mods : 6, bplcon1: 102
-Row 2 has NOT to be updated for bX 9 - counter still at 1
-pscrollflags set to 2
-abs - Processing row 2
-abs - Ok now we are on position 9 so we must absolute shift this perspective bar to the left for 10 positions: mods 0 and bpl1con to 10
-abs - New registers : mods : 6, bplcon1: 85
-Row 3 has NOT to be updated for bX 9 - counter still at 2
-pscrollflags set to 2
-abs - Processing row 3
-abs - Ok now we are on position 9 so we must absolute shift this perspective bar to the left for 10 positions: mods 0 and bpl1con to 10
-abs - New registers : mods : 6, bplcon1: 85
-Row 4 has NOT to be updated for bX 9 - counter still at 3
-pscrollflags set to 3
-abs - Processing row 4
-abs - Ok now we are on position 9 so we must absolute shift this perspective bar to the left for 11 positions: mods 0 and bpl1con to 11
-abs - New registers : mods : 6, bplcon1: 68
-Row 5 has NOT to be updated for bX 9 - counter still at 4
-pscrollflags set to 4
-abs - Processing row 5
-abs - Ok now we are on position 9 so we must absolute shift this perspective bar to the left for 12 positions: mods 0 and bpl1con to 12
-abs - New registers : mods : 6, bplcon1: 51
-Row 6 has NOT to be updated for bX 9 - counter still at 4
-pscrollflags set to 5
-abs - Processing row 6
-abs - Ok now we are on position 9 so we must absolute shift this perspective bar to the left for 13 positions: mods 0 and bpl1con to 13
-abs - New registers : mods : 6, bplcon1: 34
-Row 7 has NOT to be updated for bX 9 - counter still at 5
-pscrollflags set to 6
-abs - Processing row 7
-abs - Ok now we are on position 9 so we must absolute shift this perspective bar to the left for 14 positions: mods 0 and bpl1con to 14
-abs - New registers : mods : 6, bplcon1: 17
-Row 8 has to be updated for bX 9 - incrementing its counter to 7
-pscrollflags set to 7
-abs - Processing row 8
-abs - Ok now we are on position 9 so we must absolute shift this perspective bar to the left for 15 positions: mods 0 and bpl1con to 15
-abs - New registers : mods : 6, bplcon1: 0
-Row 9 has to be updated for bX 9 - incrementing its counter to 8
-pscrollflags set to 7
-abs - Processing row 9
-abs - Ok now we are on position 9 so we must absolute shift this perspective bar to the left for 15 positions: mods 0 and bpl1con to 15
-abs - New registers : mods : 6, bplcon1: 0
-Row 10 has to be updated for bX 9 - incrementing its counter to 8
-pscrollflags set to 8
-abs - Processing row 10
-abs - Ok now we are on position 9 so we must absolute shift this perspective bar to the left for 16 positions: mods 1 and bpl1con to 0
-abs - New registers : mods : 8, bplcon1: 255
-Row 11 has to be updated for bX 9 - incrementing its counter to 9
-pscrollflags set to 9
-abs - Processing row 11
-abs - Ok now we are on position 9 so we must absolute shift this perspective bar to the left for 17 positions: mods 1 and bpl1con to 1
-abs - New registers : mods : 6, bplcon1: 238
-UpdateCamera2 input 10
-UpdateCamera2 shift  102
-Caso con fetch modificato a 30
-Row 0 has NOT to be updated for bX 10 - counter still at 0
-pscrollflags set to 0
-abs - Processing row 0
-abs - Ok now we are on position 10 so we must absolute shift this perspective bar to the left for 9 positions: mods 0 and bpl1con to 9
-abs - New registers : mods : 6, bplcon1: 102
-abs - Here i should be moving the first chunk and in am not doing it!!!!!
-Row 1 has NOT to be updated for bX 10 - counter still at 1
-pscrollflags set to 1
-abs - Processing row 1
-abs - Ok now we are on position 10 so we must absolute shift this perspective bar to the left for 10 positions: mods 0 and bpl1con to 10
-abs - New registers : mods : 6, bplcon1: 85
-Row 2 has NOT to be updated for bX 10 - counter still at 2
-pscrollflags set to 2
-abs - Processing row 2
-abs - Ok now we are on position 10 so we must absolute shift this perspective bar to the left for 11 positions: mods 0 and bpl1con to 11
-abs - New registers : mods : 6, bplcon1: 68
-Row 3 has NOT to be updated for bX 10 - counter still at 2
-pscrollflags set to 3
-abs - Processing row 3
-abs - Ok now we are on position 10 so we must absolute shift this perspective bar to the left for 12 positions: mods 0 and bpl1con to 12
-abs - New registers : mods : 6, bplcon1: 51
-Row 4 has NOT to be updated for bX 10 - counter still at 3
-pscrollflags set to 4
-abs - Processing row 4
-abs - Ok now we are on position 10 so we must absolute shift this perspective bar to the left for 13 positions: mods 0 and bpl1con to 13
-abs - New registers : mods : 6, bplcon1: 34
-Row 5 has NOT to be updated for bX 10 - counter still at 4
-pscrollflags set to 5
-abs - Processing row 5
-abs - Ok now we are on position 10 so we must absolute shift this perspective bar to the left for 14 positions: mods 0 and bpl1con to 14
-abs - New registers : mods : 6, bplcon1: 17
-Row 6 has NOT to be updated for bX 10 - counter still at 5
-pscrollflags set to 6
-abs - Processing row 6
-abs - Ok now we are on position 10 so we must absolute shift this perspective bar to the left for 15 positions: mods 0 and bpl1con to 15
-abs - New registers : mods : 6, bplcon1: 0
-Row 7 has NOT to be updated for bX 10 - counter still at 6
-pscrollflags set to 6
-abs - Processing row 7
-abs - Ok now we are on position 10 so we must absolute shift this perspective bar to the left for 15 positions: mods 0 and bpl1con to 15
-abs - New registers : mods : 6, bplcon1: 0
-Row 8 has NOT to be updated for bX 10 - counter still at 7
-pscrollflags set to 7
-abs - Processing row 8
-abs - Ok now we are on position 10 so we must absolute shift this perspective bar to the left for 16 positions: mods 1 and bpl1con to 0
-abs - New registers : mods : 8, bplcon1: 255
-Row 9 has to be updated for bX 10 - incrementing its counter to 8
-pscrollflags set to 8
-abs - Processing row 9
-abs - Ok now we are on position 10 so we must absolute shift this perspective bar to the left for 17 positions: mods 1 and bpl1con to 1
-abs - New registers : mods : 6, bplcon1: 238
-Row 10 has to be updated for bX 10 - incrementing its counter to 9
-pscrollflags set to 9
-abs - Processing row 10
-abs - Ok now we are on position 10 so we must absolute shift this perspective bar to the left for 18 positions: mods 1 and bpl1con to 2
-abs - New registers : mods : 6, bplcon1: 221
-Row 11 has to be updated for bX 10 - incrementing its counter to 10
-pscrollflags set to 10
-abs - Processing row 11
-abs - Ok now we are on position 10 so we must absolute shift this perspective bar to the left for 19 positions: mods 1 and bpl1con to 3
-abs - New registers : mods : 6, bplcon1: 204
-UpdateCamera2 input 11
-UpdateCamera2 shift  85
-Caso con fetch modificato a 30
-Row 0 has NOT to be updated for bX 11 - counter still at 0
-pscrollflags set to 0
-abs - Processing row 0
-abs - Ok now we are on position 11 so we must absolute shift this perspective bar to the left for 10 positions: mods 0 and bpl1con to 10
-abs - New registers : mods : 6, bplcon1: 85
-abs - Here i should be moving the first chunk and in am not doing it!!!!!
-Row 1 has NOT to be updated for bX 11 - counter still at 1
-pscrollflags set to 1
-abs - Processing row 1
-abs - Ok now we are on position 11 so we must absolute shift this perspective bar to the left for 11 positions: mods 0 and bpl1con to 11
-abs - New registers : mods : 6, bplcon1: 68
-Row 2 has NOT to be updated for bX 11 - counter still at 2
-pscrollflags set to 2
-abs - Processing row 2
-abs - Ok now we are on position 11 so we must absolute shift this perspective bar to the left for 12 positions: mods 0 and bpl1con to 12
-abs - New registers : mods : 6, bplcon1: 51
-Row 3 has NOT to be updated for bX 11 - counter still at 3
-pscrollflags set to 3
-abs - Processing row 3
-abs - Ok now we are on position 11 so we must absolute shift this perspective bar to the left for 13 positions: mods 0 and bpl1con to 13
-abs - New registers : mods : 6, bplcon1: 34
-Row 4 has NOT to be updated for bX 11 - counter still at 4
-pscrollflags set to 4
-abs - Processing row 4
-abs - Ok now we are on position 11 so we must absolute shift this perspective bar to the left for 14 positions: mods 0 and bpl1con to 14
-abs - New registers : mods : 6, bplcon1: 17
-Row 5 has NOT to be updated for bX 11 - counter still at 5
-pscrollflags set to 5
-abs - Processing row 5
-abs - Ok now we are on position 11 so we must absolute shift this perspective bar to the left for 15 positions: mods 0 and bpl1con to 15
-abs - New registers : mods : 6, bplcon1: 0
-Row 6 has NOT to be updated for bX 11 - counter still at 6
-pscrollflags set to 6
-abs - Processing row 6
-abs - Ok now we are on position 11 so we must absolute shift this perspective bar to the left for 16 positions: mods 1 and bpl1con to 0
-abs - New registers : mods : 8, bplcon1: 255
-Row 7 has NOT to be updated for bX 11 - counter still at 6
-pscrollflags set to 7
-abs - Processing row 7
-abs - Ok now we are on position 11 so we must absolute shift this perspective bar to the left for 17 positions: mods 1 and bpl1con to 1
-abs - New registers : mods : 6, bplcon1: 238
-Row 8 has NOT to be updated for bX 11 - counter still at 7
-pscrollflags set to 8
-abs - Processing row 8
-abs - Ok now we are on position 11 so we must absolute shift this perspective bar to the left for 18 positions: mods 1 and bpl1con to 2
-abs - New registers : mods : 6, bplcon1: 221
-Row 9 has NOT to be updated for bX 11 - counter still at 8
-pscrollflags set to 9
-abs - Processing row 9
-abs - Ok now we are on position 11 so we must absolute shift this perspective bar to the left for 19 positions: mods 1 and bpl1con to 3
-abs - New registers : mods : 6, bplcon1: 204
-Row 10 has to be updated for bX 11 - incrementing its counter to 10
-pscrollflags set to 10
-abs - Processing row 10
-abs - Ok now we are on position 11 so we must absolute shift this perspective bar to the left for 20 positions: mods 1 and bpl1con to 4
-abs - New registers : mods : 6, bplcon1: 187
-Row 11 has to be updated for bX 11 - incrementing its counter to 11
-pscrollflags set to 11
-abs - Processing row 11
-abs - Ok now we are on position 11 so we must absolute shift this perspective bar to the left for 21 positions: mods 1 and bpl1con to 5
-abs - New registers : mods : 6, bplcon1: 170
-UpdateCamera2 input 12
-UpdateCamera2 shift  68
-Caso con fetch modificato a 30
-Row 0 has NOT to be updated for bX 12 - counter still at 0
-pscrollflags set to 0
-abs - Processing row 0
-abs - Ok now we are on position 12 so we must absolute shift this perspective bar to the left for 11 positions: mods 0 and bpl1con to 11
-abs - New registers : mods : 6, bplcon1: 68
-abs - Here i should be moving the first chunk and in am not doing it!!!!!
-Row 1 has NOT to be updated for bX 12 - counter still at 1
-pscrollflags set to 1
-abs - Processing row 1
-abs - Ok now we are on position 12 so we must absolute shift this perspective bar to the left for 12 positions: mods 0 and bpl1con to 12
-abs - New registers : mods : 6, bplcon1: 51
-Row 2 has NOT to be updated for bX 12 - counter still at 2
-pscrollflags set to 2
-abs - Processing row 2
-abs - Ok now we are on position 12 so we must absolute shift this perspective bar to the left for 13 positions: mods 0 and bpl1con to 13
-abs - New registers : mods : 6, bplcon1: 34
-Row 3 has NOT to be updated for bX 12 - counter still at 3
-pscrollflags set to 3
-abs - Processing row 3
-abs - Ok now we are on position 12 so we must absolute shift this perspective bar to the left for 14 positions: mods 0 and bpl1con to 14
-abs - New registers : mods : 6, bplcon1: 17
-Row 4 has NOT to be updated for bX 12 - counter still at 4
-pscrollflags set to 4
-abs - Processing row 4
-abs - Ok now we are on position 12 so we must absolute shift this perspective bar to the left for 15 positions: mods 0 and bpl1con to 15
-abs - New registers : mods : 6, bplcon1: 0
-Row 5 has NOT to be updated for bX 12 - counter still at 5
-pscrollflags set to 5
-abs - Processing row 5
-abs - Ok now we are on position 12 so we must absolute shift this perspective bar to the left for 16 positions: mods 1 and bpl1con to 0
-abs - New registers : mods : 8, bplcon1: 255
-Row 6 has NOT to be updated for bX 12 - counter still at 6
-pscrollflags set to 7
-abs - Processing row 6
-abs - Ok now we are on position 12 so we must absolute shift this perspective bar to the left for 18 positions: mods 1 and bpl1con to 2
-abs - New registers : mods : 6, bplcon1: 221
-Row 7 has NOT to be updated for bX 12 - counter still at 7
-pscrollflags set to 8
-abs - Processing row 7
-abs - Ok now we are on position 12 so we must absolute shift this perspective bar to the left for 19 positions: mods 1 and bpl1con to 3
-abs - New registers : mods : 6, bplcon1: 204
-Row 8 has NOT to be updated for bX 12 - counter still at 8
-pscrollflags set to 9
-abs - Processing row 8
-abs - Ok now we are on position 12 so we must absolute shift this perspective bar to the left for 20 positions: mods 1 and bpl1con to 4
-abs - New registers : mods : 6, bplcon1: 187
-Row 9 has NOT to be updated for bX 12 - counter still at 9
-pscrollflags set to 10
-abs - Processing row 9
-abs - Ok now we are on position 12 so we must absolute shift this perspective bar to the left for 21 positions: mods 1 and bpl1con to 5
-abs - New registers : mods : 6, bplcon1: 170
-Row 10 has NOT to be updated for bX 12 - counter still at 10
-pscrollflags set to 11
-abs - Processing row 10
-abs - Ok now we are on position 12 so we must absolute shift this perspective bar to the left for 22 positions: mods 1 and bpl1con to 6
-abs - New registers : mods : 6, bplcon1: 153
-Row 11 has to be updated for bX 12 - incrementing its counter to 12
-pscrollflags set to 12
-abs - Processing row 11
-abs - Ok now we are on position 12 so we must absolute shift this perspective bar to the left for 23 positions: mods 1 and bpl1con to 7
-abs - New registers : mods : 6, bplcon1: 136
-UpdateCamera2 input 13
-UpdateCamera2 shift  51
-Caso con fetch modificato a 30
-Row 0 has NOT to be updated for bX 13 - counter still at 0
-pscrollflags set to 0
-abs - Processing row 0
-abs - Ok now we are on position 13 so we must absolute shift this perspective bar to the left for 12 positions: mods 0 and bpl1con to 12
-abs - New registers : mods : 6, bplcon1: 51
-abs - Here i should be moving the first chunk and in am not doing it!!!!!
-Row 1 has NOT to be updated for bX 13 - counter still at 1
-pscrollflags set to 1
-abs - Processing row 1
-abs - Ok now we are on position 13 so we must absolute shift this perspective bar to the left for 13 positions: mods 0 and bpl1con to 13
-abs - New registers : mods : 6, bplcon1: 34
-Row 2 has NOT to be updated for bX 13 - counter still at 2
-pscrollflags set to 2
-abs - Processing row 2
-abs - Ok now we are on position 13 so we must absolute shift this perspective bar to the left for 14 positions: mods 0 and bpl1con to 14
-abs - New registers : mods : 6, bplcon1: 17
-Row 3 has NOT to be updated for bX 13 - counter still at 3
-pscrollflags set to 4
-abs - Processing row 3
-abs - Ok now we are on position 13 so we must absolute shift this perspective bar to the left for 16 positions: mods 1 and bpl1con to 0
-abs - New registers : mods : 8, bplcon1: 255
-Row 4 has NOT to be updated for bX 13 - counter still at 4
-pscrollflags set to 5
-abs - Processing row 4
-abs - Ok now we are on position 13 so we must absolute shift this perspective bar to the left for 17 positions: mods 1 and bpl1con to 1
-abs - New registers : mods : 6, bplcon1: 238
-Row 5 has NOT to be updated for bX 13 - counter still at 5
-pscrollflags set to 6
-abs - Processing row 5
-abs - Ok now we are on position 13 so we must absolute shift this perspective bar to the left for 18 positions: mods 1 and bpl1con to 2
-abs - New registers : mods : 6, bplcon1: 221
-Row 6 has NOT to be updated for bX 13 - counter still at 7
-pscrollflags set to 7
-abs - Processing row 6
-abs - Ok now we are on position 13 so we must absolute shift this perspective bar to the left for 19 positions: mods 1 and bpl1con to 3
-abs - New registers : mods : 6, bplcon1: 204
-Row 7 has NOT to be updated for bX 13 - counter still at 8
-pscrollflags set to 8
-abs - Processing row 7
-abs - Ok now we are on position 13 so we must absolute shift this perspective bar to the left for 20 positions: mods 1 and bpl1con to 4
-abs - New registers : mods : 6, bplcon1: 187
-Row 8 has NOT to be updated for bX 13 - counter still at 9
-pscrollflags set to 10
-abs - Processing row 8
-abs - Ok now we are on position 13 so we must absolute shift this perspective bar to the left for 22 positions: mods 1 and bpl1con to 6
-abs - New registers : mods : 6, bplcon1: 153
-Row 9 has NOT to be updated for bX 13 - counter still at 10
-pscrollflags set to 11
-abs - Processing row 9
-abs - Ok now we are on position 13 so we must absolute shift this perspective bar to the left for 23 positions: mods 1 and bpl1con to 7
-abs - New registers : mods : 6, bplcon1: 136
-Row 10 has NOT to be updated for bX 13 - counter still at 11
-pscrollflags set to 12
-abs - Processing row 10
-abs - Ok now we are on position 13 so we must absolute shift this perspective bar to the left for 24 positions: mods 1 and bpl1con to 8
-abs - New registers : mods : 6, bplcon1: 119
-Row 11 has NOT to be updated for bX 13 - counter still at 12
-pscrollflags set to 13
-abs - Processing row 11
-abs - Ok now we are on position 13 so we must absolute shift this perspective bar to the left for 25 positions: mods 1 and bpl1con to 9
-abs - New registers : mods : 6, bplcon1: 102
-UpdateCamera2 input 14
-UpdateCamera2 shift  34
-Caso con fetch modificato a 30
-Row 0 has NOT to be updated for bX 14 - counter still at 0
-pscrollflags set to 0
-abs - Processing row 0
-abs - Ok now we are on position 14 so we must absolute shift this perspective bar to the left for 13 positions: mods 0 and bpl1con to 13
-abs - New registers : mods : 6, bplcon1: 34
-abs - Here i should be moving the first chunk and in am not doing it!!!!!
-Row 1 has NOT to be updated for bX 14 - counter still at 1
-pscrollflags set to 1
-abs - Processing row 1
-abs - Ok now we are on position 14 so we must absolute shift this perspective bar to the left for 14 positions: mods 0 and bpl1con to 14
-abs - New registers : mods : 6, bplcon1: 17
-Row 2 has NOT to be updated for bX 14 - counter still at 2
-pscrollflags set to 3
-abs - Processing row 2
-abs - Ok now we are on position 14 so we must absolute shift this perspective bar to the left for 16 positions: mods 1 and bpl1con to 0
-abs - New registers : mods : 8, bplcon1: 255
-Row 3 has NOT to be updated for bX 14 - counter still at 4
-pscrollflags set to 4
-abs - Processing row 3
-abs - Ok now we are on position 14 so we must absolute shift this perspective bar to the left for 17 positions: mods 1 and bpl1con to 1
-abs - New registers : mods : 6, bplcon1: 238
-Row 4 has NOT to be updated for bX 14 - counter still at 5
-pscrollflags set to 5
-abs - Processing row 4
-abs - Ok now we are on position 14 so we must absolute shift this perspective bar to the left for 18 positions: mods 1 and bpl1con to 2
-abs - New registers : mods : 6, bplcon1: 221
-Row 5 has NOT to be updated for bX 14 - counter still at 6
-pscrollflags set to 6
-abs - Processing row 5
-abs - Ok now we are on position 14 so we must absolute shift this perspective bar to the left for 19 positions: mods 1 and bpl1con to 3
-abs - New registers : mods : 6, bplcon1: 204
-Row 6 has NOT to be updated for bX 14 - counter still at 7
-pscrollflags set to 8
-abs - Processing row 6
-abs - Ok now we are on position 14 so we must absolute shift this perspective bar to the left for 21 positions: mods 1 and bpl1con to 5
-abs - New registers : mods : 6, bplcon1: 170
-Row 7 has NOT to be updated for bX 14 - counter still at 8
-pscrollflags set to 9
-abs - Processing row 7
-abs - Ok now we are on position 14 so we must absolute shift this perspective bar to the left for 22 positions: mods 1 and bpl1con to 6
-abs - New registers : mods : 6, bplcon1: 153
-Row 8 has NOT to be updated for bX 14 - counter still at 10
-pscrollflags set to 10
-abs - Processing row 8
-abs - Ok now we are on position 14 so we must absolute shift this perspective bar to the left for 23 positions: mods 1 and bpl1con to 7
-abs - New registers : mods : 6, bplcon1: 136
-Row 9 has NOT to be updated for bX 14 - counter still at 11
-pscrollflags set to 12
-abs - Processing row 9
-abs - Ok now we are on position 14 so we must absolute shift this perspective bar to the left for 25 positions: mods 1 and bpl1con to 9
-abs - New registers : mods : 6, bplcon1: 102
-Row 10 has NOT to be updated for bX 14 - counter still at 12
-pscrollflags set to 13
-abs - Processing row 10
-abs - Ok now we are on position 14 so we must absolute shift this perspective bar to the left for 26 positions: mods 1 and bpl1con to 10
-abs - New registers : mods : 6, bplcon1: 85
-Row 11 has NOT to be updated for bX 14 - counter still at 13
-pscrollflags set to 14
-abs - Processing row 11
-abs - Ok now we are on position 14 so we must absolute shift this perspective bar to the left for 27 positions: mods 1 and bpl1con to 11
-abs - New registers : mods : 6, bplcon1: 68
-UpdateCamera2 input 15
-UpdateCamera2 shift  17
-Caso con fetch modificato a 30
-Row 0 has NOT to be updated for bX 15 - counter still at 0
-pscrollflags set to 0
-abs - Processing row 0
-abs - Ok now we are on position 15 so we must absolute shift this perspective bar to the left for 14 positions: mods 0 and bpl1con to 14
-abs - New registers : mods : 6, bplcon1: 17
-abs - Here i should be moving the first chunk and in am not doing it!!!!!
-Row 1 has NOT to be updated for bX 15 - counter still at 1
-pscrollflags set to 2
-abs - Processing row 1
-abs - Ok now we are on position 15 so we must absolute shift this perspective bar to the left for 16 positions: mods 1 and bpl1con to 0
-abs - New registers : mods : 8, bplcon1: 255
-Row 2 has NOT to be updated for bX 15 - counter still at 3
-pscrollflags set to 3
-abs - Processing row 2
-abs - Ok now we are on position 15 so we must absolute shift this perspective bar to the left for 17 positions: mods 1 and bpl1con to 1
-abs - New registers : mods : 6, bplcon1: 238
-Row 3 has NOT to be updated for bX 15 - counter still at 4
-pscrollflags set to 4
-abs - Processing row 3
-abs - Ok now we are on position 15 so we must absolute shift this perspective bar to the left for 18 positions: mods 1 and bpl1con to 2
-abs - New registers : mods : 6, bplcon1: 221
-Row 4 has NOT to be updated for bX 15 - counter still at 5
-pscrollflags set to 6
-abs - Processing row 4
-abs - Ok now we are on position 15 so we must absolute shift this perspective bar to the left for 20 positions: mods 1 and bpl1con to 4
-abs - New registers : mods : 6, bplcon1: 187
-Row 5 has NOT to be updated for bX 15 - counter still at 6
-pscrollflags set to 7
-abs - Processing row 5
-abs - Ok now we are on position 15 so we must absolute shift this perspective bar to the left for 21 positions: mods 1 and bpl1con to 5
-abs - New registers : mods : 6, bplcon1: 170
-Row 6 has NOT to be updated for bX 15 - counter still at 8
-pscrollflags set to 8
-abs - Processing row 6
-abs - Ok now we are on position 15 so we must absolute shift this perspective bar to the left for 22 positions: mods 1 and bpl1con to 6
-abs - New registers : mods : 6, bplcon1: 153
-Row 7 has NOT to be updated for bX 15 - counter still at 9
-pscrollflags set to 10
-abs - Processing row 7
-abs - Ok now we are on position 15 so we must absolute shift this perspective bar to the left for 24 positions: mods 1 and bpl1con to 8
-abs - New registers : mods : 6, bplcon1: 119
-Row 8 has NOT to be updated for bX 15 - counter still at 10
-pscrollflags set to 11
-abs - Processing row 8
-abs - Ok now we are on position 15 so we must absolute shift this perspective bar to the left for 25 positions: mods 1 and bpl1con to 9
-abs - New registers : mods : 6, bplcon1: 102
-Row 9 has NOT to be updated for bX 15 - counter still at 12
-pscrollflags set to 12
-abs - Processing row 9
-abs - Ok now we are on position 15 so we must absolute shift this perspective bar to the left for 26 positions: mods 1 and bpl1con to 10
-abs - New registers : mods : 6, bplcon1: 85
-Row 10 has NOT to be updated for bX 15 - counter still at 13
-pscrollflags set to 15
-abs - Processing row 10
-abs - Ok now we are on position 15 so we must absolute shift this perspective bar to the left for 29 positions: mods 1 and bpl1con to 13
-abs - New registers : mods : 6, bplcon1: 34
-Row 11 has NOT to be updated for bX 15 - counter still at 14
-pscrollflags set to 16
-abs - Processing row 11
-abs - Ok now we are on position 15 so we must absolute shift this perspective bar to the left for 30 positions: mods 1 and bpl1con to 14
-abs - New registers : mods : 6, bplcon1: 17
-UpdateCamera2 input 16
-UpdateCamera2 shift  0
-Caso con fetch modificato a 30
-Row 0 has NOT to be updated for bX 16 - counter still at 0
-pscrollflags set to 0
-abs - Processing row 0
-abs - Ok now we are on position 16 so we must absolute shift this perspective bar to the left for 15 positions: mods 0 and bpl1con to 15
-abs - New registers : mods : 6, bplcon1: 0
-abs - Here i should be moving the first chunk and in am not doing it!!!!!
-Row 1 has NOT to be updated for bX 16 - counter still at 2
-pscrollflags set to 2
-abs - Processing row 1
-abs - Ok now we are on position 16 so we must absolute shift this perspective bar to the left for 17 positions: mods 1 and bpl1con to 1
-abs - New registers : mods : 8, bplcon1: 238
-Row 2 has NOT to be updated for bX 16 - counter still at 3
-pscrollflags set to 4
-abs - Processing row 2
-abs - Ok now we are on position 16 so we must absolute shift this perspective bar to the left for 19 positions: mods 1 and bpl1con to 3
-abs - New registers : mods : 6, bplcon1: 204
-Row 3 has NOT to be updated for bX 16 - counter still at 4
-pscrollflags set to 5
-abs - Processing row 3
-abs - Ok now we are on position 16 so we must absolute shift this perspective bar to the left for 20 positions: mods 1 and bpl1con to 4
-abs - New registers : mods : 6, bplcon1: 187
-Row 4 has NOT to be updated for bX 16 - counter still at 6
-pscrollflags set to 6
-abs - Processing row 4
-abs - Ok now we are on position 16 so we must absolute shift this perspective bar to the left for 21 positions: mods 1 and bpl1con to 5
-abs - New registers : mods : 6, bplcon1: 170
-Row 5 has NOT to be updated for bX 16 - counter still at 7
-pscrollflags set to 7
-abs - Processing row 5
-abs - Ok now we are on position 16 so we must absolute shift this perspective bar to the left for 22 positions: mods 1 and bpl1con to 6
-abs - New registers : mods : 6, bplcon1: 153
-Row 6 has NOT to be updated for bX 16 - counter still at 8
-pscrollflags set to 9
-abs - Processing row 6
-abs - Ok now we are on position 16 so we must absolute shift this perspective bar to the left for 24 positions: mods 1 and bpl1con to 8
-abs - New registers : mods : 6, bplcon1: 119
-Row 7 has NOT to be updated for bX 16 - counter still at 10
-pscrollflags set to 10
-abs - Processing row 7
-abs - Ok now we are on position 16 so we must absolute shift this perspective bar to the left for 25 positions: mods 1 and bpl1con to 9
-abs - New registers : mods : 6, bplcon1: 102
-Row 8 has NOT to be updated for bX 16 - counter still at 11
-pscrollflags set to 12
-abs - Processing row 8
-abs - Ok now we are on position 16 so we must absolute shift this perspective bar to the left for 27 positions: mods 1 and bpl1con to 11
-abs - New registers : mods : 6, bplcon1: 68
-Row 9 has NOT to be updated for bX 16 - counter still at 12
-pscrollflags set to 13
-abs - Processing row 9
-abs - Ok now we are on position 16 so we must absolute shift this perspective bar to the left for 28 positions: mods 1 and bpl1con to 12
-abs - New registers : mods : 6, bplcon1: 51
-Row 10 has NOT to be updated for bX 16 - counter still at 15
-pscrollflags set to 15
-abs - Processing row 10
-abs - Ok now we are on position 16 so we must absolute shift this perspective bar to the left for 30 positions: mods 1 and bpl1con to 14
-abs - New registers : mods : 6, bplcon1: 17
-Row 11 has NOT to be updated for bX 16 - counter still at 16
-pscrollflags set to 16
-abs - Processing row 11
-abs - Ok now we are on position 16 so we must absolute shift this perspective bar to the left for 31 positions: mods 1 and bpl1con to 15
-abs - New registers : mods : 6, bplcon1: 0
-UpdateCamera2 input 17
-UpdateCamera2 shift  255
-Aggiungo 2
-Caso con fetch modificato a 30
-Row 0 has NOT to be updated for bX 17 - counter still at 0
-pscrollflags set to 0
-abs - Processing row 0
-abs - Ok now we are on position 17 so we must absolute shift this perspective bar to the left for 0 positions: mods 0 and bpl1con to 0
-abs - New registers : mods : 6, bplcon1: 255
-abs - Here i should be moving the first chunk and in am not doing it!!!!!
-Row 1 has NOT to be updated for bX 17 - counter still at 2
-pscrollflags set to 2
-abs - Processing row 1
-abs - Ok now we are on position 17 so we must absolute shift this perspective bar to the left for 2 positions: mods 0 and bpl1con to 2
-abs - New registers : mods : 6, bplcon1: 221
-Row 2 has NOT to be updated for bX 17 - counter still at 4
-pscrollflags set to 3
-abs - Processing row 2
-abs - Ok now we are on position 17 so we must absolute shift this perspective bar to the left for 3 positions: mods 0 and bpl1con to 3
-abs - New registers : mods : 6, bplcon1: 204
-Row 3 has NOT to be updated for bX 17 - counter still at 5
-pscrollflags set to 5
-abs - Processing row 3
-abs - Ok now we are on position 17 so we must absolute shift this perspective bar to the left for 5 positions: mods 0 and bpl1con to 5
-abs - New registers : mods : 6, bplcon1: 170
-Row 4 has NOT to be updated for bX 17 - counter still at 6
-pscrollflags set to 6
-abs - Processing row 4
-abs - Ok now we are on position 17 so we must absolute shift this perspective bar to the left for 6 positions: mods 0 and bpl1con to 6
-abs - New registers : mods : 6, bplcon1: 153
-Row 5 has NOT to be updated for bX 17 - counter still at 7
-pscrollflags set to 8
-abs - Processing row 5
-abs - Ok now we are on position 17 so we must absolute shift this perspective bar to the left for 8 positions: mods 0 and bpl1con to 8
-abs - New registers : mods : 6, bplcon1: 119
-Row 6 has NOT to be updated for bX 17 - counter still at 9
-pscrollflags set to 10
-abs - Processing row 6
-abs - Ok now we are on position 17 so we must absolute shift this perspective bar to the left for 10 positions: mods 0 and bpl1con to 10
-abs - New registers : mods : 6, bplcon1: 85
-Row 7 has NOT to be updated for bX 17 - counter still at 10
-pscrollflags set to 11
-abs - Processing row 7
-abs - Ok now we are on position 17 so we must absolute shift this perspective bar to the left for 11 positions: mods 0 and bpl1con to 11
-abs - New registers : mods : 6, bplcon1: 68
-Row 8 has NOT to be updated for bX 17 - counter still at 12
-pscrollflags set to 13
-abs - Processing row 8
-abs - Ok now we are on position 17 so we must absolute shift this perspective bar to the left for 13 positions: mods 0 and bpl1con to 13
-abs - New registers : mods : 6, bplcon1: 34
-Row 9 has NOT to be updated for bX 17 - counter still at 13
-pscrollflags set to 14
-abs - Processing row 9
-abs - Ok now we are on position 17 so we must absolute shift this perspective bar to the left for 14 positions: mods 0 and bpl1con to 14
-abs - New registers : mods : 6, bplcon1: 17
-Row 10 has NOT to be updated for bX 17 - counter still at 15
-pscrollflags set to 16
-abs - Processing row 10
-abs - Ok now we are on position 17 so we must absolute shift this perspective bar to the left for 16 positions: mods 1 and bpl1con to 0
-abs - New registers : mods : 8, bplcon1: 255
-Row 11 has NOT to be updated for bX 17 - counter still at 16
-pscrollflags set to 17
-abs - Processing row 11
-abs - Ok now we are on position 17 so we must absolute shift this perspective bar to the left for 17 positions: mods 1 and bpl1con to 1
-abs - New registers : mods : 6, bplcon1: 238
-UpdateCamera2 input 18
-UpdateCamera2 shift  238
-Aggiungo 2
-Caso con fetch modificato a 30
-Row 0 has NOT to be updated for bX 18 - counter still at 0
-pscrollflags set to 0
-abs - Processing row 0
-abs - Ok now we are on position 18 so we must absolute shift this perspective bar to the left for 1 positions: mods 0 and bpl1con to 1
-abs - New registers : mods : 6, bplcon1: 238
-abs - Here i should be moving the first chunk and in am not doing it!!!!!
-Row 1 has NOT to be updated for bX 18 - counter still at 2
-pscrollflags set to 2
-abs - Processing row 1
-abs - Ok now we are on position 18 so we must absolute shift this perspective bar to the left for 3 positions: mods 0 and bpl1con to 3
-abs - New registers : mods : 6, bplcon1: 204
-Row 2 has NOT to be updated for bX 18 - counter still at 3
-pscrollflags set to 4
-abs - Processing row 2
-abs - Ok now we are on position 18 so we must absolute shift this perspective bar to the left for 5 positions: mods 0 and bpl1con to 5
-abs - New registers : mods : 6, bplcon1: 170
-Row 3 has NOT to be updated for bX 18 - counter still at 5
-pscrollflags set to 5
-abs - Processing row 3
-abs - Ok now we are on position 18 so we must absolute shift this perspective bar to the left for 6 positions: mods 0 and bpl1con to 6
-abs - New registers : mods : 6, bplcon1: 153
-Row 4 has NOT to be updated for bX 18 - counter still at 6
-pscrollflags set to 8
-abs - Processing row 4
-abs - Ok now we are on position 18 so we must absolute shift this perspective bar to the left for 9 positions: mods 0 and bpl1con to 9
-abs - New registers : mods : 6, bplcon1: 102
-Row 5 has NOT to be updated for bX 18 - counter still at 8
-pscrollflags set to 9
-abs - Processing row 5
-abs - Ok now we are on position 18 so we must absolute shift this perspective bar to the left for 10 positions: mods 0 and bpl1con to 10
-abs - New registers : mods : 6, bplcon1: 85
-Row 6 has NOT to be updated for bX 18 - counter still at 10
-pscrollflags set to 11
-abs - Processing row 6
-abs - Ok now we are on position 18 so we must absolute shift this perspective bar to the left for 12 positions: mods 0 and bpl1con to 12
-abs - New registers : mods : 6, bplcon1: 51
-Row 7 has NOT to be updated for bX 18 - counter still at 11
-pscrollflags set to 13
-abs - Processing row 7
-abs - Ok now we are on position 18 so we must absolute shift this perspective bar to the left for 14 positions: mods 0 and bpl1con to 14
-abs - New registers : mods : 6, bplcon1: 17
-Row 8 has NOT to be updated for bX 18 - counter still at 13
-pscrollflags set to 14
-abs - Processing row 8
-abs - Ok now we are on position 18 so we must absolute shift this perspective bar to the left for 15 positions: mods 0 and bpl1con to 15
-abs - New registers : mods : 6, bplcon1: 0
-Row 9 has NOT to be updated for bX 18 - counter still at 14
-pscrollflags set to 16
-abs - Processing row 9
-abs - Ok now we are on position 18 so we must absolute shift this perspective bar to the left for 17 positions: mods 1 and bpl1con to 1
-abs - New registers : mods : 8, bplcon1: 238
-Row 10 has NOT to be updated for bX 18 - counter still at 16
-pscrollflags set to 18
-abs - Processing row 10
-abs - Ok now we are on position 18 so we must absolute shift this perspective bar to the left for 19 positions: mods 1 and bpl1con to 3
-abs - New registers : mods : 6, bplcon1: 204
-Row 11 has NOT to be updated for bX 18 - counter still at 17
-pscrollflags set to 19
-abs - Processing row 11
-abs - Ok now we are on position 18 so we must absolute shift this perspective bar to the left for 20 positions: mods 1 and bpl1con to 4
-abs - New registers : mods : 6, bplcon1: 187
-UpdateCamera2 input 19
-UpdateCamera2 shift  221
-Aggiungo 2
-Caso con fetch modificato a 30
-Row 0 has NOT to be updated for bX 19 - counter still at 0
-pscrollflags set to 0
-abs - Processing row 0
-abs - Ok now we are on position 19 so we must absolute shift this perspective bar to the left for 2 positions: mods 0 and bpl1con to 2
-abs - New registers : mods : 6, bplcon1: 221
-abs - Here i should be moving the first chunk and in am not doing it!!!!!
-Row 1 has NOT to be updated for bX 19 - counter still at 2
-pscrollflags set to 2
-abs - Processing row 1
-abs - Ok now we are on position 19 so we must absolute shift this perspective bar to the left for 4 positions: mods 0 and bpl1con to 4
-abs - New registers : mods : 6, bplcon1: 187
-Row 2 has NOT to be updated for bX 19 - counter still at 4
-pscrollflags set to 4
-abs - Processing row 2
-abs - Ok now we are on position 19 so we must absolute shift this perspective bar to the left for 6 positions: mods 0 and bpl1con to 6
-abs - New registers : mods : 6, bplcon1: 153
-Row 3 has NOT to be updated for bX 19 - counter still at 5
-pscrollflags set to 6
-abs - Processing row 3
-abs - Ok now we are on position 19 so we must absolute shift this perspective bar to the left for 8 positions: mods 0 and bpl1con to 8
-abs - New registers : mods : 6, bplcon1: 119
-Row 4 has NOT to be updated for bX 19 - counter still at 8
-pscrollflags set to 8
-abs - Processing row 4
-abs - Ok now we are on position 19 so we must absolute shift this perspective bar to the left for 10 positions: mods 0 and bpl1con to 10
-abs - New registers : mods : 6, bplcon1: 85
-Row 5 has NOT to be updated for bX 19 - counter still at 9
-pscrollflags set to 9
-abs - Processing row 5
-abs - Ok now we are on position 19 so we must absolute shift this perspective bar to the left for 11 positions: mods 0 and bpl1con to 11
-abs - New registers : mods : 6, bplcon1: 68
-Row 6 has NOT to be updated for bX 19 - counter still at 11
-pscrollflags set to 11
-abs - Processing row 6
-abs - Ok now we are on position 19 so we must absolute shift this perspective bar to the left for 13 positions: mods 0 and bpl1con to 13
-abs - New registers : mods : 6, bplcon1: 34
-Row 7 has NOT to be updated for bX 19 - counter still at 13
-pscrollflags set to 13
-abs - Processing row 7
-abs - Ok now we are on position 19 so we must absolute shift this perspective bar to the left for 15 positions: mods 0 and bpl1con to 15
-abs - New registers : mods : 6, bplcon1: 0
-Row 8 has NOT to be updated for bX 19 - counter still at 14
-pscrollflags set to 15
-abs - Processing row 8
-abs - Ok now we are on position 19 so we must absolute shift this perspective bar to the left for 17 positions: mods 1 and bpl1con to 1
-abs - New registers : mods : 8, bplcon1: 238
-Row 9 has NOT to be updated for bX 19 - counter still at 16
-pscrollflags set to 17
-abs - Processing row 9
-abs - Ok now we are on position 19 so we must absolute shift this perspective bar to the left for 19 positions: mods 1 and bpl1con to 3
-abs - New registers : mods : 6, bplcon1: 204
-Row 10 has NOT to be updated for bX 19 - counter still at 18
-pscrollflags set to 19
-abs - Processing row 10
-abs - Ok now we are on position 19 so we must absolute shift this perspective bar to the left for 21 positions: mods 1 and bpl1con to 5
-abs - New registers : mods : 6, bplcon1: 170
-Row 11 has NOT to be updated for bX 19 - counter still at 19
-pscrollflags set to 20
-abs - Processing row 11
-abs - Ok now we are on position 19 so we must absolute shift this perspective bar to the left for 22 positions: mods 1 and bpl1con to 6
-abs - New registers : mods : 6, bplcon1: 153
-UpdateCamera2 input 20
-UpdateCamera2 shift  204
-Aggiungo 2
-Caso con fetch modificato a 30
-Row 0 has NOT to be updated for bX 20 - counter still at 0
-pscrollflags set to 0
-abs - Processing row 0
-abs - Ok now we are on position 20 so we must absolute shift this perspective bar to the left for 3 positions: mods 0 and bpl1con to 3
-abs - New registers : mods : 6, bplcon1: 204
-abs - Here i should be moving the first chunk and in am not doing it!!!!!
-Row 1 has NOT to be updated for bX 20 - counter still at 2
-pscrollflags set to 2
-abs - Processing row 1
-abs - Ok now we are on position 20 so we must absolute shift this perspective bar to the left for 5 positions: mods 0 and bpl1con to 5
-abs - New registers : mods : 6, bplcon1: 170
-Row 2 has NOT to be updated for bX 20 - counter still at 4
-pscrollflags set to 4
-abs - Processing row 2
-abs - Ok now we are on position 20 so we must absolute shift this perspective bar to the left for 7 positions: mods 0 and bpl1con to 7
-abs - New registers : mods : 6, bplcon1: 136
-Row 3 has NOT to be updated for bX 20 - counter still at 6
-pscrollflags set to 6
-abs - Processing row 3
-abs - Ok now we are on position 20 so we must absolute shift this perspective bar to the left for 9 positions: mods 0 and bpl1con to 9
-abs - New registers : mods : 6, bplcon1: 102
-Row 4 has NOT to be updated for bX 20 - counter still at 8
-pscrollflags set to 8
-abs - Processing row 4
-abs - Ok now we are on position 20 so we must absolute shift this perspective bar to the left for 11 positions: mods 0 and bpl1con to 11
-abs - New registers : mods : 6, bplcon1: 68
-Row 5 has NOT to be updated for bX 20 - counter still at 9
-pscrollflags set to 10
-abs - Processing row 5
-abs - Ok now we are on position 20 so we must absolute shift this perspective bar to the left for 13 positions: mods 0 and bpl1con to 13
-abs - New registers : mods : 6, bplcon1: 34
-Row 6 has NOT to be updated for bX 20 - counter still at 11
-pscrollflags set to 12
-abs - Processing row 6
-abs - Ok now we are on position 20 so we must absolute shift this perspective bar to the left for 15 positions: mods 0 and bpl1con to 15
-abs - New registers : mods : 6, bplcon1: 0
-Row 7 has NOT to be updated for bX 20 - counter still at 13
-pscrollflags set to 14
-abs - Processing row 7
-abs - Ok now we are on position 20 so we must absolute shift this perspective bar to the left for 17 positions: mods 1 and bpl1con to 1
-abs - New registers : mods : 8, bplcon1: 238
-Row 8 has NOT to be updated for bX 20 - counter still at 15
-pscrollflags set to 16
-abs - Processing row 8
-abs - Ok now we are on position 20 so we must absolute shift this perspective bar to the left for 19 positions: mods 1 and bpl1con to 3
-abs - New registers : mods : 6, bplcon1: 204
-Row 9 has NOT to be updated for bX 20 - counter still at 17
-pscrollflags set to 18
-abs - Processing row 9
-abs - Ok now we are on position 20 so we must absolute shift this perspective bar to the left for 21 positions: mods 1 and bpl1con to 5
-abs - New registers : mods : 6, bplcon1: 170
-Row 10 has NOT to be updated for bX 20 - counter still at 19
-pscrollflags set to 20
-abs - Processing row 10
-abs - Ok now we are on position 20 so we must absolute shift this perspective bar to the left for 23 positions: mods 1 and bpl1con to 7
-abs - New registers : mods : 6, bplcon1: 136
-Row 11 has NOT to be updated for bX 20 - counter still at 20
-pscrollflags set to 22
-abs - Processing row 11
-abs - Ok now we are on position 20 so we must absolute shift this perspective bar to the left for 25 positions: mods 1 and bpl1con to 9
-abs - New registers : mods : 6, bplcon1: 102
-UpdateCamera2 input 21
-UpdateCamera2 shift  187
-Aggiungo 2
-Caso con fetch modificato a 30
-Row 0 has NOT to be updated for bX 21 - counter still at 0
-pscrollflags set to 0
-abs - Processing row 0
-abs - Ok now we are on position 21 so we must absolute shift this perspective bar to the left for 4 positions: mods 0 and bpl1con to 4
-abs - New registers : mods : 6, bplcon1: 187
-abs - Here i should be moving the first chunk and in am not doing it!!!!!
-Row 1 has NOT to be updated for bX 21 - counter still at 2
-pscrollflags set to 2
-abs - Processing row 1
-abs - Ok now we are on position 21 so we must absolute shift this perspective bar to the left for 6 positions: mods 0 and bpl1con to 6
-abs - New registers : mods : 6, bplcon1: 153
-Row 2 has NOT to be updated for bX 21 - counter still at 4
-pscrollflags set to 4
-abs - Processing row 2
-abs - Ok now we are on position 21 so we must absolute shift this perspective bar to the left for 8 positions: mods 0 and bpl1con to 8
-abs - New registers : mods : 6, bplcon1: 119
-Row 3 has NOT to be updated for bX 21 - counter still at 6
-pscrollflags set to 6
-abs - Processing row 3
-abs - Ok now we are on position 21 so we must absolute shift this perspective bar to the left for 10 positions: mods 0 and bpl1con to 10
-abs - New registers : mods : 6, bplcon1: 85
-Row 4 has NOT to be updated for bX 21 - counter still at 8
-pscrollflags set to 8
-abs - Processing row 4
-abs - Ok now we are on position 21 so we must absolute shift this perspective bar to the left for 12 positions: mods 0 and bpl1con to 12
-abs - New registers : mods : 6, bplcon1: 51
-Row 5 has NOT to be updated for bX 21 - counter still at 10
-pscrollflags set to 10
-abs - Processing row 5
-abs - Ok now we are on position 21 so we must absolute shift this perspective bar to the left for 14 positions: mods 0 and bpl1con to 14
-abs - New registers : mods : 6, bplcon1: 17
-Row 6 has NOT to be updated for bX 21 - counter still at 12
-pscrollflags set to 13
-abs - Processing row 6
-abs - Ok now we are on position 21 so we must absolute shift this perspective bar to the left for 17 positions: mods 1 and bpl1con to 1
-abs - New registers : mods : 8, bplcon1: 238
-Row 7 has NOT to be updated for bX 21 - counter still at 14
-pscrollflags set to 15
-abs - Processing row 7
-abs - Ok now we are on position 21 so we must absolute shift this perspective bar to the left for 19 positions: mods 1 and bpl1con to 3
-abs - New registers : mods : 6, bplcon1: 204
-Row 8 has NOT to be updated for bX 21 - counter still at 16
-pscrollflags set to 17
-abs - Processing row 8
-abs - Ok now we are on position 21 so we must absolute shift this perspective bar to the left for 21 positions: mods 1 and bpl1con to 5
-abs - New registers : mods : 6, bplcon1: 170
-Row 9 has NOT to be updated for bX 21 - counter still at 18
-pscrollflags set to 19
-abs - Processing row 9
-abs - Ok now we are on position 21 so we must absolute shift this perspective bar to the left for 23 positions: mods 1 and bpl1con to 7
-abs - New registers : mods : 6, bplcon1: 136
-Row 10 has NOT to be updated for bX 21 - counter still at 20
-pscrollflags set to 21
-abs - Processing row 10
-abs - Ok now we are on position 21 so we must absolute shift this perspective bar to the left for 25 positions: mods 1 and bpl1con to 9
-abs - New registers : mods : 6, bplcon1: 102
-Row 11 has NOT to be updated for bX 21 - counter still at 22
-pscrollflags set to 23
-abs - Processing row 11
-abs - Ok now we are on position 21 so we must absolute shift this perspective bar to the left for 27 positions: mods 1 and bpl1con to 11
-abs - New registers : mods : 6, bplcon1: 68
-UpdateCamera2 input 22
-UpdateCamera2 shift  170
-Aggiungo 2
-Caso con fetch modificato a 30
-Row 0 has NOT to be updated for bX 22 - counter still at 0
-pscrollflags set to 0
-abs - Processing row 0
-abs - Ok now we are on position 22 so we must absolute shift this perspective bar to the left for 5 positions: mods 0 and bpl1con to 5
-abs - New registers : mods : 6, bplcon1: 170
-abs - Here i should be moving the first chunk and in am not doing it!!!!!
-Row 1 has NOT to be updated for bX 22 - counter still at 2
-pscrollflags set to 2
-abs - Processing row 1
-abs - Ok now we are on position 22 so we must absolute shift this perspective bar to the left for 7 positions: mods 0 and bpl1con to 7
-abs - New registers : mods : 6, bplcon1: 136
-Row 2 has NOT to be updated for bX 22 - counter still at 4
-pscrollflags set to 4
-abs - Processing row 2
-abs - Ok now we are on position 22 so we must absolute shift this perspective bar to the left for 9 positions: mods 0 and bpl1con to 9
-abs - New registers : mods : 6, bplcon1: 102
-Row 3 has NOT to be updated for bX 22 - counter still at 6
-pscrollflags set to 6
-abs - Processing row 3
-abs - Ok now we are on position 22 so we must absolute shift this perspective bar to the left for 11 positions: mods 0 and bpl1con to 11
-abs - New registers : mods : 6, bplcon1: 68
-Row 4 has NOT to be updated for bX 22 - counter still at 8
-pscrollflags set to 8
-abs - Processing row 4
-abs - Ok now we are on position 22 so we must absolute shift this perspective bar to the left for 13 positions: mods 0 and bpl1con to 13
-abs - New registers : mods : 6, bplcon1: 34
-Row 5 has NOT to be updated for bX 22 - counter still at 10
-pscrollflags set to 11
-abs - Processing row 5
-abs - Ok now we are on position 22 so we must absolute shift this perspective bar to the left for 16 positions: mods 1 and bpl1con to 0
-abs - New registers : mods : 8, bplcon1: 255
-Row 6 has NOT to be updated for bX 22 - counter still at 13
-pscrollflags set to 13
-abs - Processing row 6
-abs - Ok now we are on position 22 so we must absolute shift this perspective bar to the left for 18 positions: mods 1 and bpl1con to 2
-abs - New registers : mods : 6, bplcon1: 221
-Row 7 has NOT to be updated for bX 22 - counter still at 15
-pscrollflags set to 15
-abs - Processing row 7
-abs - Ok now we are on position 22 so we must absolute shift this perspective bar to the left for 20 positions: mods 1 and bpl1con to 4
-abs - New registers : mods : 6, bplcon1: 187
-Row 8 has NOT to be updated for bX 22 - counter still at 17
-pscrollflags set to 18
-abs - Processing row 8
-abs - Ok now we are on position 22 so we must absolute shift this perspective bar to the left for 23 positions: mods 1 and bpl1con to 7
-abs - New registers : mods : 6, bplcon1: 136
-Row 9 has NOT to be updated for bX 22 - counter still at 19
-pscrollflags set to 20
-abs - Processing row 9
-abs - Ok now we are on position 22 so we must absolute shift this perspective bar to the left for 25 positions: mods 1 and bpl1con to 9
-abs - New registers : mods : 6, bplcon1: 102
-Row 10 has NOT to be updated for bX 22 - counter still at 21
-pscrollflags set to 22
-abs - Processing row 10
-abs - Ok now we are on position 22 so we must absolute shift this perspective bar to the left for 27 positions: mods 1 and bpl1con to 11
-abs - New registers : mods : 6, bplcon1: 68
-Row 11 has NOT to be updated for bX 22 - counter still at 23
-pscrollflags set to 24
-abs - Processing row 11
-abs - Ok now we are on position 22 so we must absolute shift this perspective bar to the left for 29 positions: mods 1 and bpl1con to 13
-abs - New registers : mods : 6, bplcon1: 34
-UpdateCamera2 input 23
-UpdateCamera2 shift  153
-Aggiungo 2
-Caso con fetch modificato a 30
-Row 0 has NOT to be updated for bX 23 - counter still at 0
-pscrollflags set to 0
-abs - Processing row 0
-abs - Ok now we are on position 23 so we must absolute shift this perspective bar to the left for 6 positions: mods 0 and bpl1con to 6
-abs - New registers : mods : 6, bplcon1: 153
-abs - Here i should be moving the first chunk and in am not doing it!!!!!
-Row 1 has NOT to be updated for bX 23 - counter still at 2
-pscrollflags set to 2
-abs - Processing row 1
-abs - Ok now we are on position 23 so we must absolute shift this perspective bar to the left for 8 positions: mods 0 and bpl1con to 8
-abs - New registers : mods : 6, bplcon1: 119
-Row 2 has NOT to be updated for bX 23 - counter still at 4
-pscrollflags set to 4
-abs - Processing row 2
-abs - Ok now we are on position 23 so we must absolute shift this perspective bar to the left for 10 positions: mods 0 and bpl1con to 10
-abs - New registers : mods : 6, bplcon1: 85
-Row 3 has NOT to be updated for bX 23 - counter still at 6
-pscrollflags set to 6
-abs - Processing row 3
-abs - Ok now we are on position 23 so we must absolute shift this perspective bar to the left for 12 positions: mods 0 and bpl1con to 12
-abs - New registers : mods : 6, bplcon1: 51
-Row 4 has NOT to be updated for bX 23 - counter still at 8
-pscrollflags set to 9
-abs - Processing row 4
-abs - Ok now we are on position 23 so we must absolute shift this perspective bar to the left for 15 positions: mods 0 and bpl1con to 15
-abs - New registers : mods : 6, bplcon1: 0
-Row 5 has NOT to be updated for bX 23 - counter still at 11
-pscrollflags set to 11
-abs - Processing row 5
-abs - Ok now we are on position 23 so we must absolute shift this perspective bar to the left for 17 positions: mods 1 and bpl1con to 1
-abs - New registers : mods : 8, bplcon1: 238
-Row 6 has NOT to be updated for bX 23 - counter still at 13
-pscrollflags set to 13
-abs - Processing row 6
-abs - Ok now we are on position 23 so we must absolute shift this perspective bar to the left for 19 positions: mods 1 and bpl1con to 3
-abs - New registers : mods : 6, bplcon1: 204
-Row 7 has NOT to be updated for bX 23 - counter still at 15
-pscrollflags set to 16
-abs - Processing row 7
-abs - Ok now we are on position 23 so we must absolute shift this perspective bar to the left for 22 positions: mods 1 and bpl1con to 6
-abs - New registers : mods : 6, bplcon1: 153
-Row 8 has NOT to be updated for bX 23 - counter still at 18
-pscrollflags set to 19
-abs - Processing row 8
-abs - Ok now we are on position 23 so we must absolute shift this perspective bar to the left for 25 positions: mods 1 and bpl1con to 9
-abs - New registers : mods : 6, bplcon1: 102
-Row 9 has NOT to be updated for bX 23 - counter still at 20
-pscrollflags set to 21
-abs - Processing row 9
-abs - Ok now we are on position 23 so we must absolute shift this perspective bar to the left for 27 positions: mods 1 and bpl1con to 11
-abs - New registers : mods : 6, bplcon1: 68
-Row 10 has NOT to be updated for bX 23 - counter still at 22
-pscrollflags set to 23
-abs - Processing row 10
-abs - Ok now we are on position 23 so we must absolute shift this perspective bar to the left for 29 positions: mods 1 and bpl1con to 13
-abs - New registers : mods : 6, bplcon1: 34
-Row 11 has NOT to be updated for bX 23 - counter still at 24
-pscrollflags set to 25
-abs - Processing row 11
-abs - Ok now we are on position 23 so we must absolute shift this perspective bar to the left for 31 positions: mods 1 and bpl1con to 15
-abs - New registers : mods : 6, bplcon1: 0
-UpdateCamera2 input 24
-UpdateCamera2 shift  136
-Aggiungo 2
-Caso con fetch modificato a 30
-Row 0 has NOT to be updated for bX 24 - counter still at 0
-pscrollflags set to 0
-abs - Processing row 0
-abs - Ok now we are on position 24 so we must absolute shift this perspective bar to the left for 7 positions: mods 0 and bpl1con to 7
-abs - New registers : mods : 6, bplcon1: 136
-abs - Here i should be moving the first chunk and in am not doing it!!!!!
-Row 1 has NOT to be updated for bX 24 - counter still at 2
-pscrollflags set to 2
-abs - Processing row 1
-abs - Ok now we are on position 24 so we must absolute shift this perspective bar to the left for 9 positions: mods 0 and bpl1con to 9
-abs - New registers : mods : 6, bplcon1: 102
-Row 2 has NOT to be updated for bX 24 - counter still at 4
-pscrollflags set to 4
-abs - Processing row 2
-abs - Ok now we are on position 24 so we must absolute shift this perspective bar to the left for 11 positions: mods 0 and bpl1con to 11
-abs - New registers : mods : 6, bplcon1: 68
-Row 3 has NOT to be updated for bX 24 - counter still at 6
-pscrollflags set to 7
-abs - Processing row 3
-abs - Ok now we are on position 24 so we must absolute shift this perspective bar to the left for 14 positions: mods 0 and bpl1con to 14
-abs - New registers : mods : 6, bplcon1: 17
-Row 4 has NOT to be updated for bX 24 - counter still at 9
-pscrollflags set to 9
-abs - Processing row 4
-abs - Ok now we are on position 24 so we must absolute shift this perspective bar to the left for 16 positions: mods 1 and bpl1con to 0
-abs - New registers : mods : 8, bplcon1: 255
-Row 5 has NOT to be updated for bX 24 - counter still at 11
-pscrollflags set to 11
-abs - Processing row 5
-abs - Ok now we are on position 24 so we must absolute shift this perspective bar to the left for 18 positions: mods 1 and bpl1con to 2
-abs - New registers : mods : 6, bplcon1: 221
-Row 6 has NOT to be updated for bX 24 - counter still at 13
-pscrollflags set to 14
-abs - Processing row 6
-abs - Ok now we are on position 24 so we must absolute shift this perspective bar to the left for 21 positions: mods 1 and bpl1con to 5
-abs - New registers : mods : 6, bplcon1: 170
-Row 7 has NOT to be updated for bX 24 - counter still at 16
-pscrollflags set to 16
-abs - Processing row 7
-abs - Ok now we are on position 24 so we must absolute shift this perspective bar to the left for 23 positions: mods 1 and bpl1con to 7
-abs - New registers : mods : 6, bplcon1: 136
-Row 8 has NOT to be updated for bX 24 - counter still at 19
-pscrollflags set to 19
-abs - Processing row 8
-abs - Ok now we are on position 24 so we must absolute shift this perspective bar to the left for 26 positions: mods 1 and bpl1con to 10
-abs - New registers : mods : 6, bplcon1: 85
-Row 9 has NOT to be updated for bX 24 - counter still at 21
-pscrollflags set to 21
-abs - Processing row 9
-abs - Ok now we are on position 24 so we must absolute shift this perspective bar to the left for 28 positions: mods 1 and bpl1con to 12
-abs - New registers : mods : 6, bplcon1: 51
-Row 10 has NOT to be updated for bX 24 - counter still at 23
-pscrollflags set to 23
-abs - Processing row 10
-abs - Ok now we are on position 24 so we must absolute shift this perspective bar to the left for 30 positions: mods 1 and bpl1con to 14
-abs - New registers : mods : 6, bplcon1: 17
-Row 11 has NOT to be updated for bX 24 - counter still at 25
-pscrollflags set to 25
-abs - Processing row 11
-abs - Ok now we are on position 24 so we must absolute shift this perspective bar to the left for 32 positions: mods 2 and bpl1con to 0
-abs - New registers : mods : 8, bplcon1: 255
-UpdateCamera2 input 25
-UpdateCamera2 shift  119
-Aggiungo 2
-Caso con fetch modificato a 30
-Row 0 has NOT to be updated for bX 25 - counter still at 0
-pscrollflags set to 0
-abs - Processing row 0
-abs - Ok now we are on position 25 so we must absolute shift this perspective bar to the left for 8 positions: mods 0 and bpl1con to 8
-abs - New registers : mods : 6, bplcon1: 119
-abs - Here i should be moving the first chunk and in am not doing it!!!!!
-Row 1 has NOT to be updated for bX 25 - counter still at 2
-pscrollflags set to 2
-abs - Processing row 1
-abs - Ok now we are on position 25 so we must absolute shift this perspective bar to the left for 10 positions: mods 0 and bpl1con to 10
-abs - New registers : mods : 6, bplcon1: 85
-Row 2 has NOT to be updated for bX 25 - counter still at 4
-pscrollflags set to 5
-abs - Processing row 2
-abs - Ok now we are on position 25 so we must absolute shift this perspective bar to the left for 13 positions: mods 0 and bpl1con to 13
-abs - New registers : mods : 6, bplcon1: 34
-Row 3 has NOT to be updated for bX 25 - counter still at 7
-pscrollflags set to 7
-abs - Processing row 3
-abs - Ok now we are on position 25 so we must absolute shift this perspective bar to the left for 15 positions: mods 0 and bpl1con to 15
-abs - New registers : mods : 6, bplcon1: 0
-Row 4 has NOT to be updated for bX 25 - counter still at 9
-pscrollflags set to 10
-abs - Processing row 4
-abs - Ok now we are on position 25 so we must absolute shift this perspective bar to the left for 18 positions: mods 1 and bpl1con to 2
-abs - New registers : mods : 8, bplcon1: 221
-Row 5 has NOT to be updated for bX 25 - counter still at 11
-pscrollflags set to 12
-abs - Processing row 5
-abs - Ok now we are on position 25 so we must absolute shift this perspective bar to the left for 20 positions: mods 1 and bpl1con to 4
-abs - New registers : mods : 6, bplcon1: 187
-Row 6 has NOT to be updated for bX 25 - counter still at 14
-pscrollflags set to 14
-abs - Processing row 6
-abs - Ok now we are on position 25 so we must absolute shift this perspective bar to the left for 22 positions: mods 1 and bpl1con to 6
-abs - New registers : mods : 6, bplcon1: 153
-Row 7 has NOT to be updated for bX 25 - counter still at 16
-pscrollflags set to 17
-abs - Processing row 7
-abs - Ok now we are on position 25 so we must absolute shift this perspective bar to the left for 25 positions: mods 1 and bpl1con to 9
-abs - New registers : mods : 6, bplcon1: 102
-Row 8 has NOT to be updated for bX 25 - counter still at 19
-pscrollflags set to 19
-abs - Processing row 8
-abs - Ok now we are on position 25 so we must absolute shift this perspective bar to the left for 27 positions: mods 1 and bpl1con to 11
-abs - New registers : mods : 6, bplcon1: 68
-Row 9 has NOT to be updated for bX 25 - counter still at 21
-pscrollflags set to 22
-abs - Processing row 9
-abs - Ok now we are on position 25 so we must absolute shift this perspective bar to the left for 30 positions: mods 1 and bpl1con to 14
-abs - New registers : mods : 6, bplcon1: 17
-Row 10 has NOT to be updated for bX 25 - counter still at 23
-pscrollflags set to 25
-abs - Processing row 10
-abs - Ok now we are on position 25 so we must absolute shift this perspective bar to the left for 33 positions: mods 2 and bpl1con to 1
-abs - New registers : mods : 8, bplcon1: 238
-Row 11 has NOT to be updated for bX 25 - counter still at 25
-pscrollflags set to 27
-abs - Processing row 11
-abs - Ok now we are on position 25 so we must absolute shift this perspective bar to the left for 35 positions: mods 2 and bpl1con to 3
-abs - New registers : mods : 6, bplcon1: 204
-UpdateCamera2 input 26
-UpdateCamera2 shift  102
-Aggiungo 2
-Caso con fetch modificato a 30
-Row 0 has NOT to be updated for bX 26 - counter still at 0
-pscrollflags set to 0
-abs - Processing row 0
-abs - Ok now we are on position 26 so we must absolute shift this perspective bar to the left for 9 positions: mods 0 and bpl1con to 9
-abs - New registers : mods : 6, bplcon1: 102
-abs - Here i should be moving the first chunk and in am not doing it!!!!!
-Row 1 has NOT to be updated for bX 26 - counter still at 2
-pscrollflags set to 2
-abs - Processing row 1
-abs - Ok now we are on position 26 so we must absolute shift this perspective bar to the left for 11 positions: mods 0 and bpl1con to 11
-abs - New registers : mods : 6, bplcon1: 68
-Row 2 has NOT to be updated for bX 26 - counter still at 5
-pscrollflags set to 5
-abs - Processing row 2
-abs - Ok now we are on position 26 so we must absolute shift this perspective bar to the left for 14 positions: mods 0 and bpl1con to 14
-abs - New registers : mods : 6, bplcon1: 17
-Row 3 has NOT to be updated for bX 26 - counter still at 7
-pscrollflags set to 7
-abs - Processing row 3
-abs - Ok now we are on position 26 so we must absolute shift this perspective bar to the left for 16 positions: mods 1 and bpl1con to 0
-abs - New registers : mods : 8, bplcon1: 255
-Row 4 has NOT to be updated for bX 26 - counter still at 10
-pscrollflags set to 11
-abs - Processing row 4
-abs - Ok now we are on position 26 so we must absolute shift this perspective bar to the left for 20 positions: mods 1 and bpl1con to 4
-abs - New registers : mods : 6, bplcon1: 187
-Row 5 has NOT to be updated for bX 26 - counter still at 12
-pscrollflags set to 13
-abs - Processing row 5
-abs - Ok now we are on position 26 so we must absolute shift this perspective bar to the left for 22 positions: mods 1 and bpl1con to 6
-abs - New registers : mods : 6, bplcon1: 153
-Row 6 has NOT to be updated for bX 26 - counter still at 14
-pscrollflags set to 16
-abs - Processing row 6
-abs - Ok now we are on position 26 so we must absolute shift this perspective bar to the left for 25 positions: mods 1 and bpl1con to 9
-abs - New registers : mods : 6, bplcon1: 102
-Row 7 has NOT to be updated for bX 26 - counter still at 17
-pscrollflags set to 19
-abs - Processing row 7
-abs - Ok now we are on position 26 so we must absolute shift this perspective bar to the left for 28 positions: mods 1 and bpl1con to 12
-abs - New registers : mods : 6, bplcon1: 51
-Row 8 has NOT to be updated for bX 26 - counter still at 19
-pscrollflags set to 21
-abs - Processing row 8
-abs - Ok now we are on position 26 so we must absolute shift this perspective bar to the left for 30 positions: mods 1 and bpl1con to 14
-abs - New registers : mods : 6, bplcon1: 17
-Row 9 has NOT to be updated for bX 26 - counter still at 22
-pscrollflags set to 24
-abs - Processing row 9
-abs - Ok now we are on position 26 so we must absolute shift this perspective bar to the left for 33 positions: mods 2 and bpl1con to 1
-abs - New registers : mods : 8, bplcon1: 238
-Row 10 has NOT to be updated for bX 26 - counter still at 25
-pscrollflags set to 26
-abs - Processing row 10
-abs - Ok now we are on position 26 so we must absolute shift this perspective bar to the left for 35 positions: mods 2 and bpl1con to 3
-abs - New registers : mods : 6, bplcon1: 204
-Row 11 has NOT to be updated for bX 26 - counter still at 27
-pscrollflags set to 28
-abs - Processing row 11
-abs - Ok now we are on position 26 so we must absolute shift this perspective bar to the left for 37 positions: mods 2 and bpl1con to 5
-abs - New registers : mods : 6, bplcon1: 170
-Block begin: stateManagerDestroy(pStateManager: 0x225eec)
-	Block begin: statePopAll(pStateManager: 0x225eec)
-		Block begin: viewDestroy(pView: 0x226174)
-			Block begin: viewLoad(pView: 0)...OK, time:  10.623 ms
-			Block begin: vPortDestroy(pVPort: 0x22638c)
-				Parent extView: 0x226174
-				found VP: 0x22638c... gotcha!
+Block begin: stateManagerDestroy(pStateManager: 0x227c2c)
+	Block begin: statePopAll(pStateManager: 0x227c2c)
+		Block begin: viewDestroy(pView: 0x228004)
+			Block begin: viewLoad(pView: 0)...OK, time:  10.240 ms
+			Block begin: vPortDestroy(pVPort: 0x22a014)
+				Parent extView: 0x228004
+				found VP: 0x22a014... gotcha!
 				Block begin: Destroying managers
-					Destroying manager 128 @addr: 0x2264a4
+					Destroying manager 128 @addr: 0x228b54
 					cameraManagerDestroy...OK! 
-					Destroying manager 0 @addr: 0x2263ec
+					Destroying manager 0 @addr: 0x228734
 					Block begin: simpleBufferTestDestroy()
-						Block begin: bitmapDestroy(pBitMap: 0x226434)...OK, time: >7min
+						Block begin: bitmapDestroy(pBitMap: 0x2286b4)...OK, time: >7min
 					Block end: simpleBufferTestDestroy(), time: >7min
-				Block end: Destroying managers, time:   1.522 ms
-			Block end: vPortDestroy(), time:   4.787 ms
+				Block end: Destroying managers, time:  13.504 ms
+			Block end: vPortDestroy(), time: >7min
 			Freeing copperlists...
-			Block begin: copListDestroy(pCopList: 0x22618c)...OK, time: >7min
-		Block end: viewDestroy(), time:   5.802 ms
-	Block end: statePopAll(), time:   8.885 ms
-Block end: stateManagerDestroy(), time:  15.458 ms
-Block begin: stateDestroy(pState: 0x226154)...OK, time:   2.710 ms
+			Block begin: copListDestroy(pCopList: 0x22802c)...OK, time: >7min
+		Block end: viewDestroy(), time: >7min
+	Block end: statePopAll(), time:   2.206 ms
+Block end: stateManagerDestroy(), time:   9.604 ms
+Block begin: stateDestroy(pState: 0x227fd4)...OK, time:   2.370 ms
 Block begin: keyDestroy()...OK, time:  53.2 us
 Goodbye, Amiga!
 Block begin: copDestroy()
-	Block begin: copListDestroy(pCopList: 0x225a0c)...OK, time:   6.835 ms
-Block end: copDestroy(), time:  14.628 ms
-Block begin: blitManagerDestroy...OK, time:  60.0 us
+	Block begin: copListDestroy(pCopList: 0x22705c)...OK, time:   7.030 ms
+Block end: copDestroy(), time: >7min
+Block begin: blitManagerDestroy...OK, time:  59.2 us
 Log closed successfully
