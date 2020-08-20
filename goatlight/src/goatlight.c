@@ -9,7 +9,7 @@
 #include "simplebuffertest.h"
 
 //#define COLORDEBUG
-#define STARTWITHBLACKBARS
+//#define STARTWITHBLACKBARS
 #define AUTOSCROLLING
 #define BITPLANES 4 // 4 bitplanes
 
@@ -43,7 +43,6 @@ UWORD getBarColorPerspectiveBack(const UBYTE);
 void MaskScreen(UBYTE);
 void unMaskScreen(UBYTE);
 UBYTE unMaskIntro(UBYTE, UBYTE);
-//void printPerspectiveRow(tSimpleBufferTestManager *s_pMainBuffer, const UWORD, const UWORD, const UWORD, const UWORD);
 void printPerspectiveRow2(tSimpleBufferTestManager *s_pMainBuffer, const UWORD, const UWORD, const UWORD);
 
 UBYTE buildPerspectiveCopperlist(UBYTE);
@@ -216,6 +215,7 @@ static UWORD s_pBarColorsPerspectiveBack[MAXCOLORS] = {
 #endif
 
 static UBYTE s_ubBarColorsCopPositions[MAXCOLORS];
+static UBYTE s_ubBarColorsCopPositionsBorder[MAXCOLORS];
 static UBYTE s_ubBarColorsCopPositionsPerspective[MAXCOLORS];
 static UBYTE s_ubBarColorsCopPositionsPerspectiveBack[MAXCOLORS];
 
@@ -225,6 +225,13 @@ static UBYTE s_ubColorIndex = 0;
     for (UBYTE ubCounter = 0; ubCounter < MAXCOLORS; ubCounter++)                         \
     {                                                                                     \
         s_ubBarColorsCopPositions[ubCounter] = ubCopIndex;                                \
+        copSetMoveBackAndFront(&g_pCustom->color[ubCounter + 1], getBarColor(ubCounter)); \
+    }
+
+#define SETBARCOLORSFRONTANDBACKBORDER                                                          \
+    for (UBYTE ubCounter = 0; ubCounter < MAXCOLORS; ubCounter++)                         \
+    {                                                                                     \
+        s_ubBarColorsCopPositionsBorder[ubCounter] = ubCopIndex;                                \
         copSetMoveBackAndFront(&g_pCustom->color[ubCounter + 1], getBarColor(ubCounter)); \
     }
 
@@ -262,7 +269,7 @@ static UBYTE s_ubColorIndex = 0;
 
 #define PERSECTIVEBARHEIGHT 3
 #define PERSPECTIVEBARSNUMBER 12    // How many perspective bars?
-#define PERSPECTIVEBARSNUMBERBACK 2 // How many back perspective bars?
+#define PERSPECTIVEBARSNUMBERBACK 4 // How many back perspective bars?
 #define PERSPECTIVEBLOCKSIZE 7      // how many copper instruction for each perspective block?
 typedef struct _tPerspectiveBar
 {
@@ -317,7 +324,7 @@ UBYTE ubCopIndexFirstLine = 0;
 
 void gameGsCreate(void)
 {
-    ULONG ulRawSize = (SimpleBufferTestGetRawCopperlistInstructionCount(BITPLANES) + 12 + MAXCOLORS*3 + PERSPECTIVEBLOCKSIZE * (PERSPECTIVEBARSNUMBER + PERSPECTIVEBARSNUMBERBACK) + 1
+    ULONG ulRawSize = (SimpleBufferTestGetRawCopperlistInstructionCount(BITPLANES) + 12 + MAXCOLORS*4 + PERSPECTIVEBLOCKSIZE * (PERSPECTIVEBARSNUMBER + PERSPECTIVEBARSNUMBERBACK) + 1
                        /*                   3 * 3 + // 32 bars - each consists of WAIT + 3 MOVE instruction
         1 +     // Final WAIT
         1       // Just to be sure*/
@@ -490,7 +497,7 @@ Bitplane 3 -      0   0   0   0        0   0   0   1        1   1    1    1
 
     ubCopIndex = buildPerspectiveCopperlist(ubCopIndex);
 
-    copSetWaitBackAndFront(0, 43);
+    copSetWaitBackAndFront(7, 43);
     copSetMoveBackAndFront(&g_pCustom->color[0], 0x0000);
 
     // set default velocity to 1
@@ -725,21 +732,6 @@ void updateCamera2(BYTE bX)
             struct _tPerspectiveBar *tBar = &tPerspectiveBarArray[ubPerspectiveRowCounter];
             struct _tPerspectiveBar *tBarPrev = &tPerspectiveBarArray[ubPerspectiveRowCounter - 1];
 
-            // Check if the row has to be updated
-            if (tBar->pScrollFlags[bX])
-            {
-                tBar->ubScrollCounter++;
-#ifdef ACE_DEBUG
-                logWrite("Row %u has to be updated for bX %d - incrementing its counter to %u\n", ubPerspectiveRowCounter, bX, tBar->ubScrollCounter);
-#endif
-            }
-            else
-            {
-#ifdef ACE_DEBUG
-                logWrite("Row %u has NOT to be updated for bX %d - counter still at %u\n", ubPerspectiveRowCounter, bX, tBar->ubScrollCounter);
-#endif
-            }
-            //if (ubPerspectiveRowCounter == 0) {
             tBar->ubScrollCounter = tBar->pScrollFlags2[bX];
 #ifdef ACE_DEBUG
             logWrite("pscrollflags set to %u\n", tBar->ubScrollCounter);
@@ -811,21 +803,7 @@ void updateCamera2(BYTE bX)
                 copSetMove(&pCmdListBack[1 + tBar->ubCopIndex].sMove, &g_pCustom->bpl1mod, uwBplMods);
                 copSetMove(&pCmdListBack[2 + tBar->ubCopIndex].sMove, &g_pCustom->bpl2mod, uwBplMods);
 
-                /*if (speciale)
-                {
-                    uwIndexModReset = 4 + tBarPrev->ubCopIndex;
-                    #ifdef ACE_DEBUG
-                    logWrite("Special mode activated saving %u\n", uwIndexModReset);
-                    #endif
-
-                    copSetMove(&pCmdListBack[5 + tBarPrev->ubCopIndex].sMove, &g_pCustom->bpl1mod, uwBplMods+2);
-                    copSetMove(&pCmdListBack[4 + tBarPrev->ubCopIndex].sMove, &g_pCustom->bpl2mod, uwBplMods+2);
-                }
-                /*else if (ubPerspectiveRowCounter>0)
-                {
-                    copSetMove(&pCmdListBack[5 + tBarPrev->ubCopIndex].sMove, &g_pCustom->bpl1mod, uwBplMods);
-                    copSetMove(&pCmdListBack[4 + tBarPrev->ubCopIndex].sMove, &g_pCustom->bpl2mod, uwBplMods);
-                }*/
+                
             }
         }
 #endif
@@ -869,6 +847,9 @@ void updateCamera2(BYTE bX)
     ubCopIndex = 1; // must be one because at zero we would get wait instruction
     SETBARCOLORSBACK;
 
+    ubCopIndex = s_ubBarColorsCopPositionsBorder[0];
+    SETBARCOLORSBACK;
+
     ubCopIndex = s_ubBarColorsCopPositionsPerspective[0];
     SETBARCOLORSBACKPERSPECTIVE;
 
@@ -901,28 +882,6 @@ UWORD getBarColorPerspectiveBack(const UBYTE ubColNo)
         ubColorRealIndex -= MAXCOLORS;
     return s_pBarColorsPerspectiveBack[ubColorRealIndex];
 }
-
-#if 0
-void switchCopColors()
-{
-    return;
-#ifdef ACE_DEBUG
-
-    logWrite("switching colors..\n");
-#endif
-    tCopList *pCopList = s_pMainBuffer->sCommon.pVPort->pView->pCopList;
-    tCopCmd *pCmdListBack = &pCopList->pBackBfr->pList[s_uwCopRawOffs];
-    tCopCmd *pCmdListFront = &pCopList->pFrontBfr->pList[s_uwCopRawOffs];
-    s_ubColorIndex++;
-    if (s_ubColorIndex >= MAXCOLORS)
-        s_ubColorIndex = 0;
-    UBYTE ubCopIndex = s_ubBarColorsCopPositions[0];
-    copSetMoveBackAndFront(&g_pCustom->color[1], getBarColor(0));
-    ubCopIndex = s_ubBarColorsCopPositions[1];
-    copSetMoveBackAndFront(&g_pCustom->color[3], getBarColor(1));
-    //copSwapBuffers();
-}
-#endif
 
 // Build perspective row function: scheme following
 /*
@@ -1187,218 +1146,6 @@ void printPerspectiveRow2(tSimpleBufferTestManager *s_pMainBuffer, const UWORD u
         }
     }
 }
-#if 0
-void printPerspectiveRow(tSimpleBufferTestManager *s_pMainBuffer, const UWORD uwRowNo, const UWORD uwBytesPerRow, const UWORD uwBarWidth, const UWORD uwSpeed)
-{
-    typedef struct _tBitplanes
-    {
-        UBYTE *p_ubBitplaneStartPointer;
-        UBYTE *p_ubBitplaneEndPointer;
-        UBYTE *p_ubBitplanePointer;
-    } tBitplanes;
-
-    tBitplanes bitplanes[3];
-
-    //ulValue = 0b00000001 11111111 1111111 111111111 00000000;
-
-    UWORD uwSpaceBetweenCols = 8;
-
-    UBYTE *p_ubBitplane0StartPointer = (UBYTE *)((ULONG)s_pMainBuffer->pBack->Planes[0]);
-    UBYTE *p_ubBitplane1StartPointer = (UBYTE *)((ULONG)s_pMainBuffer->pBack->Planes[1]);
-    UBYTE *p_ubBitplane2StartPointer = (UBYTE *)((ULONG)s_pMainBuffer->pBack->Planes[2]);
-
-    p_ubBitplane0StartPointer = p_ubBitplane0StartPointer + uwBytesPerRow * uwRowNo; // vertical position
-    UBYTE *p_ubBitplane0Pointer = p_ubBitplane0StartPointer + 4 * 4 + 3;             // go to last byte of 5th  bar
-
-    p_ubBitplane1StartPointer = p_ubBitplane1StartPointer + uwBytesPerRow * uwRowNo; // vertical position
-    UBYTE *p_ubBitplane1Pointer = p_ubBitplane1StartPointer + 4 * 4 + 3;             // go to 5th  bar
-
-    p_ubBitplane2StartPointer = p_ubBitplane2StartPointer + uwBytesPerRow * uwRowNo; // vertical position
-    UBYTE *p_ubBitplane2Pointer = p_ubBitplane2StartPointer + 4 * 4 + 3;             // go to 5th  bar
-
-    bitplanes[0].p_ubBitplaneStartPointer = p_ubBitplane0StartPointer;
-    bitplanes[0].p_ubBitplaneEndPointer = p_ubBitplane0StartPointer + 48;
-    bitplanes[0].p_ubBitplanePointer = p_ubBitplane0Pointer;
-
-    bitplanes[1].p_ubBitplaneStartPointer = p_ubBitplane1StartPointer;
-    bitplanes[1].p_ubBitplaneEndPointer = p_ubBitplane1StartPointer + 48;
-    bitplanes[1].p_ubBitplanePointer = p_ubBitplane1Pointer;
-
-    bitplanes[2].p_ubBitplaneStartPointer = p_ubBitplane2StartPointer;
-    bitplanes[2].p_ubBitplaneEndPointer = p_ubBitplane2StartPointer + 48;
-    bitplanes[2].p_ubBitplanePointer = p_ubBitplane2Pointer;
-
-    for (UBYTE ubBitplaneCounter = 0; ubBitplaneCounter < 3; ubBitplaneCounter++)
-    {
-        UWORD uwSpaceBetweenColsCounter = 0;
-        UWORD uwBarWidthCounter = 0;
-        BYTE bBytePos = 0;
-        UBYTE ubBarCounter = 4;
-
-        // start bitplane 0
-        while (bitplanes[ubBitplaneCounter].p_ubBitplanePointer >= bitplanes[ubBitplaneCounter].p_ubBitplaneStartPointer)
-        {
-            if (uwSpaceBetweenColsCounter < uwSpaceBetweenCols)
-            {
-#ifdef ACE_DEBUG
-                if (ubDebug)
-                    logWrite("Setting space (%d-%d-bytepos :%d)\n", uwSpaceBetweenColsCounter, uwSpaceBetweenCols, bBytePos);
-#endif
-
-                uwSpaceBetweenColsCounter++;
-                bBytePos++;
-                if (bBytePos >= 8)
-                {
-                    bBytePos = 0;
-                    bitplanes[ubBitplaneCounter].p_ubBitplanePointer--;
-#ifdef ACE_DEBUG
-                    if (ubDebug)
-                        logWrite("Byte ended!!! decrementing p_ubBitplane0Pointer\n");
-#endif
-                }
-            }
-            else
-            {
-                if (uwBarWidthCounter < uwBarWidth)
-                {
-#ifdef ACE_DEBUG
-                    if (ubDebug)
-                        logWrite("Setting bar (%d-%d-bytepos :%d)\n", uwBarWidthCounter, uwBarWidth, bBytePos);
-#endif
-                    if (ubBitplaneCounter == 0)
-                    {
-                        if ((ubBarCounter % 2) == 0)
-                            *bitplanes[ubBitplaneCounter].p_ubBitplanePointer |= BV(bBytePos);
-                    }
-                    else if (ubBitplaneCounter == 1)
-                    {
-                        if ((ubBarCounter % 4) == 1 || (ubBarCounter % 4) == 2)
-                            *bitplanes[ubBitplaneCounter].p_ubBitplanePointer |= BV(bBytePos);
-                    }
-
-                    else if (ubBitplaneCounter == 2)
-                    {
-                        if ((ubBarCounter % 4) == 3)
-                            *bitplanes[ubBitplaneCounter].p_ubBitplanePointer |= BV(bBytePos);
-                    }
-
-                    bBytePos++;
-                    if (bBytePos >= 8)
-                    {
-                        bBytePos = 0;
-                        bitplanes[ubBitplaneCounter].p_ubBitplanePointer--;
-#ifdef ACE_DEBUG
-                        if (ubDebug)
-                            logWrite("Byte ended!!! decrementing p_ubBitplane0Pointer\n");
-#endif
-                    }
-
-                    uwBarWidthCounter++;
-                }
-                else
-                {
-#ifdef ACE_DEBUG
-                    if (ubDebug)
-                        logWrite("Bar cycle ended, resetting counters and incrementing the wait space\n");
-#endif
-                    uwSpaceBetweenColsCounter = 0;
-                    uwBarWidthCounter = 0;
-                    uwSpaceBetweenCols = 8;
-                    ubBarCounter--;
-                }
-            }
-            // Compose the byte
-        }
-
-// start of the right part of the screen
-// restore pointers
-#ifdef ACE_DEBUG
-        if (ubDebug)
-            logWrite("Start right side... repositioning\n");
-#endif
-        bitplanes[ubBitplaneCounter].p_ubBitplanePointer = bitplanes[ubBitplaneCounter].p_ubBitplaneStartPointer + 4 * 5;
-        uwSpaceBetweenColsCounter = 0;
-        uwBarWidthCounter = 0;
-        uwSpaceBetweenCols = 8;
-        ubBarCounter = 5;
-        bBytePos = 7;
-
-        while (bitplanes[ubBitplaneCounter].p_ubBitplanePointer < bitplanes[ubBitplaneCounter].p_ubBitplaneEndPointer)
-        {
-
-            if (uwBarWidthCounter < uwBarWidth)
-            {
-#ifdef ACE_DEBUG
-                if (ubDebug)
-                    logWrite("Setting bar (%d-%d-bytepos :%d)\n", uwBarWidthCounter, uwBarWidth, bBytePos);
-#endif
-                if (ubBitplaneCounter == 0)
-                {
-                    if ((ubBarCounter % 2) == 0)
-                        *bitplanes[ubBitplaneCounter].p_ubBitplanePointer |= BV(bBytePos);
-                }
-                else if (ubBitplaneCounter == 1)
-                {
-                    if ((ubBarCounter % 4) == 1 || (ubBarCounter % 4) == 2)
-                        *bitplanes[ubBitplaneCounter].p_ubBitplanePointer |= BV(bBytePos);
-                }
-
-                else if (ubBitplaneCounter == 2)
-                {
-                    if ((ubBarCounter % 4) == 3)
-                        *bitplanes[ubBitplaneCounter].p_ubBitplanePointer |= BV(bBytePos);
-                }
-
-                bBytePos--;
-                if (bBytePos < 0)
-                {
-                    bBytePos = 7;
-                    bitplanes[ubBitplaneCounter].p_ubBitplanePointer++;
-#ifdef ACE_DEBUG
-                    if (ubDebug)
-                        logWrite("Byte ended!!! incrementing p_ubBitplane0Pointer\n");
-#endif
-                }
-
-                uwBarWidthCounter++;
-            }
-            else
-            {
-                if (uwSpaceBetweenColsCounter < uwSpaceBetweenCols)
-                {
-#ifdef ACE_DEBUG
-                    if (ubDebug)
-                        logWrite("Setting space (%d-%d-bytepos :%d)\n", uwSpaceBetweenColsCounter, uwSpaceBetweenCols, bBytePos);
-#endif
-
-                    uwSpaceBetweenColsCounter++;
-                    bBytePos--;
-                    if (bBytePos < 0)
-                    {
-                        bBytePos = 7;
-                        bitplanes[ubBitplaneCounter].p_ubBitplanePointer++;
-#ifdef ACE_DEBUG
-                        if (ubDebug)
-                            logWrite("Byte ended!!! incrementing p_ubBitplane0Pointer\n");
-#endif
-                    }
-                }
-                else
-                {
-#ifdef ACE_DEBUG
-                    if (ubDebug)
-                        logWrite("Bar cycle ended, resetting counters and incrementing the wait space\n");
-#endif
-                    uwSpaceBetweenColsCounter = 0;
-                    uwBarWidthCounter = 0;
-                    uwSpaceBetweenCols = 8;
-                    ubBarCounter++;
-                }
-            }
-        }
-    }
-}
-#endif
 
 // Build the tPerspectiveBarArray array to manage the copperlist
 UBYTE buildPerspectiveCopperlist(UBYTE ubCopIndex)
@@ -1430,108 +1177,27 @@ UBYTE buildPerspectiveCopperlist(UBYTE ubCopIndex)
         tPerspectiveBarArray[ubCount].ubCopIndex = ubCopIndex;
         tPerspectiveBarArray[ubCount].ubScrollCounter = 0;
 
-#if 0
-        for (UBYTE ubCount2 = 0; ubCount2 < 32; ubCount2++)
-        {
-            UBYTE ubValue = 0;
-            if (ubCount2 <= ubCount + 1)
-                ubValue = 1;
-            else
-                ubValue = 0;
-
-            tPerspectiveBarArray[ubCount].pScrollFlags[ubCount2] = ubValue;
-#ifdef ACE_DEBUG
-//logWrite("setting value %u for bar %u at position %u\n", ubValue, ubCount, ubCount2);
-#endif
-        }
-#endif
-
-        // 32th (linea inclinata di 33)
-
-        /*INITSCROLLFLAG(0,
-                       0, 0, 0, 0, 0, 0, 0, 0,
-                       0, 0, 0, 0, 0, 0, 0, 0,
-                       1, 1, 1, 1, 1, 1, 1, 1,
-                       1, 1, 1, 1, 1, 1, 1, 1);
-
-        INITSCROLLFLAG(1,
-                       0, 0, 0, 0, 0, 0, 1, 1,
-                       1, 1, 1, 1, 1, 1, 1, 2,
-                       2, 2, 2, 2, 2, 2, 2, 2,
-                       2, 2, 2, 2, 4, 4, 4, 4);
-
-        INITSCROLLFLAG(2,
-                       0, 0, 0, 1, 1, 1, 1, 1,
-                       1, 2, 2, 2, 2, 2, 3, 3,
-                       4, 3, 4, 4, 4, 4, 4, 4,
-                       4, 5, 5, 5, 6, 8, 8, 8);
-
-        INITSCROLLFLAG(3,
-                       0, 0, 1, 1, 1, 1, 2, 2,
-                       2, 2, 3, 3, 3, 4, 4, 4,
-                       5, 5, 5, 6, 6, 6, 6, 6,
-                       7, 7, 7, 8, 9, 10, 10, 10);
-
-        INITSCROLLFLAG(4,
-                       0, 0, 1, 1, 1, 2, 2, 3,
-                       3, 3, 4, 4, 4, 5, 5, 6,
-                       6, 6, 8, 8, 8, 8, 8, 9,
-                       9, 10, 11, 10, 12, 13, 13, 14);
-
-        INITSCROLLFLAG(5,
-                       0, 0, 1, 1, 2, 2, 3, 3,
-                       4, 4, 5, 5, 5, 6, 6, 7,
-                       7, 8, 9, 9, 10, 10, 11, 11,
-                       11, 12, 13, 13, 14, 15, 16, 17);
-
-        INITSCROLLFLAG(6,
-                       0, 1, 1, 2, 2, 3, 3, 4,
-                       4, 5, 6, 6, 7, 7, 8, 8,
-                       9, 10, 11, 11, 12, 13, 13, 13,
-                       14, 14, 16, 16, 17, 18, 19, 20);
-
-        INITSCROLLFLAG(7,
-                       0, 1, 1, 2, 3, 3, 4, 4,
-                       5, 6, 6, 7, 8, 8, 9, 10,
-                       10, 11, 13, 13, 14, 15, 15, 16,
-                       16, 17, 19, 18, 20, 21, 22, 23);
-
-        INITSCROLLFLAG(8,
-                       0, 1, 1, 2, 3, 4, 4, 5,
-                       6, 7, 7, 8, 9, 10, 10, 11,
-                       12, 13, 14, 15, 16, 17, 18, 19,
-                       19, 19, 21, 21, 22, 23, 24, 25);
-
-        INITSCROLLFLAG(9,
-                       0, 1, 2, 2, 3, 4, 5, 6,
-                       7, 7, 8, 9, 10, 11, 12, 12,
-                       13, 14, 16, 17, 18, 19, 20, 21,
-                       21, 22, 24, 24, 25, 26, 27, 28);
-
-        INITSCROLLFLAG(10,
-                       0, 1, 2, 3, 4, 5, 5, 6,
-                       7, 8, 9, 10, 11, 12, 13, 15,
-                       15, 16, 18, 19, 20, 21, 22, 23,
-                       23, 25, 26, 26, 28, 29, 30, 31);
-
-        INITSCROLLFLAG(11,
-                       0, 1, 2, 3, 4, 5, 6, 7,
-                       8, 9, 10, 11, 12, 13, 14, 16,
-                       16, 17, 19, 20, 22, 23, 24, 25,
-                       25, 27, 28, 29, 30, 31, 32, 33);*/
-
         copSetMoveBackAndFront(&g_pCustom->bplcon1, 0x0000);
         copSetMoveBackAndFront(&g_pCustom->bpl1mod, 0x0008);
         copSetMoveBackAndFront(&g_pCustom->bpl2mod, 0x0008);
+
+        // test di oggi
+        if (ubCount == PERSPECTIVEBARSNUMBER-2)
+        { 
+            #ifdef ACE_DEBUG
+            logWrite("setting palette change for border at %u \n",ubCount);
+#endif
+
+            // Change palette for perspective back rows
+            SETBARCOLORSFRONTANDBACKBORDER
+        }
+        // fine test di oggi
 
         if (ubCount == PERSPECTIVEBARSNUMBER-1)
         { 
             #ifdef ACE_DEBUG
             logWrite("setting palette change for back at %u \n",ubCount);
 #endif
-            /*copSetMoveBackAndFront(&g_pCustom->color[3], 0x0444);
-            copSetMoveBackAndFront(&g_pCustom->color[7], 0x0444);
-            copSetMoveBackAndFront(&g_pCustom->color[11], 0x0444);*/
 
             // Change palette for perspective back rows
             SETBARCOLORSFRONTANDBACKPERSPECTIVEBACK
@@ -1652,6 +1318,8 @@ UBYTE buildPerspectiveCopperlist(UBYTE ubCopIndex)
                    16, 17, 19, 20, 22, 23, 24, 25,
                    25, 27, 28, 29, 30, 31, 32, 33);
 
+    //Here starts back perspective
+
     INITSCROLLFLAG(12,
                    0, 1, 2, 3, 4, 5, 5, 6,
                    7, 8, 9, 10, 11, 12, 13, 15,
@@ -1663,6 +1331,18 @@ UBYTE buildPerspectiveCopperlist(UBYTE ubCopIndex)
                    7, 7, 8, 9, 10, 11, 12, 12,
                    13, 14, 16, 17, 18, 19, 20, 21,
                    21, 22, 24, 24, 25, 26, 27, 28);
+
+    INITSCROLLFLAG(14,
+                   0, 1, 1, 2, 3, 4, 4, 5,
+                   6, 7, 7, 8, 9, 10, 10, 11,
+                   12, 13, 14, 15, 16, 17, 18, 19,
+                   19, 19, 21, 21, 22, 23, 24, 25);
+
+    INITSCROLLFLAG(15,
+                   0, 1, 1, 2, 3, 3, 4, 4,
+                   5, 6, 6, 7, 8, 8, 9, 10,
+                   10, 11, 13, 13, 14, 15, 15, 16,
+                   16, 17, 19, 18, 20, 21, 22, 23);
 
     return ubCopIndex;
 }
