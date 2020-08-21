@@ -34,7 +34,6 @@ static UWORD s_uwCopRawOffs = 0;
 static fix16_t sg_tVelocity;
 static fix16_t sg_tVelocityIncrementer;
 
-//void updateCamera(UBYTE);
 void updateCamera2(BYTE);
 UWORD getBarColor(const UBYTE);
 UWORD getBarColorPerspective(const UBYTE);
@@ -228,23 +227,23 @@ static UBYTE s_ubColorIndex = 0;
         copSetMoveBackAndFront(&g_pCustom->color[ubCounter + 1], getBarColor(ubCounter)); \
     }
 
-#define SETBARCOLORSFRONTANDBACKBORDER                                                          \
+#define SETBARCOLORSFRONTANDBACKBORDER                                                    \
     for (UBYTE ubCounter = 0; ubCounter < MAXCOLORS; ubCounter++)                         \
     {                                                                                     \
-        s_ubBarColorsCopPositionsBorder[ubCounter] = ubCopIndex;                                \
+        s_ubBarColorsCopPositionsBorder[ubCounter] = ubCopIndex;                          \
         copSetMoveBackAndFront(&g_pCustom->color[ubCounter + 1], getBarColor(ubCounter)); \
     }
 
 #define SETBARCOLORSFRONTANDBACKPERSPECTIVE                                                          \
-    for (UBYTE ubCounter = 0; ubCounter < MAXCOLORS; ubCounter++)                         \
-    {                                                                                     \
+    for (UBYTE ubCounter = 0; ubCounter < MAXCOLORS; ubCounter++)                                    \
+    {                                                                                                \
         s_ubBarColorsCopPositionsPerspective[ubCounter] = ubCopIndex;                                \
         copSetMoveBackAndFront(&g_pCustom->color[ubCounter + 1], getBarColorPerspective(ubCounter)); \
     }
 
 #define SETBARCOLORSFRONTANDBACKPERSPECTIVEBACK                                                          \
-    for (UBYTE ubCounter = 0; ubCounter < MAXCOLORS; ubCounter++)                         \
-    {                                                                                     \
+    for (UBYTE ubCounter = 0; ubCounter < MAXCOLORS; ubCounter++)                                        \
+    {                                                                                                    \
         s_ubBarColorsCopPositionsPerspectiveBack[ubCounter] = ubCopIndex;                                \
         copSetMoveBackAndFront(&g_pCustom->color[ubCounter + 1], getBarColorPerspectiveBack(ubCounter)); \
     }
@@ -256,14 +255,14 @@ static UBYTE s_ubColorIndex = 0;
     }
 
 #define SETBARCOLORSBACKPERSPECTIVE                                                          \
-    for (UBYTE ubCounter = 0; ubCounter < MAXCOLORS; ubCounter++)                 \
-    {                                                                             \
+    for (UBYTE ubCounter = 0; ubCounter < MAXCOLORS; ubCounter++)                            \
+    {                                                                                        \
         copSetMoveBack(&g_pCustom->color[ubCounter + 1], getBarColorPerspective(ubCounter)); \
     }
 
 #define SETBARCOLORSBACKPERSPECTIVEBACK                                                          \
-    for (UBYTE ubCounter = 0; ubCounter < MAXCOLORS; ubCounter++)                 \
-    {                                                                             \
+    for (UBYTE ubCounter = 0; ubCounter < MAXCOLORS; ubCounter++)                                \
+    {                                                                                            \
         copSetMoveBack(&g_pCustom->color[ubCounter + 1], getBarColorPerspectiveBack(ubCounter)); \
     }
 
@@ -274,7 +273,6 @@ static UBYTE s_ubColorIndex = 0;
 typedef struct _tPerspectiveBar
 {
     UBYTE ubCopIndex;
-    UBYTE pScrollFlags[32];
     UBYTE ubScrollCounter;
     UBYTE pScrollFlags2[32];
     UBYTE ubCopIndex2;
@@ -324,7 +322,7 @@ UBYTE ubCopIndexFirstLine = 0;
 
 void gameGsCreate(void)
 {
-    ULONG ulRawSize = (SimpleBufferTestGetRawCopperlistInstructionCount(BITPLANES) + 12 + MAXCOLORS*4 + PERSPECTIVEBLOCKSIZE * (PERSPECTIVEBARSNUMBER + PERSPECTIVEBARSNUMBERBACK) + 1
+    ULONG ulRawSize = (SimpleBufferTestGetRawCopperlistInstructionCount(BITPLANES) + 12 + MAXCOLORS * 4 + PERSPECTIVEBLOCKSIZE * (PERSPECTIVEBARSNUMBER + PERSPECTIVEBARSNUMBERBACK) + 1
                        /*                   3 * 3 + // 32 bars - each consists of WAIT + 3 MOVE instruction
         1 +     // Final WAIT
         1       // Just to be sure*/
@@ -343,6 +341,7 @@ void gameGsCreate(void)
                             TAG_VPORT_BPP, BITPLANES, // 4 bits per pixel, 16 colors
                             // We won't specify height here - viewport will take remaining space.
                             TAG_END);
+
     s_pMainBuffer = SimpleBufferTestCreate(0,
                                            TAG_SIMPLEBUFFER_VPORT, s_pVpMain, // Required: parent viewport
                                            TAG_SIMPLEBUFFER_BITMAP_FLAGS, BMF_CLEAR,
@@ -518,7 +517,7 @@ void gameGsLoop(void)
 #endif
     static BYTE bIsExiting = 0;
     static BYTE bXCamera = 0;
-    //static fix16_t bXCamera = 0;
+
 #ifdef AUTOSCROLLING
     static fix16_t tCameraFrame = 0;
 
@@ -534,6 +533,16 @@ void gameGsLoop(void)
         if (s_ubColorIndex >= MAXCOLORS)
             s_ubColorIndex = 0;
     }
+    else if (bXCamera < 0)
+    {
+        bXCamera = 31;
+        tCameraFrame = fix16_from_int(31);
+        if (s_ubColorIndex == 0)
+            s_ubColorIndex = MAXCOLORS - 1;
+        else
+            s_ubColorIndex--;
+    }
+
     updateCamera2(bXCamera);
 #endif
 
@@ -567,15 +576,19 @@ void gameGsLoop(void)
         }
 
         updateCamera2(bXCamera);
-        /*if (bXCamera == 0)
-          switchCopColors();*/
     }
 
     if (keyUse(KEY_C))
     {
         bXCamera--;
         if (bXCamera < 0)
+        {
             bXCamera = 31;
+            if (s_ubColorIndex == 0)
+                s_ubColorIndex = MAXCOLORS - 1;
+            else
+                s_ubColorIndex--;
+        }
         updateCamera2(bXCamera);
     }
 
@@ -588,14 +601,16 @@ void gameGsLoop(void)
         copDumpBfr(pCopBfr);
     }
 
+    // Increase speed in autoscrolling mode
     if (keyUse(KEY_O))
     {
         sg_tVelocity = fix16_add(sg_tVelocity, sg_tVelocityIncrementer);
     }
+    // Decrease speed in autoscolling mode
     if (keyUse(KEY_P))
     {
-        if (sg_tVelocity > 0)
-            sg_tVelocity = fix16_sub(sg_tVelocity, sg_tVelocityIncrementer);
+        //if (sg_tVelocity > 0)
+        sg_tVelocity = fix16_sub(sg_tVelocity, sg_tVelocityIncrementer);
     }
 
 #ifdef COLORDEBUG
@@ -721,13 +736,12 @@ void updateCamera2(BYTE bX)
 
 #if 0
 
-       
 #else
 
         UBYTE ubLastBplMods = 0;
 
         // Each perspective row must be modifield in its copperlist block - cycle each of them
-        for (UBYTE ubPerspectiveRowCounter = 0; ubPerspectiveRowCounter < PERSPECTIVEBARSNUMBER+PERSPECTIVEBARSNUMBERBACK; ubPerspectiveRowCounter++)
+        for (UBYTE ubPerspectiveRowCounter = 0; ubPerspectiveRowCounter < PERSPECTIVEBARSNUMBER + PERSPECTIVEBARSNUMBERBACK; ubPerspectiveRowCounter++)
         {
             struct _tPerspectiveBar *tBar = &tPerspectiveBarArray[ubPerspectiveRowCounter];
             struct _tPerspectiveBar *tBarPrev = &tPerspectiveBarArray[ubPerspectiveRowCounter - 1];
@@ -802,13 +816,9 @@ void updateCamera2(BYTE bX)
                 copSetMove(&pCmdListBack[0 + tBar->ubCopIndex].sMove, &g_pCustom->bplcon1, uwShiftPerspective);
                 copSetMove(&pCmdListBack[1 + tBar->ubCopIndex].sMove, &g_pCustom->bpl1mod, uwBplMods);
                 copSetMove(&pCmdListBack[2 + tBar->ubCopIndex].sMove, &g_pCustom->bpl2mod, uwBplMods);
-
-                
             }
         }
 #endif
-
-       
     }
     else
     {
@@ -817,7 +827,7 @@ void updateCamera2(BYTE bX)
         copSetMove(&pCmdList[4].sMove, &g_pCustom->bpl2mod, 0x0008);
         copSetMove(&pCmdList[5].sMove, &g_pCustom->bplcon1, uwShift);
 
-        for (UBYTE ubPerspectiveRowCounter = 0; ubPerspectiveRowCounter < PERSPECTIVEBARSNUMBER+PERSPECTIVEBARSNUMBERBACK; ubPerspectiveRowCounter++)
+        for (UBYTE ubPerspectiveRowCounter = 0; ubPerspectiveRowCounter < PERSPECTIVEBARSNUMBER + PERSPECTIVEBARSNUMBERBACK; ubPerspectiveRowCounter++)
         {
             struct _tPerspectiveBar *tBar = &tPerspectiveBarArray[ubPerspectiveRowCounter];
             struct _tPerspectiveBar *tBarPrev = &tPerspectiveBarArray[ubPerspectiveRowCounter - 1];
@@ -1182,10 +1192,10 @@ UBYTE buildPerspectiveCopperlist(UBYTE ubCopIndex)
         copSetMoveBackAndFront(&g_pCustom->bpl2mod, 0x0008);
 
         // test di oggi
-        if (ubCount == PERSPECTIVEBARSNUMBER-2)
-        { 
-            #ifdef ACE_DEBUG
-            logWrite("setting palette change for border at %u \n",ubCount);
+        if (ubCount == PERSPECTIVEBARSNUMBER - 2)
+        {
+#ifdef ACE_DEBUG
+            logWrite("setting palette change for border at %u \n", ubCount);
 #endif
 
             // Change palette for perspective back rows
@@ -1193,16 +1203,15 @@ UBYTE buildPerspectiveCopperlist(UBYTE ubCopIndex)
         }
         // fine test di oggi
 
-        if (ubCount == PERSPECTIVEBARSNUMBER-1)
-        { 
-            #ifdef ACE_DEBUG
-            logWrite("setting palette change for back at %u \n",ubCount);
+        if (ubCount == PERSPECTIVEBARSNUMBER - 1)
+        {
+#ifdef ACE_DEBUG
+            logWrite("setting palette change for back at %u \n", ubCount);
 #endif
 
             // Change palette for perspective back rows
             SETBARCOLORSFRONTANDBACKPERSPECTIVEBACK
         }
-
 
         if (209 + 43 + ubWaitCount + PERSECTIVEBARHEIGHT - 1 > 255 && ubSpecialWaitSet == 0)
         {
