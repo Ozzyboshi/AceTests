@@ -46,6 +46,8 @@ void printPerspectiveRow2(tSimpleBufferTestManager *s_pMainBuffer, const UWORD, 
 
 UBYTE buildPerspectiveCopperlist(UBYTE);
 
+void setHiddenRightBarColors(UWORD, UWORD, UWORD);
+
 #define MAXCOLORS 12
 
 // Color sequence palette for non perspective vertical rectangles
@@ -212,6 +214,13 @@ static UWORD s_pBarColorsPerspectiveBack[MAXCOLORS] = {
     0x0000, // color of the fourth col
 };
 #endif
+
+#define MAXCOLORSEFFECT 4 * 3
+static UWORD s_pBarColorEffect[MAXCOLORSEFFECT] = {
+    0x0111, 0x0222, 0x0333,
+    0x0AAA, 0x0BBB, 0x0CCC,
+    0x0444, 0x0555, 0x0666,
+    0x0777, 0x0888, 0x0999};
 
 static UBYTE s_ubBarColorsCopPositions[MAXCOLORS];
 static UBYTE s_ubBarColorsCopPositionsBorder[MAXCOLORS];
@@ -552,6 +561,22 @@ void gameGsLoop(void)
         return;
     }
 
+    // Color effect
+    if (keyCheck(KEY_SPACE))
+    {
+        static UBYTE ubColorEffectIndex = 0;
+
+//ubColorEffectIndex=3;
+#ifdef ACE_DEBUG
+        logWrite("Setting new colors for index %u (%x %x %x )\n", ubColorEffectIndex, s_pBarColorEffect[ubColorEffectIndex], s_pBarColorEffect[ubColorEffectIndex + 1], s_pBarColorEffect[ubColorEffectIndex + 2]);
+#endif
+        setHiddenRightBarColors(s_pBarColorEffect[ubColorEffectIndex], s_pBarColorEffect[ubColorEffectIndex + 1], s_pBarColorEffect[ubColorEffectIndex + 2]);
+        ubColorEffectIndex += 3;
+        if (ubColorEffectIndex > MAXCOLORSEFFECT-3)
+            ubColorEffectIndex = 0;
+    }
+
+    // Exits with black bars
     if (keyCheck(KEY_Q))
     {
         bIsExiting = 1;
@@ -625,9 +650,9 @@ void gameGsLoop(void)
         lastBx = 1;
     if (bXCamera == 0 && bIntroColorIndex >= 0 && lastBx == 1)
     {
-        BYTE bColorIndex = 11 + s_ubColorIndex;
-        while (bColorIndex > 11)
-            bColorIndex -= 12;
+        BYTE bColorIndex = MAXCOLORS - 1 + s_ubColorIndex;
+        while (bColorIndex > MAXCOLORS - 1)
+            bColorIndex -= MAXCOLORS;
 #ifdef ACE_DEBUG
         logWrite("Setting intro color %u to index number %u\n", s_pBarColors2[bColorIndex], bColorIndex);
 #endif
@@ -642,14 +667,15 @@ void gameGsLoop(void)
     static BYTE bExitSequence = 11;
     if (bXCamera == 0 && bIsExiting && lastBx == 1)
     {
-        BYTE bColorIndex = 11 + s_ubColorIndex;
+        /*BYTE bColorIndex = 11 + s_ubColorIndex;
         while (bColorIndex > 11)
             bColorIndex -= 12;
         s_pBarColors[bColorIndex] = 0x0000;
         s_pBarColorsPerspective[bColorIndex] = 0x0000;
-        s_pBarColorsPerspectiveBack[bColorIndex] = 0x0000;
+        s_pBarColorsPerspectiveBack[bColorIndex] = 0x0000;*/
+        setHiddenRightBarColors(0x0000, 0x0000, 0x0000);
 #ifdef ACE_DEBUG
-        logWrite("Setting intro color to zero to index number %u\n", bColorIndex);
+        logWrite("Setting intro color to zero to index number\n");
 #endif
 
         if (bExitSequence < 0)
@@ -732,12 +758,6 @@ void updateCamera2(BYTE bX)
 
         // start of perspective
         UWORD uwBplMods = 0x0006;
-        UWORD uwShiftPerspective;
-
-#if 0
-
-#else
-
         UBYTE ubLastBplMods = 0;
 
         // Each perspective row must be modifield in its copperlist block - cycle each of them
@@ -771,9 +791,9 @@ void updateCamera2(BYTE bX)
             ubLastBplMods = ubAbsBplMods * 2;
 
 #ifdef ACE_DEBUG
-            logWrite("abs - Processing row %u\n", ubPerspectiveRowCounter);
+            /*logWrite("abs - Processing row %u\n", ubPerspectiveRowCounter);
             logWrite("abs - Ok now we are on position %u so we must absolute shift this perspective bar to the left for %u positions: mods %u and bpl1con to %u\n", bX, ubAbsShift, ubAbsBplMods, ubAbsRemainder);
-            logWrite("abs - New registers : mods : %u, bplcon1: %u\n", uwFinalMods, uwFinalBplCon1);
+            logWrite("abs - New registers : mods : %u, bplcon1: %u\n", uwFinalMods, uwFinalBplCon1);*/
 #endif
 
             copSetMove(&pCmdListBack[0 + tBar->ubCopIndex].sMove, &g_pCustom->bplcon1, uwFinalBplCon1);
@@ -796,29 +816,7 @@ void updateCamera2(BYTE bX)
                 copSetMove(&pCmdListBack[ubCopIndexFirstLine].sMove, &g_pCustom->bpl1mod, uwFinalMods);
                 copSetMove(&pCmdListBack[ubCopIndexFirstLine + 1].sMove, &g_pCustom->bpl2mod, uwFinalMods);
             }
-
-            if (0)
-            {
-                if (uwShift > 0)
-                {
-                    uwShiftPerspective = uwShift - tBar->ubScrollCounter * 17;
-                }
-                else
-                    uwShiftPerspective = 0;
-
-#ifdef ACE_DEBUG
-                logWrite("abs - uwShiftPerspective: %u\n", uwShiftPerspective);
-                logWrite("uwModPerspective: %u\n", uwBplMods);
-#endif
-
-                // Update copperlist
-                //if (s_ubPerspectiveBarCopPositions[1]!=tBarNext->ubCopIndex) gameExit();
-                copSetMove(&pCmdListBack[0 + tBar->ubCopIndex].sMove, &g_pCustom->bplcon1, uwShiftPerspective);
-                copSetMove(&pCmdListBack[1 + tBar->ubCopIndex].sMove, &g_pCustom->bpl1mod, uwBplMods);
-                copSetMove(&pCmdListBack[2 + tBar->ubCopIndex].sMove, &g_pCustom->bpl2mod, uwBplMods);
-            }
         }
-#endif
     }
     else
     {
@@ -1409,4 +1407,15 @@ UBYTE unMaskIntro(UBYTE bXCamera, UBYTE ubCmp)
         ubMask -= 2;
     }
     return 0;
+}
+
+void setHiddenRightBarColors(UWORD ubColorRectangle, UWORD ubColorPerspective, UWORD ubColorPerspectiveBack)
+{
+    const BYTE bMaxCol = MAXCOLORS - 1;
+    BYTE bColorIndex = bMaxCol + s_ubColorIndex;
+    while (bColorIndex > bMaxCol)
+        bColorIndex -= MAXCOLORS;
+    s_pBarColors[bColorIndex] = ubColorRectangle;
+    s_pBarColorsPerspective[bColorIndex] = ubColorPerspective;
+    s_pBarColorsPerspectiveBack[bColorIndex] = ubColorPerspectiveBack;
 }
