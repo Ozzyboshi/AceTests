@@ -7,10 +7,13 @@
 #include <fixmath/fix16.h>
 
 #include "simplebuffertest.h"
+#include "sprites.h"
+#include "../_res/ball2bpl16x16_frame1.h"
 
-//#define COLORDEBUG
-//#define STARTWITHBLACKBARS
-#define AUTOSCROLLING
+#include "globals.h"
+
+#include "../_res/discocrazy.h"
+
 #define BITPLANES 4 // 4 bitplanes
 
 #define copSetWaitBackAndFront(var, var2)                    \
@@ -325,13 +328,24 @@ UBYTE ubCopIndexFirstLine = 0;
     tPerspectiveBarArray[var].pScrollFlags2[30] = var30;                                                                                                                                                                                          \
     tPerspectiveBarArray[var].pScrollFlags2[31] = var31;
 
-//static UBYTE s_ubPerspectiveBarCopPositions[PERSPECTIVEBARSNUMBER];
+// Start of sprites data
+tMover g_Sprite1Vector, g_Sprite0Vector;
 
-//void copyToMainBplFromFast(const unsigned char* pData,const UBYTE ubSlot,const UBYTE ubMaxBitplanes);
+#define MAXBALLS 7
+tMover g_pBallsMovers[MAXBALLS];
+
+v2d g_Gravity;
+#define LITTLE_BALLS_MASS 2
+
+//Music
+long mt_init(const unsigned char *);
+void mt_music();
+void mt_end();
 
 void gameGsCreate(void)
 {
-    ULONG ulRawSize = (SimpleBufferTestGetRawCopperlistInstructionCount(BITPLANES) + 12 + MAXCOLORS * 4 + PERSPECTIVEBLOCKSIZE * (PERSPECTIVEBARSNUMBER + PERSPECTIVEBARSNUMBERBACK) + 1
+    // ULONG ulRawSize = SimpleBufferTestGetRawCopperlistInstructionCount(BITPLANES)+16;
+    ULONG ulRawSize = (SimpleBufferTestGetRawCopperlistInstructionCount(BITPLANES) + MAXBALLS*2 + ACE_SPRITES_COPPERLIST_SIZE + 10 + MAXCOLORS * 4 + PERSPECTIVEBLOCKSIZE * (PERSPECTIVEBARSNUMBER + PERSPECTIVEBARSNUMBERBACK) + 1
                        /*                   3 * 3 + // 32 bars - each consists of WAIT + 3 MOVE instruction
         1 +     // Final WAIT
         1       // Just to be sure*/
@@ -360,7 +374,7 @@ void gameGsCreate(void)
                                            TAG_SIMPLEBUFFER_IS_DBLBUF, 0,
                                            TAG_END);
 
-    s_uwCopRawOffs = simpleBufferGetRawCopperlistInstructionCount(BITPLANES);
+    s_uwCopRawOffs = SimpleBufferTestGetRawCopperlistInstructionCount(BITPLANES);
 
     /*Enable this in double blf mode
     CopyMemQuick(
@@ -401,6 +415,20 @@ void gameGsCreate(void)
 
     // We don't need anything from OS anymore
     systemUnuse();
+
+    for (UBYTE ubBallIndex = 0; ubBallIndex < MAXBALLS; ubBallIndex++)
+    {
+        spriteVectorInit(&g_pBallsMovers[ubBallIndex], ubBallIndex, -16-ubBallIndex*9, 50+ubBallIndex*20, fix16_div(fix16_from_int((int)ubBallIndex+4), fix16_from_int((int)ubBallIndex+2)), 0, LITTLE_BALLS_MASS);
+        copBlockEnableSpriteRaw(s_pView->pCopList, ubBallIndex, (UBYTE *)ball2bpl16x16_frame1_data, sizeof(ball2bpl16x16_frame1_data), s_uwCopRawOffs);
+        moverMove(g_pBallsMovers[ubBallIndex]);
+    }
+
+    s_uwCopRawOffs += ACE_SPRITES_COPPERLIST_SIZE;
+
+
+
+
+    //memcpy(s_pAceSprites[1].pSpriteData+4,ball2bpl16x16_frame1_data,ball2bpl16x16_frame1_size);
 
     //s_pCamera = s_pMainBuffer->pCamera;
 
@@ -500,8 +528,36 @@ Bitplane 3 -      0   0   0   0        0   0   0   1        1   1    1    1
 
     SETBARCOLORSFRONTANDBACK;
 
-    copSetWaitBackAndFront(0, 200);
+    /*copSetWaitBackAndFront(0, 200);
     copSetMoveBackAndFront(&g_pCustom->color[0], 0x0000);
+    copSetMoveBackAndFront(&g_pCustom->color[0], 0x0000);
+    copSetMoveBackAndFront(&g_pCustom->color[0], 0x0000);*/
+
+    // Sprites colors
+    // Sprite 0 and 1
+    copSetMoveBackAndFront(&g_pCustom->color[16], 0x000F);
+    copSetMoveBackAndFront(&g_pCustom->color[17], 0x0edd);
+    copSetMoveBackAndFront(&g_pCustom->color[18], 0x0922);
+    copSetMoveBackAndFront(&g_pCustom->color[19], 0x0b77);
+
+    // Sprites 2 and 3
+    copSetMoveBackAndFront(&g_pCustom->color[20], 0x000F);
+    copSetMoveBackAndFront(&g_pCustom->color[21], 0x0edd);
+    copSetMoveBackAndFront(&g_pCustom->color[22], 0x0922);
+    copSetMoveBackAndFront(&g_pCustom->color[23], 0x0b77);
+
+    // Sprites 4 and 5
+    copSetMoveBackAndFront(&g_pCustom->color[24], 0x000F);
+    copSetMoveBackAndFront(&g_pCustom->color[25], 0x0edd);
+    copSetMoveBackAndFront(&g_pCustom->color[26], 0x0922);
+    copSetMoveBackAndFront(&g_pCustom->color[27], 0x0b77);
+
+    // Sprites 6 and 7 (7 is unused)
+    copSetMoveBackAndFront(&g_pCustom->color[28], 0x000F);
+    copSetMoveBackAndFront(&g_pCustom->color[29], 0x0edd);
+    copSetMoveBackAndFront(&g_pCustom->color[30], 0x0922);
+    copSetMoveBackAndFront(&g_pCustom->color[31], 0x0b77);
+    // Sprites colors end
 
     ubCopIndex = buildPerspectiveCopperlist(ubCopIndex);
 
@@ -509,11 +565,21 @@ Bitplane 3 -      0   0   0   0        0   0   0   1        1   1    1    1
     copSetMoveBackAndFront(&g_pCustom->color[0], 0x0000);
 
     // set default velocity to 1
-    sg_tVelocity = fix16_div(fix16_from_int(1), fix16_from_int(10));
+    sg_tVelocity = fix16_div(fix16_from_int(2), fix16_from_int(1));
     sg_tVelocityIncrementer = fix16_div(fix16_from_int(1), fix16_from_int(10));
 
     // MaskScreen(0);
     // unMaskScreen(36);
+    // Init the gravity force
+    g_Gravity.x = 0; //fix16_div(fix16_from_int(1), fix16_from_int(1000));
+    g_Gravity.y = fix16_div(fix16_from_int(1), fix16_from_int(5));
+
+    // Enable bounce
+    g_ubHBounceEnabled = 0;
+    g_ubVBounceEnabled = 1;
+
+    // Init music
+    mt_init(discocrazy_data);
 
     // Load the view
     viewLoad(s_pView);
@@ -521,8 +587,30 @@ Bitplane 3 -      0   0   0   0        0   0   0   1        1   1    1    1
 
 void gameGsLoop(void)
 {
+    mt_music();
+
+   /*g_pCustom->color[16] = 0x000F;
+    g_pCustom->color[17] = 0x0edd;
+    g_pCustom->color[18] = 0x0922;
+    g_pCustom->color[19] = 0x0b77;
+
+    g_pCustom->color[20] = 0x000F;
+    g_pCustom->color[21] = 0x0edd;
+    g_pCustom->color[22] = 0x0922;
+    g_pCustom->color[23] = 0x0b77;
+
+     g_pCustom->color[24] = 0x000F;
+    g_pCustom->color[25] = 0x0edd;
+    g_pCustom->color[26] = 0x0922;
+    g_pCustom->color[27] = 0x0b77;
+
+     g_pCustom->color[28] = 0x000F;
+    g_pCustom->color[29] = 0x0edd;
+    g_pCustom->color[30] = 0x0922;
+    g_pCustom->color[31] = 0x0b77;*/
+
 #ifdef COLORDEBUG
-    g_pCustom->color[0] = 0x00FF0;
+    g_pCustom->color[0] = 0x0FF0;
 #endif
     static BYTE bIsExiting = 0;
     static BYTE bXCamera = 0;
@@ -572,7 +660,7 @@ void gameGsLoop(void)
 #endif
         setHiddenRightBarColors(s_pBarColorEffect[ubColorEffectIndex], s_pBarColorEffect[ubColorEffectIndex + 1], s_pBarColorEffect[ubColorEffectIndex + 2]);
         ubColorEffectIndex += 3;
-        if (ubColorEffectIndex > MAXCOLORSEFFECT-3)
+        if (ubColorEffectIndex > MAXCOLORSEFFECT - 3)
             ubColorEffectIndex = 0;
     }
 
@@ -638,6 +726,60 @@ void gameGsLoop(void)
         sg_tVelocity = fix16_sub(sg_tVelocity, sg_tVelocityIncrementer);
     }
 
+    static UBYTE ubMoveBalls = 0;
+    if (keyUse(KEY_1))
+    {
+        ubMoveBalls = 1;
+    }
+    if (ubMoveBalls)
+    {
+        spriteVectorApplyForce(&g_Sprite0Vector, &g_Gravity);
+        spriteVectorApplyForce(&g_Sprite1Vector, &g_Gravity);
+
+        moverAddAccellerationToVelocity(&g_Sprite0Vector);
+        moverAddAccellerationToVelocity(&g_Sprite1Vector);
+
+        moverAddVelocityToLocation(&g_Sprite0Vector);
+        moverAddVelocityToLocation(&g_Sprite1Vector);
+
+        if (moverMove(g_Sprite0Vector))
+            g_Sprite0Vector.ubLocked = 1;
+
+        if (moverMove(g_Sprite1Vector))
+            g_Sprite1Vector.ubLocked = 1;
+
+        if (g_Sprite0Vector.ubLocked == 0)
+            moverBounce(&g_Sprite0Vector);
+
+        if (g_Sprite1Vector.ubLocked == 0)
+            moverBounce(&g_Sprite1Vector);
+
+        if (g_Sprite0Vector.ubLocked == 0)
+            spriteVectorResetAccelleration(&g_Sprite0Vector);
+
+        if (g_Sprite1Vector.ubLocked == 0)
+            spriteVectorResetAccelleration(&g_Sprite1Vector);
+
+        for (UBYTE ubBallIndex = 0; ubBallIndex < MAXBALLS; ubBallIndex++)
+        {
+            //g_pBallsMovers
+            tMover* g_SpriteVector = &g_pBallsMovers[ubBallIndex];
+
+            spriteVectorApplyForce(g_SpriteVector, &g_Gravity);
+            moverAddAccellerationToVelocity(g_SpriteVector);
+            moverAddVelocityToLocation(g_SpriteVector);
+
+            if (moverMove(*g_SpriteVector))
+                (*g_SpriteVector).ubLocked = 1;
+
+            if ((*g_SpriteVector).ubLocked == 0)
+                moverBounce(g_SpriteVector);
+
+            if ((*g_SpriteVector).ubLocked == 0)
+                spriteVectorResetAccelleration(g_SpriteVector);
+        }
+    }
+
 #ifdef COLORDEBUG
     g_pCustom->color[0] = 0x0000;
 #endif
@@ -690,9 +832,13 @@ void gameGsLoop(void)
 
 void gameGsDestroy(void)
 {
+    mt_end();
 
     // Cleanup when leaving this gamestate
     systemUse();
+
+    // Free sprite stuff
+    copBlockSpritesFree();
 
     // This will also destroy all associated viewports and viewport managers
     viewDestroy(s_pView);

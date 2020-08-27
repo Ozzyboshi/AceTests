@@ -62,11 +62,12 @@ static void simpleBufferTestSetFront(
 		// copperlist must be shaped here.
 		// WAIT is calc'd in same way as in copBlockCreate in simpleBufferCreate().
 		tCopCmd *pCmdList = &pCopList->pBackBfr->pList[pManager->uwCopperOffset];
-		logWrite(
+		/*logWrite(
 			"Setting copperlist %p at offs %u\n",
 			pCopList->pBackBfr, pManager->uwCopperOffset
-		);
-		copSetWait(&pCmdList[0].sWait, 0xE2-7*4, pManager->sCommon.pVPort->uwOffsY + 0x2C-1);
+		);*/
+		//copSetWait(&pCmdList[0].sWait, 0xE2-7*4, pManager->sCommon.pVPort->uwOffsY + 0x2C-2);
+		copSetMove(&pCmdList[0].sMove, &g_pCustom->bplcon2, 0x0024);
 		copSetMove(&pCmdList[1].sMove, &g_pCustom->ddfstop, 0x00D0);    // Data fetch
 		copSetMove(&pCmdList[2].sMove, &g_pCustom->ddfstrt, uwDDfStrt);
 		copSetMove(&pCmdList[3].sMove, &g_pCustom->bpl1mod, uwModulo);  // Bitplane modulo

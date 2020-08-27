@@ -99,9 +99,9 @@ CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_goatlight_OBJECTS = main.$(OBJEXT) goatlight.$(OBJEXT) \
-	simplebuffertest.$(OBJEXT)
+	simplebuffertest.$(OBJEXT) sprites.$(OBJEXT) physics.$(OBJEXT)
 goatlight_OBJECTS = $(am_goatlight_OBJECTS)
-goatlight_DEPENDENCIES =
+goatlight_DEPENDENCIES = music_ptr_linkable.o
 AM_V_P = $(am__v_P_$(V))
 am__v_P_ = $(am__v_P_$(AM_DEFAULT_VERBOSITY))
 am__v_P_0 = false
@@ -250,8 +250,8 @@ target_alias =
 top_build_prefix = ../
 top_builddir = ..
 top_srcdir = ..
-goatlight_LDADD = 
-goatlight_SOURCES = main.c goatlight.c simplebuffertest.c
+goatlight_LDADD = music_ptr_linkable.o
+goatlight_SOURCES = main.c goatlight.c simplebuffertest.c sprites.c physics.c
 all: all-am
 
 .SUFFIXES:
@@ -340,7 +340,9 @@ distclean-compile:
 
 include ./$(DEPDIR)/goatlight.Po
 include ./$(DEPDIR)/main.Po
+include ./$(DEPDIR)/physics.Po
 include ./$(DEPDIR)/simplebuffertest.Po
+include ./$(DEPDIR)/sprites.Po
 
 .c.o:
 	$(AM_V_CC)depbase=`echo $@ | sed 's|[^/]*$$|$(DEPDIR)/&|;s|\.o$$||'`;\
@@ -564,6 +566,9 @@ uninstall-am: uninstall-binPROGRAMS
 
 .PRECIOUS: Makefile
 
+
+music_ptr_linkable.o: music_ptr_linkable.s
+	vasmm68k_mot -Fhunk -quiet -esc  -DINTERLACE=0 ./music_ptr_linkable.s  -o ./music_ptr_linkable.o -I/usr/local/amiga/os-include
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

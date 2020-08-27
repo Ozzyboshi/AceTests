@@ -4,49 +4,48 @@ Block begin: copCreate()
 		Addr: 0x2262a4
 		BLOCK mode
 	Block end: copListCreate(), time: >7min
-Block end: copCreate(), time:  84.4 us
+Block end: copCreate(), time:   2.678 ms
 Hello, Amiga!
 Block begin: keyCreate()...OK, time:  53.6 us
-Block begin: stateManagerCreate()...OK, time:   2.599 ms
-Block begin: stateCreate(cbCreate: 0x272fe4, cbLoop: 0x27354a, cbDestroy: 0x273b40, cbSuspend: 0, cbResume: 0, pPrev: 0)...OK, time:   2.531 ms
-Block begin: stateChange(pStateManager: 0x22c0e4, pState: 0x22d404)
+Block begin: stateManagerCreate()...OK, time:   2.476 ms
+Block begin: stateCreate(cbCreate: 0x27301c, cbLoop: 0x273850, cbDestroy: 0x2741a8, cbSuspend: 0, cbResume: 0, pPrev: 0)...OK, time: >7min
+Block begin: stateChange(pStateManager: 0x22bf6c, pState: 0x22d3e4)
 	Block begin: viewCreate(pTags: 0)
-		addr: 0x22d424
+		addr: 0x22d404
 		Block begin: copListCreate()
-			Addr: 0x22d43c
-			RAW mode, size: 187 + WAIT(0xFFFF)
-		Block end: copListCreate(), time:   4.530 ms
+			Addr: 0x22d41c
+			RAW mode, size: 211 + WAIT(0xFFFF)
+		Block end: copListCreate(), time: 919.6 us
 		Global CLUT mode enabled
 	Block end: viewCreate(), time: >7min
 	Block begin: vPortCreate(pTagList: 0)
-		Addr: 0x22d57c
-		Parent view: 0x22d424
+		Addr: 0x22d52c
+		Parent view: 0x22d404
 		Offsets: 0x0
 		Dimensions: 320x256@4
 		No prev VPorts - added to head
 	Block end: vPortCreate(), time: >7min
 	Block begin: simpleBufferTestCreate(pTags: 0, ...)
-		Addr: 0x22d5dc
-		Parent VPort: 0x22d57c
+		Addr: 0x22d58c
+		Parent VPort: 0x22d52c
 		Bounds: 384x256
 		Block begin: bitmapCreate(uwWidth: 384, uwHeight: 256, ubDepth: 4, ubFlags: 1)
-			addr: 0x22d614
-		Block end: bitmapCreate(), time:   4.484 ms
-		Block begin: cameraCreate(pVPort: 0x22d57c, uwPosX: 0, uwPosY: 0, uwMaxX: 384, uwMaxY: 256, isDblBfr: 0)
-			Addr: 0x22d674
+			addr: 0x22d5c4
+		Block end: bitmapCreate(), time: >7min
+		Block begin: cameraCreate(pVPort: 0x22d52c, uwPosX: 0, uwPosY: 0, uwMaxX: 384, uwMaxY: 256, isDblBfr: 0)
+			Addr: 0x22d624
 			Resetting camera bounds...
-			Block begin: cameraReset(pManager: 0x22d674, uwStartX: 0, uwStartY: 0, uwWidth: 384, uwHeight: 256, isDblBfr: 0)
+			Block begin: cameraReset(pManager: 0x22d624, uwStartX: 0, uwStartY: 0, uwWidth: 384, uwHeight: 256, isDblBfr: 0)
 				Camera max coord: 64,0
-			Block end: cameraReset(), time: >7min
+			Block end: cameraReset(), time:   4.618 ms
 			Attaching camera to VPort...
-			Manager 0x22d674 attached to head of VP 0x22d57c
-		Block end: cameraCreate(), time:  14.538 ms
+			Manager 0x22d624 attached to head of VP 0x22d52c
+		Block end: cameraCreate(), time: >7min
 		Copperlist offset: 0
-		Block begin: simpleBufferTestSetFront(pManager: 0x22d5dc, pFront: 0x22d614, isScrollX: 0)
+		Block begin: simpleBufferTestSetFront(pManager: 0x22d58c, pFront: 0x22d5c4, isScrollX: 0)
 			Modulo: 8
-			Setting copperlist 0x22d484 at offs 0
-		Block end: simplebufferTestSetFront(), time:   7.840 ms
-		Manager 0x22d5dc attached after manager 0x22d674 of VP 0x22d57c
+		Block end: simplebufferTestSetFront(), time:   3.935 ms
+		Manager 0x22d58c attached after manager 0x22d624 of VP 0x22d52c
 	Block end: simpleBufferTestCreate(), time: >7min
 	setting wait for row 252
 	setting copperlist last row with wait 254 (0) 
@@ -83,234 +82,464 @@ Block begin: stateChange(pStateManager: 0x22c0e4, pState: 0x22d404)
 	setting copperlist last row with wait 296 (42) 
 	setting wait for row 297
 	setting copperlist last row with wait 299 (45) 
-	Block begin: viewLoad(pView: 0x22d424)...OK, time: >7min
-Block end: stateChange(), time: 400.313 ms
-UpdateCamera2 input 0
-UpdateCamera2 shift  0
-UpdateCamera2 input 0
-UpdateCamera2 shift  0
-UpdateCamera2 input 0
-UpdateCamera2 shift  0
-UpdateCamera2 input 0
-UpdateCamera2 shift  0
-UpdateCamera2 input 0
-UpdateCamera2 shift  0
-UpdateCamera2 input 0
-UpdateCamera2 shift  0
-UpdateCamera2 input 0
-UpdateCamera2 shift  0
-UpdateCamera2 input 0
-UpdateCamera2 shift  0
-UpdateCamera2 input 0
-UpdateCamera2 shift  0
-UpdateCamera2 input 0
-UpdateCamera2 shift  0
-UpdateCamera2 input 1
-UpdateCamera2 shift  255
-Caso con fetch modificato a 30
-pscrollflags set to 0
-abs - Here i should be moving the first chunk and in am not doing it!!!!!
-pscrollflags set to 0
-pscrollflags set to 0
-pscrollflags set to 0
-pscrollflags set to 0
-pscrollflags set to 0
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-UpdateCamera2 input 1
-UpdateCamera2 shift  255
-Caso con fetch modificato a 30
-pscrollflags set to 0
-abs - Here i should be moving the first chunk and in am not doing it!!!!!
-pscrollflags set to 0
-pscrollflags set to 0
-pscrollflags set to 0
-pscrollflags set to 0
-pscrollflags set to 0
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-UpdateCamera2 input 1
-UpdateCamera2 shift  255
-Caso con fetch modificato a 30
-pscrollflags set to 0
-abs - Here i should be moving the first chunk and in am not doing it!!!!!
-pscrollflags set to 0
-pscrollflags set to 0
-pscrollflags set to 0
-pscrollflags set to 0
-pscrollflags set to 0
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-UpdateCamera2 input 1
-UpdateCamera2 shift  255
-Caso con fetch modificato a 30
-pscrollflags set to 0
-abs - Here i should be moving the first chunk and in am not doing it!!!!!
-pscrollflags set to 0
-pscrollflags set to 0
-pscrollflags set to 0
-pscrollflags set to 0
-pscrollflags set to 0
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-UpdateCamera2 input 1
-UpdateCamera2 shift  255
-Caso con fetch modificato a 30
-pscrollflags set to 0
-abs - Here i should be moving the first chunk and in am not doing it!!!!!
-pscrollflags set to 0
-pscrollflags set to 0
-pscrollflags set to 0
-pscrollflags set to 0
-pscrollflags set to 0
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-UpdateCamera2 input 1
-UpdateCamera2 shift  255
-Caso con fetch modificato a 30
-pscrollflags set to 0
-abs - Here i should be moving the first chunk and in am not doing it!!!!!
-pscrollflags set to 0
-pscrollflags set to 0
-pscrollflags set to 0
-pscrollflags set to 0
-pscrollflags set to 0
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-UpdateCamera2 input 1
-UpdateCamera2 shift  255
-Caso con fetch modificato a 30
-pscrollflags set to 0
-abs - Here i should be moving the first chunk and in am not doing it!!!!!
-pscrollflags set to 0
-pscrollflags set to 0
-pscrollflags set to 0
-pscrollflags set to 0
-pscrollflags set to 0
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-UpdateCamera2 input 1
-UpdateCamera2 shift  255
-Caso con fetch modificato a 30
-pscrollflags set to 0
-abs - Here i should be moving the first chunk and in am not doing it!!!!!
-pscrollflags set to 0
-pscrollflags set to 0
-pscrollflags set to 0
-pscrollflags set to 0
-pscrollflags set to 0
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-UpdateCamera2 input 1
-UpdateCamera2 shift  255
-Caso con fetch modificato a 30
-pscrollflags set to 0
-abs - Here i should be moving the first chunk and in am not doing it!!!!!
-pscrollflags set to 0
-pscrollflags set to 0
-pscrollflags set to 0
-pscrollflags set to 0
-pscrollflags set to 0
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-pscrollflags set to 1
-Block begin: stateManagerDestroy(pStateManager: 0x22c0e4)
-	Block begin: statePopAll(pStateManager: 0x22c0e4)
-		Block begin: viewDestroy(pView: 0x22d424)
-			Block begin: viewLoad(pView: 0)...OK, time:  10.822 ms
-			Block begin: vPortDestroy(pVPort: 0x22d57c)
-				Parent extView: 0x22d424
-				found VP: 0x22d57c... gotcha!
+	Block begin: viewLoad(pView: 0x22d404)...OK, time: >7min
+Block end: stateChange(), time: 394.624 ms
+Block begin: copDumpBfr(pBfr: 0x22d434)
+	Alloc size: 848, cmd count: 212
+	@0x53e54: 01040024 - MOVE: 104 := 0024
+	@0x53e58: 009400D0 - MOVE: 094 := 00D0
+	@0x53e5c: 00920038 - MOVE: 092 := 0038
+	@0x53e60: 01080008 - MOVE: 108 := 0008
+	@0x53e64: 010A0008 - MOVE: 10A := 0008
+	@0x53e68: 01020000 - MOVE: 102 := 0000
+	@0x53e6c: 00E00006 - MOVE: 0E0 := 0006
+	@0x53e70: 00E20A44 - MOVE: 0E2 := 0A44
+	@0x53e74: 00E40005 - MOVE: 0E4 := 0005
+	@0x53e78: 00E6A514 - MOVE: 0E6 := A514
+	@0x53e7c: 00E80005 - MOVE: 0E8 := 0005
+	@0x53e80: 00EA750C - MOVE: 0EA := 750C
+	@0x53e84: 00EC0005 - MOVE: 0EC := 0005
+	@0x53e88: 00EE4504 - MOVE: 0EE := 4504
+	@0x53e8c: 01200005 - MOVE: 120 := 0005
+	@0x53e90: 0122D518 - MOVE: 122 := D518
+	@0x53e94: 01240005 - MOVE: 124 := 0005
+	@0x53e98: 0126D560 - MOVE: 126 := D560
+	@0x53e9c: 01280005 - MOVE: 128 := 0005
+	@0x53ea0: 012AD780 - MOVE: 12A := D780
+	@0x53ea4: 012C0005 - MOVE: 12C := 0005
+	@0x53ea8: 012ED7C8 - MOVE: 12E := D7C8
+	@0x53eac: 01300005 - MOVE: 130 := 0005
+	@0x53eb0: 0132D810 - MOVE: 132 := D810
+	@0x53eb4: 01340005 - MOVE: 134 := 0005
+	@0x53eb8: 0136D858 - MOVE: 136 := D858
+	@0x53ebc: 01380005 - MOVE: 138 := 0005
+	@0x53ec0: 013AD8A0 - MOVE: 13A := D8A0
+	@0x53ec4: 013C0000 - MOVE: 13C := 0000
+	@0x53ec8: 013E0770 - MOVE: 13E := 0770
+	@0x53ecc: 2B01FFFE - WAIT: 0,43
+	@0x53ed0: 01820C87 - MOVE: 182 := 0C87
+	@0x53ed4: 01840AE8 - MOVE: 184 := 0AE8
+	@0x53ed8: 018608BC - MOVE: 186 := 08BC
+	@0x53edc: 01880000 - MOVE: 188 := 0000
+	@0x53ee0: 018A0C87 - MOVE: 18A := 0C87
+	@0x53ee4: 018C0AE8 - MOVE: 18C := 0AE8
+	@0x53ee8: 018E08BC - MOVE: 18E := 08BC
+	@0x53eec: 01900000 - MOVE: 190 := 0000
+	@0x53ef0: 01920C87 - MOVE: 192 := 0C87
+	@0x53ef4: 01940AE8 - MOVE: 194 := 0AE8
+	@0x53ef8: 019608BC - MOVE: 196 := 08BC
+	@0x53efc: 01980000 - MOVE: 198 := 0000
+	@0x53f00: 01A0000F - MOVE: 1A0 := 000F
+	@0x53f04: 01A20EDD - MOVE: 1A2 := 0EDD
+	@0x53f08: 01A40922 - MOVE: 1A4 := 0922
+	@0x53f0c: 01A60B77 - MOVE: 1A6 := 0B77
+	@0x53f10: 01A8000F - MOVE: 1A8 := 000F
+	@0x53f14: 01AA0EDD - MOVE: 1AA := 0EDD
+	@0x53f18: 01AC0922 - MOVE: 1AC := 0922
+	@0x53f1c: 01AE0B77 - MOVE: 1AE := 0B77
+	@0x53f20: 01B0000F - MOVE: 1B0 := 000F
+	@0x53f24: 01B20EDD - MOVE: 1B2 := 0EDD
+	@0x53f28: 01B40922 - MOVE: 1B4 := 0922
+	@0x53f2c: 01B60B77 - MOVE: 1B6 := 0B77
+	@0x53f30: 01B8000F - MOVE: 1B8 := 000F
+	@0x53f34: 01BA0EDD - MOVE: 1BA := 0EDD
+	@0x53f38: 01BC0922 - MOVE: 1BC := 0922
+	@0x53f3c: 01BE0B77 - MOVE: 1BE := 0B77
+	@0x53f40: FB01FFFE - WAIT: 0,251
+	@0x53f44: 0182095A - MOVE: 182 := 095A
+	@0x53f48: 01840694 - MOVE: 184 := 0694
+	@0x53f4c: 0186087D - MOVE: 186 := 087D
+	@0x53f50: 01880000 - MOVE: 188 := 0000
+	@0x53f54: 018A095A - MOVE: 18A := 095A
+	@0x53f58: 018C0694 - MOVE: 18C := 0694
+	@0x53f5c: 018E087D - MOVE: 18E := 087D
+	@0x53f60: 01900000 - MOVE: 190 := 0000
+	@0x53f64: 0192095A - MOVE: 192 := 095A
+	@0x53f68: 01940694 - MOVE: 194 := 0694
+	@0x53f6c: 0196087D - MOVE: 196 := 087D
+	@0x53f70: 01980000 - MOVE: 198 := 0000
+	@0x53f74: 019E0000 - MOVE: 19E := 0000
+	@0x53f78: 019E0000 - MOVE: 19E := 0000
+	@0x53f7c: FC01FFFE - WAIT: 0,252
+	@0x53f80: 01020000 - MOVE: 102 := 0000
+	@0x53f84: 01080008 - MOVE: 108 := 0008
+	@0x53f88: 010A0008 - MOVE: 10A := 0008
+	@0x53f8c: FE01FFFE - WAIT: 0,254
+	@0x53f90: 01800888 - MOVE: 180 := 0888
+	@0x53f94: 01800888 - MOVE: 180 := 0888
+	@0x53f98: FF01FFFE - WAIT: 0,255
+	@0x53f9c: 01020000 - MOVE: 102 := 0000
+	@0x53fa0: 01080008 - MOVE: 108 := 0008
+	@0x53fa4: 010A0008 - MOVE: 10A := 0008
+	@0x53fa8: FFDFFFFE - WAIT: 222,255
+	@0x53fac: 0101FFFE - WAIT: 0,1
+	@0x53fb0: 01800000 - MOVE: 180 := 0000
+	@0x53fb4: 01800000 - MOVE: 180 := 0000
+	@0x53fb8: 0201FFFE - WAIT: 0,2
+	@0x53fbc: 01020000 - MOVE: 102 := 0000
+	@0x53fc0: 01080008 - MOVE: 108 := 0008
+	@0x53fc4: 010A0008 - MOVE: 10A := 0008
+	@0x53fc8: 0401FFFE - WAIT: 0,4
+	@0x53fcc: 01800888 - MOVE: 180 := 0888
+	@0x53fd0: 01800888 - MOVE: 180 := 0888
+	@0x53fd4: 0501FFFE - WAIT: 0,5
+	@0x53fd8: 01020000 - MOVE: 102 := 0000
+	@0x53fdc: 01080008 - MOVE: 108 := 0008
+	@0x53fe0: 010A0008 - MOVE: 10A := 0008
+	@0x53fe4: 0701FFFE - WAIT: 0,7
+	@0x53fe8: 01800000 - MOVE: 180 := 0000
+	@0x53fec: 01800000 - MOVE: 180 := 0000
+	@0x53ff0: 0801FFFE - WAIT: 0,8
+	@0x53ff4: 01020000 - MOVE: 102 := 0000
+	@0x53ff8: 01080008 - MOVE: 108 := 0008
+	@0x53ffc: 010A0008 - MOVE: 10A := 0008
+	@0x54000: 0A01FFFE - WAIT: 0,10
+	@0x54004: 01800888 - MOVE: 180 := 0888
+	@0x54008: 01800888 - MOVE: 180 := 0888
+	@0x5400c: 0B01FFFE - WAIT: 0,11
+	@0x54010: 01020000 - MOVE: 102 := 0000
+	@0x54014: 01080008 - MOVE: 108 := 0008
+	@0x54018: 010A0008 - MOVE: 10A := 0008
+	@0x5401c: 0D01FFFE - WAIT: 0,13
+	@0x54020: 01800000 - MOVE: 180 := 0000
+	@0x54024: 01800000 - MOVE: 180 := 0000
+	@0x54028: 0E01FFFE - WAIT: 0,14
+	@0x5402c: 01020000 - MOVE: 102 := 0000
+	@0x54030: 01080008 - MOVE: 108 := 0008
+	@0x54034: 010A0008 - MOVE: 10A := 0008
+	@0x54038: 1001FFFE - WAIT: 0,16
+	@0x5403c: 01800888 - MOVE: 180 := 0888
+	@0x54040: 01800888 - MOVE: 180 := 0888
+	@0x54044: 1101FFFE - WAIT: 0,17
+	@0x54048: 01020000 - MOVE: 102 := 0000
+	@0x5404c: 01080008 - MOVE: 108 := 0008
+	@0x54050: 010A0008 - MOVE: 10A := 0008
+	@0x54054: 1301FFFE - WAIT: 0,19
+	@0x54058: 01800000 - MOVE: 180 := 0000
+	@0x5405c: 01800000 - MOVE: 180 := 0000
+	@0x54060: 1401FFFE - WAIT: 0,20
+	@0x54064: 01020000 - MOVE: 102 := 0000
+	@0x54068: 01080008 - MOVE: 108 := 0008
+	@0x5406c: 010A0008 - MOVE: 10A := 0008
+	@0x54070: 1601FFFE - WAIT: 0,22
+	@0x54074: 01800888 - MOVE: 180 := 0888
+	@0x54078: 01800888 - MOVE: 180 := 0888
+	@0x5407c: 1701FFFE - WAIT: 0,23
+	@0x54080: 01020000 - MOVE: 102 := 0000
+	@0x54084: 01080008 - MOVE: 108 := 0008
+	@0x54088: 010A0008 - MOVE: 10A := 0008
+	@0x5408c: 1901FFFE - WAIT: 0,25
+	@0x54090: 01800000 - MOVE: 180 := 0000
+	@0x54094: 01800000 - MOVE: 180 := 0000
+	@0x54098: 1A01FFFE - WAIT: 0,26
+	@0x5409c: 01020000 - MOVE: 102 := 0000
+	@0x540a0: 01080008 - MOVE: 108 := 0008
+	@0x540a4: 010A0008 - MOVE: 10A := 0008
+	@0x540a8: 01820C87 - MOVE: 182 := 0C87
+	@0x540ac: 01840AE8 - MOVE: 184 := 0AE8
+	@0x540b0: 018608BC - MOVE: 186 := 08BC
+	@0x540b4: 01880000 - MOVE: 188 := 0000
+	@0x540b8: 018A0C87 - MOVE: 18A := 0C87
+	@0x540bc: 018C0AE8 - MOVE: 18C := 0AE8
+	@0x540c0: 018E08BC - MOVE: 18E := 08BC
+	@0x540c4: 01900000 - MOVE: 190 := 0000
+	@0x540c8: 01920C87 - MOVE: 192 := 0C87
+	@0x540cc: 01940AE8 - MOVE: 194 := 0AE8
+	@0x540d0: 019608BC - MOVE: 196 := 08BC
+	@0x540d4: 01980000 - MOVE: 198 := 0000
+	@0x540d8: 1C01FFFE - WAIT: 0,28
+	@0x540dc: 01800888 - MOVE: 180 := 0888
+	@0x540e0: 01800888 - MOVE: 180 := 0888
+	@0x540e4: 1D01FFFE - WAIT: 0,29
+	@0x540e8: 01020000 - MOVE: 102 := 0000
+	@0x540ec: 01080008 - MOVE: 108 := 0008
+	@0x540f0: 010A0008 - MOVE: 10A := 0008
+	@0x540f4: 01820733 - MOVE: 182 := 0733
+	@0x540f8: 01840463 - MOVE: 184 := 0463
+	@0x540fc: 01860338 - MOVE: 186 := 0338
+	@0x54100: 01880000 - MOVE: 188 := 0000
+	@0x54104: 018A0733 - MOVE: 18A := 0733
+	@0x54108: 018C0463 - MOVE: 18C := 0463
+	@0x5410c: 018E0338 - MOVE: 18E := 0338
+	@0x54110: 01900000 - MOVE: 190 := 0000
+	@0x54114: 01920733 - MOVE: 192 := 0733
+	@0x54118: 01940463 - MOVE: 194 := 0463
+	@0x5411c: 01960338 - MOVE: 196 := 0338
+	@0x54120: 01980000 - MOVE: 198 := 0000
+	@0x54124: 1F01FFFE - WAIT: 0,31
+	@0x54128: 01800000 - MOVE: 180 := 0000
+	@0x5412c: 01800000 - MOVE: 180 := 0000
+	@0x54130: 2001FFFE - WAIT: 0,32
+	@0x54134: 01020000 - MOVE: 102 := 0000
+	@0x54138: 01080008 - MOVE: 108 := 0008
+	@0x5413c: 010A0008 - MOVE: 10A := 0008
+	@0x54140: 2201FFFE - WAIT: 0,34
+	@0x54144: 01800888 - MOVE: 180 := 0888
+	@0x54148: 01800888 - MOVE: 180 := 0888
+	@0x5414c: 2301FFFE - WAIT: 0,35
+	@0x54150: 01020000 - MOVE: 102 := 0000
+	@0x54154: 01080008 - MOVE: 108 := 0008
+	@0x54158: 010A0008 - MOVE: 10A := 0008
+	@0x5415c: 2501FFFE - WAIT: 0,37
+	@0x54160: 01800000 - MOVE: 180 := 0000
+	@0x54164: 01800000 - MOVE: 180 := 0000
+	@0x54168: 2601FFFE - WAIT: 0,38
+	@0x5416c: 01020000 - MOVE: 102 := 0000
+	@0x54170: 01080008 - MOVE: 108 := 0008
+	@0x54174: 010A0008 - MOVE: 10A := 0008
+	@0x54178: 2801FFFE - WAIT: 0,40
+	@0x5417c: 01800888 - MOVE: 180 := 0888
+	@0x54180: 01800888 - MOVE: 180 := 0888
+	@0x54184: 2901FFFE - WAIT: 0,41
+	@0x54188: 01020000 - MOVE: 102 := 0000
+	@0x5418c: 01080008 - MOVE: 108 := 0008
+	@0x54190: 010A0008 - MOVE: 10A := 0008
+	@0x54194: 2B01FFFE - WAIT: 0,43
+	@0x54198: 01800000 - MOVE: 180 := 0000
+	@0x5419c: 01800000 - MOVE: 180 := 0000
+	@0x541a0: 2B07FFFE - WAIT: 6,43
+Block end: copDumpBfr, time: 652.0 us
+Block begin: copDumpBfr(pBfr: 0x22d454)
+	Alloc size: 848, cmd count: 212
+	@0x541ac: 01040024 - MOVE: 104 := 0024
+	@0x541b0: 009400D0 - MOVE: 094 := 00D0
+	@0x541b4: 00920038 - MOVE: 092 := 0038
+	@0x541b8: 01080008 - MOVE: 108 := 0008
+	@0x541bc: 010A0008 - MOVE: 10A := 0008
+	@0x541c0: 01020000 - MOVE: 102 := 0000
+	@0x541c4: 00E00006 - MOVE: 0E0 := 0006
+	@0x541c8: 00E20A44 - MOVE: 0E2 := 0A44
+	@0x541cc: 00E40005 - MOVE: 0E4 := 0005
+	@0x541d0: 00E6A514 - MOVE: 0E6 := A514
+	@0x541d4: 00E80005 - MOVE: 0E8 := 0005
+	@0x541d8: 00EA750C - MOVE: 0EA := 750C
+	@0x541dc: 00EC0005 - MOVE: 0EC := 0005
+	@0x541e0: 00EE4504 - MOVE: 0EE := 4504
+	@0x541e4: 01200005 - MOVE: 120 := 0005
+	@0x541e8: 0122D518 - MOVE: 122 := D518
+	@0x541ec: 01240005 - MOVE: 124 := 0005
+	@0x541f0: 0126D560 - MOVE: 126 := D560
+	@0x541f4: 01280005 - MOVE: 128 := 0005
+	@0x541f8: 012AD780 - MOVE: 12A := D780
+	@0x541fc: 012C0005 - MOVE: 12C := 0005
+	@0x54200: 012ED7C8 - MOVE: 12E := D7C8
+	@0x54204: 01300005 - MOVE: 130 := 0005
+	@0x54208: 0132D810 - MOVE: 132 := D810
+	@0x5420c: 01340005 - MOVE: 134 := 0005
+	@0x54210: 0136D858 - MOVE: 136 := D858
+	@0x54214: 01380005 - MOVE: 138 := 0005
+	@0x54218: 013AD8A0 - MOVE: 13A := D8A0
+	@0x5421c: 013C0000 - MOVE: 13C := 0000
+	@0x54220: 013E0770 - MOVE: 13E := 0770
+	@0x54224: 2B01FFFE - WAIT: 0,43
+	@0x54228: 01820C87 - MOVE: 182 := 0C87
+	@0x5422c: 01840AE8 - MOVE: 184 := 0AE8
+	@0x54230: 018608BC - MOVE: 186 := 08BC
+	@0x54234: 01880000 - MOVE: 188 := 0000
+	@0x54238: 018A0C87 - MOVE: 18A := 0C87
+	@0x5423c: 018C0AE8 - MOVE: 18C := 0AE8
+	@0x54240: 018E08BC - MOVE: 18E := 08BC
+	@0x54244: 01900000 - MOVE: 190 := 0000
+	@0x54248: 01920C87 - MOVE: 192 := 0C87
+	@0x5424c: 01940AE8 - MOVE: 194 := 0AE8
+	@0x54250: 019608BC - MOVE: 196 := 08BC
+	@0x54254: 01980000 - MOVE: 198 := 0000
+	@0x54258: 01A0000F - MOVE: 1A0 := 000F
+	@0x5425c: 01A20EDD - MOVE: 1A2 := 0EDD
+	@0x54260: 01A40922 - MOVE: 1A4 := 0922
+	@0x54264: 01A60B77 - MOVE: 1A6 := 0B77
+	@0x54268: 01A8000F - MOVE: 1A8 := 000F
+	@0x5426c: 01AA0EDD - MOVE: 1AA := 0EDD
+	@0x54270: 01AC0922 - MOVE: 1AC := 0922
+	@0x54274: 01AE0B77 - MOVE: 1AE := 0B77
+	@0x54278: 01B0000F - MOVE: 1B0 := 000F
+	@0x5427c: 01B20EDD - MOVE: 1B2 := 0EDD
+	@0x54280: 01B40922 - MOVE: 1B4 := 0922
+	@0x54284: 01B60B77 - MOVE: 1B6 := 0B77
+	@0x54288: 01B8000F - MOVE: 1B8 := 000F
+	@0x5428c: 01BA0EDD - MOVE: 1BA := 0EDD
+	@0x54290: 01BC0922 - MOVE: 1BC := 0922
+	@0x54294: 01BE0B77 - MOVE: 1BE := 0B77
+	@0x54298: FB01FFFE - WAIT: 0,251
+	@0x5429c: 0182095A - MOVE: 182 := 095A
+	@0x542a0: 01840694 - MOVE: 184 := 0694
+	@0x542a4: 0186087D - MOVE: 186 := 087D
+	@0x542a8: 01880000 - MOVE: 188 := 0000
+	@0x542ac: 018A095A - MOVE: 18A := 095A
+	@0x542b0: 018C0694 - MOVE: 18C := 0694
+	@0x542b4: 018E087D - MOVE: 18E := 087D
+	@0x542b8: 01900000 - MOVE: 190 := 0000
+	@0x542bc: 0192095A - MOVE: 192 := 095A
+	@0x542c0: 01940694 - MOVE: 194 := 0694
+	@0x542c4: 0196087D - MOVE: 196 := 087D
+	@0x542c8: 01980000 - MOVE: 198 := 0000
+	@0x542cc: 019E0000 - MOVE: 19E := 0000
+	@0x542d0: 019E0000 - MOVE: 19E := 0000
+	@0x542d4: FC01FFFE - WAIT: 0,252
+	@0x542d8: 01020000 - MOVE: 102 := 0000
+	@0x542dc: 01080008 - MOVE: 108 := 0008
+	@0x542e0: 010A0008 - MOVE: 10A := 0008
+	@0x542e4: FE01FFFE - WAIT: 0,254
+	@0x542e8: 01800888 - MOVE: 180 := 0888
+	@0x542ec: 01800888 - MOVE: 180 := 0888
+	@0x542f0: FF01FFFE - WAIT: 0,255
+	@0x542f4: 01020000 - MOVE: 102 := 0000
+	@0x542f8: 01080008 - MOVE: 108 := 0008
+	@0x542fc: 010A0008 - MOVE: 10A := 0008
+	@0x54300: FFDFFFFE - WAIT: 222,255
+	@0x54304: 0101FFFE - WAIT: 0,1
+	@0x54308: 01800000 - MOVE: 180 := 0000
+	@0x5430c: 01800000 - MOVE: 180 := 0000
+	@0x54310: 0201FFFE - WAIT: 0,2
+	@0x54314: 01020000 - MOVE: 102 := 0000
+	@0x54318: 01080008 - MOVE: 108 := 0008
+	@0x5431c: 010A0008 - MOVE: 10A := 0008
+	@0x54320: 0401FFFE - WAIT: 0,4
+	@0x54324: 01800888 - MOVE: 180 := 0888
+	@0x54328: 01800888 - MOVE: 180 := 0888
+	@0x5432c: 0501FFFE - WAIT: 0,5
+	@0x54330: 01020000 - MOVE: 102 := 0000
+	@0x54334: 01080008 - MOVE: 108 := 0008
+	@0x54338: 010A0008 - MOVE: 10A := 0008
+	@0x5433c: 0701FFFE - WAIT: 0,7
+	@0x54340: 01800000 - MOVE: 180 := 0000
+	@0x54344: 01800000 - MOVE: 180 := 0000
+	@0x54348: 0801FFFE - WAIT: 0,8
+	@0x5434c: 01020000 - MOVE: 102 := 0000
+	@0x54350: 01080008 - MOVE: 108 := 0008
+	@0x54354: 010A0008 - MOVE: 10A := 0008
+	@0x54358: 0A01FFFE - WAIT: 0,10
+	@0x5435c: 01800888 - MOVE: 180 := 0888
+	@0x54360: 01800888 - MOVE: 180 := 0888
+	@0x54364: 0B01FFFE - WAIT: 0,11
+	@0x54368: 01020000 - MOVE: 102 := 0000
+	@0x5436c: 01080008 - MOVE: 108 := 0008
+	@0x54370: 010A0008 - MOVE: 10A := 0008
+	@0x54374: 0D01FFFE - WAIT: 0,13
+	@0x54378: 01800000 - MOVE: 180 := 0000
+	@0x5437c: 01800000 - MOVE: 180 := 0000
+	@0x54380: 0E01FFFE - WAIT: 0,14
+	@0x54384: 01020000 - MOVE: 102 := 0000
+	@0x54388: 01080008 - MOVE: 108 := 0008
+	@0x5438c: 010A0008 - MOVE: 10A := 0008
+	@0x54390: 1001FFFE - WAIT: 0,16
+	@0x54394: 01800888 - MOVE: 180 := 0888
+	@0x54398: 01800888 - MOVE: 180 := 0888
+	@0x5439c: 1101FFFE - WAIT: 0,17
+	@0x543a0: 01020000 - MOVE: 102 := 0000
+	@0x543a4: 01080008 - MOVE: 108 := 0008
+	@0x543a8: 010A0008 - MOVE: 10A := 0008
+	@0x543ac: 1301FFFE - WAIT: 0,19
+	@0x543b0: 01800000 - MOVE: 180 := 0000
+	@0x543b4: 01800000 - MOVE: 180 := 0000
+	@0x543b8: 1401FFFE - WAIT: 0,20
+	@0x543bc: 01020000 - MOVE: 102 := 0000
+	@0x543c0: 01080008 - MOVE: 108 := 0008
+	@0x543c4: 010A0008 - MOVE: 10A := 0008
+	@0x543c8: 1601FFFE - WAIT: 0,22
+	@0x543cc: 01800888 - MOVE: 180 := 0888
+	@0x543d0: 01800888 - MOVE: 180 := 0888
+	@0x543d4: 1701FFFE - WAIT: 0,23
+	@0x543d8: 01020000 - MOVE: 102 := 0000
+	@0x543dc: 01080008 - MOVE: 108 := 0008
+	@0x543e0: 010A0008 - MOVE: 10A := 0008
+	@0x543e4: 1901FFFE - WAIT: 0,25
+	@0x543e8: 01800000 - MOVE: 180 := 0000
+	@0x543ec: 01800000 - MOVE: 180 := 0000
+	@0x543f0: 1A01FFFE - WAIT: 0,26
+	@0x543f4: 01020000 - MOVE: 102 := 0000
+	@0x543f8: 01080008 - MOVE: 108 := 0008
+	@0x543fc: 010A0008 - MOVE: 10A := 0008
+	@0x54400: 01820C87 - MOVE: 182 := 0C87
+	@0x54404: 01840AE8 - MOVE: 184 := 0AE8
+	@0x54408: 018608BC - MOVE: 186 := 08BC
+	@0x5440c: 01880000 - MOVE: 188 := 0000
+	@0x54410: 018A0C87 - MOVE: 18A := 0C87
+	@0x54414: 018C0AE8 - MOVE: 18C := 0AE8
+	@0x54418: 018E08BC - MOVE: 18E := 08BC
+	@0x5441c: 01900000 - MOVE: 190 := 0000
+	@0x54420: 01920C87 - MOVE: 192 := 0C87
+	@0x54424: 01940AE8 - MOVE: 194 := 0AE8
+	@0x54428: 019608BC - MOVE: 196 := 08BC
+	@0x5442c: 01980000 - MOVE: 198 := 0000
+	@0x54430: 1C01FFFE - WAIT: 0,28
+	@0x54434: 01800888 - MOVE: 180 := 0888
+	@0x54438: 01800888 - MOVE: 180 := 0888
+	@0x5443c: 1D01FFFE - WAIT: 0,29
+	@0x54440: 01020000 - MOVE: 102 := 0000
+	@0x54444: 01080008 - MOVE: 108 := 0008
+	@0x54448: 010A0008 - MOVE: 10A := 0008
+	@0x5444c: 01820733 - MOVE: 182 := 0733
+	@0x54450: 01840463 - MOVE: 184 := 0463
+	@0x54454: 01860338 - MOVE: 186 := 0338
+	@0x54458: 01880000 - MOVE: 188 := 0000
+	@0x5445c: 018A0733 - MOVE: 18A := 0733
+	@0x54460: 018C0463 - MOVE: 18C := 0463
+	@0x54464: 018E0338 - MOVE: 18E := 0338
+	@0x54468: 01900000 - MOVE: 190 := 0000
+	@0x5446c: 01920733 - MOVE: 192 := 0733
+	@0x54470: 01940463 - MOVE: 194 := 0463
+	@0x54474: 01960338 - MOVE: 196 := 0338
+	@0x54478: 01980000 - MOVE: 198 := 0000
+	@0x5447c: 1F01FFFE - WAIT: 0,31
+	@0x54480: 01800000 - MOVE: 180 := 0000
+	@0x54484: 01800000 - MOVE: 180 := 0000
+	@0x54488: 2001FFFE - WAIT: 0,32
+	@0x5448c: 01020000 - MOVE: 102 := 0000
+	@0x54490: 01080008 - MOVE: 108 := 0008
+	@0x54494: 010A0008 - MOVE: 10A := 0008
+	@0x54498: 2201FFFE - WAIT: 0,34
+	@0x5449c: 01800888 - MOVE: 180 := 0888
+	@0x544a0: 01800888 - MOVE: 180 := 0888
+	@0x544a4: 2301FFFE - WAIT: 0,35
+	@0x544a8: 01020000 - MOVE: 102 := 0000
+	@0x544ac: 01080008 - MOVE: 108 := 0008
+	@0x544b0: 010A0008 - MOVE: 10A := 0008
+	@0x544b4: 2501FFFE - WAIT: 0,37
+	@0x544b8: 01800000 - MOVE: 180 := 0000
+	@0x544bc: 01800000 - MOVE: 180 := 0000
+	@0x544c0: 2601FFFE - WAIT: 0,38
+	@0x544c4: 01020000 - MOVE: 102 := 0000
+	@0x544c8: 01080008 - MOVE: 108 := 0008
+	@0x544cc: 010A0008 - MOVE: 10A := 0008
+	@0x544d0: 2801FFFE - WAIT: 0,40
+	@0x544d4: 01800888 - MOVE: 180 := 0888
+	@0x544d8: 01800888 - MOVE: 180 := 0888
+	@0x544dc: 2901FFFE - WAIT: 0,41
+	@0x544e0: 01020000 - MOVE: 102 := 0000
+	@0x544e4: 01080008 - MOVE: 108 := 0008
+	@0x544e8: 010A0008 - MOVE: 10A := 0008
+	@0x544ec: 2B01FFFE - WAIT: 0,43
+	@0x544f0: 01800000 - MOVE: 180 := 0000
+	@0x544f4: 01800000 - MOVE: 180 := 0000
+	@0x544f8: 2B07FFFE - WAIT: 6,43
+Block end: copDumpBfr, time:   8.091 ms
+Block begin: stateManagerDestroy(pStateManager: 0x22bf6c)
+	Block begin: statePopAll(pStateManager: 0x22bf6c)
+		Block begin: viewDestroy(pView: 0x22d404)
+			Block begin: viewLoad(pView: 0)...OK, time:  10.652 ms
+			Block begin: vPortDestroy(pVPort: 0x22d52c)
+				Parent extView: 0x22d404
+				found VP: 0x22d52c... gotcha!
 				Block begin: Destroying managers
-					Destroying manager 128 @addr: 0x22d674
+					Destroying manager 128 @addr: 0x22d624
 					cameraManagerDestroy...OK! 
-					Destroying manager 0 @addr: 0x22d5dc
+					Destroying manager 0 @addr: 0x22d58c
 					Block begin: simpleBufferTestDestroy()
-						Block begin: bitmapDestroy(pBitMap: 0x22d614)...OK, time: >7min
+						Block begin: bitmapDestroy(pBitMap: 0x22d5c4)...OK, time:  14.206 ms
 					Block end: simpleBufferTestDestroy(), time: >7min
-				Block end: Destroying managers, time:   8.000 ms
-			Block end: vPortDestroy(), time:  11.634 ms
+				Block end: Destroying managers, time:  12.280 ms
+			Block end: vPortDestroy(), time: >7min
 			Freeing copperlists...
-			Block begin: copListDestroy(pCopList: 0x22d43c)...OK, time: >7min
-		Block end: viewDestroy(), time:   1.216 ms
-	Block end: statePopAll(), time:   5.954 ms
-Block end: stateManagerDestroy(), time:  11.607 ms
-Block begin: stateDestroy(pState: 0x22d404)...OK, time: >7min
-Block begin: keyDestroy()...OK, time:  54.0 us
+			Block begin: copListDestroy(pCopList: 0x22d41c)...OK, time:   2.038 ms
+		Block end: viewDestroy(), time:   9.596 ms
+	Block end: statePopAll(), time:  12.165 ms
+Block end: stateManagerDestroy(), time: >7min
+Block begin: stateDestroy(pState: 0x22d3e4)...OK, time:   2.382 ms
+Block begin: keyDestroy()...OK, time:  53.2 us
 Goodbye, Amiga!
 Block begin: copDestroy()
-	Block begin: copListDestroy(pCopList: 0x2262a4)...OK, time:   7.082 ms
-Block end: copDestroy(), time: 498.4 us
-Block begin: blitManagerDestroy...OK, time:  59.2 us
+	Block begin: copListDestroy(pCopList: 0x2262a4)...OK, time:   6.843 ms
+Block end: copDestroy(), time:  15.222 ms
+Block begin: blitManagerDestroy...OK, time:  60.0 us
 Log closed successfully

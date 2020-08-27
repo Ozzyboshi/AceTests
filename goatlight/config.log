@@ -264,8 +264,8 @@ configure:3952: checking for ace/managers/viewport/simplebuffer.h
 configure:3952: result: yes
 configure:3968: checking for library containing viewCreate
 configure:3999: m68k-amigaos-gcc -o conftest -m68000 -msoft-float -fomit-frame-pointer -s -noixemul -ffast-math -DAMIGA -Wall -Wextra -O3   conftest.c  >&5
-/opt/amiga/lib/gcc/m68k-amigaos/6.5.0b/../../../../m68k-amigaos/bin/ld: /tmp/ccR7nq6B.o: in function `main':
-/tmp/ccR7nq6B.o:(.text+0x2): undefined reference to `viewCreate'
+/opt/amiga/lib/gcc/m68k-amigaos/6.5.0b/../../../../m68k-amigaos/bin/ld: /tmp/ccDI7Byg.o: in function `main':
+/tmp/ccDI7Byg.o:(.text+0x2): undefined reference to `viewCreate'
 collect2: error: ld returned 1 exit status
 configure:3999: $? = 1
 configure: failed program was:

@@ -79,7 +79,9 @@ goatlight.o: goatlight.c goatlight.h \
  /opt/amiga/include/ace/managers/blit.h \
  /opt/amiga/include/fixmath/fix16.h \
  /opt/amiga/m68k-amigaos/sys-include/stdint.h \
- /opt/amiga/m68k-amigaos/sys-include/sys/_intsup.h simplebuffertest.h
+ /opt/amiga/m68k-amigaos/sys-include/sys/_intsup.h simplebuffertest.h \
+ sprites.h physics.h vectors.h ../_res/ball2bpl16x16_frame1.h globals.h \
+ ../_res/discocrazy.h
 
 goatlight.h:
 
@@ -250,3 +252,15 @@ goatlight.h:
 /opt/amiga/m68k-amigaos/sys-include/sys/_intsup.h:
 
 simplebuffertest.h:
+
+sprites.h:
+
+physics.h:
+
+vectors.h:
+
+../_res/ball2bpl16x16_frame1.h:
+
+globals.h:
+
+../_res/discocrazy.h:
