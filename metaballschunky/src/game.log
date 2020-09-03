@@ -1,0 +1,1042 @@
+Block begin: blitManagerCreate...OK, time:  60.0 us
+Block begin: copCreate()
+	Block begin: copListCreate()
+		Addr: 0x2256c4
+		BLOCK mode
+	Block end: copListCreate(), time: >7min
+Block end: copCreate(), time: >7min
+Hello, Amiga!
+Block begin: keyCreate()...OK, time:  53.6 us
+Block begin: stateManagerCreate()...OK, time:   2.537 ms
+Block begin: stateCreate(cbCreate: 0x2730ae, cbLoop: 0x27381c, cbDestroy: 0x273a4e, cbSuspend: 0, cbResume: 0, pPrev: 0)...OK, time:   2.558 ms
+Block begin: statePush(pStateManager: 0x22bf1c, pState: 0x22ddc4)
+	Block begin: viewCreate(pTags: 0)
+		addr: 0x22dde4
+		Block begin: copListCreate()
+			Addr: 0x22ddfc
+			RAW mode, size: 355 + WAIT(0xFFFF)
+		Block end: copListCreate(), time:   3.894 ms
+		Global CLUT mode enabled
+	Block end: viewCreate(), time: >7min
+	Block begin: vPortCreate(pTagList: 0)
+		Addr: 0x22df84
+		Parent view: 0x22dde4
+		Offsets: 0x0
+		Dimensions: 320x256@5
+		No prev VPorts - added to head
+	Block end: vPortCreate(), time: >7min
+	Block begin: simpleBufferCreate(pTags: 0, ...)
+		Addr: 0x22dfe4
+		Parent VPort: 0x22df84
+		Bounds: 320x256
+		Block begin: bitmapCreate(uwWidth: 320, uwHeight: 256, ubDepth: 5, ubFlags: 1)
+			addr: 0x22e01c
+		Block end: bitmapCreate(), time:   9.585 ms
+		Block begin: cameraCreate(pVPort: 0x22df84, uwPosX: 0, uwPosY: 0, uwMaxX: 320, uwMaxY: 256, isDblBfr: 0)
+			Addr: 0x23a534
+			Resetting camera bounds...
+			Block begin: cameraReset(pManager: 0x23a534, uwStartX: 0, uwStartY: 0, uwWidth: 320, uwHeight: 256, isDblBfr: 0)
+				Camera max coord: 0,0
+			Block end: cameraReset(), time:   4.694 ms
+			Attaching camera to VPort...
+			Manager 0x23a534 attached to head of VP 0x22df84
+		Block end: cameraCreate(), time: >7min
+		Copperlist offset: 0
+		Block begin: simpleBufferSetFront(pManager: 0x22dfe4, pFront: 0x22e01c, isScrollX: 1)
+			Modulo: 0
+			Setting copperlist 0x22de44 at offs 0
+		Block end: simplebufferSetFront(), time:   8.187 ms
+		Manager 0x22dfe4 attached after manager 0x23a534 of VP 0x22df84
+	Block end: simpleBufferCreate(), time: >7min
+	Block begin: viewLoad(pView: 0x22dde4)...OK, time: >7min
+Block end: statePush(), time:  31.884 ms
+z pressed
+ciclo 0
+uwColor vale 241
+Setting value f1 for pixel vertical 0
+ciclo 1
+uwColor vale 243
+Setting value f3 for pixel vertical 1
+ciclo 2
+uwColor vale 246
+Setting value f6 for pixel vertical 2
+ciclo 3
+uwColor vale 248
+Setting value f8 for pixel vertical 3
+ciclo 4
+uwColor vale 249
+Setting value f9 for pixel vertical 4
+ciclo 5
+uwColor vale 250
+Setting value fa for pixel vertical 5
+ciclo 6
+uwColor vale 250
+Setting value fa for pixel vertical 6
+ciclo 7
+uwColor vale 249
+Setting value f9 for pixel vertical 7
+ciclo 8
+uwColor vale 247
+Setting value f7 for pixel vertical 8
+ciclo 9
+uwColor vale 245
+Setting value f5 for pixel vertical 9
+ciclo 10
+uwColor vale 242
+Setting value f2 for pixel vertical 10
+ciclo 11
+uwColor vale 240
+Setting value f0 for pixel vertical 11
+ciclo 12
+uwColor vale 496
+Setting value 1f0 for pixel vertical 12
+ciclo 13
+uwColor vale 1264
+Setting value 4f0 for pixel vertical 13
+ciclo 14
+uwColor vale 1776
+Setting value 6f0 for pixel vertical 14
+ciclo 15
+uwColor vale 2032
+Setting value 7f0 for pixel vertical 15
+ciclo 0
+uwColor vale 244
+Setting value f4 for pixel vertical 0
+ciclo 1
+uwColor vale 247
+Setting value f7 for pixel vertical 1
+ciclo 2
+uwColor vale 251
+Setting value fb for pixel vertical 2
+ciclo 3
+uwColor vale 254
+Setting value fe for pixel vertical 3
+ciclo 4
+uwColor vale 255
+Setting value ff for pixel vertical 4
+ciclo 5
+uwColor vale 223
+Setting value df for pixel vertical 5
+ciclo 6
+uwColor vale 239
+Setting value ef for pixel vertical 6
+ciclo 7
+uwColor vale 255
+Setting value ff for pixel vertical 7
+ciclo 8
+uwColor vale 253
+Setting value fd for pixel vertical 8
+ciclo 9
+uwColor vale 249
+Setting value f9 for pixel vertical 9
+ciclo 10
+uwColor vale 246
+Setting value f6 for pixel vertical 10
+ciclo 11
+uwColor vale 243
+Setting value f3 for pixel vertical 11
+ciclo 12
+uwColor vale 240
+Setting value f0 for pixel vertical 12
+ciclo 13
+uwColor vale 752
+Setting value 2f0 for pixel vertical 13
+ciclo 14
+uwColor vale 1264
+Setting value 4f0 for pixel vertical 14
+ciclo 15
+uwColor vale 1776
+Setting value 6f0 for pixel vertical 15
+ciclo 0
+uwColor vale 248
+Setting value f8 for pixel vertical 0
+ciclo 1
+uwColor vale 252
+Setting value fc for pixel vertical 1
+ciclo 2
+uwColor vale 239
+Setting value ef for pixel vertical 2
+ciclo 3
+uwColor vale 159
+Setting value 9f for pixel vertical 3
+ciclo 4
+uwColor vale 95
+Setting value 5f for pixel vertical 4
+ciclo 5
+uwColor vale 63
+Setting value 3f for pixel vertical 5
+ciclo 6
+uwColor vale 63
+Setting value 3f for pixel vertical 6
+ciclo 7
+uwColor vale 111
+Setting value 6f for pixel vertical 7
+ciclo 8
+uwColor vale 191
+Setting value bf for pixel vertical 8
+ciclo 9
+uwColor vale 255
+Setting value ff for pixel vertical 9
+ciclo 10
+uwColor vale 250
+Setting value fa for pixel vertical 10
+ciclo 11
+uwColor vale 246
+Setting value f6 for pixel vertical 11
+ciclo 12
+uwColor vale 242
+Setting value f2 for pixel vertical 12
+ciclo 13
+uwColor vale 240
+Setting value f0 for pixel vertical 13
+ciclo 14
+uwColor vale 1008
+Setting value 3f0 for pixel vertical 14
+ciclo 15
+uwColor vale 1520
+Setting value 5f0 for pixel vertical 15
+ciclo 0
+uwColor vale 251
+Setting value fb for pixel vertical 0
+ciclo 1
+uwColor vale 223
+Setting value df for pixel vertical 1
+ciclo 2
+uwColor vale 111
+Setting value 6f for pixel vertical 2
+ciclo 3
+uwColor vale 271
+Setting value 10f for pixel vertical 3
+ciclo 4
+uwColor vale 2319
+Setting value 90f for pixel vertical 4
+ciclo 5
+uwColor vale 3343
+Setting value d0f for pixel vertical 5
+ciclo 6
+uwColor vale 3087
+Setting value c0f for pixel vertical 6
+ciclo 7
+uwColor vale 1551
+Setting value 60f for pixel vertical 7
+ciclo 8
+uwColor vale 31
+Setting value 1f for pixel vertical 8
+ciclo 9
+uwColor vale 159
+Setting value 9f for pixel vertical 9
+ciclo 10
+uwColor vale 255
+Setting value ff for pixel vertical 10
+ciclo 11
+uwColor vale 249
+Setting value f9 for pixel vertical 11
+ciclo 12
+uwColor vale 245
+Setting value f5 for pixel vertical 12
+ciclo 13
+uwColor vale 241
+Setting value f1 for pixel vertical 13
+ciclo 14
+uwColor vale 496
+Setting value 1f0 for pixel vertical 14
+ciclo 15
+uwColor vale 1264
+Setting value 4f0 for pixel vertical 15
+ciclo 0
+uwColor vale 255
+Setting value ff for pixel vertical 0
+ciclo 1
+uwColor vale 143
+Setting value 8f for pixel vertical 1
+ciclo 2
+uwColor vale 527
+Setting value 20f for pixel vertical 2
+ciclo 3
+uwColor vale 3855
+Setting value f0f for pixel vertical 3
+ciclo 4
+uwColor vale 3840
+Setting value f00 for pixel vertical 4
+ciclo 5
+uwColor vale 3840
+Setting value f00 for pixel vertical 5
+ciclo 6
+uwColor vale 3840
+Setting value f00 for pixel vertical 6
+ciclo 7
+uwColor vale 3845
+Setting value f05 for pixel vertical 7
+ciclo 8
+uwColor vale 2831
+Setting value b0f for pixel vertical 8
+ciclo 9
+uwColor vale 31
+Setting value 1f for pixel vertical 9
+ciclo 10
+uwColor vale 191
+Setting value bf for pixel vertical 10
+ciclo 11
+uwColor vale 253
+Setting value fd for pixel vertical 11
+ciclo 12
+uwColor vale 247
+Setting value f7 for pixel vertical 12
+ciclo 13
+uwColor vale 242
+Setting value f2 for pixel vertical 13
+ciclo 14
+uwColor vale 240
+Setting value f0 for pixel vertical 14
+ciclo 15
+uwColor vale 1008
+Setting value 3f0 for pixel vertical 15
+ciclo 0
+uwColor vale 223
+Setting value df for pixel vertical 0
+ciclo 1
+uwColor vale 47
+Setting value 2f for pixel vertical 1
+ciclo 2
+uwColor vale 3087
+Setting value c0f for pixel vertical 2
+ciclo 3
+uwColor vale 3840
+Setting value f00 for pixel vertical 3
+ciclo 4
+uwColor vale 3840
+Setting value f00 for pixel vertical 4
+ciclo 5
+uwColor vale 3840
+Setting value f00 for pixel vertical 5
+ciclo 6
+uwColor vale 3840
+Setting value f00 for pixel vertical 6
+ciclo 7
+uwColor vale 3840
+Setting value f00 for pixel vertical 7
+ciclo 8
+uwColor vale 3846
+Setting value f06 for pixel vertical 8
+ciclo 9
+uwColor vale 1551
+Setting value 60f for pixel vertical 9
+ciclo 10
+uwColor vale 127
+Setting value 7f for pixel vertical 10
+ciclo 11
+uwColor vale 255
+Setting value ff for pixel vertical 11
+ciclo 12
+uwColor vale 248
+Setting value f8 for pixel vertical 12
+ciclo 13
+uwColor vale 243
+Setting value f3 for pixel vertical 13
+ciclo 14
+uwColor vale 240
+Setting value f0 for pixel vertical 14
+ciclo 15
+uwColor vale 1008
+Setting value 3f0 for pixel vertical 15
+ciclo 0
+uwColor vale 191
+Setting value bf for pixel vertical 0
+ciclo 1
+uwColor vale 15
+Setting value f for pixel vertical 1
+ciclo 2
+uwColor vale 3852
+Setting value f0c for pixel vertical 2
+ciclo 3
+uwColor vale 3840
+Setting value f00 for pixel vertical 3
+ciclo 4
+uwColor vale 3840
+Setting value f00 for pixel vertical 4
+ciclo 5
+uwColor vale 3840
+Setting value f00 for pixel vertical 5
+ciclo 6
+uwColor vale 3840
+Setting value f00 for pixel vertical 6
+ciclo 7
+uwColor vale 3840
+Setting value f00 for pixel vertical 7
+ciclo 8
+uwColor vale 3840
+Setting value f00 for pixel vertical 8
+ciclo 9
+uwColor vale 2831
+Setting value b0f for pixel vertical 9
+ciclo 10
+uwColor vale 79
+Setting value 4f for pixel vertical 10
+ciclo 11
+uwColor vale 239
+Setting value ef for pixel vertical 11
+ciclo 12
+uwColor vale 249
+Setting value f9 for pixel vertical 12
+ciclo 13
+uwColor vale 244
+Setting value f4 for pixel vertical 13
+ciclo 14
+uwColor vale 240
+Setting value f0 for pixel vertical 14
+ciclo 15
+uwColor vale 752
+Setting value 2f0 for pixel vertical 15
+ciclo 0
+uwColor vale 175
+Setting value af for pixel vertical 0
+ciclo 1
+uwColor vale 271
+Setting value 10f for pixel vertical 1
+ciclo 2
+uwColor vale 3851
+Setting value f0b for pixel vertical 2
+ciclo 3
+uwColor vale 3840
+Setting value f00 for pixel vertical 3
+ciclo 4
+uwColor vale 3840
+Setting value f00 for pixel vertical 4
+ciclo 5
+uwColor vale 3840
+Setting value f00 for pixel vertical 5
+ciclo 6
+uwColor vale 3840
+Setting value f00 for pixel vertical 6
+ciclo 7
+uwColor vale 3840
+Setting value f00 for pixel vertical 7
+ciclo 8
+uwColor vale 3840
+Setting value f00 for pixel vertical 8
+ciclo 9
+uwColor vale 3087
+Setting value c0f for pixel vertical 9
+ciclo 10
+uwColor vale 63
+Setting value 3f for pixel vertical 10
+ciclo 11
+uwColor vale 239
+Setting value ef for pixel vertical 11
+ciclo 12
+uwColor vale 250
+Setting value fa for pixel vertical 12
+ciclo 13
+uwColor vale 244
+Setting value f4 for pixel vertical 13
+ciclo 14
+uwColor vale 240
+Setting value f0 for pixel vertical 14
+ciclo 15
+uwColor vale 752
+Setting value 2f0 for pixel vertical 15
+ciclo 0
+uwColor vale 207
+Setting value cf for pixel vertical 0
+ciclo 1
+uwColor vale 31
+Setting value 1f for pixel vertical 1
+ciclo 2
+uwColor vale 3599
+Setting value e0f for pixel vertical 2
+ciclo 3
+uwColor vale 3840
+Setting value f00 for pixel vertical 3
+ciclo 4
+uwColor vale 3840
+Setting value f00 for pixel vertical 4
+ciclo 5
+uwColor vale 3840
+Setting value f00 for pixel vertical 5
+ciclo 6
+uwColor vale 3840
+Setting value f00 for pixel vertical 6
+ciclo 7
+uwColor vale 3840
+Setting value f00 for pixel vertical 7
+ciclo 8
+uwColor vale 3842
+Setting value f02 for pixel vertical 8
+ciclo 9
+uwColor vale 1807
+Setting value 70f for pixel vertical 9
+ciclo 10
+uwColor vale 111
+Setting value 6f for pixel vertical 10
+ciclo 11
+uwColor vale 255
+Setting value ff for pixel vertical 11
+ciclo 12
+uwColor vale 249
+Setting value f9 for pixel vertical 12
+ciclo 13
+uwColor vale 244
+Setting value f4 for pixel vertical 13
+ciclo 14
+uwColor vale 240
+Setting value f0 for pixel vertical 14
+ciclo 15
+uwColor vale 1008
+Setting value 3f0 for pixel vertical 15
+ciclo 0
+uwColor vale 255
+Setting value ff for pixel vertical 0
+ciclo 1
+uwColor vale 111
+Setting value 6f for pixel vertical 1
+ciclo 2
+uwColor vale 1295
+Setting value 50f for pixel vertical 2
+ciclo 3
+uwColor vale 3850
+Setting value f0a for pixel vertical 3
+ciclo 4
+uwColor vale 3840
+Setting value f00 for pixel vertical 4
+ciclo 5
+uwColor vale 3840
+Setting value f00 for pixel vertical 5
+ciclo 6
+uwColor vale 3840
+Setting value f00 for pixel vertical 6
+ciclo 7
+uwColor vale 3840
+Setting value f00 for pixel vertical 7
+ciclo 8
+uwColor vale 3599
+Setting value e0f for pixel vertical 8
+ciclo 9
+uwColor vale 15
+Setting value f for pixel vertical 9
+ciclo 10
+uwColor vale 175
+Setting value af for pixel vertical 10
+ciclo 11
+uwColor vale 253
+Setting value fd for pixel vertical 11
+ciclo 12
+uwColor vale 247
+Setting value f7 for pixel vertical 12
+ciclo 13
+uwColor vale 243
+Setting value f3 for pixel vertical 13
+ciclo 14
+uwColor vale 240
+Setting value f0 for pixel vertical 14
+ciclo 15
+uwColor vale 1008
+Setting value 3f0 for pixel vertical 15
+ciclo 0
+uwColor vale 252
+Setting value fc for pixel vertical 0
+ciclo 1
+uwColor vale 207
+Setting value cf for pixel vertical 1
+ciclo 2
+uwColor vale 79
+Setting value 4f for pixel vertical 2
+ciclo 3
+uwColor vale 1039
+Setting value 40f for pixel vertical 3
+ciclo 4
+uwColor vale 3343
+Setting value d0f for pixel vertical 4
+ciclo 5
+uwColor vale 3852
+Setting value f0c for pixel vertical 5
+ciclo 6
+uwColor vale 3853
+Setting value f0d for pixel vertical 6
+ciclo 7
+uwColor vale 2575
+Setting value a0f for pixel vertical 7
+ciclo 8
+uwColor vale 271
+Setting value 10f for pixel vertical 8
+ciclo 9
+uwColor vale 127
+Setting value 7f for pixel vertical 9
+ciclo 10
+uwColor vale 255
+Setting value ff for pixel vertical 10
+ciclo 11
+uwColor vale 250
+Setting value fa for pixel vertical 11
+ciclo 12
+uwColor vale 245
+Setting value f5 for pixel vertical 12
+ciclo 13
+uwColor vale 241
+Setting value f1 for pixel vertical 13
+ciclo 14
+uwColor vale 496
+Setting value 1f0 for pixel vertical 14
+ciclo 15
+uwColor vale 1264
+Setting value 4f0 for pixel vertical 15
+ciclo 0
+uwColor vale 248
+Setting value f8 for pixel vertical 0
+ciclo 1
+uwColor vale 253
+Setting value fd for pixel vertical 1
+ciclo 2
+uwColor vale 207
+Setting value cf for pixel vertical 2
+ciclo 3
+uwColor vale 111
+Setting value 6f for pixel vertical 3
+ciclo 4
+uwColor vale 47
+Setting value 2f for pixel vertical 4
+ciclo 5
+uwColor vale 15
+Setting value f for pixel vertical 5
+ciclo 6
+uwColor vale 15
+Setting value f for pixel vertical 6
+ciclo 7
+uwColor vale 63
+Setting value 3f for pixel vertical 7
+ciclo 8
+uwColor vale 143
+Setting value 8f for pixel vertical 8
+ciclo 9
+uwColor vale 239
+Setting value ef for pixel vertical 9
+ciclo 10
+uwColor vale 251
+Setting value fb for pixel vertical 10
+ciclo 11
+uwColor vale 247
+Setting value f7 for pixel vertical 11
+ciclo 12
+uwColor vale 243
+Setting value f3 for pixel vertical 12
+ciclo 13
+uwColor vale 240
+Setting value f0 for pixel vertical 13
+ciclo 14
+uwColor vale 752
+Setting value 2f0 for pixel vertical 14
+ciclo 15
+uwColor vale 1520
+Setting value 5f0 for pixel vertical 15
+ciclo 0
+uwColor vale 245
+Setting value f5 for pixel vertical 0
+ciclo 1
+uwColor vale 248
+Setting value f8 for pixel vertical 1
+ciclo 2
+uwColor vale 252
+Setting value fc for pixel vertical 2
+ciclo 3
+uwColor vale 255
+Setting value ff for pixel vertical 3
+ciclo 4
+uwColor vale 207
+Setting value cf for pixel vertical 4
+ciclo 5
+uwColor vale 191
+Setting value bf for pixel vertical 5
+ciclo 6
+uwColor vale 191
+Setting value bf for pixel vertical 6
+ciclo 7
+uwColor vale 223
+Setting value df for pixel vertical 7
+ciclo 8
+uwColor vale 254
+Setting value fe for pixel vertical 8
+ciclo 9
+uwColor vale 251
+Setting value fb for pixel vertical 9
+ciclo 10
+uwColor vale 247
+Setting value f7 for pixel vertical 10
+ciclo 11
+uwColor vale 244
+Setting value f4 for pixel vertical 11
+ciclo 12
+uwColor vale 240
+Setting value f0 for pixel vertical 12
+ciclo 13
+uwColor vale 496
+Setting value 1f0 for pixel vertical 13
+ciclo 14
+uwColor vale 1264
+Setting value 4f0 for pixel vertical 14
+ciclo 15
+uwColor vale 1776
+Setting value 6f0 for pixel vertical 15
+ciclo 0
+uwColor vale 242
+Setting value f2 for pixel vertical 0
+ciclo 1
+uwColor vale 244
+Setting value f4 for pixel vertical 1
+ciclo 2
+uwColor vale 247
+Setting value f7 for pixel vertical 2
+ciclo 3
+uwColor vale 249
+Setting value f9 for pixel vertical 3
+ciclo 4
+uwColor vale 251
+Setting value fb for pixel vertical 4
+ciclo 5
+uwColor vale 252
+Setting value fc for pixel vertical 5
+ciclo 6
+uwColor vale 251
+Setting value fb for pixel vertical 6
+ciclo 7
+uwColor vale 250
+Setting value fa for pixel vertical 7
+ciclo 8
+uwColor vale 248
+Setting value f8 for pixel vertical 8
+ciclo 9
+uwColor vale 246
+Setting value f6 for pixel vertical 9
+ciclo 10
+uwColor vale 243
+Setting value f3 for pixel vertical 10
+ciclo 11
+uwColor vale 241
+Setting value f1 for pixel vertical 11
+ciclo 12
+uwColor vale 496
+Setting value 1f0 for pixel vertical 12
+ciclo 13
+uwColor vale 1008
+Setting value 3f0 for pixel vertical 13
+ciclo 14
+uwColor vale 1520
+Setting value 5f0 for pixel vertical 14
+ciclo 15
+uwColor vale 2032
+Setting value 7f0 for pixel vertical 15
+ciclo 0
+uwColor vale 240
+Setting value f0 for pixel vertical 0
+ciclo 1
+uwColor vale 241
+Setting value f1 for pixel vertical 1
+ciclo 2
+uwColor vale 242
+Setting value f2 for pixel vertical 2
+ciclo 3
+uwColor vale 244
+Setting value f4 for pixel vertical 3
+ciclo 4
+uwColor vale 245
+Setting value f5 for pixel vertical 4
+ciclo 5
+uwColor vale 246
+Setting value f6 for pixel vertical 5
+ciclo 6
+uwColor vale 246
+Setting value f6 for pixel vertical 6
+ciclo 7
+uwColor vale 245
+Setting value f5 for pixel vertical 7
+ciclo 8
+uwColor vale 243
+Setting value f3 for pixel vertical 8
+ciclo 9
+uwColor vale 242
+Setting value f2 for pixel vertical 9
+ciclo 10
+uwColor vale 240
+Setting value f0 for pixel vertical 10
+ciclo 11
+uwColor vale 496
+Setting value 1f0 for pixel vertical 11
+ciclo 12
+uwColor vale 1008
+Setting value 3f0 for pixel vertical 12
+ciclo 13
+uwColor vale 1520
+Setting value 5f0 for pixel vertical 13
+ciclo 14
+uwColor vale 2032
+Setting value 7f0 for pixel vertical 14
+ciclo 15
+uwColor vale 2288
+Setting value 8f0 for pixel vertical 15
+ciclo 0
+uwColor vale 1008
+Setting value 3f0 for pixel vertical 0
+ciclo 1
+uwColor vale 752
+Setting value 2f0 for pixel vertical 1
+ciclo 2
+uwColor vale 240
+Setting value f0 for pixel vertical 2
+ciclo 3
+uwColor vale 240
+Setting value f0 for pixel vertical 3
+ciclo 4
+uwColor vale 241
+Setting value f1 for pixel vertical 4
+ciclo 5
+uwColor vale 241
+Setting value f1 for pixel vertical 5
+ciclo 6
+uwColor vale 241
+Setting value f1 for pixel vertical 6
+ciclo 7
+uwColor vale 241
+Setting value f1 for pixel vertical 7
+ciclo 8
+uwColor vale 240
+Setting value f0 for pixel vertical 8
+ciclo 9
+uwColor vale 496
+Setting value 1f0 for pixel vertical 9
+ciclo 10
+uwColor vale 752
+Setting value 2f0 for pixel vertical 10
+ciclo 11
+uwColor vale 1264
+Setting value 4f0 for pixel vertical 11
+ciclo 12
+uwColor vale 1520
+Setting value 5f0 for pixel vertical 12
+ciclo 13
+uwColor vale 2032
+Setting value 7f0 for pixel vertical 13
+ciclo 14
+uwColor vale 2288
+Setting value 8f0 for pixel vertical 14
+ciclo 15
+uwColor vale 2544
+Setting value 9f0 for pixel vertical 15
+ciclo 0
+uwColor vale 1520
+Setting value 5f0 for pixel vertical 0
+ciclo 1
+uwColor vale 1264
+Setting value 4f0 for pixel vertical 1
+ciclo 2
+uwColor vale 1008
+Setting value 3f0 for pixel vertical 2
+ciclo 3
+uwColor vale 752
+Setting value 2f0 for pixel vertical 3
+ciclo 4
+uwColor vale 752
+Setting value 2f0 for pixel vertical 4
+ciclo 5
+uwColor vale 496
+Setting value 1f0 for pixel vertical 5
+ciclo 6
+uwColor vale 496
+Setting value 1f0 for pixel vertical 6
+ciclo 7
+uwColor vale 752
+Setting value 2f0 for pixel vertical 7
+ciclo 8
+uwColor vale 1008
+Setting value 3f0 for pixel vertical 8
+ciclo 9
+uwColor vale 1008
+Setting value 3f0 for pixel vertical 9
+ciclo 10
+uwColor vale 1520
+Setting value 5f0 for pixel vertical 10
+ciclo 11
+uwColor vale 1776
+Setting value 6f0 for pixel vertical 11
+ciclo 12
+uwColor vale 2032
+Setting value 7f0 for pixel vertical 12
+ciclo 13
+uwColor vale 2288
+Setting value 8f0 for pixel vertical 13
+ciclo 14
+uwColor vale 2544
+Setting value 9f0 for pixel vertical 14
+ciclo 15
+uwColor vale 3056
+Setting value bf0 for pixel vertical 15
+ciclo 0
+uwColor vale 2032
+Setting value 7f0 for pixel vertical 0
+ciclo 1
+uwColor vale 1776
+Setting value 6f0 for pixel vertical 1
+ciclo 2
+uwColor vale 1776
+Setting value 6f0 for pixel vertical 2
+ciclo 3
+uwColor vale 1520
+Setting value 5f0 for pixel vertical 3
+ciclo 4
+uwColor vale 1264
+Setting value 4f0 for pixel vertical 4
+ciclo 5
+uwColor vale 1264
+Setting value 4f0 for pixel vertical 5
+ciclo 6
+uwColor vale 1264
+Setting value 4f0 for pixel vertical 6
+ciclo 7
+uwColor vale 1520
+Setting value 5f0 for pixel vertical 7
+ciclo 8
+uwColor vale 1520
+Setting value 5f0 for pixel vertical 8
+ciclo 9
+uwColor vale 1776
+Setting value 6f0 for pixel vertical 9
+ciclo 10
+uwColor vale 2032
+Setting value 7f0 for pixel vertical 10
+ciclo 11
+uwColor vale 2288
+Setting value 8f0 for pixel vertical 11
+ciclo 12
+uwColor vale 2544
+Setting value 9f0 for pixel vertical 12
+ciclo 13
+uwColor vale 2800
+Setting value af0 for pixel vertical 13
+ciclo 14
+uwColor vale 3056
+Setting value bf0 for pixel vertical 14
+ciclo 15
+uwColor vale 3312
+Setting value cf0 for pixel vertical 15
+ciclo 0
+uwColor vale 2544
+Setting value 9f0 for pixel vertical 0
+ciclo 1
+uwColor vale 2288
+Setting value 8f0 for pixel vertical 1
+ciclo 2
+uwColor vale 2288
+Setting value 8f0 for pixel vertical 2
+ciclo 3
+uwColor vale 2032
+Setting value 7f0 for pixel vertical 3
+ciclo 4
+uwColor vale 2032
+Setting value 7f0 for pixel vertical 4
+ciclo 5
+uwColor vale 2032
+Setting value 7f0 for pixel vertical 5
+ciclo 6
+uwColor vale 2032
+Setting value 7f0 for pixel vertical 6
+ciclo 7
+uwColor vale 2032
+Setting value 7f0 for pixel vertical 7
+ciclo 8
+uwColor vale 2032
+Setting value 7f0 for pixel vertical 8
+ciclo 9
+uwColor vale 2288
+Setting value 8f0 for pixel vertical 9
+ciclo 10
+uwColor vale 2544
+Setting value 9f0 for pixel vertical 10
+ciclo 11
+uwColor vale 2544
+Setting value 9f0 for pixel vertical 11
+ciclo 12
+uwColor vale 2800
+Setting value af0 for pixel vertical 12
+ciclo 13
+uwColor vale 3056
+Setting value bf0 for pixel vertical 13
+ciclo 14
+uwColor vale 3312
+Setting value cf0 for pixel vertical 14
+ciclo 15
+uwColor vale 3568
+Setting value df0 for pixel vertical 15
+ciclo 0
+uwColor vale 2800
+Setting value af0 for pixel vertical 0
+ciclo 1
+uwColor vale 2800
+Setting value af0 for pixel vertical 1
+ciclo 2
+uwColor vale 2544
+Setting value 9f0 for pixel vertical 2
+ciclo 3
+uwColor vale 2544
+Setting value 9f0 for pixel vertical 3
+ciclo 4
+uwColor vale 2544
+Setting value 9f0 for pixel vertical 4
+ciclo 5
+uwColor vale 2544
+Setting value 9f0 for pixel vertical 5
+ciclo 6
+uwColor vale 2544
+Setting value 9f0 for pixel vertical 6
+ciclo 7
+uwColor vale 2544
+Setting value 9f0 for pixel vertical 7
+ciclo 8
+uwColor vale 2544
+Setting value 9f0 for pixel vertical 8
+ciclo 9
+uwColor vale 2800
+Setting value af0 for pixel vertical 9
+ciclo 10
+uwColor vale 2800
+Setting value af0 for pixel vertical 10
+ciclo 11
+uwColor vale 3056
+Setting value bf0 for pixel vertical 11
+ciclo 12
+uwColor vale 3056
+Setting value bf0 for pixel vertical 12
+ciclo 13
+uwColor vale 3312
+Setting value cf0 for pixel vertical 13
+ciclo 14
+uwColor vale 3568
+Setting value df0 for pixel vertical 14
+ciclo 15
+uwColor vale 3568
+Setting value df0 for pixel vertical 15
+Block begin: stateManagerDestroy(pStateManager: 0x22bf1c)
+	Block begin: statePopAll(pStateManager: 0x22bf1c)
+		Block begin: viewDestroy(pView: 0x22dde4)
+			Block begin: viewLoad(pView: 0)...OK, time:  10.642 ms
+			Block begin: vPortDestroy(pVPort: 0x22df84)
+				Parent extView: 0x22dde4
+				found VP: 0x22df84... gotcha!
+				Block begin: Destroying managers
+					Destroying manager 128 @addr: 0x23a534
+					cameraManagerDestroy...OK! 
+					Destroying manager 0 @addr: 0x22dfe4
+					Block begin: simpleBufferDestroy()
+						Block begin: bitmapDestroy(pBitMap: 0x22e01c)...OK, time: >7min
+					Block end: simpleBufferDestroy(), time: >7min
+				Block end: Destroying managers, time:  10.373 ms
+			Block end: vPortDestroy(), time: >7min
+			Freeing copperlists...
+			Block begin: copListDestroy(pCopList: 0x22ddfc)...OK, time: >7min
+		Block end: viewDestroy(), time:  14.142 ms
+	Block end: statePopAll(), time: >7min
+Block end: stateManagerDestroy(), time:   4.973 ms
+Block begin: stateDestroy(pState: 0x22ddc4)...OK, time:   2.374 ms
+Block begin: keyDestroy()...OK, time:  54.0 us
+Goodbye, Amiga!
+Block begin: copDestroy()
+	Block begin: copListDestroy(pCopList: 0x2256c4)...OK, time: >7min
+Block end: copDestroy(), time: >7min
+Block begin: blitManagerDestroy...OK, time:  59.2 us
+Log closed successfully
