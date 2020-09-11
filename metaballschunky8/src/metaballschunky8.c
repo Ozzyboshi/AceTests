@@ -7,7 +7,7 @@
 #include <ace/managers/blit.h>
 
 #define BITPLANES 5
-#define NUMCHUNKYROWS 26
+#define NUMCHUNKYROWS 31
 #define BARHEIGHT 8*NUMCHUNKYROWS
 
 #include <limits.h>
@@ -45,6 +45,11 @@
 #define copSetSkipBackAndFront3(var, var2)                  \
   copSetSkip(&pCmdListBack3[ubCopIndex3].sWait, var, var2);  \
   copSetSkip(&pCmdListFront3[ubCopIndex3].sWait, var, var2); \
+  ubCopIndex3++;
+
+#define copSetSkipRawBackAndFront3(var, var2, var3, var4)                  \
+  copSetSkipRaw(&pCmdListBack3[ubCopIndex3].sWait, var, var2, var3, var4);  \
+  copSetSkipRaw(&pCmdListFront3[ubCopIndex3].sWait, var, var2, var3, var4); \
   ubCopIndex3++;
 
 #define copSetWaitRawBackAndFront2(var, var2, var3, var4)                   \
@@ -87,8 +92,12 @@ tCopCmd *pCmdListFront3;
 tCopList *mycopListCreate(void *pTagList, ...);
 void copSetWaitRaw(tCopWaitCmd *pWaitCmd, UBYTE ubX, UBYTE ubY, UBYTE ubXCompare, UBYTE ubYCompare);
 void copSetSkip(tCopWaitCmd *pWaitCmd, UBYTE ubX, UBYTE ubY);
+void copSetSkipRaw(tCopWaitCmd *, UBYTE , UBYTE , UBYTE , UBYTE );
+
 UWORD copBuildRaw(UWORD ,ULONG ,ULONG , UWORD ,UWORD ,UWORD , UWORD ,UWORD ,UWORD , UBYTE );
 UWORD copBuildRawV2(UWORD , UBYTE , UWORD ,UWORD ,UWORD , UWORD ,UWORD ,UWORD , UBYTE );
+UWORD copBuildRawV2_255(UWORD , UBYTE , UWORD ,UWORD ,UWORD , UWORD ,UWORD ,UWORD , UBYTE );
+
 void setChunkyPixelColor(UWORD ,UWORD , UWORD );
 
 void gameGsCreate(void)
@@ -128,7 +137,7 @@ void gameGsCreate(void)
   // Build a copperlist to use when Y >= 128
   pThirdCopList = mycopListCreate(0,
                                   TAG_COPPER_LIST_MODE, COPPER_MODE_RAW,
-                                  TAG_COPPER_RAW_COUNT, 45*NUMCHUNKYROWS+10,
+                                  TAG_COPPER_RAW_COUNT, 45*NUMCHUNKYROWS+90,
                                   TAG_DONE);
 
   s_uwCopRawOffs = simpleBufferGetRawCopperlistInstructionCount(BITPLANES);
@@ -465,7 +474,7 @@ void gameGsCreate(void)
   //ubCopIndex3 = copBuildRaw(ubCopIndex3,ulCop3H3,ulCop3L3, 0x00F0,0x000F,0x0F00, 0x0777,0x0888,0x0999,76);
 
   UBYTE ubVerticalSkip = 76;
-  for (UBYTE ubCopCounter = 3; ubCopCounter<NUMCHUNKYROWS; ubCopCounter++)
+  for (UBYTE ubCopCounter = 3; ubCopCounter<=NUMCHUNKYROWS; ubCopCounter++)
   {
     UWORD uwCol1,uwCol2,uwCol3,uwCol4,uwCol5,uwCol6;
     if ((ubCopCounter%2)==0)
@@ -486,10 +495,25 @@ void gameGsCreate(void)
       uwCol5=0x0888;
       uwCol6=0x0999;
     }
-    ubCopIndex3 = copBuildRawV2(ubCopIndex3,ubCopCounter, uwCol1,uwCol2,uwCol3, uwCol4,uwCol5,uwCol6,ubVerticalSkip);
+    logWrite("building for vertical skip %u\n",ubVerticalSkip);
+    if (ubCopCounter==26) // 26 is a special row because it crosses 255, so we mush split the row in 2 pieces
+    {
+      ubCopIndex3 = copBuildRawV2_255(ubCopIndex3,ubCopCounter, 0x0F00,0x00F0,0x000F, 0x0444,0x0555,0x0000,254);
+      ubCopIndex3 = copBuildRawV2(ubCopIndex3,ubCopCounter+1, 0x0F00,0x00F0,0x000F, 0x0444,0x0555,0x0000,ubVerticalSkip);
+    }
+    else if (ubCopCounter>26)
+    {
+      ubCopIndex3 = copBuildRawV2(ubCopIndex3,ubCopCounter+1,uwCol1,uwCol2,uwCol3, uwCol4,uwCol5,uwCol6,ubVerticalSkip);
+    }
+    else
+    {
+      ubCopIndex3 = copBuildRawV2(ubCopIndex3,ubCopCounter, uwCol1,uwCol2,uwCol3, uwCol4,uwCol5,uwCol6,ubVerticalSkip);
+    }
     ubVerticalSkip+=8;
   }
-  //ubCopIndex3 = copBuildRawV2(ubCopIndex3,5, 0x0F00,0x00F0,0x000F, 0x0666,0x0777,0x0888,92);
+  /*ubCopIndex3 = copBuildRawV2_255(ubCopIndex3,NUMCHUNKYROWS-1, 0x0F00,0x00F0,0x000F, 0x0444,0x0555,0x0000,254);
+  ubCopIndex3 = copBuildRawV2(ubCopIndex3,NUMCHUNKYROWS, 0x0F00,0x00F0,0x000F, 0x0444,0x0555,0x0000,4);*/
+  //ubCopIndex3 = copBuildRawV2(ubCopIndex3,NUMCHUNKYROWS+1, 0x00F0,0x000F,0x0F00, 0x0666,0x0777,0x0888,12);
 
   // COPPERLIST 3 END
 
@@ -499,13 +523,13 @@ void gameGsCreate(void)
   // Draw rectangles
   for (UBYTE ubCount = 0; ubCount<31;ubCount++)
   {
-  blitRect(s_pMainBuffer->pBack, ubCount * 8, 0, 8, BARHEIGHT, ubCount + 1);
+  blitRect(s_pMainBuffer->pBack, ubCount * 8, 0, 8, BARHEIGHT+8, ubCount + 1);
   }
 
   UBYTE ubColIndex = 1;
   for (UBYTE ubCount = 31; ubCount<40;ubCount++)
   {
-  blitRect(s_pMainBuffer->pBack, ubCount * 8, 0, 8, BARHEIGHT, ubColIndex);
+  blitRect(s_pMainBuffer->pBack, ubCount * 8, 0, 8, BARHEIGHT+8, ubColIndex);
   ubColIndex++;
   }
   //blitRect(s_pMainBuffer->pBack, 1 * 8, 0, 8, 256, 0 + 2);
@@ -662,6 +686,17 @@ void copSetSkip(tCopWaitCmd *pWaitCmd, UBYTE ubX, UBYTE ubY)
   pWaitCmd->bfIsSkip = 1;
 }
 
+void copSetSkipRaw(tCopWaitCmd *pWaitCmd, UBYTE ubX, UBYTE ubY, UBYTE ubXCompare, UBYTE ubYCompare)
+{
+  pWaitCmd->bfWaitY = ubY;
+  pWaitCmd->bfWaitX = ubX >> 1;
+  pWaitCmd->bfIsWait = 1;
+  pWaitCmd->bfBlitterIgnore = 1;
+  pWaitCmd->bfVE = ubYCompare;
+  pWaitCmd->bfHE = ubXCompare;
+  pWaitCmd->bfIsSkip = 1;
+}
+
 UWORD copBuildRaw(UWORD ubCopIndex3,ULONG ulCop3H,ULONG ulCop3L, UWORD uwCol1,UWORD uwCol2,UWORD uwCol3, UWORD uwCol4,UWORD uwCol5,UWORD uwCol6, UBYTE ubSkipPos)
 {
   UWORD *cop2lc = (UWORD *)&g_pCustom->cop2lc;
@@ -789,10 +824,149 @@ UWORD copBuildRawV2(UWORD ubCopIndex3, UBYTE ubChunkyRawNo, UWORD uwCol1,UWORD u
 
 void setChunkyPixelColor(UWORD uwX,UWORD uwY, UWORD uwValue)
 {
+  if (uwY>26) uwY++;
   tCopCmd *pCmdListBack = &pThirdCopList->pBackBfr->pList[0];
   UWORD uwIndex = uwX;
   uwIndex += 45*uwY;
-  pCmdListBack[uwIndex].sMove.bfValue = uwValue;
+  pCmdListBack[uwIndex].sMove.bfValue = uwValue; 
+
+  if (uwY==26)
+  {
+    uwY++;
+    uwIndex =uwX + 45*uwY;
+    pCmdListBack[uwIndex].sMove.bfValue = uwValue; 
+    //setChunkyPixelColor(uwX,uwY+1, uwValue);
+    //logWrite("Extra value!!!!!!\n");
+  }
+}
+
+
+UWORD copBuildRawV2_255(UWORD ubCopIndex3, UBYTE ubChunkyRawNo, UWORD uwCol1,UWORD uwCol2,UWORD uwCol3, UWORD uwCol4,UWORD uwCol5,UWORD uwCol6, UBYTE ubSkipPos)
+{
+  ULONG ulCop3Addr = (ULONG)((void *)pThirdCopList->pBackBfr->pList);
+  ulCop3Addr += (45*4*ubChunkyRawNo);
+  UWORD *cop2lc = (UWORD *)&g_pCustom->cop2lc;
+
+  UWORD ulCop3H = (UWORD)(ulCop3Addr >> 16);
+  UWORD ulCop3L = (UWORD)(ulCop3Addr & 0x0000FFFF);
+
+  /*logWrite("cop3addr ultima riga H : %x\n", ulCop3H4);
+  logWrite("cop3addr ultima riga L : %x\n", ulCop3L4);*/
 
   
+  copSetMoveBackAndFront3(cop2lc, ulCop3H);
+  copSetMoveBackAndFront3(cop2lc + 1, ulCop3L);
+
+  copSetMoveBackAndFront3(&g_pCustom->color[1], uwCol1);
+  copSetMoveBackAndFront3(&g_pCustom->color[2], uwCol2);
+  copSetMoveBackAndFront3(&g_pCustom->color[3], uwCol3);
+  copSetMoveBackAndFront3(&g_pCustom->color[4], uwCol1);
+  copSetMoveBackAndFront3(&g_pCustom->color[5], uwCol2);
+  copSetMoveBackAndFront3(&g_pCustom->color[6], uwCol3);
+  copSetMoveBackAndFront3(&g_pCustom->color[7], uwCol1);
+  copSetMoveBackAndFront3(&g_pCustom->color[8], uwCol2);
+  copSetMoveBackAndFront3(&g_pCustom->color[9], uwCol3);
+  copSetMoveBackAndFront3(&g_pCustom->color[10], uwCol1);
+  copSetMoveBackAndFront3(&g_pCustom->color[11], uwCol2);
+  copSetMoveBackAndFront3(&g_pCustom->color[12], uwCol3);
+  copSetMoveBackAndFront3(&g_pCustom->color[13], uwCol1);
+  copSetMoveBackAndFront3(&g_pCustom->color[14], uwCol2);
+  copSetMoveBackAndFront3(&g_pCustom->color[15], uwCol3);
+  copSetMoveBackAndFront3(&g_pCustom->color[16], uwCol1);
+  copSetMoveBackAndFront3(&g_pCustom->color[17], uwCol2);
+  copSetMoveBackAndFront3(&g_pCustom->color[18], uwCol3);
+  copSetMoveBackAndFront3(&g_pCustom->color[19], uwCol1);
+  copSetMoveBackAndFront3(&g_pCustom->color[20], uwCol2);
+  copSetMoveBackAndFront3(&g_pCustom->color[21], uwCol3);
+  copSetMoveBackAndFront3(&g_pCustom->color[22], uwCol1);
+  copSetMoveBackAndFront3(&g_pCustom->color[23], uwCol2);
+  copSetMoveBackAndFront3(&g_pCustom->color[24], uwCol3);
+  copSetMoveBackAndFront3(&g_pCustom->color[25], uwCol1);
+  copSetMoveBackAndFront3(&g_pCustom->color[26], uwCol2);
+  copSetMoveBackAndFront3(&g_pCustom->color[27], uwCol3);
+  copSetMoveBackAndFront3(&g_pCustom->color[28], uwCol1);
+  copSetMoveBackAndFront3(&g_pCustom->color[29], uwCol2);
+  copSetMoveBackAndFront3(&g_pCustom->color[30], uwCol3);
+  copSetMoveBackAndFront3(&g_pCustom->color[31], 0x0F0F);
+
+  // 8 missing colors here
+  //copSetWaitRawBackAndFront3(160, 0x00, 0x7F, 0x00);
+  copSetMoveBackAndFront3(&g_pCustom->color[1], uwCol4);
+  copSetMoveBackAndFront3(&g_pCustom->color[2], uwCol5);
+  copSetMoveBackAndFront3(&g_pCustom->color[3], uwCol6);
+  copSetMoveBackAndFront3(&g_pCustom->color[4], uwCol4);
+  copSetMoveBackAndFront3(&g_pCustom->color[5], uwCol5);
+  copSetMoveBackAndFront3(&g_pCustom->color[6], uwCol6);
+  copSetMoveBackAndFront3(&g_pCustom->color[7], uwCol4);
+  copSetMoveBackAndFront3(&g_pCustom->color[8], uwCol5);
+  copSetMoveBackAndFront3(&g_pCustom->color[9], uwCol6);
+
+  copSetWaitRawBackAndFront3(0xdf, 0x00, 0x7F, 0x00);
+  copSetSkipBackAndFront3(0,255);
+  //copSetSkipRawBackAndFront3(100,0xFF,0x7F,0x7F);
+  copSetMoveBackAndFront3(&g_pCustom->copjmp2, 1);
+  return ubCopIndex3;
+  
+
+  copSetMoveBackAndFront3(&g_pCustom->color[1], uwCol1);
+  copSetMoveBackAndFront3(&g_pCustom->color[2], uwCol2);
+  copSetMoveBackAndFront3(&g_pCustom->color[3], uwCol3);
+  copSetMoveBackAndFront3(&g_pCustom->color[4], uwCol1);
+  copSetMoveBackAndFront3(&g_pCustom->color[5], uwCol2);
+  copSetMoveBackAndFront3(&g_pCustom->color[6], uwCol3);
+  copSetMoveBackAndFront3(&g_pCustom->color[7], uwCol1);
+  copSetMoveBackAndFront3(&g_pCustom->color[8], uwCol2);
+  copSetMoveBackAndFront3(&g_pCustom->color[9], uwCol3);
+  copSetMoveBackAndFront3(&g_pCustom->color[10], uwCol1);
+  copSetMoveBackAndFront3(&g_pCustom->color[11], uwCol2);
+  copSetMoveBackAndFront3(&g_pCustom->color[12], uwCol3);
+  copSetMoveBackAndFront3(&g_pCustom->color[13], uwCol1);
+  copSetMoveBackAndFront3(&g_pCustom->color[14], uwCol2);
+  copSetMoveBackAndFront3(&g_pCustom->color[15], uwCol3);
+  copSetMoveBackAndFront3(&g_pCustom->color[16], uwCol1);
+  copSetMoveBackAndFront3(&g_pCustom->color[17], uwCol2);
+  copSetMoveBackAndFront3(&g_pCustom->color[18], uwCol3);
+  copSetMoveBackAndFront3(&g_pCustom->color[19], uwCol1);
+  copSetMoveBackAndFront3(&g_pCustom->color[20], uwCol2);
+  copSetMoveBackAndFront3(&g_pCustom->color[21], uwCol3);
+  copSetMoveBackAndFront3(&g_pCustom->color[22], uwCol1);
+  copSetMoveBackAndFront3(&g_pCustom->color[23], uwCol2);
+  copSetMoveBackAndFront3(&g_pCustom->color[24], uwCol3);
+  copSetMoveBackAndFront3(&g_pCustom->color[25], uwCol1);
+  copSetMoveBackAndFront3(&g_pCustom->color[26], uwCol2);
+  copSetMoveBackAndFront3(&g_pCustom->color[27], uwCol3);
+  copSetMoveBackAndFront3(&g_pCustom->color[28], uwCol1);
+  copSetMoveBackAndFront3(&g_pCustom->color[29], uwCol2);
+  copSetMoveBackAndFront3(&g_pCustom->color[30], uwCol3);
+  copSetMoveBackAndFront3(&g_pCustom->color[31], 0x0F0F);
+
+  // 8 missing colors here
+  //copSetWaitRawBackAndFront3(160, 0x00, 0x7F, 0x00);
+  copSetMoveBackAndFront3(&g_pCustom->color[1], uwCol4);
+  copSetMoveBackAndFront3(&g_pCustom->color[2], uwCol5);
+  copSetMoveBackAndFront3(&g_pCustom->color[3], uwCol6);
+  copSetMoveBackAndFront3(&g_pCustom->color[4], uwCol4);
+  copSetMoveBackAndFront3(&g_pCustom->color[5], uwCol5);
+  copSetMoveBackAndFront3(&g_pCustom->color[6], uwCol6);
+  copSetMoveBackAndFront3(&g_pCustom->color[7], uwCol4);
+  copSetMoveBackAndFront3(&g_pCustom->color[8], uwCol5);
+  copSetMoveBackAndFront3(&g_pCustom->color[9], uwCol6);
+
+  copSetWaitBackAndFront3(0xdf, 0xff);
+  return ubCopIndex3;
+  
+  copSetWaitBackAndFront3(0, 0);
+    copSetMoveBackAndFront3(&g_pCustom->color[0], 0x0FFF);
+
+
+  //copSetWaitRawBackAndFront3(0xdf, 0x00, 0x7F, 0x00);
+  //copSetSkipBackAndFront3(0,0x00);
+  //copSetMoveBackAndFront3(&g_pCustom->copjmp2, 1);
+
+  return ubCopIndex3;
+
+  copSetWaitRawBackAndFront3(0xdf, 0x00, 0x7F, 0x00);
+  //copSetWaitBackAndFront3(0xdf, 0xff);
+
+  return ubCopIndex3;
 }
