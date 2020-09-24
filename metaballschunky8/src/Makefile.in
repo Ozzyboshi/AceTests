@@ -101,7 +101,7 @@ PROGRAMS = $(bin_PROGRAMS)
 am_metaballschunky8_OBJECTS = main.$(OBJEXT) \
 	metaballschunky8.$(OBJEXT)
 metaballschunky8_OBJECTS = $(am_metaballschunky8_OBJECTS)
-metaballschunky8_DEPENDENCIES =
+metaballschunky8_DEPENDENCIES = music_ptr_linkable.o
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
 am__v_P_0 = false
@@ -250,7 +250,7 @@ target_alias = @target_alias@
 top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
-metaballschunky8_LDADD = 
+metaballschunky8_LDADD = music_ptr_linkable.o
 metaballschunky8_SOURCES = main.c metaballschunky8.c
 all: all-am
 
@@ -563,6 +563,9 @@ uninstall-am: uninstall-binPROGRAMS
 
 .PRECIOUS: Makefile
 
+
+music_ptr_linkable.o: music_ptr_linkable.s
+	vasmm68k_mot -Fhunk -quiet -esc  -DINTERLACE=0 ./music_ptr_linkable.s  -o ./music_ptr_linkable.o -I/usr/local/amiga/os-include
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

@@ -76,7 +76,7 @@ metaballschunky8.o: metaballschunky8.c metaballschunky8.h \
  /opt/amiga/m68k-amigaos/ndk-include/graphics/text.h \
  /opt/amiga/m68k-amigaos/ndk-include/graphics/scale.h \
  /opt/amiga/m68k-amigaos/ndk-include/hardware/blit.h \
- /opt/amiga/include/ace/managers/blit.h \
+ /opt/amiga/include/ace/managers/blit.h ../_res/discocrazy.h \
  /opt/amiga/m68k-amigaos/sys-include/limits.h
 
 metaballschunky8.h:
@@ -240,5 +240,7 @@ metaballschunky8.h:
 /opt/amiga/m68k-amigaos/ndk-include/hardware/blit.h:
 
 /opt/amiga/include/ace/managers/blit.h:
+
+../_res/discocrazy.h:
 
 /opt/amiga/m68k-amigaos/sys-include/limits.h:

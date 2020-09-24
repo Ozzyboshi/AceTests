@@ -3990,7 +3990,7 @@ return viewCreate ();
   return 0;
 }
 _ACEOF
-for ac_lib in '' acedebug; do
+for ac_lib in '' acerelease; do
   if test -z "$ac_lib"; then
     ac_res="none required"
   else
@@ -4200,9 +4200,7 @@ ac_config_files="$ac_config_files Makefile src/Makefile"
 
 # asm=vasmm68k_mot
 
-
-$as_echo "@%:@define ACE_DEBUG ON" >>confdefs.h
-
+# AC_DEFINE([ACE_DEBUG], [ON], [Debug on])
 
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure

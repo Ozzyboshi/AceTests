@@ -1,80 +1,80 @@
 Block begin: blitManagerCreate...OK, time:  60.0 us
 Block begin: copCreate()
 	Block begin: copListCreate()
-		Addr: 0x22e63c
+		Addr: 0x22bc1c
 		BLOCK mode
-	Block end: copListCreate(), time: >7min
-Block end: copCreate(), time: >7min
+	Block end: copListCreate(), time:   1.530 ms
+Block end: copCreate(), time:   6.779 ms
 Hello, Amiga!
-Block begin: keyCreate()...OK, time:  53.6 us
-Block begin: stateManagerCreate()...OK, time:   2.994 ms
-Block begin: stateCreate(cbCreate: 0x274376, cbLoop: 0x276206, cbDestroy: 0x276374, cbSuspend: 0, cbResume: 0, pPrev: 0)...OK, time:   2.971 ms
-Block begin: statePush(pStateManager: 0x273514, pState: 0x27378c)
+Block begin: keyCreate()...OK, time:  54.0 us
+Block begin: stateManagerCreate()...OK, time:   2.495 ms
+Block begin: stateCreate(cbCreate: 0x2731ba, cbLoop: 0x275036, cbDestroy: 0x27533e, cbSuspend: 0, cbResume: 0, pPrev: 0)...OK, time:   2.540 ms
+Block begin: statePush(pStateManager: 0x22bfa4, pState: 0x22c0c4)
 	Block begin: viewCreate(pTags: 0)
-		addr: 0x2738dc
+		addr: 0x22d284
 		Block begin: copListCreate()
-			Addr: 0x273904
+			Addr: 0x22d2ac
 			RAW mode, size: 146 + WAIT(0xFFFF)
-		Block end: copListCreate(), time:   5.242 ms
+		Block end: copListCreate(), time: >7min
 		Global CLUT mode enabled
-	Block end: viewCreate(), time:   1.143 ms
+	Block end: viewCreate(), time:   1.278 ms
 	Block begin: vPortCreate(pTagList: 0)
-		Addr: 0x273ab4
-		Parent view: 0x2738dc
+		Addr: 0x22e0ec
+		Parent view: 0x22d284
 		Offsets: 0x0
 		Dimensions: 320x256@5
 		No prev VPorts - added to head
-	Block end: vPortCreate(), time:  18.014 ms
+	Block end: vPortCreate(), time: >7min
 	Block begin: simpleBufferCreate(pTags: 0, ...)
-		Addr: 0x273b14
-		Parent VPort: 0x273ab4
+		Addr: 0x22e084
+		Parent VPort: 0x22e0ec
 		Bounds: 320x256
 		Block begin: bitmapCreate(uwWidth: 320, uwHeight: 256, ubDepth: 5, ubFlags: 1)
-			addr: 0x273b4c
-		Block end: bitmapCreate(), time:  10.456 ms
-		Block begin: cameraCreate(pVPort: 0x273ab4, uwPosX: 0, uwPosY: 0, uwMaxX: 320, uwMaxY: 256, isDblBfr: 0)
-			Addr: 0x273b7c
+			addr: 0x22e24c
+		Block end: bitmapCreate(), time: >7min
+		Block begin: cameraCreate(pVPort: 0x22e0ec, uwPosX: 0, uwPosY: 0, uwMaxX: 320, uwMaxY: 256, isDblBfr: 0)
+			Addr: 0x22e27c
 			Resetting camera bounds...
-			Block begin: cameraReset(pManager: 0x273b7c, uwStartX: 0, uwStartY: 0, uwWidth: 320, uwHeight: 256, isDblBfr: 0)
+			Block begin: cameraReset(pManager: 0x22e27c, uwStartX: 0, uwStartY: 0, uwWidth: 320, uwHeight: 256, isDblBfr: 0)
 				Camera max coord: 0,0
 			Block end: cameraReset(), time: >7min
 			Attaching camera to VPort...
-			Manager 0x273b7c attached to head of VP 0x273ab4
+			Manager 0x22e27c attached to head of VP 0x22e0ec
 		Block end: cameraCreate(), time: >7min
 		Copperlist offset: 0
-		Block begin: simpleBufferSetFront(pManager: 0x273b14, pFront: 0x273b4c, isScrollX: 1)
+		Block begin: simpleBufferSetFront(pManager: 0x22e084, pFront: 0x22e24c, isScrollX: 1)
 			Modulo: 0
-			Setting copperlist 0x27394c at offs 0
-		Block end: simplebufferSetFront(), time:   7.988 ms
-		Manager 0x273b14 attached after manager 0x273b7c of VP 0x273ab4
-	Block end: simpleBufferCreate(), time:   3.048 ms
+			Setting copperlist 0x22d2f4 at offs 0
+		Block end: simplebufferSetFront(), time:   8.130 ms
+		Manager 0x22e084 attached after manager 0x22e27c of VP 0x22e0ec
+	Block end: simpleBufferCreate(), time: >7min
 	Block begin: copListCreate()
-		Addr: 0x273bbc
+		Addr: 0x22e0bc
 		RAW mode, size: 146 + WAIT(0xFFFF)
-		Addr orpBackBfr alessiooooooooooooooooooooooooooooooooooo : 0x22a94
-	Block end: copListCreate(), time:   3.901 ms
+		Addr orpBackBfr alessiooooooooooooooooooooooooooooooooooo : 0xd693c
+	Block end: copListCreate(), time:   2.341 ms
 	Block begin: copListCreate()
-		Addr: 0x273c44
+		Addr: 0x22e2fc
 		RAW mode, size: 1485 + WAIT(0xFFFF)
-		Addr orpBackBfr alessiooooooooooooooooooooooooooooooooooo : 0x2442c
-	Block end: copListCreate(), time:  12.384 ms
-	cop2addr with vertical wait: 141972
-	cop2addr withOUT vertical wait: 141976
-	cop3addr: 148524
-	cop2addr H : 2
-	cop2addr L : 10900
-	cop2addr H : 2
-	cop2addr L : 10904
-	cop3addr H : 2
-	cop3addr L : 17452
-	cop3addr H : 2
-	cop3addr L : 17632
-	cop3addr terza riga H : 2
-	cop3addr tarza riga L : 4594
-	cop3addr terza riga H : 2
-	cop3addr tarza riga L : 4648
-	cop3addr quinta riga H : 2
-	cop3addr tarza riga L : 46fc
+		Addr orpBackBfr alessiooooooooooooooooooooooooooooooooooo : 0xd82d4
+	Block end: copListCreate(), time:   4.638 ms
+	cop2addr with vertical wait: 878908
+	cop2addr withOUT vertical wait: 878912
+	cop3addr: 885460
+	cop2addr H : 13
+	cop2addr L : 26940
+	cop2addr H : 13
+	cop2addr L : 26944
+	cop3addr H : 13
+	cop3addr L : 33492
+	cop3addr H : 13
+	cop3addr L : 33672
+	cop3addr terza riga H : d
+	cop3addr tarza riga L : 843c
+	cop3addr terza riga H : d
+	cop3addr tarza riga L : 84f0
+	cop3addr quinta riga H : d
+	cop3addr tarza riga L : 85a4
 	building for vertical skip 76
 	building for vertical skip 84
 	building for vertical skip 92
@@ -104,35 +104,35 @@ Block begin: statePush(pStateManager: 0x273514, pState: 0x27378c)
 	building for vertical skip 28
 	building for vertical skip 36
 	building for vertical skip 44
-	Block begin: viewLoad(pView: 0x2738dc)...OK, time: >7min
-Block end: statePush(), time:  49.181 ms
-Block begin: stateManagerDestroy(pStateManager: 0x273514)
-	Block begin: statePopAll(pStateManager: 0x273514)
-		Block begin: copListDestroy(pCopList: 0x273bbc)...OK, time: >7min
-		Block begin: viewDestroy(pView: 0x2738dc)
-			Block begin: viewLoad(pView: 0)...OK, time:  10.592 ms
-			Block begin: vPortDestroy(pVPort: 0x273ab4)
-				Parent extView: 0x2738dc
-				found VP: 0x273ab4... gotcha!
+	Block begin: viewLoad(pView: 0x22d284)...OK, time: >7min
+Block end: statePush(), time:  60.046 ms
+Block begin: stateManagerDestroy(pStateManager: 0x22bfa4)
+	Block begin: statePopAll(pStateManager: 0x22bfa4)
+		Block begin: copListDestroy(pCopList: 0x22e0bc)...OK, time: >7min
+		Block begin: viewDestroy(pView: 0x22d284)
+			Block begin: viewLoad(pView: 0)...OK, time:  10.822 ms
+			Block begin: vPortDestroy(pVPort: 0x22e0ec)
+				Parent extView: 0x22d284
+				found VP: 0x22e0ec... gotcha!
 				Block begin: Destroying managers
-					Destroying manager 128 @addr: 0x273b7c
+					Destroying manager 128 @addr: 0x22e27c
 					cameraManagerDestroy...OK! 
-					Destroying manager 0 @addr: 0x273b14
+					Destroying manager 0 @addr: 0x22e084
 					Block begin: simpleBufferDestroy()
-						Block begin: bitmapDestroy(pBitMap: 0x273b4c)...OK, time: >7min
+						Block begin: bitmapDestroy(pBitMap: 0x22e24c)...OK, time: >7min
 					Block end: simpleBufferDestroy(), time: >7min
-				Block end: Destroying managers, time:   8.269 ms
-			Block end: vPortDestroy(), time:  12.030 ms
+				Block end: Destroying managers, time:   7.222 ms
+			Block end: vPortDestroy(), time:  10.722 ms
 			Freeing copperlists...
-			Block begin: copListDestroy(pCopList: 0x273904)...OK, time: >7min
-		Block end: viewDestroy(), time:  10.933 ms
-	Block end: statePopAll(), time:  15.217 ms
-Block end: stateManagerDestroy(), time:   1.641 ms
-Block begin: stateDestroy(pState: 0x27378c)...OK, time:   2.799 ms
-Block begin: keyDestroy()...OK, time:  80.8 us
+			Block begin: copListDestroy(pCopList: 0x22d2ac)...OK, time: >7min
+		Block end: viewDestroy(), time:   7.180 ms
+	Block end: statePopAll(), time:  11.452 ms
+Block end: stateManagerDestroy(), time:  16.476 ms
+Block begin: stateDestroy(pState: 0x22c0c4)...OK, time:   2.573 ms
+Block begin: keyDestroy()...OK, time:  53.2 us
 Goodbye, Amiga!
 Block begin: copDestroy()
-	Block begin: copListDestroy(pCopList: 0x22e63c)...OK, time:   7.682 ms
+	Block begin: copListDestroy(pCopList: 0x22bc1c)...OK, time:   7.456 ms
 Block end: copDestroy(), time: >7min
-Block begin: blitManagerDestroy...OK, time:  86.0 us
+Block begin: blitManagerDestroy...OK, time:  60.0 us
 Log closed successfully

@@ -101,7 +101,7 @@ PROGRAMS = $(bin_PROGRAMS)
 am_metaballschunky8_OBJECTS = main.$(OBJEXT) \
 	metaballschunky8.$(OBJEXT)
 metaballschunky8_OBJECTS = $(am_metaballschunky8_OBJECTS)
-metaballschunky8_DEPENDENCIES =
+metaballschunky8_DEPENDENCIES = music_ptr_linkable.o
 AM_V_P = $(am__v_P_$(V))
 am__v_P_ = $(am__v_P_$(AM_DEFAULT_VERBOSITY))
 am__v_P_0 = false
@@ -171,7 +171,7 @@ CFLAGS = -m68000 -msoft-float -fomit-frame-pointer -s -noixemul -ffast-math -DAM
 CPP = m68k-amigaos-gcc -E
 CPPFLAGS = 
 CYGPATH_W = echo
-DEFS = -DPACKAGE_NAME=\"metaballschunky8\" -DPACKAGE_TARNAME=\"metaballschunky8\" -DPACKAGE_VERSION=\"0.1\" -DPACKAGE_STRING=\"metaballschunky8\ 0.1\" -DPACKAGE_BUGREPORT=\"\" -DPACKAGE_URL=\"\" -DPACKAGE=\"metaballschunky8\" -DVERSION=\"0.1\" -DSTDC_HEADERS=1 -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_MEMORY_H=1 -DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1 -DHAVE_UNISTD_H=1 -DHAVE_STDLIB_H=1 -DHAVE_ACE_MANAGERS_KEY_H=1 -DHAVE_ACE_MANAGERS_GAME_H=1 -DHAVE_ACE_UTILS_CHUNKY_H=1 -DHAVE_ACE_MANAGERS_VIEWPORT_SIMPLEBUFFER_H=1 -DACE_DEBUG=ON
+DEFS = -DPACKAGE_NAME=\"metaballschunky8\" -DPACKAGE_TARNAME=\"metaballschunky8\" -DPACKAGE_VERSION=\"0.1\" -DPACKAGE_STRING=\"metaballschunky8\ 0.1\" -DPACKAGE_BUGREPORT=\"\" -DPACKAGE_URL=\"\" -DPACKAGE=\"metaballschunky8\" -DVERSION=\"0.1\" -DSTDC_HEADERS=1 -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_MEMORY_H=1 -DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1 -DHAVE_UNISTD_H=1 -DHAVE_STDLIB_H=1 -DHAVE_ACE_MANAGERS_KEY_H=1 -DHAVE_ACE_MANAGERS_GAME_H=1 -DHAVE_ACE_UTILS_CHUNKY_H=1 -DHAVE_ACE_MANAGERS_VIEWPORT_SIMPLEBUFFER_H=1
 DEPDIR = .deps
 ECHO_C = 
 ECHO_N = -n
@@ -186,7 +186,7 @@ INSTALL_SCRIPT = ${INSTALL}
 INSTALL_STRIP_PROGRAM = $(install_sh) -c -s
 LDFLAGS = 
 LIBOBJS = 
-LIBS = -lacedebug 
+LIBS = -lacerelease 
 LTLIBOBJS = 
 MAKEINFO = ${SHELL} /data/metaballschunky8/missing makeinfo
 MKDIR_P = /bin/mkdir -p
@@ -250,7 +250,7 @@ target_alias =
 top_build_prefix = ../
 top_builddir = ..
 top_srcdir = ..
-metaballschunky8_LDADD = 
+metaballschunky8_LDADD = music_ptr_linkable.o
 metaballschunky8_SOURCES = main.c metaballschunky8.c
 all: all-am
 
@@ -563,6 +563,9 @@ uninstall-am: uninstall-binPROGRAMS
 
 .PRECIOUS: Makefile
 
+
+music_ptr_linkable.o: music_ptr_linkable.s
+	vasmm68k_mot -Fhunk -quiet -esc  -DINTERLACE=0 ./music_ptr_linkable.s  -o ./music_ptr_linkable.o -I/usr/local/amiga/os-include
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

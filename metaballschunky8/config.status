@@ -654,14 +654,14 @@ S["INSTALL_PROGRAM"]="${INSTALL}"
 S["target_alias"]=""
 S["host_alias"]="m68k"
 S["build_alias"]=""
-S["LIBS"]="-lacedebug "
+S["LIBS"]="-lacerelease "
 S["ECHO_T"]=""
 S["ECHO_N"]="-n"
 S["ECHO_C"]=""
 S["DEFS"]="-DPACKAGE_NAME=\\\"metaballschunky8\\\" -DPACKAGE_TARNAME=\\\"metaballschunky8\\\" -DPACKAGE_VERSION=\\\"0.1\\\" -DPACKAGE_STRING=\\\"metaballschunky8\\ 0.1\\\" -DPA"\
 "CKAGE_BUGREPORT=\\\"\\\" -DPACKAGE_URL=\\\"\\\" -DPACKAGE=\\\"metaballschunky8\\\" -DVERSION=\\\"0.1\\\" -DSTDC_HEADERS=1 -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1 -"\
 "DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_MEMORY_H=1 -DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1 -DHAVE_UNISTD_H=1 -DHAVE_STDLIB_H=1 -D"\
-"HAVE_ACE_MANAGERS_KEY_H=1 -DHAVE_ACE_MANAGERS_GAME_H=1 -DHAVE_ACE_UTILS_CHUNKY_H=1 -DHAVE_ACE_MANAGERS_VIEWPORT_SIMPLEBUFFER_H=1 -DACE_DEBUG=ON"
+"HAVE_ACE_MANAGERS_KEY_H=1 -DHAVE_ACE_MANAGERS_GAME_H=1 -DHAVE_ACE_UTILS_CHUNKY_H=1 -DHAVE_ACE_MANAGERS_VIEWPORT_SIMPLEBUFFER_H=1"
 S["mandir"]="${datarootdir}/man"
 S["localedir"]="${datarootdir}/locale"
 S["libdir"]="${exec_prefix}/lib"

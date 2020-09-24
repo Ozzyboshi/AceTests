@@ -17,7 +17,7 @@ if test "" = no; then
   AC_MSG_ERROR([Unable to find required ACE include files]);
 fi
 
-AC_SEARCH_LIBS([viewCreate], [acedebug],[have_ace_lib=yes],[have_ace_lib=no])
+AC_SEARCH_LIBS([viewCreate], [acerelease],[have_ace_lib=yes],[have_ace_lib=no])
 if test "" = no; then
   AC_MSG_ERROR([Unable to find required ACE lib file]);
 fi
@@ -45,7 +45,7 @@ fi
 AC_CONFIG_FILES([Makefile src/Makefile])
 # asm=vasmm68k_mot
 
-AC_DEFINE([ACE_DEBUG], [ON], [Debug on])
+# AC_DEFINE([ACE_DEBUG], [ON], [Debug on])
 
 AC_OUTPUT
 
