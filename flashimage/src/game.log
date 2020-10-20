@@ -1,0 +1,165 @@
+Block begin: blitManagerCreate...OK, time:  60.0 us
+Block begin: copCreate()
+	Block begin: copListCreate()
+		Addr: 0x225cbc
+		BLOCK mode
+	Block end: copListCreate(), time: >7min
+Block end: copCreate(), time:   1.058 ms
+Hello, Amiga!
+Block begin: keyCreate()...OK, time:  53.6 us
+Block begin: stateManagerCreate()...OK, time:   2.462 ms
+Block begin: stateCreate(cbCreate: 0x2730a0, cbLoop: 0x2731ea, cbDestroy: 0x273350, cbSuspend: 0, cbResume: 0, pPrev: 0)...OK, time:   2.562 ms
+Block begin: statePush(pStateManager: 0x226454, pState: 0x2266f4)
+	Block begin: viewCreate(pTags: 0)
+		addr: 0x2282a4
+		Block begin: copListCreate()
+			Addr: 0x2282bc
+			BLOCK mode
+		Block end: copListCreate(), time: >7min
+		Global CLUT mode enabled
+	Block end: viewCreate(), time:  10.110 ms
+	Block begin: vPortCreate(pTagList: 0)
+		Addr: 0x22df54
+		Parent view: 0x2282a4
+		Offsets: 0x0
+		Dimensions: 320x256@4
+		No prev VPorts - added to head
+	Block end: vPortCreate(), time: >7min
+	Block begin: simpleBufferCreate(pTags: 0, ...)
+		Addr: 0x22c0c4
+		Parent VPort: 0x22df54
+		Bounds: 320x256
+		Block begin: bitmapCreate(uwWidth: 320, uwHeight: 256, ubDepth: 4, ubFlags: 1)
+			addr: 0x22c114
+		Block end: bitmapCreate(), time:   4.185 ms
+		Block begin: cameraCreate(pVPort: 0x22df54, uwPosX: 0, uwPosY: 0, uwMaxX: 320, uwMaxY: 256, isDblBfr: 0)
+			Addr: 0x22de5c
+			Resetting camera bounds...
+			Block begin: cameraReset(pManager: 0x22de5c, uwStartX: 0, uwStartY: 0, uwWidth: 320, uwHeight: 256, isDblBfr: 0)
+				Camera max coord: 0,0
+			Block end: cameraReset(), time:   4.591 ms
+			Attaching camera to VPort...
+			Manager 0x22de5c attached to head of VP 0x22df54
+		Block end: cameraCreate(), time: >7min
+		Block begin: copBlockCreate(pCopList: 0x2282bc, uwMaxCmds: 13, uwWaitX: 198, uwWaitY: 43)
+			pAddr: 0x22dfb4
+			Head: 0
+			Added as head, next: 0
+		Block end: copBlockCreate(), time: >7min
+		Block begin: simpleBufferSetFront(pManager: 0x22c0c4, pFront: 0x22c114, isScrollX: 1)
+			Modulo: 0
+		Block end: simplebufferSetFront(), time: >7min
+		Manager 0x22c0c4 attached after manager 0x22de5c of VP 0x22df54
+	Block end: simpleBufferCreate(), time: >7min
+	Block begin: viewLoad(pView: 0x2282a4)...OK, time: >7min
+Block end: statePush(), time: >7min
+r color is : f
+r color is : f
+r color is : f
+r color is : f
+r color is : f
+r color is : f
+r color is : f
+r color is : f
+r color is : f
+r color is : f
+r color is : f
+r color is : f
+r color is : f
+r color is : f
+r color is : f
+r color is : f
+r color is : e
+r color is : e
+r color is : e
+r color is : e
+r color is : e
+r color is : e
+r color is : e
+r color is : f
+r color is : f
+r color is : f
+r color is : f
+r color is : f
+r color is : f
+r color is : f
+r color is : f
+r color is : f
+r color is : d
+r color is : d
+r color is : d
+r color is : d
+r color is : d
+r color is : e
+r color is : e
+r color is : e
+r color is : e
+r color is : f
+r color is : f
+r color is : f
+r color is : f
+r color is : f
+r color is : f
+r color is : f
+r color is : c
+r color is : c
+r color is : c
+r color is : c
+r color is : d
+r color is : d
+r color is : d
+r color is : e
+r color is : e
+r color is : e
+r color is : f
+r color is : f
+r color is : f
+r color is : f
+r color is : f
+r color is : f
+r color is : b
+r color is : b
+r color is : c
+r color is : c
+r color is : c
+r color is : d
+r color is : d
+r color is : d
+r color is : e
+r color is : e
+r color is : f
+r color is : f
+r color is : f
+r color is : f
+r color is : f
+r color is : f
+Block begin: stateManagerDestroy(pStateManager: 0x226454)
+	Block begin: statePopAll(pStateManager: 0x226454)
+		Block begin: viewDestroy(pView: 0x2282a4)
+			Block begin: viewLoad(pView: 0)...OK, time:  10.138 ms
+			Block begin: vPortDestroy(pVPort: 0x22df54)
+				Parent extView: 0x2282a4
+				found VP: 0x22df54... gotcha!
+				Block begin: Destroying managers
+					Destroying manager 128 @addr: 0x22de5c
+					cameraManagerDestroy...OK! 
+					Destroying manager 0 @addr: 0x22c0c4
+					Block begin: simpleBufferDestroy()
+						Block begin: copBlockDestroy(pCopList: 0x2282bc, pBlock: 0x22dfb4)...OK, time:   5.702 ms
+						Block begin: bitmapDestroy(pBitMap: 0x22c114)...OK, time: >7min
+					Block end: simpleBufferDestroy(), time:   7.959 ms
+				Block end: Destroying managers, time:  13.111 ms
+			Block end: vPortDestroy(), time: >7min
+			Freeing copperlists...
+			Block begin: copListDestroy(pCopList: 0x2282bc)...OK, time: >7min
+		Block end: viewDestroy(), time:  11.645 ms
+	Block end: statePopAll(), time:  16.180 ms
+Block end: stateManagerDestroy(), time:   1.040 ms
+Block begin: stateDestroy(pState: 0x2266f4)...OK, time:   2.280 ms
+Block begin: keyDestroy()...OK, time: >7min
+Goodbye, Amiga!
+Block begin: copDestroy()
+	Block begin: copListDestroy(pCopList: 0x225cbc)...OK, time:   6.921 ms
+Block end: copDestroy(), time: >7min
+Block begin: blitManagerDestroy...OK, time:  60.0 us
+Log closed successfully

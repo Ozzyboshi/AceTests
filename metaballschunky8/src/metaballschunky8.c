@@ -132,6 +132,11 @@ long mt_init(const unsigned char *);
 void mt_music();
 void mt_end();
 
+static void interruptHandlerMusic(REGARG(volatile tCustom *pCustom, "a0"), REGARG(volatile void *pData, "a1")) 
+{
+  mt_music();
+}
+
 UWORD COLORS[72];
 
 UBYTE *calcpixel(void *);
@@ -661,14 +666,16 @@ void gameGsCreate(void)
 
   // Load the view
   viewLoad(s_pView);
+
+  systemSetInt(INTB_VERTB, interruptHandlerMusic, 0);
 }
 
 void gameGsLoop(void)
 {
 
   UBYTE *addr = calcpixel(&pThirdCopList->pBackBfr->pList[0]);
-  mt_music();
-  vPortWaitForEnd(s_pVpMain);
+  //mt_music();
+  //vPortWaitForEnd(s_pVpMain);
 
 #ifdef COLORDEBUG
   g_pCustom->color[0] = 0x0F00;
@@ -700,7 +707,7 @@ void gameGsLoop(void)
   //drawpixel( &pThirdCopList->pBackBfr->pList[0]);
       
 
-  mt_music();
+  //mt_music();
   #ifdef COLORDEBUG
   g_pCustom->color[0] = 0x0000;
 #endif
