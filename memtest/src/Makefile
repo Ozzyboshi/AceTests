@@ -70,10 +70,10 @@ am__make_running_with_option = \
   test $$has_opt = yes
 am__make_dryrun = (target_option=n; $(am__make_running_with_option))
 am__make_keepgoing = (target_option=k; $(am__make_running_with_option))
-pkgdatadir = $(datadir)/flashimage
-pkgincludedir = $(includedir)/flashimage
-pkglibdir = $(libdir)/flashimage
-pkglibexecdir = $(libexecdir)/flashimage
+pkgdatadir = $(datadir)/memtest
+pkgincludedir = $(includedir)/memtest
+pkglibdir = $(libdir)/memtest
+pkglibexecdir = $(libexecdir)/memtest
 am__cd = CDPATH="$${ZSH_VERSION+.}$(PATH_SEPARATOR)" && cd
 install_sh_DATA = $(install_sh) -c -m 644
 install_sh_PROGRAM = $(install_sh) -c
@@ -86,7 +86,7 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
-bin_PROGRAMS = flashimage$(EXEEXT)
+bin_PROGRAMS = memtest$(EXEEXT)
 subdir = src
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/configure.ac
@@ -98,9 +98,9 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_flashimage_OBJECTS = main.$(OBJEXT) flashimage.$(OBJEXT)
-flashimage_OBJECTS = $(am_flashimage_OBJECTS)
-flashimage_DEPENDENCIES =
+am_memtest_OBJECTS = main.$(OBJEXT) memtest.$(OBJEXT)
+memtest_OBJECTS = $(am_memtest_OBJECTS)
+memtest_DEPENDENCIES =
 AM_V_P = $(am__v_P_$(V))
 am__v_P_ = $(am__v_P_$(AM_DEFAULT_VERBOSITY))
 am__v_P_0 = false
@@ -116,7 +116,7 @@ am__v_at_1 =
 DEFAULT_INCLUDES = -I.
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__maybe_remake_depfiles = depfiles
-am__depfiles_remade = ./$(DEPDIR)/flashimage.Po ./$(DEPDIR)/main.Po
+am__depfiles_remade = ./$(DEPDIR)/main.Po ./$(DEPDIR)/memtest.Po
 am__mv = mv -f
 COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
@@ -130,8 +130,8 @@ AM_V_CCLD = $(am__v_CCLD_$(V))
 am__v_CCLD_ = $(am__v_CCLD_$(AM_DEFAULT_VERBOSITY))
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
-SOURCES = $(flashimage_SOURCES)
-DIST_SOURCES = $(flashimage_SOURCES)
+SOURCES = $(memtest_SOURCES)
+DIST_SOURCES = $(memtest_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -158,12 +158,12 @@ ETAGS = etags
 CTAGS = ctags
 am__DIST_COMMON = $(srcdir)/Makefile.in $(top_srcdir)/depcomp
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
-ACLOCAL = ${SHELL} /data/AceTests/flashimage/missing aclocal-1.16
+ACLOCAL = ${SHELL} /data/AceTests/memtest/missing aclocal-1.16
 AMTAR = $${TAR-tar}
 AM_DEFAULT_VERBOSITY = 1
-AUTOCONF = ${SHELL} /data/AceTests/flashimage/missing autoconf
-AUTOHEADER = ${SHELL} /data/AceTests/flashimage/missing autoheader
-AUTOMAKE = ${SHELL} /data/AceTests/flashimage/missing automake-1.16
+AUTOCONF = ${SHELL} /data/AceTests/memtest/missing autoconf
+AUTOHEADER = ${SHELL} /data/AceTests/memtest/missing autoheader
+AUTOMAKE = ${SHELL} /data/AceTests/memtest/missing automake-1.16
 AWK = mawk
 CC = m68k-amigaos-gcc
 CCDEPMODE = depmode=gcc3
@@ -171,7 +171,7 @@ CFLAGS = -m68000 -msoft-float -fomit-frame-pointer -s -noixemul -ffast-math -DAM
 CPP = m68k-amigaos-gcc -E
 CPPFLAGS = 
 CYGPATH_W = echo
-DEFS = -DPACKAGE_NAME=\"flashimage\" -DPACKAGE_TARNAME=\"flashimage\" -DPACKAGE_VERSION=\"0.1\" -DPACKAGE_STRING=\"flashimage\ 0.1\" -DPACKAGE_BUGREPORT=\"\" -DPACKAGE_URL=\"\" -DPACKAGE=\"flashimage\" -DVERSION=\"0.1\" -DSTDC_HEADERS=1 -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_MEMORY_H=1 -DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1 -DHAVE_UNISTD_H=1 -DHAVE_STDLIB_H=1 -DHAVE_ACE_MANAGERS_KEY_H=1 -DHAVE_ACE_MANAGERS_GAME_H=1 -DHAVE_ACE_UTILS_CHUNKY_H=1 -DHAVE_ACE_MANAGERS_VIEWPORT_SIMPLEBUFFER_H=1
+DEFS = -DPACKAGE_NAME=\"memtest\" -DPACKAGE_TARNAME=\"memtest\" -DPACKAGE_VERSION=\"0.1\" -DPACKAGE_STRING=\"memtest\ 0.1\" -DPACKAGE_BUGREPORT=\"\" -DPACKAGE_URL=\"\" -DPACKAGE=\"memtest\" -DVERSION=\"0.1\" -DSTDC_HEADERS=1 -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_MEMORY_H=1 -DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1 -DHAVE_UNISTD_H=1 -DHAVE_STDLIB_H=1 -DHAVE_ACE_MANAGERS_KEY_H=1 -DHAVE_ACE_MANAGERS_GAME_H=1 -DHAVE_ACE_UTILS_CHUNKY_H=1 -DHAVE_ACE_MANAGERS_VIEWPORT_SIMPLEBUFFER_H=1
 DEPDIR = .deps
 ECHO_C = 
 ECHO_N = -n
@@ -188,14 +188,14 @@ LDFLAGS =
 LIBOBJS = 
 LIBS = -lacerelease 
 LTLIBOBJS = 
-MAKEINFO = ${SHELL} /data/AceTests/flashimage/missing makeinfo
+MAKEINFO = ${SHELL} /data/AceTests/memtest/missing makeinfo
 MKDIR_P = /usr/bin/mkdir -p
 OBJEXT = o
-PACKAGE = flashimage
+PACKAGE = memtest
 PACKAGE_BUGREPORT = 
-PACKAGE_NAME = flashimage
-PACKAGE_STRING = flashimage 0.1
-PACKAGE_TARNAME = flashimage
+PACKAGE_NAME = memtest
+PACKAGE_STRING = memtest 0.1
+PACKAGE_TARNAME = memtest
 PACKAGE_URL = 
 PACKAGE_VERSION = 0.1
 PATH_SEPARATOR = :
@@ -203,10 +203,10 @@ SET_MAKE =
 SHELL = /bin/bash
 STRIP = strip
 VERSION = 0.1
-abs_builddir = /data/AceTests/flashimage/src
-abs_srcdir = /data/AceTests/flashimage/src
-abs_top_builddir = /data/AceTests/flashimage
-abs_top_srcdir = /data/AceTests/flashimage
+abs_builddir = /data/AceTests/memtest/src
+abs_srcdir = /data/AceTests/memtest/src
+abs_top_builddir = /data/AceTests/memtest
+abs_top_srcdir = /data/AceTests/memtest
 ac_ct_CC = m68k-amigaos-gcc
 am__include = include
 am__leading_dot = .
@@ -228,7 +228,7 @@ host_alias = m68k
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /data/AceTests/flashimage/install-sh
+install_sh = ${SHELL} /data/AceTests/memtest/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
@@ -250,8 +250,8 @@ target_alias =
 top_build_prefix = ../
 top_builddir = ..
 top_srcdir = ..
-flashimage_LDADD = 
-flashimage_SOURCES = main.c flashimage.c
+memtest_LDADD = 
+memtest_SOURCES = main.c memtest.c
 all: all-am
 
 .SUFFIXES:
@@ -328,9 +328,9 @@ uninstall-binPROGRAMS:
 clean-binPROGRAMS:
 	-test -z "$(bin_PROGRAMS)" || rm -f $(bin_PROGRAMS)
 
-flashimage$(EXEEXT): $(flashimage_OBJECTS) $(flashimage_DEPENDENCIES) $(EXTRA_flashimage_DEPENDENCIES) 
-	@rm -f flashimage$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(flashimage_OBJECTS) $(flashimage_LDADD) $(LIBS)
+memtest$(EXEEXT): $(memtest_OBJECTS) $(memtest_DEPENDENCIES) $(EXTRA_memtest_DEPENDENCIES) 
+	@rm -f memtest$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(memtest_OBJECTS) $(memtest_LDADD) $(LIBS)
 
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
@@ -338,8 +338,8 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
-include ./$(DEPDIR)/flashimage.Po # am--include-marker
 include ./$(DEPDIR)/main.Po # am--include-marker
+include ./$(DEPDIR)/memtest.Po # am--include-marker
 
 $(am__depfiles_remade):
 	@$(MKDIR_P) $(@D)
@@ -490,8 +490,8 @@ clean: clean-am
 clean-am: clean-binPROGRAMS clean-generic mostlyclean-am
 
 distclean: distclean-am
-		-rm -f ./$(DEPDIR)/flashimage.Po
-	-rm -f ./$(DEPDIR)/main.Po
+		-rm -f ./$(DEPDIR)/main.Po
+	-rm -f ./$(DEPDIR)/memtest.Po
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-tags
@@ -537,8 +537,8 @@ install-ps-am:
 installcheck-am:
 
 maintainer-clean: maintainer-clean-am
-		-rm -f ./$(DEPDIR)/flashimage.Po
-	-rm -f ./$(DEPDIR)/main.Po
+		-rm -f ./$(DEPDIR)/main.Po
+	-rm -f ./$(DEPDIR)/memtest.Po
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 
