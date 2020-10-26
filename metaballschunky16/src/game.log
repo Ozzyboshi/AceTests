@@ -1,0 +1,1892 @@
+Block begin: blitManagerCreate...OK, time:  60.0 us
+Block begin: copCreate()
+	Block begin: copListCreate()
+		Addr: 0x21e7a4
+		BLOCK mode
+	Block end: copListCreate(), time: >7min
+Block end: copCreate(), time:   4.529 ms
+Hello, Amiga!
+Block begin: keyCreate()...OK, time:  53.6 us
+Block begin: stateManagerCreate()...OK, time:   2.710 ms
+Block begin: stateCreate(cbCreate: 0x27320e, cbLoop: 0x273afc, cbDestroy: 0x273e86, cbSuspend: 0, cbResume: 0, pPrev: 0)...OK, time: >7min
+Block begin: statePush(pStateManager: 0x21ee34, pState: 0x21fc44)
+	Block begin: viewCreate(pTags: 0)
+		addr: 0x21fd74
+		Block begin: copListCreate()
+			Addr: 0x22dc8c
+			RAW mode, size: 355 + WAIT(0xFFFF)
+		Block end: copListCreate(), time:   4.232 ms
+		Global CLUT mode enabled
+	Block end: viewCreate(), time:   1.839 ms
+	Block begin: vPortCreate(pTagList: 0)
+		Addr: 0x23daf4
+		Parent view: 0x21fd74
+		Offsets: 0x0
+		Dimensions: 320x256@5
+		No prev VPorts - added to head
+	Block end: vPortCreate(), time: >7min
+	Block begin: simpleBufferCreate(pTags: 0, ...)
+		Addr: 0x23db54
+		Parent VPort: 0x23daf4
+		Bounds: 320x256
+		Block begin: bitmapCreate(uwWidth: 320, uwHeight: 256, ubDepth: 5, ubFlags: 1)
+			addr: 0x23db8c
+		Block end: bitmapCreate(), time:   7.482 ms
+		Block begin: cameraCreate(pVPort: 0x23daf4, uwPosX: 0, uwPosY: 0, uwMaxX: 320, uwMaxY: 256, isDblBfr: 0)
+			Addr: 0x23dbbc
+			Resetting camera bounds...
+			Block begin: cameraReset(pManager: 0x23dbbc, uwStartX: 0, uwStartY: 0, uwWidth: 320, uwHeight: 256, isDblBfr: 0)
+				Camera max coord: 0,0
+			Block end: cameraReset(), time: >7min
+			Attaching camera to VPort...
+			Manager 0x23dbbc attached to head of VP 0x23daf4
+		Block end: cameraCreate(), time: >7min
+		Copperlist offset: 0
+		Block begin: simpleBufferSetFront(pManager: 0x23db54, pFront: 0x23db8c, isScrollX: 1)
+			Modulo: 0
+			Setting copperlist 0x22dd84 at offs 0
+		Block end: simplebufferSetFront(), time:   9.532 ms
+		Manager 0x23db54 attached after manager 0x23dbbc of VP 0x23daf4
+	Block end: simpleBufferCreate(), time: 942.8 us
+	Block begin: viewLoad(pView: 0x21fd74)...OK, time: >7min
+Block end: statePush(), time:  29.579 ms
+X Distance for horizontal counter 0 is 160
+X Distance 2 for horizontal counter 0 is 0
+Y Distance for horizontal counter 0 is 128
+Y Distance 2 for horizontal counter 0 is 0
+Setting value fc0 for pixel vertical 0
+Y Distance for horizontal counter 1 is 112
+Y Distance 2 for horizontal counter 1 is 16
+Setting value fc0 for pixel vertical 1
+Y Distance for horizontal counter 2 is 96
+Y Distance 2 for horizontal counter 2 is 32
+Setting value fc0 for pixel vertical 2
+Y Distance for horizontal counter 3 is 80
+Y Distance 2 for horizontal counter 3 is 48
+Setting value fc0 for pixel vertical 3
+Y Distance for horizontal counter 4 is 64
+Y Distance 2 for horizontal counter 4 is 64
+Setting value fc0 for pixel vertical 4
+Y Distance for horizontal counter 5 is 48
+Y Distance 2 for horizontal counter 5 is 80
+Setting value fc0 for pixel vertical 5
+Y Distance for horizontal counter 6 is 32
+Y Distance 2 for horizontal counter 6 is 96
+Setting value fc0 for pixel vertical 6
+Y Distance for horizontal counter 7 is 16
+Y Distance 2 for horizontal counter 7 is 112
+Setting value fc0 for pixel vertical 7
+Y Distance for horizontal counter 8 is 0
+Y Distance 2 for horizontal counter 8 is 128
+Setting value fc0 for pixel vertical 8
+Y Distance for horizontal counter 9 is 16
+Y Distance 2 for horizontal counter 9 is 144
+Setting value 8f0 for pixel vertical 9
+Y Distance for horizontal counter 10 is 32
+Y Distance 2 for horizontal counter 10 is 160
+Setting value f3 for pixel vertical 10
+Y Distance for horizontal counter 11 is 48
+Y Distance 2 for horizontal counter 11 is 176
+Setting value ff for pixel vertical 11
+Y Distance for horizontal counter 12 is 64
+Y Distance 2 for horizontal counter 12 is 192
+Setting value 4f for pixel vertical 12
+Y Distance for horizontal counter 13 is 80
+Y Distance 2 for horizontal counter 13 is 208
+Setting value 70f for pixel vertical 13
+Y Distance for horizontal counter 14 is 96
+Y Distance 2 for horizontal counter 14 is 224
+Setting value f0c for pixel vertical 14
+Y Distance for horizontal counter 15 is 112
+Y Distance 2 for horizontal counter 15 is 240
+Setting value f00 for pixel vertical 15
+X Distance for horizontal counter 1 is 144
+X Distance 2 for horizontal counter 1 is 16
+Y Distance for horizontal counter 0 is 128
+Y Distance 2 for horizontal counter 0 is 0
+Setting value fc0 for pixel vertical 0
+Y Distance for horizontal counter 1 is 112
+Y Distance 2 for horizontal counter 1 is 16
+Setting value fc0 for pixel vertical 1
+Y Distance for horizontal counter 2 is 96
+Y Distance 2 for horizontal counter 2 is 32
+Setting value fc0 for pixel vertical 2
+Y Distance for horizontal counter 3 is 80
+Y Distance 2 for horizontal counter 3 is 48
+Setting value fc0 for pixel vertical 3
+Y Distance for horizontal counter 4 is 64
+Y Distance 2 for horizontal counter 4 is 64
+Setting value fc0 for pixel vertical 4
+Y Distance for horizontal counter 5 is 48
+Y Distance 2 for horizontal counter 5 is 80
+Setting value fc0 for pixel vertical 5
+Y Distance for horizontal counter 6 is 32
+Y Distance 2 for horizontal counter 6 is 96
+Setting value fc0 for pixel vertical 6
+Y Distance for horizontal counter 7 is 16
+Y Distance 2 for horizontal counter 7 is 112
+Setting value fc0 for pixel vertical 7
+Y Distance for horizontal counter 8 is 0
+Y Distance 2 for horizontal counter 8 is 128
+Setting value fc0 for pixel vertical 8
+Y Distance for horizontal counter 9 is 16
+Y Distance 2 for horizontal counter 9 is 144
+Setting value 8f0 for pixel vertical 9
+Y Distance for horizontal counter 10 is 32
+Y Distance 2 for horizontal counter 10 is 160
+Setting value f3 for pixel vertical 10
+Y Distance for horizontal counter 11 is 48
+Y Distance 2 for horizontal counter 11 is 176
+Setting value ff for pixel vertical 11
+Y Distance for horizontal counter 12 is 64
+Y Distance 2 for horizontal counter 12 is 192
+Setting value 4f for pixel vertical 12
+Y Distance for horizontal counter 13 is 80
+Y Distance 2 for horizontal counter 13 is 208
+Setting value 70f for pixel vertical 13
+Y Distance for horizontal counter 14 is 96
+Y Distance 2 for horizontal counter 14 is 224
+Setting value f0c for pixel vertical 14
+Y Distance for horizontal counter 15 is 112
+Y Distance 2 for horizontal counter 15 is 240
+Setting value f00 for pixel vertical 15
+X Distance for horizontal counter 2 is 128
+X Distance 2 for horizontal counter 2 is 32
+Y Distance for horizontal counter 0 is 128
+Y Distance 2 for horizontal counter 0 is 0
+Setting value fc0 for pixel vertical 0
+Y Distance for horizontal counter 1 is 112
+Y Distance 2 for horizontal counter 1 is 16
+Setting value fc0 for pixel vertical 1
+Y Distance for horizontal counter 2 is 96
+Y Distance 2 for horizontal counter 2 is 32
+Setting value fc0 for pixel vertical 2
+Y Distance for horizontal counter 3 is 80
+Y Distance 2 for horizontal counter 3 is 48
+Setting value fc0 for pixel vertical 3
+Y Distance for horizontal counter 4 is 64
+Y Distance 2 for horizontal counter 4 is 64
+Setting value fc0 for pixel vertical 4
+Y Distance for horizontal counter 5 is 48
+Y Distance 2 for horizontal counter 5 is 80
+Setting value fc0 for pixel vertical 5
+Y Distance for horizontal counter 6 is 32
+Y Distance 2 for horizontal counter 6 is 96
+Setting value fc0 for pixel vertical 6
+Y Distance for horizontal counter 7 is 16
+Y Distance 2 for horizontal counter 7 is 112
+Setting value fc0 for pixel vertical 7
+Y Distance for horizontal counter 8 is 0
+Y Distance 2 for horizontal counter 8 is 128
+Setting value fc0 for pixel vertical 8
+Y Distance for horizontal counter 9 is 16
+Y Distance 2 for horizontal counter 9 is 144
+Setting value 8f0 for pixel vertical 9
+Y Distance for horizontal counter 10 is 32
+Y Distance 2 for horizontal counter 10 is 160
+Setting value f3 for pixel vertical 10
+Y Distance for horizontal counter 11 is 48
+Y Distance 2 for horizontal counter 11 is 176
+Setting value ff for pixel vertical 11
+Y Distance for horizontal counter 12 is 64
+Y Distance 2 for horizontal counter 12 is 192
+Setting value 4f for pixel vertical 12
+Y Distance for horizontal counter 13 is 80
+Y Distance 2 for horizontal counter 13 is 208
+Setting value 70f for pixel vertical 13
+Y Distance for horizontal counter 14 is 96
+Y Distance 2 for horizontal counter 14 is 224
+Setting value f0c for pixel vertical 14
+Y Distance for horizontal counter 15 is 112
+Y Distance 2 for horizontal counter 15 is 240
+Setting value f00 for pixel vertical 15
+X Distance for horizontal counter 3 is 112
+X Distance 2 for horizontal counter 3 is 48
+Y Distance for horizontal counter 0 is 128
+Y Distance 2 for horizontal counter 0 is 0
+Setting value fc0 for pixel vertical 0
+Y Distance for horizontal counter 1 is 112
+Y Distance 2 for horizontal counter 1 is 16
+Setting value fc0 for pixel vertical 1
+Y Distance for horizontal counter 2 is 96
+Y Distance 2 for horizontal counter 2 is 32
+Setting value fc0 for pixel vertical 2
+Y Distance for horizontal counter 3 is 80
+Y Distance 2 for horizontal counter 3 is 48
+Setting value fc0 for pixel vertical 3
+Y Distance for horizontal counter 4 is 64
+Y Distance 2 for horizontal counter 4 is 64
+Setting value fc0 for pixel vertical 4
+Y Distance for horizontal counter 5 is 48
+Y Distance 2 for horizontal counter 5 is 80
+Setting value fc0 for pixel vertical 5
+Y Distance for horizontal counter 6 is 32
+Y Distance 2 for horizontal counter 6 is 96
+Setting value fc0 for pixel vertical 6
+Y Distance for horizontal counter 7 is 16
+Y Distance 2 for horizontal counter 7 is 112
+Setting value fc0 for pixel vertical 7
+Y Distance for horizontal counter 8 is 0
+Y Distance 2 for horizontal counter 8 is 128
+Setting value fc0 for pixel vertical 8
+Y Distance for horizontal counter 9 is 16
+Y Distance 2 for horizontal counter 9 is 144
+Setting value 8f0 for pixel vertical 9
+Y Distance for horizontal counter 10 is 32
+Y Distance 2 for horizontal counter 10 is 160
+Setting value f3 for pixel vertical 10
+Y Distance for horizontal counter 11 is 48
+Y Distance 2 for horizontal counter 11 is 176
+Setting value ff for pixel vertical 11
+Y Distance for horizontal counter 12 is 64
+Y Distance 2 for horizontal counter 12 is 192
+Setting value 4f for pixel vertical 12
+Y Distance for horizontal counter 13 is 80
+Y Distance 2 for horizontal counter 13 is 208
+Setting value 70f for pixel vertical 13
+Y Distance for horizontal counter 14 is 96
+Y Distance 2 for horizontal counter 14 is 224
+Setting value f0c for pixel vertical 14
+Y Distance for horizontal counter 15 is 112
+Y Distance 2 for horizontal counter 15 is 240
+Setting value f00 for pixel vertical 15
+X Distance for horizontal counter 4 is 96
+X Distance 2 for horizontal counter 4 is 64
+Y Distance for horizontal counter 0 is 128
+Y Distance 2 for horizontal counter 0 is 0
+Setting value fc0 for pixel vertical 0
+Y Distance for horizontal counter 1 is 112
+Y Distance 2 for horizontal counter 1 is 16
+Setting value fc0 for pixel vertical 1
+Y Distance for horizontal counter 2 is 96
+Y Distance 2 for horizontal counter 2 is 32
+Setting value fc0 for pixel vertical 2
+Y Distance for horizontal counter 3 is 80
+Y Distance 2 for horizontal counter 3 is 48
+Setting value fc0 for pixel vertical 3
+Y Distance for horizontal counter 4 is 64
+Y Distance 2 for horizontal counter 4 is 64
+Setting value fc0 for pixel vertical 4
+Y Distance for horizontal counter 5 is 48
+Y Distance 2 for horizontal counter 5 is 80
+Setting value fc0 for pixel vertical 5
+Y Distance for horizontal counter 6 is 32
+Y Distance 2 for horizontal counter 6 is 96
+Setting value fc0 for pixel vertical 6
+Y Distance for horizontal counter 7 is 16
+Y Distance 2 for horizontal counter 7 is 112
+Setting value fc0 for pixel vertical 7
+Y Distance for horizontal counter 8 is 0
+Y Distance 2 for horizontal counter 8 is 128
+Setting value fc0 for pixel vertical 8
+Y Distance for horizontal counter 9 is 16
+Y Distance 2 for horizontal counter 9 is 144
+Setting value 8f0 for pixel vertical 9
+Y Distance for horizontal counter 10 is 32
+Y Distance 2 for horizontal counter 10 is 160
+Setting value f3 for pixel vertical 10
+Y Distance for horizontal counter 11 is 48
+Y Distance 2 for horizontal counter 11 is 176
+Setting value ff for pixel vertical 11
+Y Distance for horizontal counter 12 is 64
+Y Distance 2 for horizontal counter 12 is 192
+Setting value 4f for pixel vertical 12
+Y Distance for horizontal counter 13 is 80
+Y Distance 2 for horizontal counter 13 is 208
+Setting value 70f for pixel vertical 13
+Y Distance for horizontal counter 14 is 96
+Y Distance 2 for horizontal counter 14 is 224
+Setting value f0c for pixel vertical 14
+Y Distance for horizontal counter 15 is 112
+Y Distance 2 for horizontal counter 15 is 240
+Setting value f00 for pixel vertical 15
+X Distance for horizontal counter 5 is 80
+X Distance 2 for horizontal counter 5 is 80
+Y Distance for horizontal counter 0 is 128
+Y Distance 2 for horizontal counter 0 is 0
+Setting value fc0 for pixel vertical 0
+Y Distance for horizontal counter 1 is 112
+Y Distance 2 for horizontal counter 1 is 16
+Setting value fc0 for pixel vertical 1
+Y Distance for horizontal counter 2 is 96
+Y Distance 2 for horizontal counter 2 is 32
+Setting value fc0 for pixel vertical 2
+Y Distance for horizontal counter 3 is 80
+Y Distance 2 for horizontal counter 3 is 48
+Setting value fc0 for pixel vertical 3
+Y Distance for horizontal counter 4 is 64
+Y Distance 2 for horizontal counter 4 is 64
+Setting value fc0 for pixel vertical 4
+Y Distance for horizontal counter 5 is 48
+Y Distance 2 for horizontal counter 5 is 80
+Setting value fc0 for pixel vertical 5
+Y Distance for horizontal counter 6 is 32
+Y Distance 2 for horizontal counter 6 is 96
+Setting value fc0 for pixel vertical 6
+Y Distance for horizontal counter 7 is 16
+Y Distance 2 for horizontal counter 7 is 112
+Setting value fc0 for pixel vertical 7
+Y Distance for horizontal counter 8 is 0
+Y Distance 2 for horizontal counter 8 is 128
+Setting value fc0 for pixel vertical 8
+Y Distance for horizontal counter 9 is 16
+Y Distance 2 for horizontal counter 9 is 144
+Setting value 8f0 for pixel vertical 9
+Y Distance for horizontal counter 10 is 32
+Y Distance 2 for horizontal counter 10 is 160
+Setting value f3 for pixel vertical 10
+Y Distance for horizontal counter 11 is 48
+Y Distance 2 for horizontal counter 11 is 176
+Setting value ff for pixel vertical 11
+Y Distance for horizontal counter 12 is 64
+Y Distance 2 for horizontal counter 12 is 192
+Setting value 4f for pixel vertical 12
+Y Distance for horizontal counter 13 is 80
+Y Distance 2 for horizontal counter 13 is 208
+Setting value 70f for pixel vertical 13
+Y Distance for horizontal counter 14 is 96
+Y Distance 2 for horizontal counter 14 is 224
+Setting value f0c for pixel vertical 14
+Y Distance for horizontal counter 15 is 112
+Y Distance 2 for horizontal counter 15 is 240
+Setting value f00 for pixel vertical 15
+X Distance for horizontal counter 6 is 64
+X Distance 2 for horizontal counter 6 is 96
+Y Distance for horizontal counter 0 is 128
+Y Distance 2 for horizontal counter 0 is 0
+Setting value fc0 for pixel vertical 0
+Y Distance for horizontal counter 1 is 112
+Y Distance 2 for horizontal counter 1 is 16
+Setting value fc0 for pixel vertical 1
+Y Distance for horizontal counter 2 is 96
+Y Distance 2 for horizontal counter 2 is 32
+Setting value fc0 for pixel vertical 2
+Y Distance for horizontal counter 3 is 80
+Y Distance 2 for horizontal counter 3 is 48
+Setting value fc0 for pixel vertical 3
+Y Distance for horizontal counter 4 is 64
+Y Distance 2 for horizontal counter 4 is 64
+Setting value fc0 for pixel vertical 4
+Y Distance for horizontal counter 5 is 48
+Y Distance 2 for horizontal counter 5 is 80
+Setting value fc0 for pixel vertical 5
+Y Distance for horizontal counter 6 is 32
+Y Distance 2 for horizontal counter 6 is 96
+Setting value fc0 for pixel vertical 6
+Y Distance for horizontal counter 7 is 16
+Y Distance 2 for horizontal counter 7 is 112
+Setting value fc0 for pixel vertical 7
+Y Distance for horizontal counter 8 is 0
+Y Distance 2 for horizontal counter 8 is 128
+Setting value fc0 for pixel vertical 8
+Y Distance for horizontal counter 9 is 16
+Y Distance 2 for horizontal counter 9 is 144
+Setting value 8f0 for pixel vertical 9
+Y Distance for horizontal counter 10 is 32
+Y Distance 2 for horizontal counter 10 is 160
+Setting value f3 for pixel vertical 10
+Y Distance for horizontal counter 11 is 48
+Y Distance 2 for horizontal counter 11 is 176
+Setting value ff for pixel vertical 11
+Y Distance for horizontal counter 12 is 64
+Y Distance 2 for horizontal counter 12 is 192
+Setting value 4f for pixel vertical 12
+Y Distance for horizontal counter 13 is 80
+Y Distance 2 for horizontal counter 13 is 208
+Setting value 70f for pixel vertical 13
+Y Distance for horizontal counter 14 is 96
+Y Distance 2 for horizontal counter 14 is 224
+Setting value f0c for pixel vertical 14
+Y Distance for horizontal counter 15 is 112
+Y Distance 2 for horizontal counter 15 is 240
+Setting value f00 for pixel vertical 15
+X Distance for horizontal counter 7 is 48
+X Distance 2 for horizontal counter 7 is 112
+Y Distance for horizontal counter 0 is 128
+Y Distance 2 for horizontal counter 0 is 0
+Setting value fc0 for pixel vertical 0
+Y Distance for horizontal counter 1 is 112
+Y Distance 2 for horizontal counter 1 is 16
+Setting value fc0 for pixel vertical 1
+Y Distance for horizontal counter 2 is 96
+Y Distance 2 for horizontal counter 2 is 32
+Setting value fc0 for pixel vertical 2
+Y Distance for horizontal counter 3 is 80
+Y Distance 2 for horizontal counter 3 is 48
+Setting value fc0 for pixel vertical 3
+Y Distance for horizontal counter 4 is 64
+Y Distance 2 for horizontal counter 4 is 64
+Setting value fc0 for pixel vertical 4
+Y Distance for horizontal counter 5 is 48
+Y Distance 2 for horizontal counter 5 is 80
+Setting value fc0 for pixel vertical 5
+Y Distance for horizontal counter 6 is 32
+Y Distance 2 for horizontal counter 6 is 96
+Setting value fc0 for pixel vertical 6
+Y Distance for horizontal counter 7 is 16
+Y Distance 2 for horizontal counter 7 is 112
+Setting value fc0 for pixel vertical 7
+Y Distance for horizontal counter 8 is 0
+Y Distance 2 for horizontal counter 8 is 128
+Setting value fc0 for pixel vertical 8
+Y Distance for horizontal counter 9 is 16
+Y Distance 2 for horizontal counter 9 is 144
+Setting value 8f0 for pixel vertical 9
+Y Distance for horizontal counter 10 is 32
+Y Distance 2 for horizontal counter 10 is 160
+Setting value f3 for pixel vertical 10
+Y Distance for horizontal counter 11 is 48
+Y Distance 2 for horizontal counter 11 is 176
+Setting value ff for pixel vertical 11
+Y Distance for horizontal counter 12 is 64
+Y Distance 2 for horizontal counter 12 is 192
+Setting value 4f for pixel vertical 12
+Y Distance for horizontal counter 13 is 80
+Y Distance 2 for horizontal counter 13 is 208
+Setting value 70f for pixel vertical 13
+Y Distance for horizontal counter 14 is 96
+Y Distance 2 for horizontal counter 14 is 224
+Setting value f0c for pixel vertical 14
+Y Distance for horizontal counter 15 is 112
+Y Distance 2 for horizontal counter 15 is 240
+Setting value f00 for pixel vertical 15
+X Distance for horizontal counter 8 is 32
+X Distance 2 for horizontal counter 8 is 128
+Y Distance for horizontal counter 0 is 128
+Y Distance 2 for horizontal counter 0 is 0
+Setting value fc0 for pixel vertical 0
+Y Distance for horizontal counter 1 is 112
+Y Distance 2 for horizontal counter 1 is 16
+Setting value fc0 for pixel vertical 1
+Y Distance for horizontal counter 2 is 96
+Y Distance 2 for horizontal counter 2 is 32
+Setting value fc0 for pixel vertical 2
+Y Distance for horizontal counter 3 is 80
+Y Distance 2 for horizontal counter 3 is 48
+Setting value fc0 for pixel vertical 3
+Y Distance for horizontal counter 4 is 64
+Y Distance 2 for horizontal counter 4 is 64
+Setting value fc0 for pixel vertical 4
+Y Distance for horizontal counter 5 is 48
+Y Distance 2 for horizontal counter 5 is 80
+Setting value fc0 for pixel vertical 5
+Y Distance for horizontal counter 6 is 32
+Y Distance 2 for horizontal counter 6 is 96
+Setting value fc0 for pixel vertical 6
+Y Distance for horizontal counter 7 is 16
+Y Distance 2 for horizontal counter 7 is 112
+Setting value fc0 for pixel vertical 7
+Y Distance for horizontal counter 8 is 0
+Y Distance 2 for horizontal counter 8 is 128
+Setting value fc0 for pixel vertical 8
+Y Distance for horizontal counter 9 is 16
+Y Distance 2 for horizontal counter 9 is 144
+Setting value 8f0 for pixel vertical 9
+Y Distance for horizontal counter 10 is 32
+Y Distance 2 for horizontal counter 10 is 160
+Setting value f3 for pixel vertical 10
+Y Distance for horizontal counter 11 is 48
+Y Distance 2 for horizontal counter 11 is 176
+Setting value ff for pixel vertical 11
+Y Distance for horizontal counter 12 is 64
+Y Distance 2 for horizontal counter 12 is 192
+Setting value 4f for pixel vertical 12
+Y Distance for horizontal counter 13 is 80
+Y Distance 2 for horizontal counter 13 is 208
+Setting value 70f for pixel vertical 13
+Y Distance for horizontal counter 14 is 96
+Y Distance 2 for horizontal counter 14 is 224
+Setting value f0c for pixel vertical 14
+Y Distance for horizontal counter 15 is 112
+Y Distance 2 for horizontal counter 15 is 240
+Setting value f00 for pixel vertical 15
+X Distance for horizontal counter 9 is 16
+X Distance 2 for horizontal counter 9 is 144
+Y Distance for horizontal counter 0 is 128
+Y Distance 2 for horizontal counter 0 is 0
+Setting value fc0 for pixel vertical 0
+Y Distance for horizontal counter 1 is 112
+Y Distance 2 for horizontal counter 1 is 16
+Setting value fc0 for pixel vertical 1
+Y Distance for horizontal counter 2 is 96
+Y Distance 2 for horizontal counter 2 is 32
+Setting value fc0 for pixel vertical 2
+Y Distance for horizontal counter 3 is 80
+Y Distance 2 for horizontal counter 3 is 48
+Setting value fc0 for pixel vertical 3
+Y Distance for horizontal counter 4 is 64
+Y Distance 2 for horizontal counter 4 is 64
+Setting value fc0 for pixel vertical 4
+Y Distance for horizontal counter 5 is 48
+Y Distance 2 for horizontal counter 5 is 80
+Setting value fc0 for pixel vertical 5
+Y Distance for horizontal counter 6 is 32
+Y Distance 2 for horizontal counter 6 is 96
+Setting value fc0 for pixel vertical 6
+Y Distance for horizontal counter 7 is 16
+Y Distance 2 for horizontal counter 7 is 112
+Setting value fc0 for pixel vertical 7
+Y Distance for horizontal counter 8 is 0
+Y Distance 2 for horizontal counter 8 is 128
+Setting value fc0 for pixel vertical 8
+Y Distance for horizontal counter 9 is 16
+Y Distance 2 for horizontal counter 9 is 144
+Setting value 8f0 for pixel vertical 9
+Y Distance for horizontal counter 10 is 32
+Y Distance 2 for horizontal counter 10 is 160
+Setting value f3 for pixel vertical 10
+Y Distance for horizontal counter 11 is 48
+Y Distance 2 for horizontal counter 11 is 176
+Setting value ff for pixel vertical 11
+Y Distance for horizontal counter 12 is 64
+Y Distance 2 for horizontal counter 12 is 192
+Setting value 4f for pixel vertical 12
+Y Distance for horizontal counter 13 is 80
+Y Distance 2 for horizontal counter 13 is 208
+Setting value 70f for pixel vertical 13
+Y Distance for horizontal counter 14 is 96
+Y Distance 2 for horizontal counter 14 is 224
+Setting value f0c for pixel vertical 14
+Y Distance for horizontal counter 15 is 112
+Y Distance 2 for horizontal counter 15 is 240
+Setting value f00 for pixel vertical 15
+X Distance for horizontal counter 10 is 0
+X Distance 2 for horizontal counter 10 is 160
+Y Distance for horizontal counter 0 is 128
+Y Distance 2 for horizontal counter 0 is 0
+Setting value fc0 for pixel vertical 0
+Y Distance for horizontal counter 1 is 112
+Y Distance 2 for horizontal counter 1 is 16
+Setting value fc0 for pixel vertical 1
+Y Distance for horizontal counter 2 is 96
+Y Distance 2 for horizontal counter 2 is 32
+Setting value fc0 for pixel vertical 2
+Y Distance for horizontal counter 3 is 80
+Y Distance 2 for horizontal counter 3 is 48
+Setting value fc0 for pixel vertical 3
+Y Distance for horizontal counter 4 is 64
+Y Distance 2 for horizontal counter 4 is 64
+Setting value fc0 for pixel vertical 4
+Y Distance for horizontal counter 5 is 48
+Y Distance 2 for horizontal counter 5 is 80
+Setting value fc0 for pixel vertical 5
+Y Distance for horizontal counter 6 is 32
+Y Distance 2 for horizontal counter 6 is 96
+Setting value fc0 for pixel vertical 6
+Y Distance for horizontal counter 7 is 16
+Y Distance 2 for horizontal counter 7 is 112
+Setting value fc0 for pixel vertical 7
+Y Distance for horizontal counter 8 is 0
+Y Distance 2 for horizontal counter 8 is 128
+Setting value fc0 for pixel vertical 8
+Y Distance for horizontal counter 9 is 16
+Y Distance 2 for horizontal counter 9 is 144
+Setting value 8f0 for pixel vertical 9
+Y Distance for horizontal counter 10 is 32
+Y Distance 2 for horizontal counter 10 is 160
+Setting value f3 for pixel vertical 10
+Y Distance for horizontal counter 11 is 48
+Y Distance 2 for horizontal counter 11 is 176
+Setting value ff for pixel vertical 11
+Y Distance for horizontal counter 12 is 64
+Y Distance 2 for horizontal counter 12 is 192
+Setting value 4f for pixel vertical 12
+Y Distance for horizontal counter 13 is 80
+Y Distance 2 for horizontal counter 13 is 208
+Setting value 70f for pixel vertical 13
+Y Distance for horizontal counter 14 is 96
+Y Distance 2 for horizontal counter 14 is 224
+Setting value f0c for pixel vertical 14
+Y Distance for horizontal counter 15 is 112
+Y Distance 2 for horizontal counter 15 is 240
+Setting value f00 for pixel vertical 15
+X Distance for horizontal counter 11 is 16
+X Distance 2 for horizontal counter 11 is 176
+Y Distance for horizontal counter 0 is 128
+Y Distance 2 for horizontal counter 0 is 0
+Setting value 8f0 for pixel vertical 0
+Y Distance for horizontal counter 1 is 112
+Y Distance 2 for horizontal counter 1 is 16
+Setting value 8f0 for pixel vertical 1
+Y Distance for horizontal counter 2 is 96
+Y Distance 2 for horizontal counter 2 is 32
+Setting value 8f0 for pixel vertical 2
+Y Distance for horizontal counter 3 is 80
+Y Distance 2 for horizontal counter 3 is 48
+Setting value 8f0 for pixel vertical 3
+Y Distance for horizontal counter 4 is 64
+Y Distance 2 for horizontal counter 4 is 64
+Setting value 8f0 for pixel vertical 4
+Y Distance for horizontal counter 5 is 48
+Y Distance 2 for horizontal counter 5 is 80
+Setting value 8f0 for pixel vertical 5
+Y Distance for horizontal counter 6 is 32
+Y Distance 2 for horizontal counter 6 is 96
+Setting value 8f0 for pixel vertical 6
+Y Distance for horizontal counter 7 is 16
+Y Distance 2 for horizontal counter 7 is 112
+Setting value 8f0 for pixel vertical 7
+Y Distance for horizontal counter 8 is 0
+Y Distance 2 for horizontal counter 8 is 128
+Setting value 8f0 for pixel vertical 8
+Y Distance for horizontal counter 9 is 16
+Y Distance 2 for horizontal counter 9 is 144
+Setting value f3 for pixel vertical 9
+Y Distance for horizontal counter 10 is 32
+Y Distance 2 for horizontal counter 10 is 160
+Setting value ff for pixel vertical 10
+Y Distance for horizontal counter 11 is 48
+Y Distance 2 for horizontal counter 11 is 176
+Setting value 4f for pixel vertical 11
+Y Distance for horizontal counter 12 is 64
+Y Distance 2 for horizontal counter 12 is 192
+Setting value 70f for pixel vertical 12
+Y Distance for horizontal counter 13 is 80
+Y Distance 2 for horizontal counter 13 is 208
+Setting value f0c for pixel vertical 13
+Y Distance for horizontal counter 14 is 96
+Y Distance 2 for horizontal counter 14 is 224
+Setting value f00 for pixel vertical 14
+Y Distance for horizontal counter 15 is 112
+Y Distance 2 for horizontal counter 15 is 240
+Setting value fc0 for pixel vertical 15
+X Distance for horizontal counter 12 is 32
+X Distance 2 for horizontal counter 12 is 192
+Y Distance for horizontal counter 0 is 128
+Y Distance 2 for horizontal counter 0 is 0
+Setting value f3 for pixel vertical 0
+Y Distance for horizontal counter 1 is 112
+Y Distance 2 for horizontal counter 1 is 16
+Setting value f3 for pixel vertical 1
+Y Distance for horizontal counter 2 is 96
+Y Distance 2 for horizontal counter 2 is 32
+Setting value f3 for pixel vertical 2
+Y Distance for horizontal counter 3 is 80
+Y Distance 2 for horizontal counter 3 is 48
+Setting value f3 for pixel vertical 3
+Y Distance for horizontal counter 4 is 64
+Y Distance 2 for horizontal counter 4 is 64
+Setting value f3 for pixel vertical 4
+Y Distance for horizontal counter 5 is 48
+Y Distance 2 for horizontal counter 5 is 80
+Setting value f3 for pixel vertical 5
+Y Distance for horizontal counter 6 is 32
+Y Distance 2 for horizontal counter 6 is 96
+Setting value f3 for pixel vertical 6
+Y Distance for horizontal counter 7 is 16
+Y Distance 2 for horizontal counter 7 is 112
+Setting value f3 for pixel vertical 7
+Y Distance for horizontal counter 8 is 0
+Y Distance 2 for horizontal counter 8 is 128
+Setting value f3 for pixel vertical 8
+Y Distance for horizontal counter 9 is 16
+Y Distance 2 for horizontal counter 9 is 144
+Setting value ff for pixel vertical 9
+Y Distance for horizontal counter 10 is 32
+Y Distance 2 for horizontal counter 10 is 160
+Setting value 4f for pixel vertical 10
+Y Distance for horizontal counter 11 is 48
+Y Distance 2 for horizontal counter 11 is 176
+Setting value 70f for pixel vertical 11
+Y Distance for horizontal counter 12 is 64
+Y Distance 2 for horizontal counter 12 is 192
+Setting value f0c for pixel vertical 12
+Y Distance for horizontal counter 13 is 80
+Y Distance 2 for horizontal counter 13 is 208
+Setting value f00 for pixel vertical 13
+Y Distance for horizontal counter 14 is 96
+Y Distance 2 for horizontal counter 14 is 224
+Setting value fc0 for pixel vertical 14
+Y Distance for horizontal counter 15 is 112
+Y Distance 2 for horizontal counter 15 is 240
+Setting value 8f0 for pixel vertical 15
+X Distance for horizontal counter 13 is 48
+X Distance 2 for horizontal counter 13 is 208
+Y Distance for horizontal counter 0 is 128
+Y Distance 2 for horizontal counter 0 is 0
+Setting value ff for pixel vertical 0
+Y Distance for horizontal counter 1 is 112
+Y Distance 2 for horizontal counter 1 is 16
+Setting value ff for pixel vertical 1
+Y Distance for horizontal counter 2 is 96
+Y Distance 2 for horizontal counter 2 is 32
+Setting value ff for pixel vertical 2
+Y Distance for horizontal counter 3 is 80
+Y Distance 2 for horizontal counter 3 is 48
+Setting value ff for pixel vertical 3
+Y Distance for horizontal counter 4 is 64
+Y Distance 2 for horizontal counter 4 is 64
+Setting value ff for pixel vertical 4
+Y Distance for horizontal counter 5 is 48
+Y Distance 2 for horizontal counter 5 is 80
+Setting value ff for pixel vertical 5
+Y Distance for horizontal counter 6 is 32
+Y Distance 2 for horizontal counter 6 is 96
+Setting value ff for pixel vertical 6
+Y Distance for horizontal counter 7 is 16
+Y Distance 2 for horizontal counter 7 is 112
+Setting value ff for pixel vertical 7
+Y Distance for horizontal counter 8 is 0
+Y Distance 2 for horizontal counter 8 is 128
+Setting value ff for pixel vertical 8
+Y Distance for horizontal counter 9 is 16
+Y Distance 2 for horizontal counter 9 is 144
+Setting value 4f for pixel vertical 9
+Y Distance for horizontal counter 10 is 32
+Y Distance 2 for horizontal counter 10 is 160
+Setting value 70f for pixel vertical 10
+Y Distance for horizontal counter 11 is 48
+Y Distance 2 for horizontal counter 11 is 176
+Setting value f0c for pixel vertical 11
+Y Distance for horizontal counter 12 is 64
+Y Distance 2 for horizontal counter 12 is 192
+Setting value f00 for pixel vertical 12
+Y Distance for horizontal counter 13 is 80
+Y Distance 2 for horizontal counter 13 is 208
+Setting value fc0 for pixel vertical 13
+Y Distance for horizontal counter 14 is 96
+Y Distance 2 for horizontal counter 14 is 224
+Setting value 8f0 for pixel vertical 14
+Y Distance for horizontal counter 15 is 112
+Y Distance 2 for horizontal counter 15 is 240
+Setting value f3 for pixel vertical 15
+X Distance for horizontal counter 14 is 64
+X Distance 2 for horizontal counter 14 is 224
+Y Distance for horizontal counter 0 is 128
+Y Distance 2 for horizontal counter 0 is 0
+Setting value 4f for pixel vertical 0
+Y Distance for horizontal counter 1 is 112
+Y Distance 2 for horizontal counter 1 is 16
+Setting value 4f for pixel vertical 1
+Y Distance for horizontal counter 2 is 96
+Y Distance 2 for horizontal counter 2 is 32
+Setting value 4f for pixel vertical 2
+Y Distance for horizontal counter 3 is 80
+Y Distance 2 for horizontal counter 3 is 48
+Setting value 4f for pixel vertical 3
+Y Distance for horizontal counter 4 is 64
+Y Distance 2 for horizontal counter 4 is 64
+Setting value 4f for pixel vertical 4
+Y Distance for horizontal counter 5 is 48
+Y Distance 2 for horizontal counter 5 is 80
+Setting value 4f for pixel vertical 5
+Y Distance for horizontal counter 6 is 32
+Y Distance 2 for horizontal counter 6 is 96
+Setting value 4f for pixel vertical 6
+Y Distance for horizontal counter 7 is 16
+Y Distance 2 for horizontal counter 7 is 112
+Setting value 4f for pixel vertical 7
+Y Distance for horizontal counter 8 is 0
+Y Distance 2 for horizontal counter 8 is 128
+Setting value 4f for pixel vertical 8
+Y Distance for horizontal counter 9 is 16
+Y Distance 2 for horizontal counter 9 is 144
+Setting value 70f for pixel vertical 9
+Y Distance for horizontal counter 10 is 32
+Y Distance 2 for horizontal counter 10 is 160
+Setting value f0c for pixel vertical 10
+Y Distance for horizontal counter 11 is 48
+Y Distance 2 for horizontal counter 11 is 176
+Setting value f00 for pixel vertical 11
+Y Distance for horizontal counter 12 is 64
+Y Distance 2 for horizontal counter 12 is 192
+Setting value fc0 for pixel vertical 12
+Y Distance for horizontal counter 13 is 80
+Y Distance 2 for horizontal counter 13 is 208
+Setting value 8f0 for pixel vertical 13
+Y Distance for horizontal counter 14 is 96
+Y Distance 2 for horizontal counter 14 is 224
+Setting value f3 for pixel vertical 14
+Y Distance for horizontal counter 15 is 112
+Y Distance 2 for horizontal counter 15 is 240
+Setting value ff for pixel vertical 15
+X Distance for horizontal counter 15 is 80
+X Distance 2 for horizontal counter 15 is 240
+Y Distance for horizontal counter 0 is 128
+Y Distance 2 for horizontal counter 0 is 0
+Setting value 70f for pixel vertical 0
+Y Distance for horizontal counter 1 is 112
+Y Distance 2 for horizontal counter 1 is 16
+Setting value 70f for pixel vertical 1
+Y Distance for horizontal counter 2 is 96
+Y Distance 2 for horizontal counter 2 is 32
+Setting value 70f for pixel vertical 2
+Y Distance for horizontal counter 3 is 80
+Y Distance 2 for horizontal counter 3 is 48
+Setting value 70f for pixel vertical 3
+Y Distance for horizontal counter 4 is 64
+Y Distance 2 for horizontal counter 4 is 64
+Setting value 70f for pixel vertical 4
+Y Distance for horizontal counter 5 is 48
+Y Distance 2 for horizontal counter 5 is 80
+Setting value 70f for pixel vertical 5
+Y Distance for horizontal counter 6 is 32
+Y Distance 2 for horizontal counter 6 is 96
+Setting value 70f for pixel vertical 6
+Y Distance for horizontal counter 7 is 16
+Y Distance 2 for horizontal counter 7 is 112
+Setting value 70f for pixel vertical 7
+Y Distance for horizontal counter 8 is 0
+Y Distance 2 for horizontal counter 8 is 128
+Setting value 70f for pixel vertical 8
+Y Distance for horizontal counter 9 is 16
+Y Distance 2 for horizontal counter 9 is 144
+Setting value f0c for pixel vertical 9
+Y Distance for horizontal counter 10 is 32
+Y Distance 2 for horizontal counter 10 is 160
+Setting value f00 for pixel vertical 10
+Y Distance for horizontal counter 11 is 48
+Y Distance 2 for horizontal counter 11 is 176
+Setting value fc0 for pixel vertical 11
+Y Distance for horizontal counter 12 is 64
+Y Distance 2 for horizontal counter 12 is 192
+Setting value 8f0 for pixel vertical 12
+Y Distance for horizontal counter 13 is 80
+Y Distance 2 for horizontal counter 13 is 208
+Setting value f3 for pixel vertical 13
+Y Distance for horizontal counter 14 is 96
+Y Distance 2 for horizontal counter 14 is 224
+Setting value ff for pixel vertical 14
+Y Distance for horizontal counter 15 is 112
+Y Distance 2 for horizontal counter 15 is 240
+Setting value 4f for pixel vertical 15
+X Distance for horizontal counter 16 is 96
+X Distance 2 for horizontal counter 16 is 256
+Y Distance for horizontal counter 0 is 128
+Y Distance 2 for horizontal counter 0 is 0
+Setting value f0c for pixel vertical 0
+Y Distance for horizontal counter 1 is 112
+Y Distance 2 for horizontal counter 1 is 16
+Setting value f0c for pixel vertical 1
+Y Distance for horizontal counter 2 is 96
+Y Distance 2 for horizontal counter 2 is 32
+Setting value f0c for pixel vertical 2
+Y Distance for horizontal counter 3 is 80
+Y Distance 2 for horizontal counter 3 is 48
+Setting value f0c for pixel vertical 3
+Y Distance for horizontal counter 4 is 64
+Y Distance 2 for horizontal counter 4 is 64
+Setting value f0c for pixel vertical 4
+Y Distance for horizontal counter 5 is 48
+Y Distance 2 for horizontal counter 5 is 80
+Setting value f0c for pixel vertical 5
+Y Distance for horizontal counter 6 is 32
+Y Distance 2 for horizontal counter 6 is 96
+Setting value f0c for pixel vertical 6
+Y Distance for horizontal counter 7 is 16
+Y Distance 2 for horizontal counter 7 is 112
+Setting value f0c for pixel vertical 7
+Y Distance for horizontal counter 8 is 0
+Y Distance 2 for horizontal counter 8 is 128
+Setting value f0c for pixel vertical 8
+Y Distance for horizontal counter 9 is 16
+Y Distance 2 for horizontal counter 9 is 144
+Setting value f00 for pixel vertical 9
+Y Distance for horizontal counter 10 is 32
+Y Distance 2 for horizontal counter 10 is 160
+Setting value fc0 for pixel vertical 10
+Y Distance for horizontal counter 11 is 48
+Y Distance 2 for horizontal counter 11 is 176
+Setting value 8f0 for pixel vertical 11
+Y Distance for horizontal counter 12 is 64
+Y Distance 2 for horizontal counter 12 is 192
+Setting value f3 for pixel vertical 12
+Y Distance for horizontal counter 13 is 80
+Y Distance 2 for horizontal counter 13 is 208
+Setting value ff for pixel vertical 13
+Y Distance for horizontal counter 14 is 96
+Y Distance 2 for horizontal counter 14 is 224
+Setting value 4f for pixel vertical 14
+Y Distance for horizontal counter 15 is 112
+Y Distance 2 for horizontal counter 15 is 240
+Setting value 70f for pixel vertical 15
+X Distance for horizontal counter 17 is 112
+X Distance 2 for horizontal counter 17 is 272
+Y Distance for horizontal counter 0 is 128
+Y Distance 2 for horizontal counter 0 is 0
+Setting value f00 for pixel vertical 0
+Y Distance for horizontal counter 1 is 112
+Y Distance 2 for horizontal counter 1 is 16
+Setting value f00 for pixel vertical 1
+Y Distance for horizontal counter 2 is 96
+Y Distance 2 for horizontal counter 2 is 32
+Setting value f00 for pixel vertical 2
+Y Distance for horizontal counter 3 is 80
+Y Distance 2 for horizontal counter 3 is 48
+Setting value f00 for pixel vertical 3
+Y Distance for horizontal counter 4 is 64
+Y Distance 2 for horizontal counter 4 is 64
+Setting value f00 for pixel vertical 4
+Y Distance for horizontal counter 5 is 48
+Y Distance 2 for horizontal counter 5 is 80
+Setting value f00 for pixel vertical 5
+Y Distance for horizontal counter 6 is 32
+Y Distance 2 for horizontal counter 6 is 96
+Setting value f00 for pixel vertical 6
+Y Distance for horizontal counter 7 is 16
+Y Distance 2 for horizontal counter 7 is 112
+Setting value f00 for pixel vertical 7
+Y Distance for horizontal counter 8 is 0
+Y Distance 2 for horizontal counter 8 is 128
+Setting value f00 for pixel vertical 8
+Y Distance for horizontal counter 9 is 16
+Y Distance 2 for horizontal counter 9 is 144
+Setting value fc0 for pixel vertical 9
+Y Distance for horizontal counter 10 is 32
+Y Distance 2 for horizontal counter 10 is 160
+Setting value 8f0 for pixel vertical 10
+Y Distance for horizontal counter 11 is 48
+Y Distance 2 for horizontal counter 11 is 176
+Setting value f3 for pixel vertical 11
+Y Distance for horizontal counter 12 is 64
+Y Distance 2 for horizontal counter 12 is 192
+Setting value ff for pixel vertical 12
+Y Distance for horizontal counter 13 is 80
+Y Distance 2 for horizontal counter 13 is 208
+Setting value 4f for pixel vertical 13
+Y Distance for horizontal counter 14 is 96
+Y Distance 2 for horizontal counter 14 is 224
+Setting value 70f for pixel vertical 14
+Y Distance for horizontal counter 15 is 112
+Y Distance 2 for horizontal counter 15 is 240
+Setting value f0c for pixel vertical 15
+X Distance for horizontal counter 18 is 128
+X Distance 2 for horizontal counter 18 is 288
+Y Distance for horizontal counter 0 is 128
+Y Distance 2 for horizontal counter 0 is 0
+Setting value fc0 for pixel vertical 0
+Y Distance for horizontal counter 1 is 112
+Y Distance 2 for horizontal counter 1 is 16
+Setting value fc0 for pixel vertical 1
+Y Distance for horizontal counter 2 is 96
+Y Distance 2 for horizontal counter 2 is 32
+Setting value fc0 for pixel vertical 2
+Y Distance for horizontal counter 3 is 80
+Y Distance 2 for horizontal counter 3 is 48
+Setting value fc0 for pixel vertical 3
+Y Distance for horizontal counter 4 is 64
+Y Distance 2 for horizontal counter 4 is 64
+Setting value fc0 for pixel vertical 4
+Y Distance for horizontal counter 5 is 48
+Y Distance 2 for horizontal counter 5 is 80
+Setting value fc0 for pixel vertical 5
+Y Distance for horizontal counter 6 is 32
+Y Distance 2 for horizontal counter 6 is 96
+Setting value fc0 for pixel vertical 6
+Y Distance for horizontal counter 7 is 16
+Y Distance 2 for horizontal counter 7 is 112
+Setting value fc0 for pixel vertical 7
+Y Distance for horizontal counter 8 is 0
+Y Distance 2 for horizontal counter 8 is 128
+Setting value fc0 for pixel vertical 8
+Y Distance for horizontal counter 9 is 16
+Y Distance 2 for horizontal counter 9 is 144
+Setting value 8f0 for pixel vertical 9
+Y Distance for horizontal counter 10 is 32
+Y Distance 2 for horizontal counter 10 is 160
+Setting value f3 for pixel vertical 10
+Y Distance for horizontal counter 11 is 48
+Y Distance 2 for horizontal counter 11 is 176
+Setting value ff for pixel vertical 11
+Y Distance for horizontal counter 12 is 64
+Y Distance 2 for horizontal counter 12 is 192
+Setting value 4f for pixel vertical 12
+Y Distance for horizontal counter 13 is 80
+Y Distance 2 for horizontal counter 13 is 208
+Setting value 70f for pixel vertical 13
+Y Distance for horizontal counter 14 is 96
+Y Distance 2 for horizontal counter 14 is 224
+Setting value f0c for pixel vertical 14
+Y Distance for horizontal counter 15 is 112
+Y Distance 2 for horizontal counter 15 is 240
+Setting value f00 for pixel vertical 15
+X Distance for horizontal counter 19 is 144
+X Distance 2 for horizontal counter 19 is 304
+Y Distance for horizontal counter 0 is 128
+Y Distance 2 for horizontal counter 0 is 0
+Setting value 8f0 for pixel vertical 0
+Y Distance for horizontal counter 1 is 112
+Y Distance 2 for horizontal counter 1 is 16
+Setting value 8f0 for pixel vertical 1
+Y Distance for horizontal counter 2 is 96
+Y Distance 2 for horizontal counter 2 is 32
+Setting value 8f0 for pixel vertical 2
+Y Distance for horizontal counter 3 is 80
+Y Distance 2 for horizontal counter 3 is 48
+Setting value 8f0 for pixel vertical 3
+Y Distance for horizontal counter 4 is 64
+Y Distance 2 for horizontal counter 4 is 64
+Setting value 8f0 for pixel vertical 4
+Y Distance for horizontal counter 5 is 48
+Y Distance 2 for horizontal counter 5 is 80
+Setting value 8f0 for pixel vertical 5
+Y Distance for horizontal counter 6 is 32
+Y Distance 2 for horizontal counter 6 is 96
+Setting value 8f0 for pixel vertical 6
+Y Distance for horizontal counter 7 is 16
+Y Distance 2 for horizontal counter 7 is 112
+Setting value 8f0 for pixel vertical 7
+Y Distance for horizontal counter 8 is 0
+Y Distance 2 for horizontal counter 8 is 128
+Setting value 8f0 for pixel vertical 8
+Y Distance for horizontal counter 9 is 16
+Y Distance 2 for horizontal counter 9 is 144
+Setting value f3 for pixel vertical 9
+Y Distance for horizontal counter 10 is 32
+Y Distance 2 for horizontal counter 10 is 160
+Setting value ff for pixel vertical 10
+Y Distance for horizontal counter 11 is 48
+Y Distance 2 for horizontal counter 11 is 176
+Setting value 4f for pixel vertical 11
+Y Distance for horizontal counter 12 is 64
+Y Distance 2 for horizontal counter 12 is 192
+Setting value 70f for pixel vertical 12
+Y Distance for horizontal counter 13 is 80
+Y Distance 2 for horizontal counter 13 is 208
+Setting value f0c for pixel vertical 13
+Y Distance for horizontal counter 14 is 96
+Y Distance 2 for horizontal counter 14 is 224
+Setting value f00 for pixel vertical 14
+Y Distance for horizontal counter 15 is 112
+Y Distance 2 for horizontal counter 15 is 240
+Setting value fc0 for pixel vertical 15
+X Distance for horizontal counter 0 is 160
+X Distance 2 for horizontal counter 0 is 0
+Y Distance for horizontal counter 0 is 128
+Y Distance 2 for horizontal counter 0 is 0
+Setting value fc0 for pixel vertical 0
+Y Distance for horizontal counter 1 is 112
+Y Distance 2 for horizontal counter 1 is 16
+Setting value fc0 for pixel vertical 1
+Y Distance for horizontal counter 2 is 96
+Y Distance 2 for horizontal counter 2 is 32
+Setting value fc0 for pixel vertical 2
+Y Distance for horizontal counter 3 is 80
+Y Distance 2 for horizontal counter 3 is 48
+Setting value fc0 for pixel vertical 3
+Y Distance for horizontal counter 4 is 64
+Y Distance 2 for horizontal counter 4 is 64
+Setting value fc0 for pixel vertical 4
+Y Distance for horizontal counter 5 is 48
+Y Distance 2 for horizontal counter 5 is 80
+Setting value fc0 for pixel vertical 5
+Y Distance for horizontal counter 6 is 32
+Y Distance 2 for horizontal counter 6 is 96
+Setting value fc0 for pixel vertical 6
+Y Distance for horizontal counter 7 is 16
+Y Distance 2 for horizontal counter 7 is 112
+Setting value fc0 for pixel vertical 7
+Y Distance for horizontal counter 8 is 0
+Y Distance 2 for horizontal counter 8 is 128
+Setting value fc0 for pixel vertical 8
+Y Distance for horizontal counter 9 is 16
+Y Distance 2 for horizontal counter 9 is 144
+Setting value 8f0 for pixel vertical 9
+Y Distance for horizontal counter 10 is 32
+Y Distance 2 for horizontal counter 10 is 160
+Setting value f3 for pixel vertical 10
+Y Distance for horizontal counter 11 is 48
+Y Distance 2 for horizontal counter 11 is 176
+Setting value ff for pixel vertical 11
+Y Distance for horizontal counter 12 is 64
+Y Distance 2 for horizontal counter 12 is 192
+Setting value 4f for pixel vertical 12
+Y Distance for horizontal counter 13 is 80
+Y Distance 2 for horizontal counter 13 is 208
+Setting value 70f for pixel vertical 13
+Y Distance for horizontal counter 14 is 96
+Y Distance 2 for horizontal counter 14 is 224
+Setting value f0c for pixel vertical 14
+Y Distance for horizontal counter 15 is 112
+Y Distance 2 for horizontal counter 15 is 240
+Setting value f00 for pixel vertical 15
+X Distance for horizontal counter 1 is 144
+X Distance 2 for horizontal counter 1 is 16
+Y Distance for horizontal counter 0 is 128
+Y Distance 2 for horizontal counter 0 is 0
+Setting value fc0 for pixel vertical 0
+Y Distance for horizontal counter 1 is 112
+Y Distance 2 for horizontal counter 1 is 16
+Setting value fc0 for pixel vertical 1
+Y Distance for horizontal counter 2 is 96
+Y Distance 2 for horizontal counter 2 is 32
+Setting value fc0 for pixel vertical 2
+Y Distance for horizontal counter 3 is 80
+Y Distance 2 for horizontal counter 3 is 48
+Setting value fc0 for pixel vertical 3
+Y Distance for horizontal counter 4 is 64
+Y Distance 2 for horizontal counter 4 is 64
+Setting value fc0 for pixel vertical 4
+Y Distance for horizontal counter 5 is 48
+Y Distance 2 for horizontal counter 5 is 80
+Setting value fc0 for pixel vertical 5
+Y Distance for horizontal counter 6 is 32
+Y Distance 2 for horizontal counter 6 is 96
+Setting value fc0 for pixel vertical 6
+Y Distance for horizontal counter 7 is 16
+Y Distance 2 for horizontal counter 7 is 112
+Setting value fc0 for pixel vertical 7
+Y Distance for horizontal counter 8 is 0
+Y Distance 2 for horizontal counter 8 is 128
+Setting value fc0 for pixel vertical 8
+Y Distance for horizontal counter 9 is 16
+Y Distance 2 for horizontal counter 9 is 144
+Setting value 8f0 for pixel vertical 9
+Y Distance for horizontal counter 10 is 32
+Y Distance 2 for horizontal counter 10 is 160
+Setting value f3 for pixel vertical 10
+Y Distance for horizontal counter 11 is 48
+Y Distance 2 for horizontal counter 11 is 176
+Setting value ff for pixel vertical 11
+Y Distance for horizontal counter 12 is 64
+Y Distance 2 for horizontal counter 12 is 192
+Setting value 4f for pixel vertical 12
+Y Distance for horizontal counter 13 is 80
+Y Distance 2 for horizontal counter 13 is 208
+Setting value 70f for pixel vertical 13
+Y Distance for horizontal counter 14 is 96
+Y Distance 2 for horizontal counter 14 is 224
+Setting value f0c for pixel vertical 14
+Y Distance for horizontal counter 15 is 112
+Y Distance 2 for horizontal counter 15 is 240
+Setting value f00 for pixel vertical 15
+X Distance for horizontal counter 2 is 128
+X Distance 2 for horizontal counter 2 is 32
+Y Distance for horizontal counter 0 is 128
+Y Distance 2 for horizontal counter 0 is 0
+Setting value fc0 for pixel vertical 0
+Y Distance for horizontal counter 1 is 112
+Y Distance 2 for horizontal counter 1 is 16
+Setting value fc0 for pixel vertical 1
+Y Distance for horizontal counter 2 is 96
+Y Distance 2 for horizontal counter 2 is 32
+Setting value fc0 for pixel vertical 2
+Y Distance for horizontal counter 3 is 80
+Y Distance 2 for horizontal counter 3 is 48
+Setting value fc0 for pixel vertical 3
+Y Distance for horizontal counter 4 is 64
+Y Distance 2 for horizontal counter 4 is 64
+Setting value fc0 for pixel vertical 4
+Y Distance for horizontal counter 5 is 48
+Y Distance 2 for horizontal counter 5 is 80
+Setting value fc0 for pixel vertical 5
+Y Distance for horizontal counter 6 is 32
+Y Distance 2 for horizontal counter 6 is 96
+Setting value fc0 for pixel vertical 6
+Y Distance for horizontal counter 7 is 16
+Y Distance 2 for horizontal counter 7 is 112
+Setting value fc0 for pixel vertical 7
+Y Distance for horizontal counter 8 is 0
+Y Distance 2 for horizontal counter 8 is 128
+Setting value fc0 for pixel vertical 8
+Y Distance for horizontal counter 9 is 16
+Y Distance 2 for horizontal counter 9 is 144
+Setting value 8f0 for pixel vertical 9
+Y Distance for horizontal counter 10 is 32
+Y Distance 2 for horizontal counter 10 is 160
+Setting value f3 for pixel vertical 10
+Y Distance for horizontal counter 11 is 48
+Y Distance 2 for horizontal counter 11 is 176
+Setting value ff for pixel vertical 11
+Y Distance for horizontal counter 12 is 64
+Y Distance 2 for horizontal counter 12 is 192
+Setting value 4f for pixel vertical 12
+Y Distance for horizontal counter 13 is 80
+Y Distance 2 for horizontal counter 13 is 208
+Setting value 70f for pixel vertical 13
+Y Distance for horizontal counter 14 is 96
+Y Distance 2 for horizontal counter 14 is 224
+Setting value f0c for pixel vertical 14
+Y Distance for horizontal counter 15 is 112
+Y Distance 2 for horizontal counter 15 is 240
+Setting value f00 for pixel vertical 15
+X Distance for horizontal counter 3 is 112
+X Distance 2 for horizontal counter 3 is 48
+Y Distance for horizontal counter 0 is 128
+Y Distance 2 for horizontal counter 0 is 0
+Setting value fc0 for pixel vertical 0
+Y Distance for horizontal counter 1 is 112
+Y Distance 2 for horizontal counter 1 is 16
+Setting value fc0 for pixel vertical 1
+Y Distance for horizontal counter 2 is 96
+Y Distance 2 for horizontal counter 2 is 32
+Setting value fc0 for pixel vertical 2
+Y Distance for horizontal counter 3 is 80
+Y Distance 2 for horizontal counter 3 is 48
+Setting value fc0 for pixel vertical 3
+Y Distance for horizontal counter 4 is 64
+Y Distance 2 for horizontal counter 4 is 64
+Setting value fc0 for pixel vertical 4
+Y Distance for horizontal counter 5 is 48
+Y Distance 2 for horizontal counter 5 is 80
+Setting value fc0 for pixel vertical 5
+Y Distance for horizontal counter 6 is 32
+Y Distance 2 for horizontal counter 6 is 96
+Setting value fc0 for pixel vertical 6
+Y Distance for horizontal counter 7 is 16
+Y Distance 2 for horizontal counter 7 is 112
+Setting value fc0 for pixel vertical 7
+Y Distance for horizontal counter 8 is 0
+Y Distance 2 for horizontal counter 8 is 128
+Setting value fc0 for pixel vertical 8
+Y Distance for horizontal counter 9 is 16
+Y Distance 2 for horizontal counter 9 is 144
+Setting value 8f0 for pixel vertical 9
+Y Distance for horizontal counter 10 is 32
+Y Distance 2 for horizontal counter 10 is 160
+Setting value f3 for pixel vertical 10
+Y Distance for horizontal counter 11 is 48
+Y Distance 2 for horizontal counter 11 is 176
+Setting value ff for pixel vertical 11
+Y Distance for horizontal counter 12 is 64
+Y Distance 2 for horizontal counter 12 is 192
+Setting value 4f for pixel vertical 12
+Y Distance for horizontal counter 13 is 80
+Y Distance 2 for horizontal counter 13 is 208
+Setting value 70f for pixel vertical 13
+Y Distance for horizontal counter 14 is 96
+Y Distance 2 for horizontal counter 14 is 224
+Setting value f0c for pixel vertical 14
+Y Distance for horizontal counter 15 is 112
+Y Distance 2 for horizontal counter 15 is 240
+Setting value f00 for pixel vertical 15
+X Distance for horizontal counter 4 is 96
+X Distance 2 for horizontal counter 4 is 64
+Y Distance for horizontal counter 0 is 128
+Y Distance 2 for horizontal counter 0 is 0
+Setting value fc0 for pixel vertical 0
+Y Distance for horizontal counter 1 is 112
+Y Distance 2 for horizontal counter 1 is 16
+Setting value fc0 for pixel vertical 1
+Y Distance for horizontal counter 2 is 96
+Y Distance 2 for horizontal counter 2 is 32
+Setting value fc0 for pixel vertical 2
+Y Distance for horizontal counter 3 is 80
+Y Distance 2 for horizontal counter 3 is 48
+Setting value fc0 for pixel vertical 3
+Y Distance for horizontal counter 4 is 64
+Y Distance 2 for horizontal counter 4 is 64
+Setting value fc0 for pixel vertical 4
+Y Distance for horizontal counter 5 is 48
+Y Distance 2 for horizontal counter 5 is 80
+Setting value fc0 for pixel vertical 5
+Y Distance for horizontal counter 6 is 32
+Y Distance 2 for horizontal counter 6 is 96
+Setting value fc0 for pixel vertical 6
+Y Distance for horizontal counter 7 is 16
+Y Distance 2 for horizontal counter 7 is 112
+Setting value fc0 for pixel vertical 7
+Y Distance for horizontal counter 8 is 0
+Y Distance 2 for horizontal counter 8 is 128
+Setting value fc0 for pixel vertical 8
+Y Distance for horizontal counter 9 is 16
+Y Distance 2 for horizontal counter 9 is 144
+Setting value 8f0 for pixel vertical 9
+Y Distance for horizontal counter 10 is 32
+Y Distance 2 for horizontal counter 10 is 160
+Setting value f3 for pixel vertical 10
+Y Distance for horizontal counter 11 is 48
+Y Distance 2 for horizontal counter 11 is 176
+Setting value ff for pixel vertical 11
+Y Distance for horizontal counter 12 is 64
+Y Distance 2 for horizontal counter 12 is 192
+Setting value 4f for pixel vertical 12
+Y Distance for horizontal counter 13 is 80
+Y Distance 2 for horizontal counter 13 is 208
+Setting value 70f for pixel vertical 13
+Y Distance for horizontal counter 14 is 96
+Y Distance 2 for horizontal counter 14 is 224
+Setting value f0c for pixel vertical 14
+Y Distance for horizontal counter 15 is 112
+Y Distance 2 for horizontal counter 15 is 240
+Setting value f00 for pixel vertical 15
+X Distance for horizontal counter 5 is 80
+X Distance 2 for horizontal counter 5 is 80
+Y Distance for horizontal counter 0 is 128
+Y Distance 2 for horizontal counter 0 is 0
+Setting value fc0 for pixel vertical 0
+Y Distance for horizontal counter 1 is 112
+Y Distance 2 for horizontal counter 1 is 16
+Setting value fc0 for pixel vertical 1
+Y Distance for horizontal counter 2 is 96
+Y Distance 2 for horizontal counter 2 is 32
+Setting value fc0 for pixel vertical 2
+Y Distance for horizontal counter 3 is 80
+Y Distance 2 for horizontal counter 3 is 48
+Setting value fc0 for pixel vertical 3
+Y Distance for horizontal counter 4 is 64
+Y Distance 2 for horizontal counter 4 is 64
+Setting value fc0 for pixel vertical 4
+Y Distance for horizontal counter 5 is 48
+Y Distance 2 for horizontal counter 5 is 80
+Setting value fc0 for pixel vertical 5
+Y Distance for horizontal counter 6 is 32
+Y Distance 2 for horizontal counter 6 is 96
+Setting value fc0 for pixel vertical 6
+Y Distance for horizontal counter 7 is 16
+Y Distance 2 for horizontal counter 7 is 112
+Setting value fc0 for pixel vertical 7
+Y Distance for horizontal counter 8 is 0
+Y Distance 2 for horizontal counter 8 is 128
+Setting value fc0 for pixel vertical 8
+Y Distance for horizontal counter 9 is 16
+Y Distance 2 for horizontal counter 9 is 144
+Setting value 8f0 for pixel vertical 9
+Y Distance for horizontal counter 10 is 32
+Y Distance 2 for horizontal counter 10 is 160
+Setting value f3 for pixel vertical 10
+Y Distance for horizontal counter 11 is 48
+Y Distance 2 for horizontal counter 11 is 176
+Setting value ff for pixel vertical 11
+Y Distance for horizontal counter 12 is 64
+Y Distance 2 for horizontal counter 12 is 192
+Setting value 4f for pixel vertical 12
+Y Distance for horizontal counter 13 is 80
+Y Distance 2 for horizontal counter 13 is 208
+Setting value 70f for pixel vertical 13
+Y Distance for horizontal counter 14 is 96
+Y Distance 2 for horizontal counter 14 is 224
+Setting value f0c for pixel vertical 14
+Y Distance for horizontal counter 15 is 112
+Y Distance 2 for horizontal counter 15 is 240
+Setting value f00 for pixel vertical 15
+X Distance for horizontal counter 6 is 64
+X Distance 2 for horizontal counter 6 is 96
+Y Distance for horizontal counter 0 is 128
+Y Distance 2 for horizontal counter 0 is 0
+Setting value fc0 for pixel vertical 0
+Y Distance for horizontal counter 1 is 112
+Y Distance 2 for horizontal counter 1 is 16
+Setting value fc0 for pixel vertical 1
+Y Distance for horizontal counter 2 is 96
+Y Distance 2 for horizontal counter 2 is 32
+Setting value fc0 for pixel vertical 2
+Y Distance for horizontal counter 3 is 80
+Y Distance 2 for horizontal counter 3 is 48
+Setting value fc0 for pixel vertical 3
+Y Distance for horizontal counter 4 is 64
+Y Distance 2 for horizontal counter 4 is 64
+Setting value fc0 for pixel vertical 4
+Y Distance for horizontal counter 5 is 48
+Y Distance 2 for horizontal counter 5 is 80
+Setting value fc0 for pixel vertical 5
+Y Distance for horizontal counter 6 is 32
+Y Distance 2 for horizontal counter 6 is 96
+Setting value fc0 for pixel vertical 6
+Y Distance for horizontal counter 7 is 16
+Y Distance 2 for horizontal counter 7 is 112
+Setting value fc0 for pixel vertical 7
+Y Distance for horizontal counter 8 is 0
+Y Distance 2 for horizontal counter 8 is 128
+Setting value fc0 for pixel vertical 8
+Y Distance for horizontal counter 9 is 16
+Y Distance 2 for horizontal counter 9 is 144
+Setting value 8f0 for pixel vertical 9
+Y Distance for horizontal counter 10 is 32
+Y Distance 2 for horizontal counter 10 is 160
+Setting value f3 for pixel vertical 10
+Y Distance for horizontal counter 11 is 48
+Y Distance 2 for horizontal counter 11 is 176
+Setting value ff for pixel vertical 11
+Y Distance for horizontal counter 12 is 64
+Y Distance 2 for horizontal counter 12 is 192
+Setting value 4f for pixel vertical 12
+Y Distance for horizontal counter 13 is 80
+Y Distance 2 for horizontal counter 13 is 208
+Setting value 70f for pixel vertical 13
+Y Distance for horizontal counter 14 is 96
+Y Distance 2 for horizontal counter 14 is 224
+Setting value f0c for pixel vertical 14
+Y Distance for horizontal counter 15 is 112
+Y Distance 2 for horizontal counter 15 is 240
+Setting value f00 for pixel vertical 15
+X Distance for horizontal counter 7 is 48
+X Distance 2 for horizontal counter 7 is 112
+Y Distance for horizontal counter 0 is 128
+Y Distance 2 for horizontal counter 0 is 0
+Setting value fc0 for pixel vertical 0
+Y Distance for horizontal counter 1 is 112
+Y Distance 2 for horizontal counter 1 is 16
+Setting value fc0 for pixel vertical 1
+Y Distance for horizontal counter 2 is 96
+Y Distance 2 for horizontal counter 2 is 32
+Setting value fc0 for pixel vertical 2
+Y Distance for horizontal counter 3 is 80
+Y Distance 2 for horizontal counter 3 is 48
+Setting value fc0 for pixel vertical 3
+Y Distance for horizontal counter 4 is 64
+Y Distance 2 for horizontal counter 4 is 64
+Setting value fc0 for pixel vertical 4
+Y Distance for horizontal counter 5 is 48
+Y Distance 2 for horizontal counter 5 is 80
+Setting value fc0 for pixel vertical 5
+Y Distance for horizontal counter 6 is 32
+Y Distance 2 for horizontal counter 6 is 96
+Setting value fc0 for pixel vertical 6
+Y Distance for horizontal counter 7 is 16
+Y Distance 2 for horizontal counter 7 is 112
+Setting value fc0 for pixel vertical 7
+Y Distance for horizontal counter 8 is 0
+Y Distance 2 for horizontal counter 8 is 128
+Setting value fc0 for pixel vertical 8
+Y Distance for horizontal counter 9 is 16
+Y Distance 2 for horizontal counter 9 is 144
+Setting value 8f0 for pixel vertical 9
+Y Distance for horizontal counter 10 is 32
+Y Distance 2 for horizontal counter 10 is 160
+Setting value f3 for pixel vertical 10
+Y Distance for horizontal counter 11 is 48
+Y Distance 2 for horizontal counter 11 is 176
+Setting value ff for pixel vertical 11
+Y Distance for horizontal counter 12 is 64
+Y Distance 2 for horizontal counter 12 is 192
+Setting value 4f for pixel vertical 12
+Y Distance for horizontal counter 13 is 80
+Y Distance 2 for horizontal counter 13 is 208
+Setting value 70f for pixel vertical 13
+Y Distance for horizontal counter 14 is 96
+Y Distance 2 for horizontal counter 14 is 224
+Setting value f0c for pixel vertical 14
+Y Distance for horizontal counter 15 is 112
+Y Distance 2 for horizontal counter 15 is 240
+Setting value f00 for pixel vertical 15
+X Distance for horizontal counter 8 is 32
+X Distance 2 for horizontal counter 8 is 128
+Y Distance for horizontal counter 0 is 128
+Y Distance 2 for horizontal counter 0 is 0
+Setting value fc0 for pixel vertical 0
+Y Distance for horizontal counter 1 is 112
+Y Distance 2 for horizontal counter 1 is 16
+Setting value fc0 for pixel vertical 1
+Y Distance for horizontal counter 2 is 96
+Y Distance 2 for horizontal counter 2 is 32
+Setting value fc0 for pixel vertical 2
+Y Distance for horizontal counter 3 is 80
+Y Distance 2 for horizontal counter 3 is 48
+Setting value fc0 for pixel vertical 3
+Y Distance for horizontal counter 4 is 64
+Y Distance 2 for horizontal counter 4 is 64
+Setting value fc0 for pixel vertical 4
+Y Distance for horizontal counter 5 is 48
+Y Distance 2 for horizontal counter 5 is 80
+Setting value fc0 for pixel vertical 5
+Y Distance for horizontal counter 6 is 32
+Y Distance 2 for horizontal counter 6 is 96
+Setting value fc0 for pixel vertical 6
+Y Distance for horizontal counter 7 is 16
+Y Distance 2 for horizontal counter 7 is 112
+Setting value fc0 for pixel vertical 7
+Y Distance for horizontal counter 8 is 0
+Y Distance 2 for horizontal counter 8 is 128
+Setting value fc0 for pixel vertical 8
+Y Distance for horizontal counter 9 is 16
+Y Distance 2 for horizontal counter 9 is 144
+Setting value 8f0 for pixel vertical 9
+Y Distance for horizontal counter 10 is 32
+Y Distance 2 for horizontal counter 10 is 160
+Setting value f3 for pixel vertical 10
+Y Distance for horizontal counter 11 is 48
+Y Distance 2 for horizontal counter 11 is 176
+Setting value ff for pixel vertical 11
+Y Distance for horizontal counter 12 is 64
+Y Distance 2 for horizontal counter 12 is 192
+Setting value 4f for pixel vertical 12
+Y Distance for horizontal counter 13 is 80
+Y Distance 2 for horizontal counter 13 is 208
+Setting value 70f for pixel vertical 13
+Y Distance for horizontal counter 14 is 96
+Y Distance 2 for horizontal counter 14 is 224
+Setting value f0c for pixel vertical 14
+Y Distance for horizontal counter 15 is 112
+Y Distance 2 for horizontal counter 15 is 240
+Setting value f00 for pixel vertical 15
+X Distance for horizontal counter 9 is 16
+X Distance 2 for horizontal counter 9 is 144
+Y Distance for horizontal counter 0 is 128
+Y Distance 2 for horizontal counter 0 is 0
+Setting value fc0 for pixel vertical 0
+Y Distance for horizontal counter 1 is 112
+Y Distance 2 for horizontal counter 1 is 16
+Setting value fc0 for pixel vertical 1
+Y Distance for horizontal counter 2 is 96
+Y Distance 2 for horizontal counter 2 is 32
+Setting value fc0 for pixel vertical 2
+Y Distance for horizontal counter 3 is 80
+Y Distance 2 for horizontal counter 3 is 48
+Setting value fc0 for pixel vertical 3
+Y Distance for horizontal counter 4 is 64
+Y Distance 2 for horizontal counter 4 is 64
+Setting value fc0 for pixel vertical 4
+Y Distance for horizontal counter 5 is 48
+Y Distance 2 for horizontal counter 5 is 80
+Setting value fc0 for pixel vertical 5
+Y Distance for horizontal counter 6 is 32
+Y Distance 2 for horizontal counter 6 is 96
+Setting value fc0 for pixel vertical 6
+Y Distance for horizontal counter 7 is 16
+Y Distance 2 for horizontal counter 7 is 112
+Setting value fc0 for pixel vertical 7
+Y Distance for horizontal counter 8 is 0
+Y Distance 2 for horizontal counter 8 is 128
+Setting value fc0 for pixel vertical 8
+Y Distance for horizontal counter 9 is 16
+Y Distance 2 for horizontal counter 9 is 144
+Setting value 8f0 for pixel vertical 9
+Y Distance for horizontal counter 10 is 32
+Y Distance 2 for horizontal counter 10 is 160
+Setting value f3 for pixel vertical 10
+Y Distance for horizontal counter 11 is 48
+Y Distance 2 for horizontal counter 11 is 176
+Setting value ff for pixel vertical 11
+Y Distance for horizontal counter 12 is 64
+Y Distance 2 for horizontal counter 12 is 192
+Setting value 4f for pixel vertical 12
+Y Distance for horizontal counter 13 is 80
+Y Distance 2 for horizontal counter 13 is 208
+Setting value 70f for pixel vertical 13
+Y Distance for horizontal counter 14 is 96
+Y Distance 2 for horizontal counter 14 is 224
+Setting value f0c for pixel vertical 14
+Y Distance for horizontal counter 15 is 112
+Y Distance 2 for horizontal counter 15 is 240
+Setting value f00 for pixel vertical 15
+X Distance for horizontal counter 10 is 0
+X Distance 2 for horizontal counter 10 is 160
+Y Distance for horizontal counter 0 is 128
+Y Distance 2 for horizontal counter 0 is 0
+Setting value fc0 for pixel vertical 0
+Y Distance for horizontal counter 1 is 112
+Y Distance 2 for horizontal counter 1 is 16
+Setting value fc0 for pixel vertical 1
+Y Distance for horizontal counter 2 is 96
+Y Distance 2 for horizontal counter 2 is 32
+Setting value fc0 for pixel vertical 2
+Y Distance for horizontal counter 3 is 80
+Y Distance 2 for horizontal counter 3 is 48
+Setting value fc0 for pixel vertical 3
+Y Distance for horizontal counter 4 is 64
+Y Distance 2 for horizontal counter 4 is 64
+Setting value fc0 for pixel vertical 4
+Y Distance for horizontal counter 5 is 48
+Y Distance 2 for horizontal counter 5 is 80
+Setting value fc0 for pixel vertical 5
+Y Distance for horizontal counter 6 is 32
+Y Distance 2 for horizontal counter 6 is 96
+Setting value fc0 for pixel vertical 6
+Y Distance for horizontal counter 7 is 16
+Y Distance 2 for horizontal counter 7 is 112
+Setting value fc0 for pixel vertical 7
+Y Distance for horizontal counter 8 is 0
+Y Distance 2 for horizontal counter 8 is 128
+Setting value fc0 for pixel vertical 8
+Y Distance for horizontal counter 9 is 16
+Y Distance 2 for horizontal counter 9 is 144
+Setting value 8f0 for pixel vertical 9
+Y Distance for horizontal counter 10 is 32
+Y Distance 2 for horizontal counter 10 is 160
+Setting value f3 for pixel vertical 10
+Y Distance for horizontal counter 11 is 48
+Y Distance 2 for horizontal counter 11 is 176
+Setting value ff for pixel vertical 11
+Y Distance for horizontal counter 12 is 64
+Y Distance 2 for horizontal counter 12 is 192
+Setting value 4f for pixel vertical 12
+Y Distance for horizontal counter 13 is 80
+Y Distance 2 for horizontal counter 13 is 208
+Setting value 70f for pixel vertical 13
+Y Distance for horizontal counter 14 is 96
+Y Distance 2 for horizontal counter 14 is 224
+Setting value f0c for pixel vertical 14
+Y Distance for horizontal counter 15 is 112
+Y Distance 2 for horizontal counter 15 is 240
+Setting value f00 for pixel vertical 15
+X Distance for horizontal counter 11 is 16
+X Distance 2 for horizontal counter 11 is 176
+Y Distance for horizontal counter 0 is 128
+Y Distance 2 for horizontal counter 0 is 0
+Setting value 8f0 for pixel vertical 0
+Y Distance for horizontal counter 1 is 112
+Y Distance 2 for horizontal counter 1 is 16
+Setting value 8f0 for pixel vertical 1
+Y Distance for horizontal counter 2 is 96
+Y Distance 2 for horizontal counter 2 is 32
+Setting value 8f0 for pixel vertical 2
+Y Distance for horizontal counter 3 is 80
+Y Distance 2 for horizontal counter 3 is 48
+Setting value 8f0 for pixel vertical 3
+Y Distance for horizontal counter 4 is 64
+Y Distance 2 for horizontal counter 4 is 64
+Setting value 8f0 for pixel vertical 4
+Y Distance for horizontal counter 5 is 48
+Y Distance 2 for horizontal counter 5 is 80
+Setting value 8f0 for pixel vertical 5
+Y Distance for horizontal counter 6 is 32
+Y Distance 2 for horizontal counter 6 is 96
+Setting value 8f0 for pixel vertical 6
+Y Distance for horizontal counter 7 is 16
+Y Distance 2 for horizontal counter 7 is 112
+Setting value 8f0 for pixel vertical 7
+Y Distance for horizontal counter 8 is 0
+Y Distance 2 for horizontal counter 8 is 128
+Setting value 8f0 for pixel vertical 8
+Y Distance for horizontal counter 9 is 16
+Y Distance 2 for horizontal counter 9 is 144
+Setting value f3 for pixel vertical 9
+Y Distance for horizontal counter 10 is 32
+Y Distance 2 for horizontal counter 10 is 160
+Setting value ff for pixel vertical 10
+Y Distance for horizontal counter 11 is 48
+Y Distance 2 for horizontal counter 11 is 176
+Setting value 4f for pixel vertical 11
+Y Distance for horizontal counter 12 is 64
+Y Distance 2 for horizontal counter 12 is 192
+Setting value 70f for pixel vertical 12
+Y Distance for horizontal counter 13 is 80
+Y Distance 2 for horizontal counter 13 is 208
+Setting value f0c for pixel vertical 13
+Y Distance for horizontal counter 14 is 96
+Y Distance 2 for horizontal counter 14 is 224
+Setting value f00 for pixel vertical 14
+Y Distance for horizontal counter 15 is 112
+Y Distance 2 for horizontal counter 15 is 240
+Setting value fc0 for pixel vertical 15
+X Distance for horizontal counter 12 is 32
+X Distance 2 for horizontal counter 12 is 192
+Y Distance for horizontal counter 0 is 128
+Y Distance 2 for horizontal counter 0 is 0
+Setting value f3 for pixel vertical 0
+Y Distance for horizontal counter 1 is 112
+Y Distance 2 for horizontal counter 1 is 16
+Setting value f3 for pixel vertical 1
+Y Distance for horizontal counter 2 is 96
+Y Distance 2 for horizontal counter 2 is 32
+Setting value f3 for pixel vertical 2
+Y Distance for horizontal counter 3 is 80
+Y Distance 2 for horizontal counter 3 is 48
+Setting value f3 for pixel vertical 3
+Y Distance for horizontal counter 4 is 64
+Y Distance 2 for horizontal counter 4 is 64
+Setting value f3 for pixel vertical 4
+Y Distance for horizontal counter 5 is 48
+Y Distance 2 for horizontal counter 5 is 80
+Setting value f3 for pixel vertical 5
+Y Distance for horizontal counter 6 is 32
+Y Distance 2 for horizontal counter 6 is 96
+Setting value f3 for pixel vertical 6
+Y Distance for horizontal counter 7 is 16
+Y Distance 2 for horizontal counter 7 is 112
+Setting value f3 for pixel vertical 7
+Y Distance for horizontal counter 8 is 0
+Y Distance 2 for horizontal counter 8 is 128
+Setting value f3 for pixel vertical 8
+Y Distance for horizontal counter 9 is 16
+Y Distance 2 for horizontal counter 9 is 144
+Setting value ff for pixel vertical 9
+Y Distance for horizontal counter 10 is 32
+Y Distance 2 for horizontal counter 10 is 160
+Setting value 4f for pixel vertical 10
+Y Distance for horizontal counter 11 is 48
+Y Distance 2 for horizontal counter 11 is 176
+Setting value 70f for pixel vertical 11
+Y Distance for horizontal counter 12 is 64
+Y Distance 2 for horizontal counter 12 is 192
+Setting value f0c for pixel vertical 12
+Y Distance for horizontal counter 13 is 80
+Y Distance 2 for horizontal counter 13 is 208
+Setting value f00 for pixel vertical 13
+Y Distance for horizontal counter 14 is 96
+Y Distance 2 for horizontal counter 14 is 224
+Setting value fc0 for pixel vertical 14
+Y Distance for horizontal counter 15 is 112
+Y Distance 2 for horizontal counter 15 is 240
+Setting value 8f0 for pixel vertical 15
+X Distance for horizontal counter 13 is 48
+X Distance 2 for horizontal counter 13 is 208
+Y Distance for horizontal counter 0 is 128
+Y Distance 2 for horizontal counter 0 is 0
+Setting value ff for pixel vertical 0
+Y Distance for horizontal counter 1 is 112
+Y Distance 2 for horizontal counter 1 is 16
+Setting value ff for pixel vertical 1
+Y Distance for horizontal counter 2 is 96
+Y Distance 2 for horizontal counter 2 is 32
+Setting value ff for pixel vertical 2
+Y Distance for horizontal counter 3 is 80
+Y Distance 2 for horizontal counter 3 is 48
+Setting value ff for pixel vertical 3
+Y Distance for horizontal counter 4 is 64
+Y Distance 2 for horizontal counter 4 is 64
+Setting value ff for pixel vertical 4
+Y Distance for horizontal counter 5 is 48
+Y Distance 2 for horizontal counter 5 is 80
+Setting value ff for pixel vertical 5
+Y Distance for horizontal counter 6 is 32
+Y Distance 2 for horizontal counter 6 is 96
+Setting value ff for pixel vertical 6
+Y Distance for horizontal counter 7 is 16
+Y Distance 2 for horizontal counter 7 is 112
+Setting value ff for pixel vertical 7
+Y Distance for horizontal counter 8 is 0
+Y Distance 2 for horizontal counter 8 is 128
+Setting value ff for pixel vertical 8
+Y Distance for horizontal counter 9 is 16
+Y Distance 2 for horizontal counter 9 is 144
+Setting value 4f for pixel vertical 9
+Y Distance for horizontal counter 10 is 32
+Y Distance 2 for horizontal counter 10 is 160
+Setting value 70f for pixel vertical 10
+Y Distance for horizontal counter 11 is 48
+Y Distance 2 for horizontal counter 11 is 176
+Setting value f0c for pixel vertical 11
+Y Distance for horizontal counter 12 is 64
+Y Distance 2 for horizontal counter 12 is 192
+Setting value f00 for pixel vertical 12
+Y Distance for horizontal counter 13 is 80
+Y Distance 2 for horizontal counter 13 is 208
+Setting value fc0 for pixel vertical 13
+Y Distance for horizontal counter 14 is 96
+Y Distance 2 for horizontal counter 14 is 224
+Setting value 8f0 for pixel vertical 14
+Y Distance for horizontal counter 15 is 112
+Y Distance 2 for horizontal counter 15 is 240
+Setting value f3 for pixel vertical 15
+X Distance for horizontal counter 14 is 64
+X Distance 2 for horizontal counter 14 is 224
+Y Distance for horizontal counter 0 is 128
+Y Distance 2 for horizontal counter 0 is 0
+Setting value 4f for pixel vertical 0
+Y Distance for horizontal counter 1 is 112
+Y Distance 2 for horizontal counter 1 is 16
+Setting value 4f for pixel vertical 1
+Y Distance for horizontal counter 2 is 96
+Y Distance 2 for horizontal counter 2 is 32
+Setting value 4f for pixel vertical 2
+Y Distance for horizontal counter 3 is 80
+Y Distance 2 for horizontal counter 3 is 48
+Setting value 4f for pixel vertical 3
+Y Distance for horizontal counter 4 is 64
+Y Distance 2 for horizontal counter 4 is 64
+Setting value 4f for pixel vertical 4
+Y Distance for horizontal counter 5 is 48
+Y Distance 2 for horizontal counter 5 is 80
+Setting value 4f for pixel vertical 5
+Y Distance for horizontal counter 6 is 32
+Y Distance 2 for horizontal counter 6 is 96
+Setting value 4f for pixel vertical 6
+Y Distance for horizontal counter 7 is 16
+Y Distance 2 for horizontal counter 7 is 112
+Setting value 4f for pixel vertical 7
+Y Distance for horizontal counter 8 is 0
+Y Distance 2 for horizontal counter 8 is 128
+Setting value 4f for pixel vertical 8
+Y Distance for horizontal counter 9 is 16
+Y Distance 2 for horizontal counter 9 is 144
+Setting value 70f for pixel vertical 9
+Y Distance for horizontal counter 10 is 32
+Y Distance 2 for horizontal counter 10 is 160
+Setting value f0c for pixel vertical 10
+Y Distance for horizontal counter 11 is 48
+Y Distance 2 for horizontal counter 11 is 176
+Setting value f00 for pixel vertical 11
+Y Distance for horizontal counter 12 is 64
+Y Distance 2 for horizontal counter 12 is 192
+Setting value fc0 for pixel vertical 12
+Y Distance for horizontal counter 13 is 80
+Y Distance 2 for horizontal counter 13 is 208
+Setting value 8f0 for pixel vertical 13
+Y Distance for horizontal counter 14 is 96
+Y Distance 2 for horizontal counter 14 is 224
+Setting value f3 for pixel vertical 14
+Y Distance for horizontal counter 15 is 112
+Y Distance 2 for horizontal counter 15 is 240
+Setting value ff for pixel vertical 15
+X Distance for horizontal counter 15 is 80
+X Distance 2 for horizontal counter 15 is 240
+Y Distance for horizontal counter 0 is 128
+Y Distance 2 for horizontal counter 0 is 0
+Setting value 70f for pixel vertical 0
+Y Distance for horizontal counter 1 is 112
+Y Distance 2 for horizontal counter 1 is 16
+Setting value 70f for pixel vertical 1
+Y Distance for horizontal counter 2 is 96
+Y Distance 2 for horizontal counter 2 is 32
+Setting value 70f for pixel vertical 2
+Y Distance for horizontal counter 3 is 80
+Y Distance 2 for horizontal counter 3 is 48
+Setting value 70f for pixel vertical 3
+Y Distance for horizontal counter 4 is 64
+Y Distance 2 for horizontal counter 4 is 64
+Setting value 70f for pixel vertical 4
+Y Distance for horizontal counter 5 is 48
+Y Distance 2 for horizontal counter 5 is 80
+Setting value 70f for pixel vertical 5
+Y Distance for horizontal counter 6 is 32
+Y Distance 2 for horizontal counter 6 is 96
+Setting value 70f for pixel vertical 6
+Y Distance for horizontal counter 7 is 16
+Y Distance 2 for horizontal counter 7 is 112
+Setting value 70f for pixel vertical 7
+Y Distance for horizontal counter 8 is 0
+Y Distance 2 for horizontal counter 8 is 128
+Setting value 70f for pixel vertical 8
+Y Distance for horizontal counter 9 is 16
+Y Distance 2 for horizontal counter 9 is 144
+Setting value f0c for pixel vertical 9
+Y Distance for horizontal counter 10 is 32
+Y Distance 2 for horizontal counter 10 is 160
+Setting value f00 for pixel vertical 10
+Y Distance for horizontal counter 11 is 48
+Y Distance 2 for horizontal counter 11 is 176
+Setting value fc0 for pixel vertical 11
+Y Distance for horizontal counter 12 is 64
+Y Distance 2 for horizontal counter 12 is 192
+Setting value 8f0 for pixel vertical 12
+Y Distance for horizontal counter 13 is 80
+Y Distance 2 for horizontal counter 13 is 208
+Setting value f3 for pixel vertical 13
+Y Distance for horizontal counter 14 is 96
+Y Distance 2 for horizontal counter 14 is 224
+Setting value ff for pixel vertical 14
+Y Distance for horizontal counter 15 is 112
+Y Distance 2 for horizontal counter 15 is 240
+Setting value 4f for pixel vertical 15
+X Distance for horizontal counter 16 is 96
+X Distance 2 for horizontal counter 16 is 256
+Y Distance for horizontal counter 0 is 128
+Y Distance 2 for horizontal counter 0 is 0
+Setting value f0c for pixel vertical 0
+Y Distance for horizontal counter 1 is 112
+Y Distance 2 for horizontal counter 1 is 16
+Setting value f0c for pixel vertical 1
+Y Distance for horizontal counter 2 is 96
+Y Distance 2 for horizontal counter 2 is 32
+Setting value f0c for pixel vertical 2
+Y Distance for horizontal counter 3 is 80
+Y Distance 2 for horizontal counter 3 is 48
+Setting value f0c for pixel vertical 3
+Y Distance for horizontal counter 4 is 64
+Y Distance 2 for horizontal counter 4 is 64
+Setting value f0c for pixel vertical 4
+Y Distance for horizontal counter 5 is 48
+Y Distance 2 for horizontal counter 5 is 80
+Setting value f0c for pixel vertical 5
+Y Distance for horizontal counter 6 is 32
+Y Distance 2 for horizontal counter 6 is 96
+Setting value f0c for pixel vertical 6
+Y Distance for horizontal counter 7 is 16
+Y Distance 2 for horizontal counter 7 is 112
+Setting value f0c for pixel vertical 7
+Y Distance for horizontal counter 8 is 0
+Y Distance 2 for horizontal counter 8 is 128
+Setting value f0c for pixel vertical 8
+Y Distance for horizontal counter 9 is 16
+Y Distance 2 for horizontal counter 9 is 144
+Setting value f00 for pixel vertical 9
+Y Distance for horizontal counter 10 is 32
+Y Distance 2 for horizontal counter 10 is 160
+Setting value fc0 for pixel vertical 10
+Y Distance for horizontal counter 11 is 48
+Y Distance 2 for horizontal counter 11 is 176
+Setting value 8f0 for pixel vertical 11
+Y Distance for horizontal counter 12 is 64
+Y Distance 2 for horizontal counter 12 is 192
