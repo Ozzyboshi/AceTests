@@ -74,6 +74,7 @@ static UWORD s_uwCopRawOffs = 0;
 static tCopCmd *pCopCmds;
 static UWORD g_sWaitPositions[YRES];
 
+UBYTE StrokeEffecForward(UBYTE);
 void setPxColor(UBYTE ubX, UBYTE ubY, UWORD uwValue);
 static UWORD colorHSV(UBYTE ubH, UBYTE ubS, UBYTE ubV);
 
@@ -106,22 +107,22 @@ static UWORD COLORS[202] = {
 };
 
 static UWORD GRADIENT[16] = {
-  0x0F00,
-  0x0E10,
-  0x0D20,
-  0x0C30,
-  0x0B40,
-  0x0A50,
-  0x0960,
-  0x0870,
-  0x0780,
-  0x0690,
-  0x05A0,
-  0x04B0,
-  0x03C0,
-  0x02D0,
-  0x01E0,
-  0x00F0
+    0x0F00,
+    0x0E10,
+    0x0D20,
+    0x0C30,
+    0x0B40,
+    0x0A50,
+    0x0960,
+    0x0870,
+    0x0780,
+    0x0690,
+    0x05A0,
+    0x04B0,
+    0x03C0,
+    0x02D0,
+    0x01E0,
+    0x00F0
 
 };
 
@@ -216,7 +217,7 @@ Bitplane 4 -      0   0   0   0        0   0   0   0        0   0    0    0    0
 
   for (UBYTE ubCont = 0; ubCont < 20; ubCont++)
   {
-    blitRect(s_pMainBuffer->pBack, ubCont * 16, 0, 16, 256, ubCont + 1);
+    //blitRect(s_pMainBuffer->pBack, ubCont * 16, 0, 16, 256, ubCont + 1);
   }
 
   tCopList *pCopList = s_pMainBuffer->sCommon.pVPort->pView->pCopList;
@@ -303,23 +304,108 @@ Bitplane 4 -      0   0   0   0        0   0   0   0        0   0    0    0    0
 
   // Load the view
   viewLoad(s_pView);
-
 }
+
+BYTE g_bXdirection[] = {1, 0, -1, 0};
+BYTE g_bYdirection[] = {0, 1, 0, -1};
 
 void gameGsLoop(void)
 {
 #ifdef COLORDEBUG
   g_pCustom->color[0] = 0x0FF0;
 #endif
-
+  static UBYTE ubFadeInComplete = 0;
+  static UBYTE ubFadeOutComplete = 0;
+  static UBYTE ubExitStage = 0;
   static UWORD uwFrameNo = 0;
   static UBYTE *pColorPtr = &colors_data[0];
 
   // This will loop forever until you "pop" or change gamestate
   // or close the game
-  if (keyCheck(KEY_ESCAPE))
+  
+  if (keyCheck(KEY_ESCAPE)) ubExitStage=1;
+
+  if (ubExitStage)
   {
-    gameExit();
+    if (StrokeEffecForward(0))
+      gameExit();
+  }
+
+  if (keyUse(KEY_P))
+  {
+    StrokeEffecForward(0);
+    return ;
+    static UBYTE isFollowingX = 1;
+    static UBYTE isFollowingY = 0;
+    static UBYTE ubIndexXDirection = 0;
+    static UBYTE ubIndexYDirection = 0;
+    static UBYTE ubIndexXLimit = 19;
+    static UBYTE ubIndexYLimit = 15;
+    static UBYTE ubIndexXLimitBottom = 0;
+    static UBYTE ubIndexYLimitBottom = 0;
+    static WORD wX = 0;
+    static WORD wY = 0;
+    static WORD wRefX = 0;
+    static WORD wRefY = 0;
+
+    blitRect(s_pMainBuffer->pBack, wX * 16, wY * 16, 16, 16, 0);
+
+    wX += g_bXdirection[ubIndexXDirection];
+    wY += g_bYdirection[ubIndexYDirection];
+
+    // Lap over restart horizontally immediately
+    if (wX == wRefX && wY == wRefY)
+    {
+      isFollowingX = 1;
+      isFollowingY = 0;
+      ubIndexXDirection = 0;
+      ubIndexYDirection = 0;
+      wRefX++;
+      wRefY++;
+      wX = wRefX;
+      wY = wRefY;
+      ubIndexXLimit--;
+      ubIndexYLimit--;
+      ubIndexXLimitBottom++;
+      ubIndexYLimitBottom++;
+      if (wRefX == 9)
+        gameExit();
+    }
+
+    else if (isFollowingX && (wX <= ubIndexXLimitBottom || wX >= ubIndexXLimit))
+    {
+      ubIndexXDirection++;
+      if (ubIndexXDirection >= 4)
+      {
+        ubIndexXDirection = 0;
+      }
+      ubIndexYDirection++;
+      if (ubIndexYDirection >= 4)
+      {
+        ubIndexYDirection = 0;
+      }
+      isFollowingX = 0;
+      isFollowingY = 1;
+    }
+
+    else if (isFollowingY && (wY <= ubIndexYLimitBottom || wY >= ubIndexYLimit))
+    {
+      ubIndexXDirection++;
+      if (ubIndexXDirection >= 4)
+        ubIndexXDirection = 0;
+      ubIndexYDirection++;
+      if (ubIndexYDirection >= 4)
+        ubIndexYDirection = 0;
+      isFollowingX = 1;
+      isFollowingY = 0;
+    }
+    //gameExit();
+  }
+
+  if (!ubFadeInComplete)
+  {
+    ubFadeInComplete = StrokeEffecForward(1);
+    //gameExit();
   }
 
   if (keyUse(KEY_D))
@@ -470,14 +556,16 @@ void gameGsLoop(void)
           gameExit();*/
         uwColor = COLORS[ubColorIndex];
 
-       ubColorIndex = wDistTot>>4;
-       
-       if (ubColorIndex<64) uwColor = COLORS[ubColorIndex];
-       else uwColor=0;
+        ubColorIndex = wDistTot >> 4;
 
-       // uwColor = GRADIENT[7];
+        if (ubColorIndex < 64)
+          uwColor = COLORS[ubColorIndex];
+        else
+          uwColor = 0;
 
-        /*if (wDist < 20)
+          // uwColor = GRADIENT[7];
+
+          /*if (wDist < 20)
           uwColor = 0x0FFF;
         else if (wDist < 50)
           uwColor = 0x0EEE;*/
@@ -641,4 +729,88 @@ static UWORD colorHSV(UBYTE ubH, UBYTE ubS, UBYTE ubV)
   default:
     return (ubV << 8) | (p << 4) | q;
   }
+}
+
+UBYTE StrokeEffecForward(UBYTE ubFlag)
+{
+  static UBYTE isFollowingX = 1;
+  static UBYTE isFollowingY = 0;
+  static UBYTE ubIndexXDirection = 0;
+  static UBYTE ubIndexYDirection = 0;
+  static UBYTE ubIndexXLimit = 19;
+  static UBYTE ubIndexYLimit = 15;
+  static UBYTE ubIndexXLimitBottom = 0;
+  static UBYTE ubIndexYLimitBottom = 0;
+  static WORD wX = 0;
+  static WORD wY = 0;
+  static WORD wRefX = 0;
+  static WORD wRefY = 0;
+
+  blitRect(s_pMainBuffer->pBack, wX * 16, wY * 16, 16, 16, ubFlag ? wX + 1 : 0);
+
+  wX += g_bXdirection[ubIndexXDirection];
+  wY += g_bYdirection[ubIndexYDirection];
+
+  // Lap over restart horizontally immediately
+  if (wX == wRefX && wY == wRefY)
+  {
+    isFollowingX = 1;
+    isFollowingY = 0;
+    ubIndexXDirection = 0;
+    ubIndexYDirection = 0;
+    wRefX++;
+    wRefY++;
+    wX = wRefX;
+    wY = wRefY;
+    ubIndexXLimit--;
+    ubIndexYLimit--;
+    ubIndexXLimitBottom++;
+    ubIndexYLimitBottom++;
+    if (wRefX == 8)
+    {
+      isFollowingX = 1;
+      isFollowingY = 0;
+      ubIndexXDirection = 0;
+      ubIndexYDirection = 0;
+      ubIndexXLimit = 19;
+      ubIndexYLimit = 15;
+      ubIndexXLimitBottom = 0;
+      ubIndexYLimitBottom = 0;
+      wX = 0;
+      wY = 0;
+      wRefX = 0;
+      wRefY = 0;
+      return 1;
+      //gameExit();
+    }
+  }
+
+  else if (isFollowingX && (wX <= ubIndexXLimitBottom || wX >= ubIndexXLimit))
+  {
+    ubIndexXDirection++;
+    if (ubIndexXDirection >= 4)
+    {
+      ubIndexXDirection = 0;
+    }
+    ubIndexYDirection++;
+    if (ubIndexYDirection >= 4)
+    {
+      ubIndexYDirection = 0;
+    }
+    isFollowingX = 0;
+    isFollowingY = 1;
+  }
+
+  else if (isFollowingY && (wY <= ubIndexYLimitBottom || wY >= ubIndexYLimit))
+  {
+    ubIndexXDirection++;
+    if (ubIndexXDirection >= 4)
+      ubIndexXDirection = 0;
+    ubIndexYDirection++;
+    if (ubIndexYDirection >= 4)
+      ubIndexYDirection = 0;
+    isFollowingX = 1;
+    isFollowingY = 0;
+  }
+  return 0;
 }
