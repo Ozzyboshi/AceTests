@@ -1,0 +1,67 @@
+Block begin: blitManagerCreate...OK, time:  61.6 us
+Block begin: copCreate()
+	Block begin: copListCreate()
+		Addr: 0x21e7a4
+		BLOCK mode
+	Block end: copListCreate(), time: >7min
+Block end: copCreate(), time: 262.0 us
+Hello, Amiga!
+Block begin: keyCreate()...OK, time:  81.2 us
+Block begin: stateManagerCreate()...OK, time:   2.819 ms
+Block begin: stateCreate(cbCreate: 0x2732be, cbLoop: 0x273470, cbDestroy: 0x2735f6, cbSuspend: 0, cbResume: 0, pPrev: 0)...OK, time:   3.139 ms
+Block begin: statePush(pStateManager: 0x21ee34, pState: 0x21fd74)
+	Block begin: viewCreate(pTags: 0)
+		addr: 0x22579c
+		Block begin: copListCreate()
+			Addr: 0x22dc9c
+			RAW mode, size: 106 + WAIT(0xFFFF)
+		Block end: copListCreate(), time:   6.229 ms
+		Global CLUT mode enabled
+	Block end: viewCreate(), time: >7min
+	Block begin: vPortCreate(pTagList: 0)
+		Addr: 0x23daf4
+		Parent view: 0x22579c
+		Offsets: 0x0
+		Dimensions: 320x256@1
+		No prev VPorts - added to head
+	Block end: vPortCreate(), time: >7min
+	Block begin: simpleBufferCreate(pTags: 0, ...)
+		Addr: 0x23db54
+		Parent VPort: 0x23daf4
+		Bounds: 320x272
+		Block begin: bitmapCreate(uwWidth: 320, uwHeight: 272, ubDepth: 1, ubFlags: 1)
+			addr: 0x23db8c
+		Block end: bitmapCreate(), time: >7min
+		Block begin: cameraCreate(pVPort: 0x23daf4, uwPosX: 0, uwPosY: 0, uwMaxX: 320, uwMaxY: 272, isDblBfr: 0)
+			Addr: 0x23dbbc
+			Resetting camera bounds...
+			Block begin: cameraReset(pManager: 0x23dbbc, uwStartX: 0, uwStartY: 0, uwWidth: 320, uwHeight: 272, isDblBfr: 0)
+				Camera max coord: 0,16
+			Block end: cameraReset(), time:   4.789 ms
+			Attaching camera to VPort...
+			Manager 0x23dbbc attached to head of VP 0x23daf4
+		Block end: cameraCreate(), time: >7min
+		Copperlist offset: 0
+		Block begin: simpleBufferSetFront(pManager: 0x23db54, pFront: 0x23db8c, isScrollX: 1)
+			Modulo: 0
+			Setting copperlist 0x22deb4 at offs 0
+		Block end: simplebufferSetFront(), time:   8.460 ms
+		Manager 0x23db54 attached after manager 0x23dbbc of VP 0x23daf4
+	Block end: simpleBufferCreate(), time:   3.152 ms
+	Block begin: fontCreateFromMem(szFontName: '0x14af8')
+		Addr: 0x23c3fc, data width: 384px, chars: 127, font height: 7px
+		Block begin: bitmapCreate(uwWidth: 384, uwHeight: 7, ubDepth: 1, ubFlags: 0)
+			addr: 0x23e634
+		Block end: bitmapCreate(), time: >7min
+	Block end: fontCreateFromMem(), time: >7min
+	Block begin: fontCreateTextBitMap(uwWidth: 250, uwHeight: 7)
+		Block begin: bitmapCreate(uwWidth: 250, uwHeight: 7, ubDepth: 1, ubFlags: 0)
+			addr: 0x23e664
+		Block end: bitmapCreate(), time: >7min
+	Block end: fontCreateTextBitmap(), time:   2.107 ms
+	Block begin: bitmapCreate(uwWidth: 320, uwHeight: 272, ubDepth: 1, ubFlags: 1)
+		addr: 0x23e6b4
+	Block end: bitmapCreate(), time: >7min
+	Nuova bitmap : 0x23e6b4
+	Block begin: viewLoad(pView: 0x22579c)...OK, time: >7min
+Block end: statePush(), time: >7min
