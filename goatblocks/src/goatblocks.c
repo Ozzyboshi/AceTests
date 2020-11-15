@@ -9,6 +9,9 @@
 #include "goatblock32X32.h"
 #include "goatblockplt.h"
 
+#include <ace/utils/font.h>                     // needed for tFont and font stuff
+#include "../_res/uni54.h"
+
 #define copSetWaitBackAndFront(var, var2, var3)            \
   copSetWait(&pCmdListBack[ubCopIndex].sWait, var, var2);  \
   copSetWait(&pCmdListFront[ubCopIndex].sWait, var, var2); \
@@ -26,10 +29,9 @@ typedef struct tTimersManager
 {
   BYTE bCubeIndexArray[5];
   ULONG ulTimeDelta;
-}tTimersManager;
+} tTimersManager;
 
 static tTimersManager TIMER[MAXTIMERS];
-
 
 typedef struct tBlock
 {
@@ -65,7 +67,10 @@ void drawBlock2(tBlock);
 void deleteBlock(tBlock);
 void initTimer();
 
-#define BITPLANES 4
+void copyBplShifted(UWORD *, UWORD *);
+
+
+#define BITPLANES 5
 #define VSPACE 8
 #define VPADDING 25
 
@@ -85,6 +90,42 @@ static ULONG ulTimerDelta;
 static UBYTE ubTimerIndex = 0;
 //static BYTE pDisappearArray[] = {0,1,2,3,-1};
 //static UBYTE ubDisappearIndex = 0;
+static tFont *s_pFontUI;
+static tTextBitMap *s_pGlyph;
+tBitMap *g_pBitmapHelper;
+char *g_pTxt[] = {
+    "start", "start2", "start3", "strt4", "", "", "",
+    "", "", "", "", "", "", "",
+    "", "alessio", "", "", // 18 empty rows
+    "Vertical scrooltext example",
+    "---",
+    "This is a vertical scrolltext example",
+    "--",
+    "It uses one color,",
+    "so only one bitplane is set",
+    "--",
+    "A double buffered technique is used",
+    "in order to save ram",
+    "The data is stored in an array of pointers",
+   "each pointers points to a phrase",
+    "--",
+    "Fonts are courtesy of Kain (the ace creator)",
+    "",
+    "You can set the speed changing the ",
+    "ulframe counter module",
+    "This demo should reset",
+    "automatically after the last row",
+    "",
+    "",
+    "",
+    "",
+    "---------------END------------",
+    0};
+
+    static ULONG g_ulTxtSize = 0;
+
+static tBitMap *g_pPlane1;
+static tBitMap *g_pPlane2;
 
 void gameGsCreate(void)
 {
@@ -112,6 +153,7 @@ void gameGsCreate(void)
                                      TAG_SIMPLEBUFFER_BITMAP_FLAGS, BMF_CLEAR,
                                      TAG_SIMPLEBUFFER_COPLIST_OFFSET, 0,
                                      TAG_SIMPLEBUFFER_IS_DBLBUF, 0,
+                                     TAG_SIMPLEBUFFER_BOUND_HEIGHT, 256 + 16,
                                      TAG_END);
 
   s_uwCopRawOffs = simpleBufferGetRawCopperlistInstructionCount(BITPLANES);
@@ -134,10 +176,25 @@ void gameGsCreate(void)
 
   // Since we've set up global CLUT, palette will be loaded from first viewport
   // Colors are 0x0RGB, each channel accepts values from 0 to 15 (0 to F).
-  /*s_pVpMain->pPalette[0] = 0x0000; // First color is also border color
-  s_pVpMain->pPalette[1] = 0x0888; // Gray
-  s_pVpMain->pPalette[2] = 0x0800; // Red - not max, a bit dark
-  s_pVpMain->pPalette[3] = 0x0008; // Blue - same brightness as red*/
+  //s_pVpMain->pPalette[15] = 0x0000; // First color is also border color
+  s_pVpMain->pPalette[16] = 0x0FFF; // Gray
+  s_pVpMain->pPalette[17] = 0x0FFF; // Red - not max, a bit dark
+  s_pVpMain->pPalette[18] = 0x0FFF; // Blue - same brightness as red*/
+  s_pVpMain->pPalette[19] = 0x0FFF; // First color is also border color
+  s_pVpMain->pPalette[20] = 0x0FFF; // Gray
+  s_pVpMain->pPalette[21] = 0x0FFF; // Red - not max, a bit dark
+  s_pVpMain->pPalette[22] = 0x0FFF; // Blue - same brightness as red*/
+
+s_pVpMain->pPalette[23] = 0x0FFF; // First color is also border color
+  s_pVpMain->pPalette[24] = 0x0FFF; // Gray
+  s_pVpMain->pPalette[25] = 0x0FFF; // Red - not max, a bit dark
+  s_pVpMain->pPalette[26] = 0x0FFF; // Blue - same brightness as red*/
+  s_pVpMain->pPalette[27] = 0x0FFF; // First color is also border color
+  s_pVpMain->pPalette[28] = 0x0FFF; // Gray
+  s_pVpMain->pPalette[29] = 0x0FFF; // Red - not max, a bit dark
+  s_pVpMain->pPalette[30] = 0x0FFF; // Blue - same brightness as red*/
+
+ s_pVpMain->pPalette[31] = 0x0FFF; 
 
   UWORD *pPalette = (UWORD *)goatblockplt_data;
   for (UBYTE ubCount = 0; ubCount < 8; ubCount++)
@@ -233,6 +290,35 @@ void gameGsCreate(void)
   /*copSetWaitBackAndFront(0xdf, 0xff, 0);
   copSetMoveBackAndFront(&g_pCustom->color[0], 0x00F0);*/
 
+  s_pFontUI = fontCreateFromMem((UBYTE *)uni54_data_shared_data);
+  if (s_pFontUI == NULL)
+    return;
+
+  s_pGlyph = fontCreateTextBitMap(250, s_pFontUI->uwHeight);
+
+  g_pBitmapHelper = bitmapCreate(320, 256 + 16, 5, BMF_CLEAR);
+#ifdef ACE_DEBUG
+  logWrite("Nuova bitmap : %p\n", g_pBitmapHelper);
+#endif
+
+  UBYTE ubCount = 0;
+  while (g_pTxt[ubCount] && ubCount < 17)
+  {
+
+#if 1
+    fontFillTextBitMap(s_pFontUI, s_pGlyph, g_pTxt[ubCount]);
+    fontDrawTextBitMap(s_pMainBuffer->pBack, s_pGlyph, 10, ubCount * 16, 16, FONT_LEFT | FONT_LAZY);
+#endif
+
+    ubCount++;
+  }
+
+  g_pPlane1 = s_pMainBuffer->pFront;
+  g_pPlane2 = g_pBitmapHelper;
+
+  g_ulTxtSize = sizeof(g_pTxt);
+  g_ulTxtSize = g_ulTxtSize >> 2;
+
   // Load the view
   viewLoad(s_pView);
 
@@ -244,17 +330,73 @@ void gameGsCreate(void)
 
 void gameGsLoop(void)
 {
-  if(timerGetDelta(ulStart, timerGet()) > ulTimerDelta)
+
+    static ULONG ulFrame = 0;
+
+  //if (keyUse(KEY_SPACE))
+  if (ulFrame % 4)
+  {
+    static UBYTE ubScrollCounter = 0;
+    static UWORD ubTxtIndex = 17;
+
+    if (1)
+    {
+
+      tCopList *pCopList = s_pMainBuffer->sCommon.pVPort->pView->pCopList;
+      tCopCmd *pCmdList = &pCopList->pBackBfr->pList[s_pMainBuffer->uwCopperOffset];
+      static ULONG ulPlaneAddr = 0;
+      if (ubScrollCounter == 0)
+      {
+#ifdef COLORS_DEBUG
+        g_pCustom->color[0] = 0x0FF0;
+#endif
+        ulPlaneAddr = (ULONG)(g_pPlane1->Planes[4]);
+        copyBplShifted((UWORD *)g_pPlane1->Planes[4], (UWORD *)g_pPlane2->Planes[4]);
+      }
+      ulPlaneAddr += 40;
+
+      copSetMove(&pCmdList[14 + 0].sMove, &g_pBplFetch[4].uwHi, ulPlaneAddr >> 16);
+      copSetMove(&pCmdList[14 + 1].sMove, &g_pBplFetch[4].uwLo, ulPlaneAddr & 0xFFFF);
+      copSwapBuffers();
+      ubScrollCounter++;
+      vPortWaitForEnd(s_pVpMain);
+      if (ubScrollCounter == 1)
+      {
+        char buf[60];
+        sprintf(buf, "%*s", -50, g_pTxt[ubTxtIndex++]);
+        fontFillTextBitMap(s_pFontUI, s_pGlyph, buf);
+        if (ubTxtIndex >= g_ulTxtSize)
+          ubTxtIndex = 0;
+        fontDrawTextBitMap(g_pPlane2, s_pGlyph, 10, 16 * 16, 16, FONT_LEFT | FONT_LAZY);
+      }
+    }
+
+    if (ubScrollCounter >= 16)
+    {
+#ifdef COLORS_DEBUG
+      g_pCustom->color[0] = 0x0F00;
+#endif
+      ubScrollCounter = 0;
+      tBitMap *pTmp = g_pPlane1;
+      g_pPlane1 = g_pPlane2;
+      g_pPlane2 = pTmp;
+    }
+  }
+  ulFrame++;
+
+
+  if (timerGetDelta(ulStart, timerGet()) > ulTimerDelta)
   {
     UBYTE ubCount = 0;
-    while (TIMER[ubTimerIndex].bCubeIndexArray[ubCount]>=0)
+    while (TIMER[ubTimerIndex].bCubeIndexArray[ubCount] >= 0)
     {
       BLOCK_NEXT_STAGE(TIMER[ubTimerIndex].bCubeIndexArray[ubCount]);
       ubCount++;
     }
     ulStart = timerGet();
     ubTimerIndex++;
-    if (ubTimerIndex>= MAXTIMERS) ubTimerIndex=0;
+    if (ubTimerIndex >= MAXTIMERS)
+      ubTimerIndex = 0;
   }
   // This will loop forever until you "pop" or change gamestate
   // or close the game
@@ -294,7 +436,7 @@ void gameGsLoop(void)
     BLOCK_NEXT_STAGE(6);
   }
 
- // if (keyUse(KEY_SPACE))
+  // if (keyUse(KEY_SPACE))
   if (1)
   {
 
@@ -346,7 +488,7 @@ void gameGsLoop(void)
         {
           deleteBlock(*pBlock);
           drawBlock(*pBlock);
-          pBlock->ubStatus=0;
+          pBlock->ubStatus = 0;
         }
         else
         {
@@ -363,6 +505,8 @@ void gameGsLoop(void)
     }
   }
 
+
+
   vPortWaitForEnd(s_pVpMain);
 }
 
@@ -370,6 +514,8 @@ void gameGsDestroy(void)
 {
   // Cleanup when leaving this gamestate
   systemUse();
+
+  bitmapDestroy(g_pBitmapHelper);
 
   // This will also destroy all associated viewports and viewport managers
   viewDestroy(s_pView);
@@ -460,4 +606,21 @@ void initTimer()
   TIMER[5].bCubeIndexArray[1] = 5;
   TIMER[5].bCubeIndexArray[2] = -1;
   TIMER[5].ulTimeDelta = 60;
+}
+
+void copyBplShifted(UWORD *pSrc, UWORD *pDst)
+{
+
+  blitWait();
+  g_pCustom->bltcon0 = 0x09F0;
+  g_pCustom->bltcon1 = 0x0000;
+  g_pCustom->bltafwm = 0xFFFF;
+  g_pCustom->bltalwm = 0xFFFF;
+  g_pCustom->bltamod = 0x0000;
+  g_pCustom->bltbmod = 0x0000;
+  g_pCustom->bltcmod = 0x0000;
+  g_pCustom->bltdmod = 0x0000;
+  g_pCustom->bltapt = (UBYTE *)((ULONG)pSrc + 40 * 16);
+  g_pCustom->bltdpt = (UBYTE *)((ULONG)pDst);
+  g_pCustom->bltsize = 0x4014;
 }
