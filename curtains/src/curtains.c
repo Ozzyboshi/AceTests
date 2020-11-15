@@ -5,11 +5,15 @@
 #include <ace/managers/blit.h>
 #include <ace/managers/viewport/simplebuffer.h> // Simple buffer
 
+#define COLORS_DEBUG
 #define FIX16
 #ifdef FIX16
 #include <fixmath/fix16.h>
 #endif
 #include "../_res/valchiria320x256.h"
+
+#define DELAYTIME 30
+#define GRAVITY 900
 
 #define BITPLANES 5
 
@@ -168,10 +172,10 @@ void curtainsGsCreate(void)
   s_pCurtains[0].s_pSource = AllocMem(10, MEMF_CHIP);*/
   //inline static void courtain_init(UBYTE ubIndex,UBYTE ubAlloc,UBYTE ubOffset)
 
-  courtain_init(0, 1, 0, 0);
-  courtain_init(1, 1, 10, 10);
-  courtain_init(2, 1, 20, 20);
-  courtain_init(3, 1, 30, 30);
+  courtain_init(0, 1, 0, 0 * DELAYTIME);
+  courtain_init(1, 1, 10, 1 * DELAYTIME);
+  courtain_init(2, 1, 20, 2 * DELAYTIME);
+  courtain_init(3, 1, 30, 3 * DELAYTIME);
 
   /*s_pCurtains[1].ubOffset = 10;
   s_pCurtains[1].ubPosition = 0;
@@ -205,7 +209,7 @@ void curtainsGsCreate(void)
 
 #ifdef FIX16
   g_Gravity.y = 0; //fix16_div(fix16_from_int(1), fix16_from_int(1000));
-  g_Gravity.x = fix16_div(fix16_from_int(1), fix16_from_int(30));
+  g_Gravity.x = fix16_div(fix16_from_int(1), fix16_from_int(GRAVITY));
 #endif
 
   // Load the view
@@ -227,8 +231,12 @@ void curtainsGsLoop(void)
   }
   //if (keyUse(KEY_Q))
   //ubFadeIn = 1;
-  if (ubFadeIn && uwFrameCounter % 8 == 0)
+  if (ubFadeIn && ((uwFrameCounter % 1) == 0))
   {
+//for (UBYTE ubCourtainCounter = 0; ubCourtainCounter < MAXCOURTAINS; ubCourtainCounter++)
+#ifdef COLORS_DEBUG
+    g_pCustom->color[0] = 0x0F00;
+#endif
     for (UBYTE ubCourtainCounter = 0; ubCourtainCounter < MAXCOURTAINS; ubCourtainCounter++)
     {
       if (s_pCurtains[ubCourtainCounter].ubSkipFramesCounter > 0)
@@ -239,7 +247,7 @@ void curtainsGsLoop(void)
       {
         blitBlack(ubCourtainCounter);
 #ifdef FIX16
-        if (s_pCurtains[ubCourtainCounter].ubCountBouncer < 4)
+        if (s_pCurtains[ubCourtainCounter].ubCountBouncer < 10)
         {
           v2d_add(&s_pCurtains[ubCourtainCounter].tAccelleration, &s_pCurtains[ubCourtainCounter].tAccelleration, &g_Gravity);
           v2d_add(&s_pCurtains[ubCourtainCounter].tVelocity, &s_pCurtains[ubCourtainCounter].tVelocity, &s_pCurtains[ubCourtainCounter].tAccelleration);
@@ -261,10 +269,12 @@ void curtainsGsLoop(void)
         {
           //ubFadeIn = 0;
 
-          courtain_init(0, 0, 0, 0);
-          courtain_init(1, 0, 10, 10);
-          courtain_init(2, 0, 20, 20);
-          courtain_init(3, 0, 30, 30);
+
+          courtain_init(0, 0, 0, 0 * DELAYTIME);
+          courtain_init(1, 0, 10, 1 * DELAYTIME);
+          courtain_init(2, 0, 20, 2 * DELAYTIME);
+          courtain_init(3, 0, 30, 3 * DELAYTIME);
+
           blitWait();
           memset((UBYTE *)((ULONG)s_pMainBuffer->pBack->Planes[4]), 0xFF, 40 * 256);
           blitWait();
@@ -276,6 +286,9 @@ void curtainsGsLoop(void)
           s_pCurtains[ubCourtainCounter].ubIncrementer *= -1;
 #endif
     }
+#ifdef COLORS_DEBUG
+    g_pCustom->color[0] = 0x0000;
+#endif
   }
   vPortWaitForEnd(s_pVpMain);
 }
