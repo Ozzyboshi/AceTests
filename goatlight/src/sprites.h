@@ -28,6 +28,8 @@ tAceSprite s_pAceSprites[ACE_MAXSPRITES];
 
 tCopBlock *copBlockEnableSpriteFull(tCopList *, FUBYTE, UBYTE *, ULONG);
 void copBlockEnableSpriteRaw(tCopList *, FUBYTE , UBYTE *, ULONG , FUWORD );
+void copBlockEnableSpriteEmpty(tCopList *, FUBYTE , /*UBYTE *pSpriteData,*/ ULONG , FUWORD );
+
 void memBitmapToSprite(UBYTE* , const size_t );
 void copBlockSpritesFree();
 void spriteMove3(FUBYTE,WORD,WORD);

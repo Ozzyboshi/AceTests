@@ -1,3 +1,8 @@
+/********************************************/
+/* Nofflight Amiga demo for Flashparty 2021 */
+/* Author : Ozzyboshi                       */
+/********************************************/
+
 #include "goatlight.h"
 #include <ace/managers/key.h>                   // Keyboard processing
 #include <ace/managers/game.h>                  // For using gameExit
@@ -13,8 +18,16 @@
 #include "globals.h"
 
 #include "../_res/discocrazy.h"
+//#include "../_res/obrush.h"
 
-#define BITPLANES 4 // 4 bitplanes
+#include "../_res/Goatfonts/IFF/goatfonts.h"
+/*#include "../_res/Goatfonts48/IFF/goatfonts48_1.h"
+#include "../_res/Goatfonts48/IFF/goatfonts48_2.h"
+#include "../_res/Goatfonts48/IFF/goatfonts48_3.h"*/
+#include "bigfonts.h"
+
+#define BITPLANES 5 // 4 bitplanes
+#define YTEXTCOORDINATE 167
 
 #define copSetWaitBackAndFront(var, var2)                    \
     copSetWait(&pCmdListBack[ubCopIndex].sWait, var, var2);  \
@@ -34,22 +47,39 @@ static tView *s_pView;    // View containing all the viewports
 static tVPort *s_pVpMain; // Viewport for playfield
 static tSimpleBufferTestManager *s_pMainBuffer;
 static UWORD s_uwCopRawOffs = 0;
+static UWORD s_uwCopSpriteOffs = 0;
 static fix16_t sg_tVelocity;
 static fix16_t sg_tVelocityIncrementer;
+static UBYTE ubCopSpritesColorIndex = 0;
+static UBYTE ubCopSpritesBigTxtColorIndex = 0;
 
 void updateCamera2(BYTE);
 UWORD getBarColor(const UBYTE);
 UWORD getBarColorPerspective(const UBYTE);
 UWORD getBarColorPerspectiveBack(const UBYTE);
+void setSpriteBallsCopperlistBack();
+void setCopSpritesBigTxtColorIndexReset();
 
-void MaskScreen(UBYTE);
+/*void MaskScreen(UBYTE);
 void unMaskScreen(UBYTE);
-UBYTE unMaskIntro(UBYTE, UBYTE);
+UBYTE unMaskIntro(UBYTE, UBYTE);*/
 void printPerspectiveRow2(tSimpleBufferTestManager *s_pMainBuffer, const UWORD, const UWORD, const UWORD);
 
 UBYTE buildPerspectiveCopperlist(UBYTE);
 
 void setHiddenRightBarColors(UWORD, UWORD, UWORD);
+
+#define BIGFONT(var)     initBigFont(ubFontIndex++,var##_1_combined_data,var##_2_combined_data,var##_3_combined_data);
+void initBigFonts();
+void initBigFont(UBYTE ,const unsigned char* ,const unsigned char* ,const unsigned char* );
+void updateBigLetter(UBYTE );
+typedef struct _tBigFontData
+{
+    UBYTE *pChunk1;
+    UBYTE *pChunk2;
+    UBYTE *pChunk3;
+} tBigFontData;
+tBigFontData pBigFonts[30];
 
 #define MAXCOLORS 12
 
@@ -233,10 +263,20 @@ static UBYTE s_ubBarColorsCopPositionsPerspectiveBack[MAXCOLORS];
 static UBYTE s_ubColorIndex = 0;
 
 #define SETBARCOLORSFRONTANDBACK                                                          \
-    for (UBYTE ubCounter = 0; ubCounter < MAXCOLORS; ubCounter++)                         \
+    for (UBYTE ubCounter = 0; ubCounter < 4; ubCounter++)                                 \
     {                                                                                     \
         s_ubBarColorsCopPositions[ubCounter] = ubCopIndex;                                \
         copSetMoveBackAndFront(&g_pCustom->color[ubCounter + 1], getBarColor(ubCounter)); \
+    }                                                                                     \
+    for (UBYTE ubCounter = 4; ubCounter < 8; ubCounter++)                                 \
+    {                                                                                     \
+        s_ubBarColorsCopPositions[ubCounter] = ubCopIndex;                                \
+        copSetMoveBackAndFront(&g_pCustom->color[ubCounter + 5], getBarColor(ubCounter)); \
+    }                                                                                     \
+    for (UBYTE ubCounter = 8; ubCounter < 12; ubCounter++)                                \
+    {                                                                                     \
+        s_ubBarColorsCopPositions[ubCounter] = ubCopIndex;                                \
+        copSetMoveBackAndFront(&g_pCustom->color[ubCounter + 9], getBarColor(ubCounter)); \
     }
 
 #define SETBARCOLORSFRONTANDBACKBORDER                                                    \
@@ -261,10 +301,26 @@ static UBYTE s_ubColorIndex = 0;
     }
 
 #define SETBARCOLORSBACK                                                          \
-    for (UBYTE ubCounter = 0; ubCounter < MAXCOLORS; ubCounter++)                 \
+    for (UBYTE ubCounter = 0; ubCounter < 4; ubCounter++)                         \
+    {                                                                             \
+        copSetMoveBack(&g_pCustom->color[ubCounter + 1], getBarColor(ubCounter)); \
+    }                                                                             \
+    for (UBYTE ubCounter = 4; ubCounter < 8; ubCounter++)                         \
+    {                                                                             \
+        copSetMoveBack(&g_pCustom->color[ubCounter + 5], getBarColor(ubCounter)); \
+    }                                                                             \
+    for (UBYTE ubCounter = 8; ubCounter < 12; ubCounter++)                        \
+    {                                                                             \
+        copSetMoveBack(&g_pCustom->color[ubCounter + 9], getBarColor(ubCounter)); \
+    }
+
+#define SETBARCOLORSBACKREDUCED                                                   \
+    for (UBYTE ubCounter = 0; ubCounter < 4; ubCounter++)                         \
     {                                                                             \
         copSetMoveBack(&g_pCustom->color[ubCounter + 1], getBarColor(ubCounter)); \
     }
+/*copSetMoveBack(&g_pCustom->color[9], getBarColor(7));                         \
+    copSetMoveBack(&g_pCustom->color[10], getBarColor(8));*/
 
 #define SETBARCOLORSBACKPERSPECTIVE                                                          \
     for (UBYTE ubCounter = 0; ubCounter < MAXCOLORS; ubCounter++)                            \
@@ -278,6 +334,13 @@ static UBYTE s_ubColorIndex = 0;
         copSetMoveBack(&g_pCustom->color[ubCounter + 1], getBarColorPerspectiveBack(ubCounter)); \
     }
 
+#define SETBARCOLORSBACKBORDERSTD                                                 \
+    for (UBYTE ubCounter = 0; ubCounter < MAXCOLORS; ubCounter++)                 \
+    {                                                                             \
+        copSetMoveBack(&g_pCustom->color[ubCounter + 1], getBarColor(ubCounter)); \
+    }
+
+#define VBARHEIGHT 207
 #define PERSECTIVEBARHEIGHT 3
 #define PERSPECTIVEBARSNUMBER 12    // How many perspective bars?
 #define PERSPECTIVEBARSNUMBERBACK 4 // How many back perspective bars?
@@ -339,17 +402,34 @@ v2d g_Gravity;
 
 //Music
 long mt_init(const unsigned char *);
+int chan2played();
+int chan3played();
 void mt_music();
 void mt_end();
+
+static tBitMap *g_pBitmapHelper1, *g_pBitmapHelper2, *g_pBitmapHelperTmp;
+static UBYTE ubTxtOverlayFlag = 0;
+static UBYTE s_ubMoveBalls = 0;
+
+void printTxtChar(UWORD uwXPos, UBYTE ubLetter);
+void printTxtCharEmpty(UWORD uwXPos);
+void printTextMsg(BYTE);
+void blitBitPlane(UBYTE *, UBYTE *);
+void setSpriteBallsCopperlist();
+void setCopSpritesBigTxtColorIndex();
+
+static UWORD uwChan2PlayedArray[15];
+static UWORD uwChan3PlayedArray[15];
+static UWORD uwChan4PlayedArray[15];
 
 void gameGsCreate(void)
 {
     // ULONG ulRawSize = SimpleBufferTestGetRawCopperlistInstructionCount(BITPLANES)+16;
-    ULONG ulRawSize = (SimpleBufferTestGetRawCopperlistInstructionCount(BITPLANES) + MAXBALLS*2 + ACE_SPRITES_COPPERLIST_SIZE + 10 + MAXCOLORS * 4 + PERSPECTIVEBLOCKSIZE * (PERSPECTIVEBARSNUMBER + PERSPECTIVEBARSNUMBERBACK) + 1
-                       /*                   3 * 3 + // 32 bars - each consists of WAIT + 3 MOVE instruction
+    ULONG ulRawSize = 10 + (SimpleBufferTestGetRawCopperlistInstructionCount(BITPLANES) + MAXBALLS * 2 + ACE_SPRITES_COPPERLIST_SIZE + 10 + MAXCOLORS * 4 + PERSPECTIVEBLOCKSIZE * (PERSPECTIVEBARSNUMBER + PERSPECTIVEBARSNUMBERBACK) + 1
+                            /*                   3 * 3 + // 32 bars - each consists of WAIT + 3 MOVE instruction
         1 +     // Final WAIT
         1       // Just to be sure*/
-    );
+                           );
 
     // Create a view - first arg is always zero, then it's option-value
     s_pView = viewCreate(0,
@@ -375,62 +455,19 @@ void gameGsCreate(void)
                                            TAG_END);
 
     s_uwCopRawOffs = SimpleBufferTestGetRawCopperlistInstructionCount(BITPLANES);
-
-    /*Enable this in double blf mode
-    CopyMemQuick(
-        s_pView->pCopList->pBackBfr->pList,
-        s_pView->pCopList->pFrontBfr->pList,
-        s_pView->pCopList->pBackBfr->uwAllocSize
-      );*/
-
-    // Since we've set up global CLUT, palette will be loaded from first viewport
-    // Colors are 0x0RGB, each channel accepts values from 0 to 15 (0 to F).
-    s_pVpMain->pPalette[0] = 0x0000; // Background color
-
-    s_pVpMain->pPalette[1] = 0x0888; // Gray
-    s_pVpMain->pPalette[2] = 0x0800; // Red - not max, a bit dark
-    s_pVpMain->pPalette[3] = 0x0008; // Blue - same brightness as red
-    s_pVpMain->pPalette[4] = 0x0008;
-
-    // Second set of colors
-    /* s_pVpMain->pPalette[5] = 0x00FF;
-    s_pVpMain->pPalette[6] = 0x00FF;
-    s_pVpMain->pPalette[7] = 0x00FF;
-    s_pVpMain->pPalette[8] = 0x00FF;
-
-    s_pVpMain->pPalette[9] = 0x0FF0;
-    s_pVpMain->pPalette[10] = 0x0FF0;
-    s_pVpMain->pPalette[11] = 0x0FF0;
-    s_pVpMain->pPalette[12] = 0x0FF0;*/
-
-    // palette for 8 to 15 is for masking entrance and exit
-    /*s_pVpMain->pPalette[8] = 0x0000;
-    s_pVpMain->pPalette[9] = 0x0000;
-    s_pVpMain->pPalette[10] = 0x0000;
-    s_pVpMain->pPalette[11] = 0x0000;
-    s_pVpMain->pPalette[12] = 0x0000;
-    s_pVpMain->pPalette[13] = 0x0000;
-    s_pVpMain->pPalette[14] = 0x0000;
-    s_pVpMain->pPalette[15] = 0x0000;*/
+    s_uwCopSpriteOffs = s_uwCopRawOffs;
 
     // We don't need anything from OS anymore
     systemUnuse();
 
     for (UBYTE ubBallIndex = 0; ubBallIndex < MAXBALLS; ubBallIndex++)
     {
-        spriteVectorInit(&g_pBallsMovers[ubBallIndex], ubBallIndex, -16-ubBallIndex*9, 50+ubBallIndex*20, fix16_div(fix16_from_int((int)ubBallIndex+4), fix16_from_int((int)ubBallIndex+2)), 0, LITTLE_BALLS_MASS);
-        copBlockEnableSpriteRaw(s_pView->pCopList, ubBallIndex, (UBYTE *)ball2bpl16x16_frame1_data, sizeof(ball2bpl16x16_frame1_data), s_uwCopRawOffs);
+        spriteVectorInit(&g_pBallsMovers[ubBallIndex], ubBallIndex, -16 - ubBallIndex * 9, 50 + ubBallIndex * 20, fix16_div(fix16_from_int((int)ubBallIndex + 4), fix16_from_int((int)ubBallIndex + 2)), 0, LITTLE_BALLS_MASS);
+        copBlockEnableSpriteRaw(s_pView->pCopList, ubBallIndex, (UBYTE *)ball2bpl16x16_frame1_data, sizeof(ball2bpl16x16_frame1_data), s_uwCopSpriteOffs);
         moverMove(g_pBallsMovers[ubBallIndex]);
     }
 
     s_uwCopRawOffs += ACE_SPRITES_COPPERLIST_SIZE;
-
-
-
-
-    //memcpy(s_pAceSprites[1].pSpriteData+4,ball2bpl16x16_frame1_data,ball2bpl16x16_frame1_size);
-
-    //s_pCamera = s_pMainBuffer->pCamera;
 
     // Draw rectangles
 
@@ -440,72 +477,50 @@ ColUMN            0   1   2   3        4   5   6   7        8   9   10   11
 
 Bitplane 0 -      1   0   1   0        1   0   1   0        1   0    1    0
 Bitplane 1 -      0   1   1   0        0   1   1   0        0   1    1    0
-Bitplane 2 -      0   0   0   1        1   1   1   0        0   0    0    1
-Bitplane 3 -      0   0   0   0        0   0   0   1        1   1    1    1
+Bitplane 2 -      0   0   0   1        0   0   0   1        0   0    0    1
+Bitplane 3 -      0   0   0   0        1   1   1   1        0   0    0    0
+Bitplane 4 -      0   0   0   0        0   0   0   0        1   1    1    1
 
+Bitplane 4 - (quello per il testo , 1 testo on, 2 testo off)*/
 
-*/
+    blitRect(s_pMainBuffer->pBack, 0 * 32, 0, 24, VBARHEIGHT, 1); // first column col 1 (index 0)
+    blitRect(s_pMainBuffer->pBack, 1 * 32, 0, 24, VBARHEIGHT, 2); // second column col 2
+    blitRect(s_pMainBuffer->pBack, 2 * 32, 0, 24, VBARHEIGHT, 3); // third column col 3
+    blitRect(s_pMainBuffer->pBack, 3 * 32, 0, 24, VBARHEIGHT, 4); // fourth column col 4
+    // ----------- end of first group -------------------------
 
-    UBYTE *p_ubBitplanePointer;
-    UWORD uwRowCounter = 0;
+    blitRect(s_pMainBuffer->pBack, 4 * 32, 0, 24, VBARHEIGHT, 9);  // first column col 9 (index 4)
+    blitRect(s_pMainBuffer->pBack, 5 * 32, 0, 24, VBARHEIGHT, 10); // second column col 10
+    blitRect(s_pMainBuffer->pBack, 6 * 32, 0, 24, VBARHEIGHT, 11); // third column col 11
+    blitRect(s_pMainBuffer->pBack, 7 * 32, 0, 24, VBARHEIGHT, 12); // fourth column col 12
+    // ----------- end of second group -------------------------
 
-    UBYTE ubContBitplanes = 0;
-    while (ubContBitplanes < BITPLANES)
-    {
+    blitRect(s_pMainBuffer->pBack, 8 * 32, 0, 24, VBARHEIGHT, 17);  // first column col 9 (index 8)
+    blitRect(s_pMainBuffer->pBack, 9 * 32, 0, 24, VBARHEIGHT, 18);  // second column col 10
+    blitRect(s_pMainBuffer->pBack, 10 * 32, 0, 24, VBARHEIGHT, 19); // third column col 11
+    blitRect(s_pMainBuffer->pBack, 11 * 32, 0, 24, VBARHEIGHT, 20); // fourth column col 12
 
-        p_ubBitplanePointer = (UBYTE *)((ULONG)s_pMainBuffer->pBack->Planes[ubContBitplanes]);
-        uwRowCounter = 0;
-        while (uwRowCounter < 208)
-        {
-            UBYTE ubCounter = 0;
-            for (ubCounter = 0; ubCounter < 12; ubCounter++)
-            {
-                UBYTE ubCode = 0xFF;
+    blitRect(s_pMainBuffer->pBack, 0 * 32, VBARHEIGHT, 24, 1, 1); // first column col 1 (index 0)
+    blitRect(s_pMainBuffer->pBack, 1 * 32, VBARHEIGHT, 24, 1, 2); // second column col 2
+    blitRect(s_pMainBuffer->pBack, 2 * 32, VBARHEIGHT, 24, 1, 3); // third column col 3
+    blitRect(s_pMainBuffer->pBack, 3 * 32, VBARHEIGHT, 24, 1, 4); // fourth column col 4
 
-                //list possibilities for zero
-                // Bitplane 0 - set to 0 for 2 3 6 7 10 11
-                //if (ubContBitplanes == 0 && (ubCounter == 2 || ubCounter == 3 || ubCounter == 6 || ubCounter == 7 || ubCounter == 10 || ubCounter == 11))
-                if (ubContBitplanes == 0 && ubCounter % 2 == 1)
-                    ubCode = 0x00;
+    blitRect(s_pMainBuffer->pBack, 4 * 32, VBARHEIGHT, 24, 1, 5); // first column col 1 (index 0)
+    blitRect(s_pMainBuffer->pBack, 5 * 32, VBARHEIGHT, 24, 1, 6); // second column col 2
+    blitRect(s_pMainBuffer->pBack, 6 * 32, VBARHEIGHT, 24, 1, 7); // third column col 3
+    blitRect(s_pMainBuffer->pBack, 7 * 32, VBARHEIGHT, 24, 1, 8); // fourth column col 4
 
-                // Bitplane 1
-                // odd colon must have color code 01
-                if (ubContBitplanes == 1 && (ubCounter % 4 == 0 || ubCounter % 4 == 3))
-                    ubCode = 0x00;
+    blitRect(s_pMainBuffer->pBack, 8 * 32, VBARHEIGHT, 24, 1, 9);   // first column col 1 (index 0)
+    blitRect(s_pMainBuffer->pBack, 9 * 32, VBARHEIGHT, 24, 1, 10);  // second column col 2
+    blitRect(s_pMainBuffer->pBack, 10 * 32, VBARHEIGHT, 24, 1, 11); // third column col 3
+    blitRect(s_pMainBuffer->pBack, 11 * 32, VBARHEIGHT, 24, 1, 12); // fourth column col 4
 
-                //Bitplane 2
-                // old else if (ubContBitplanes == 2 && ubCounter % 4 != 3)
-                else if (ubContBitplanes == 2 && (ubCounter < 3 || ubCounter == 7 || ubCounter == 8 || ubCounter == 9 || ubCounter == 10))
-                    ubCode = 0x00;
-
-                else if (ubContBitplanes == 3 && ubCounter < 7)
-                    ubCode = 0x00;
-
-                *p_ubBitplanePointer = ubCode;
-                p_ubBitplanePointer++;
-
-                *p_ubBitplanePointer = ubCode;
-                p_ubBitplanePointer++;
-
-                if (ubCounter == 1)
-                    *p_ubBitplanePointer = ubCode;
-                else
-                    *p_ubBitplanePointer = ubCode;
-                p_ubBitplanePointer++;
-
-                *p_ubBitplanePointer = 0x00;
-                p_ubBitplanePointer++;
-            }
-            uwRowCounter++;
-        }
-        ubContBitplanes++;
-    }
+    // ----------- end of third group -------------------------
 
     // Start building/drawing perspective rows
     UWORD uwRowWidth = 25;
     for (UWORD uwCounter = 208; uwCounter < 208 + PERSPECTIVEBARSNUMBER * PERSECTIVEBARHEIGHT; uwCounter++)
     {
-        //printPerspectiveRow(s_pMainBuffer, uwCounter, 48, uwRowWidth, 1);
         printPerspectiveRow2(s_pMainBuffer, uwCounter, 48, uwRowWidth);
         if ((uwCounter % PERSECTIVEBARHEIGHT) == 0)
             uwRowWidth += 3;
@@ -535,41 +550,40 @@ Bitplane 3 -      0   0   0   0        0   0   0   1        1   1    1    1
 
     // Sprites colors
     // Sprite 0 and 1
-    copSetMoveBackAndFront(&g_pCustom->color[16], 0x000F);
-    copSetMoveBackAndFront(&g_pCustom->color[17], 0x0edd);
-    copSetMoveBackAndFront(&g_pCustom->color[18], 0x0922);
-    copSetMoveBackAndFront(&g_pCustom->color[19], 0x0b77);
+    ubCopSpritesColorIndex = ubCopIndex;
+    // create space in copperlist for sprites - for now just a dumb set on color 5 that is unused
+    for (UBYTE ubDumb = 0; ubDumb < 16; ubDumb++)
+    {
+        copSetMoveBackAndFront(&g_pCustom->color[5], 0x000F);
+    }
 
-    // Sprites 2 and 3
-    copSetMoveBackAndFront(&g_pCustom->color[20], 0x000F);
-    copSetMoveBackAndFront(&g_pCustom->color[21], 0x0edd);
-    copSetMoveBackAndFront(&g_pCustom->color[22], 0x0922);
-    copSetMoveBackAndFront(&g_pCustom->color[23], 0x0b77);
+    copSetWaitBackAndFront(0, 239);
+    ubCopSpritesBigTxtColorIndex = ubCopIndex;
+    copSetMoveBackAndFront(&g_pCustom->color[15], 0x0FFF);
+    copSetMoveBackAndFront(&g_pCustom->color[15], 0x00CF);
+    copSetMoveBackAndFront(&g_pCustom->color[15], 0x055F);
 
-    // Sprites 4 and 5
-    copSetMoveBackAndFront(&g_pCustom->color[24], 0x000F);
-    copSetMoveBackAndFront(&g_pCustom->color[25], 0x0edd);
-    copSetMoveBackAndFront(&g_pCustom->color[26], 0x0922);
-    copSetMoveBackAndFront(&g_pCustom->color[27], 0x0b77);
+    copSetMoveBackAndFront(&g_pCustom->color[15], 0x0FFF);
+    copSetMoveBackAndFront(&g_pCustom->color[15], 0x00CF);
+    copSetMoveBackAndFront(&g_pCustom->color[15], 0x055F);
 
-    // Sprites 6 and 7 (7 is unused)
-    copSetMoveBackAndFront(&g_pCustom->color[28], 0x000F);
-    copSetMoveBackAndFront(&g_pCustom->color[29], 0x0edd);
-    copSetMoveBackAndFront(&g_pCustom->color[30], 0x0922);
-    copSetMoveBackAndFront(&g_pCustom->color[31], 0x0b77);
-    // Sprites colors end
+    copSetMoveBackAndFront(&g_pCustom->color[15], 0x0FFF);
+    copSetMoveBackAndFront(&g_pCustom->color[15], 0x00CF);
+    copSetMoveBackAndFront(&g_pCustom->color[15], 0x055F);
+
+#if 0
+
+#endif
 
     ubCopIndex = buildPerspectiveCopperlist(ubCopIndex);
 
     copSetWaitBackAndFront(7, 43);
-    copSetMoveBackAndFront(&g_pCustom->color[0], 0x0000);
+    copSetMoveBackAndFront(&g_pCustom->color[31], 0x0FF0);
 
     // set default velocity to 1
     sg_tVelocity = fix16_div(fix16_from_int(2), fix16_from_int(1));
     sg_tVelocityIncrementer = fix16_div(fix16_from_int(1), fix16_from_int(10));
 
-    // MaskScreen(0);
-    // unMaskScreen(36);
     // Init the gravity force
     g_Gravity.x = 0; //fix16_div(fix16_from_int(1), fix16_from_int(1000));
     g_Gravity.y = fix16_div(fix16_from_int(1), fix16_from_int(5));
@@ -578,36 +592,54 @@ Bitplane 3 -      0   0   0   0        0   0   0   1        1   1    1    1
     g_ubHBounceEnabled = 0;
     g_ubVBounceEnabled = 1;
 
+    // Inizio test text overlay
+    g_pBitmapHelper1 = bitmapCreate(384 * 1, 256, 1, BMF_CLEAR);
+    blitBitPlane((UBYTE *)((ULONG)s_pMainBuffer->pBack->Planes[3]), g_pBitmapHelper1->Planes[0]);
+
+    g_pBitmapHelper2 = bitmapCreate(384 * 1, 256, 1, BMF_CLEAR);
+
+    g_pBitmapHelperTmp = bitmapCreate(320 * 1, 32, 2, BMF_CLEAR);
+
     // Init music
     mt_init(discocrazy_data);
 
+    uwChan3PlayedArray[6] = 0x0C87;
+    uwChan3PlayedArray[5] = 0x0CA7;
+    uwChan3PlayedArray[4] = 0x0CB7;
+    uwChan3PlayedArray[3] = 0x0CC7;
+    uwChan3PlayedArray[2] = 0x0CD7;
+    uwChan3PlayedArray[1] = 0x0CE7;
+    uwChan3PlayedArray[0] = 0x0CF7;
+
+    uwChan4PlayedArray[6] = 0x0AE8;
+    uwChan4PlayedArray[5] = 0x0BE9;
+    uwChan4PlayedArray[4] = 0x0CEA;
+    uwChan4PlayedArray[3] = 0x0DEB;
+    uwChan4PlayedArray[2] = 0x0EFC;
+    uwChan4PlayedArray[1] = 0x0FFD;
+    uwChan4PlayedArray[0] = 0x0FFF;
+
+    uwChan2PlayedArray[6] = 0x08BC;
+    uwChan2PlayedArray[5] = 0x07AB;
+    uwChan2PlayedArray[4] = 0x069B;
+    uwChan2PlayedArray[3] = 0x048A;
+    uwChan2PlayedArray[2] = 0x037A;
+    uwChan2PlayedArray[1] = 0x0269;
+    uwChan2PlayedArray[0] = 0x0069;
+
+    initBigFonts();
+
     // Load the view
     viewLoad(s_pView);
+
+    //bitmapSave(s_pMainBuffer->pBack, "bitplanes.raw");
 }
 
 void gameGsLoop(void)
 {
+    static UWORD uwFrameNo = 0;
+    static UBYTE ubBigTxtMove = 0;
     mt_music();
-
-   /*g_pCustom->color[16] = 0x000F;
-    g_pCustom->color[17] = 0x0edd;
-    g_pCustom->color[18] = 0x0922;
-    g_pCustom->color[19] = 0x0b77;
-
-    g_pCustom->color[20] = 0x000F;
-    g_pCustom->color[21] = 0x0edd;
-    g_pCustom->color[22] = 0x0922;
-    g_pCustom->color[23] = 0x0b77;
-
-     g_pCustom->color[24] = 0x000F;
-    g_pCustom->color[25] = 0x0edd;
-    g_pCustom->color[26] = 0x0922;
-    g_pCustom->color[27] = 0x0b77;
-
-     g_pCustom->color[28] = 0x000F;
-    g_pCustom->color[29] = 0x0edd;
-    g_pCustom->color[30] = 0x0922;
-    g_pCustom->color[31] = 0x0b77;*/
 
 #ifdef COLORDEBUG
     g_pCustom->color[0] = 0x0FF0;
@@ -616,6 +648,47 @@ void gameGsLoop(void)
     static BYTE bXCamera = 0;
 
 #ifdef AUTOSCROLLING
+    uwFrameNo++;
+
+    // Manage col change
+    if (uwFrameNo >= 300 && bIsExiting == 0)
+    {
+        static BYTE bChan3Index = 0;
+        static BYTE bChan4Index = 0;
+#if 0
+        int g_iChan4Played = chan2played();
+        //g_iChan4Played=uwFrameNo%10;
+
+        if (g_iChan4Played)
+            bChan3Index = 0;
+        else
+        {
+            bChan3Index++;
+            if (bChan3Index > 6)
+                bChan3Index = 6;
+        }
+        s_pBarColors[0] = uwChan3PlayedArray[bChan3Index];
+        s_pBarColors[4] = uwChan3PlayedArray[bChan3Index];
+        s_pBarColors[8] = uwChan3PlayedArray[bChan3Index];
+
+        if (g_iChan4Played)
+            bChan4Index = 0;
+        else
+        {
+            bChan4Index++;
+            if (bChan4Index > 6)
+                bChan4Index = 6;
+        }
+        s_pBarColors[1] = uwChan4PlayedArray[bChan4Index];
+        s_pBarColors[5] = uwChan4PlayedArray[bChan4Index];
+        s_pBarColors[9] = uwChan4PlayedArray[bChan4Index];
+
+        s_pBarColors[2] = uwChan2PlayedArray[bChan4Index];
+        s_pBarColors[6] = uwChan2PlayedArray[bChan4Index];
+        s_pBarColors[10] = uwChan2PlayedArray[bChan4Index];
+#endif
+    }
+
     static fix16_t tCameraFrame = 0;
 
     tCameraFrame = fix16_add(tCameraFrame, sg_tVelocity);
@@ -640,8 +713,152 @@ void gameGsLoop(void)
             s_ubColorIndex--;
     }
 
+    // Control starts here
+
+    // Slow down
+    if (uwFrameNo >= 600 && uwFrameNo <= 900 && (uwFrameNo % 4) == 0)
+    {
+        sg_tVelocity = fix16_sub(sg_tVelocity, sg_tVelocityIncrementer);
+    }
+
+    // Accellerate
+    else if (uwFrameNo >= 1000 && uwFrameNo <= 1550 && (uwFrameNo % 6) == 0)
+    {
+        sg_tVelocity = fix16_add(sg_tVelocity, sg_tVelocityIncrementer);
+    }
+
+    // Show balls
+    if (uwFrameNo == 300 || uwFrameNo == 301)
+    {
+        setSpriteBallsCopperlistBack();
+        s_ubMoveBalls = 1;
+    }
+    // Balls falls down
+    else if (uwFrameNo == 1700)
+    {
+        g_ubVBounceEnabled = 0;
+    }
+
+    // Print text
+    else if (uwFrameNo == 2000)
+    {
+        setCopSpritesBigTxtColorIndex();
+        s_ubMoveBalls = 0;
+        ubTxtOverlayFlag = 1;
+
+        // Start big txt
+        //char Lettera = 'A';
+        //tBigFontData *pCurrBigLetter = &pBigFonts[(UBYTE)Lettera - 65];
+
+        /*******************************/
+        /*** START OF FIRST  LETTER ****/
+        /*******************************/
+        copBlockEnableSpriteEmpty(s_pView->pCopList, 0, A_1_combined_size, s_uwCopSpriteOffs);
+        copBlockEnableSpriteEmpty(s_pView->pCopList, 1, A_2_combined_size, s_uwCopSpriteOffs);
+        s_pAceSprites[0].bTrailingSpriteIndex = 1;
+
+        copBlockEnableSpriteEmpty(s_pView->pCopList, 2, A_3_combined_size, s_uwCopSpriteOffs);
+        s_pAceSprites[1].bTrailingSpriteIndex = 2;
+
+        /*******************************/
+        /*** START OF SECOND LETTER ****/
+        /*******************************/
+        //Lettera = 'B';
+       // pCurrBigLetter = &pBigFonts[(UBYTE)Lettera - 65];
+        copBlockEnableSpriteEmpty(s_pView->pCopList, 3, B_1_combined_size, s_uwCopSpriteOffs);
+        copBlockEnableSpriteEmpty(s_pView->pCopList, 4, B_2_combined_size, s_uwCopSpriteOffs);
+        s_pAceSprites[3].bTrailingSpriteIndex = 4;
+        copBlockEnableSpriteEmpty(s_pView->pCopList, 5, B_3_combined_size, s_uwCopSpriteOffs);
+        s_pAceSprites[4].bTrailingSpriteIndex = 5;
+
+        ubBigTxtMove = 1;
+    }
+    else if (uwFrameNo == 3600)
+    {
+
+        bIsExiting = 1;
+        ubTxtOverlayFlag = 0;
+        ubBigTxtMove = 0;
+        setCopSpritesBigTxtColorIndexReset();
+
+        tCopList *pCopList = s_pMainBuffer->sCommon.pVPort->pView->pCopList;
+        tCopCmd *pCmdListBack = &pCopList->pBackBfr->pList[s_uwCopRawOffs];
+        tCopCmd *pCmdListFront = &pCopList->pFrontBfr->pList[s_uwCopRawOffs];
+
+        UBYTE ubCopIndex = 1;
+
+        SETBARCOLORSFRONTANDBACK;
+
+        for (UBYTE ubDumb = 0; ubDumb < 16; ubDumb++)
+        {
+            copSetMoveBackAndFront(&g_pCustom->color[5], 0x000F);
+        }
+    }
+
     updateCamera2(bXCamera);
+
 #endif
+
+    if (keyCheck(KEY_G))
+    {
+        
+        setCopSpritesBigTxtColorIndex();
+
+        char Lettera = 'A';
+
+        tBigFontData *pCurrBigLetter = &pBigFonts[(UBYTE)Lettera - 65];
+
+        /*******************************/
+        /*** START OF FIRST  LETTER ****/
+        /*******************************/
+        //copBlockEnableSpriteRaw(s_pView->pCopList, 0, (UBYTE *)goatfonts48_1_data, sizeof(goatfonts48_1_data), s_uwCopSpriteOffs);
+        copBlockEnableSpriteEmpty(s_pView->pCopList, 0, A_1_combined_size, s_uwCopSpriteOffs);
+        memcpy(s_pAceSprites[0].pSpriteData + 4, pCurrBigLetter->pChunk1, A_1_combined_size);
+        //memset(s_pAceSprites[0].pSpriteData + 4,0xff,goatfonts48_1_size);
+
+        //copBlockEnableSpriteRaw(s_pView->pCopList, 1, (UBYTE *)goatfonts48_2_data, sizeof(goatfonts48_2_data), s_uwCopSpriteOffs);
+        copBlockEnableSpriteEmpty(s_pView->pCopList, 1, A_2_combined_size, s_uwCopSpriteOffs);
+        s_pAceSprites[0].bTrailingSpriteIndex = 1;
+        memcpy(s_pAceSprites[1].pSpriteData + 4, pCurrBigLetter->pChunk2, A_2_combined_size);
+
+        //copBlockEnableSpriteRaw(s_pView->pCopList, 2, (UBYTE *)goatfonts48_3_data, sizeof(goatfonts48_3_data), s_uwCopSpriteOffs);
+        copBlockEnableSpriteEmpty(s_pView->pCopList, 2, A_3_combined_size, s_uwCopSpriteOffs);
+        memcpy(s_pAceSprites[2].pSpriteData + 4, pCurrBigLetter->pChunk3, A_3_combined_size);
+        s_pAceSprites[1].bTrailingSpriteIndex = 2;
+
+        /*******************************/
+        /*** START OF SECOND LETTER ****/
+        /*******************************/
+        Lettera = 'B';
+
+        pCurrBigLetter = &pBigFonts[(UBYTE)Lettera - 65];
+        //copBlockEnableSpriteRaw(s_pView->pCopList, 3, (UBYTE *)goatfonts48_1_data, sizeof(goatfonts48_1_data), s_uwCopSpriteOffs);
+        copBlockEnableSpriteEmpty(s_pView->pCopList, 3, B_1_combined_size, s_uwCopSpriteOffs);
+        memcpy(s_pAceSprites[3].pSpriteData + 4, pCurrBigLetter->pChunk1, B_1_combined_size);
+
+        //copBlockEnableSpriteRaw(s_pView->pCopList, 4, (UBYTE *)goatfonts48_2_data, sizeof(goatfonts48_2_data), s_uwCopSpriteOffs);
+        copBlockEnableSpriteEmpty(s_pView->pCopList, 4, B_2_combined_size, s_uwCopSpriteOffs);
+        memcpy(s_pAceSprites[4].pSpriteData + 4, pCurrBigLetter->pChunk2, B_2_combined_size);
+        s_pAceSprites[3].bTrailingSpriteIndex = 4;
+
+        //copBlockEnableSpriteRaw(s_pView->pCopList, 5, (UBYTE *)goatfonts48_3_data, sizeof(goatfonts48_3_data), s_uwCopSpriteOffs);
+        copBlockEnableSpriteEmpty(s_pView->pCopList, 5, B_3_combined_size, s_uwCopSpriteOffs);
+        memcpy(s_pAceSprites[5].pSpriteData + 4, pCurrBigLetter->pChunk3, B_3_combined_size);
+        s_pAceSprites[4].bTrailingSpriteIndex = 5;
+
+        ubBigTxtMove = 1;
+    }
+
+    /*if (keyUse(KEY_H))
+    {
+        static UWORD uwBigTxtA = 100;
+        spriteMove3(0,  uwBigTxtA-- , 196);
+    }*/
+
+    if (keyCheck(KEY_T))
+    {
+        ubTxtOverlayFlag = 1;
+    }
 
     if (keyCheck(KEY_ESCAPE))
     {
@@ -668,6 +885,7 @@ void gameGsLoop(void)
     if (keyCheck(KEY_Q))
     {
         bIsExiting = 1;
+        ubTxtOverlayFlag = 0;
     }
 
     if (keyUse(KEY_V))
@@ -676,7 +894,7 @@ void gameGsLoop(void)
         s_ubColorIndex = 0;
         updateCamera2(bXCamera);
     }
-    if (keyUse(KEY_B))
+    if (keyCheck(KEY_B))
     {
         bXCamera++;
 
@@ -726,44 +944,20 @@ void gameGsLoop(void)
         sg_tVelocity = fix16_sub(sg_tVelocity, sg_tVelocityIncrementer);
     }
 
-    static UBYTE ubMoveBalls = 0;
     if (keyUse(KEY_1))
     {
-        ubMoveBalls = 1;
+        setSpriteBallsCopperlist();
+        s_ubMoveBalls = 1;
     }
-    if (ubMoveBalls)
+    if (s_ubMoveBalls)
     {
-        spriteVectorApplyForce(&g_Sprite0Vector, &g_Gravity);
-        spriteVectorApplyForce(&g_Sprite1Vector, &g_Gravity);
-
-        moverAddAccellerationToVelocity(&g_Sprite0Vector);
-        moverAddAccellerationToVelocity(&g_Sprite1Vector);
-
-        moverAddVelocityToLocation(&g_Sprite0Vector);
-        moverAddVelocityToLocation(&g_Sprite1Vector);
-
-        if (moverMove(g_Sprite0Vector))
-            g_Sprite0Vector.ubLocked = 1;
-
-        if (moverMove(g_Sprite1Vector))
-            g_Sprite1Vector.ubLocked = 1;
-
-        if (g_Sprite0Vector.ubLocked == 0)
-            moverBounce(&g_Sprite0Vector);
-
-        if (g_Sprite1Vector.ubLocked == 0)
-            moverBounce(&g_Sprite1Vector);
-
-        if (g_Sprite0Vector.ubLocked == 0)
-            spriteVectorResetAccelleration(&g_Sprite0Vector);
-
-        if (g_Sprite1Vector.ubLocked == 0)
-            spriteVectorResetAccelleration(&g_Sprite1Vector);
-
         for (UBYTE ubBallIndex = 0; ubBallIndex < MAXBALLS; ubBallIndex++)
         {
             //g_pBallsMovers
-            tMover* g_SpriteVector = &g_pBallsMovers[ubBallIndex];
+            tMover *g_SpriteVector = &g_pBallsMovers[ubBallIndex];
+
+            if ((*g_SpriteVector).ubLocked)
+                continue; // dont process locked balls
 
             spriteVectorApplyForce(g_SpriteVector, &g_Gravity);
             moverAddAccellerationToVelocity(g_SpriteVector);
@@ -785,6 +979,38 @@ void gameGsLoop(void)
 #endif
 
     vPortWaitForEnd(s_pVpMain);
+
+    if (ubTxtOverlayFlag)
+        printTextMsg(bXCamera);
+
+    if (ubBigTxtMove)
+    {
+        static BYTE bXCameraOld = 0;
+        BYTE bPixelMoved = bXCamera - bXCameraOld;
+        if (bPixelMoved < 0)
+            bPixelMoved += 32;
+        if (bPixelMoved)
+            bPixelMoved += 3;
+        bXCameraOld = bXCamera;
+
+        static UWORD uwBigTxtA = 57;
+        uwBigTxtA -= bPixelMoved;
+        spriteMove3(0, uwBigTxtA, 196);
+        if (uwBigTxtA > 320 && uwBigTxtA < 65535 - 48)
+        {
+            updateBigLetter(0);
+            uwBigTxtA = 320;
+        }
+
+        static UWORD uwBigTxtB = 217 + 24;
+        uwBigTxtB -= bPixelMoved;
+        spriteMove3(3, uwBigTxtB, 196);
+        if (uwBigTxtB > 320 && uwBigTxtB < 65535 - 48)
+        {
+            updateBigLetter(3);
+            uwBigTxtB = 320;
+        }
+    }
 
     static BYTE bIntroColorIndex = 11;
     static UBYTE lastBx = 0;
@@ -809,12 +1035,6 @@ void gameGsLoop(void)
     static BYTE bExitSequence = 11;
     if (bXCamera == 0 && bIsExiting && lastBx == 1)
     {
-        /*BYTE bColorIndex = 11 + s_ubColorIndex;
-        while (bColorIndex > 11)
-            bColorIndex -= 12;
-        s_pBarColors[bColorIndex] = 0x0000;
-        s_pBarColorsPerspective[bColorIndex] = 0x0000;
-        s_pBarColorsPerspectiveBack[bColorIndex] = 0x0000;*/
         setHiddenRightBarColors(0x0000, 0x0000, 0x0000);
 #ifdef ACE_DEBUG
         logWrite("Setting intro color to zero to index number\n");
@@ -833,6 +1053,10 @@ void gameGsLoop(void)
 void gameGsDestroy(void)
 {
     mt_end();
+
+    bitmapDestroy(g_pBitmapHelper1);
+    bitmapDestroy(g_pBitmapHelper2);
+    bitmapDestroy(g_pBitmapHelperTmp);
 
     // Cleanup when leaving this gamestate
     systemUse();
@@ -866,6 +1090,113 @@ void updateCamera2(BYTE bX)
     ULONG ulPlaneAddr2 = (ULONG)((ULONG)s_pMainBuffer->pBack->Planes[1]);
     ULONG ulPlaneAddr3 = (ULONG)((ULONG)s_pMainBuffer->pBack->Planes[2]);
     ULONG ulPlaneAddr4 = (ULONG)((ULONG)s_pMainBuffer->pBack->Planes[3]);
+    ULONG ulPlaneAddr5 = (ULONG)((ULONG)s_pMainBuffer->pBack->Planes[4]);
+
+    if (ubTxtOverlayFlag || s_ubMoveBalls)
+    {
+        //printTextMsg(bX);
+#if 1
+        static UBYTE ubLastPosition = 0;
+        static UWORD uwCycleCounter = 0;
+
+        BYTE bCurrentPosition = bX - ubLastPosition;
+#ifdef ACE_DEBUG
+        logWrite("UpdateCamera2 Velocity: %u\n", bCurrentPosition);
+#endif
+
+        // If bCurrentposition is negative, one full cycle has been done
+        if (bCurrentPosition < 0)
+        {
+            uwCycleCounter++;
+            /*{
+                static UBYTE ubTxtArrayOffset = 0;
+                static UBYTE pTxtArray[] = {1, 0, 1, 0, 1};
+                UBYTE *pPtrTxtArray = pTxtArray + ubTxtArrayOffset;
+                ubTxtArrayOffset++;
+
+                for (UWORD uwCycleCont = 0; uwCycleCont < uwCycleCounter; uwCycleCont++)
+                {
+                    if ((*pPtrTxtArray) == 0)
+                        printTxtCharEmpty(40 - uwCycleCont * 4);
+                    else
+                        printTxtChar(40 - uwCycleCont * 4);
+                    pPtrTxtArray--;
+                }
+            }*/
+
+#ifdef ACE_DEBUG
+            logWrite("UpdateCamera2 full cycle detected: %u\n", uwCycleCounter);
+#endif
+        }
+        /*if (uwCycleCounter == 12)
+            gameExit();*/
+
+        ubLastPosition = bX;
+#endif
+
+        /*if (bX == 0 && s_ulTxtPlaneCounter)
+            s_ulTxtPlaneCounter += 2;*/
+        /*if (bX > 16)
+        {
+            s_ulTxtPlaneCounter += 2;
+            while (ubTxtFrameCounter>16) ubTxtFrameCounter-=16;
+        }*/
+
+        ///while (ubTxtFrameCounter>31) ubTxtFrameCounter-=31;
+
+        UWORD uwOffset = uwCycleCounter << 2;
+        uwOffset = 0;
+        ulPlaneAddr4 = (ULONG)((ULONG)g_pBitmapHelper1->Planes[0] + uwOffset);
+        ulPlaneAddr5 = (ULONG)g_pBitmapHelper2->Planes[0] + uwOffset;
+        if (bX > 16)
+        {
+#ifdef ACE_DEBUG
+            logWrite("UpdateCamera2 extra bitplane increase\n");
+#endif
+            ulPlaneAddr4 += 2;
+            ulPlaneAddr5 += 2;
+        }
+
+        //tCopList *pCopList = s_pMainBuffer->sCommon.pVPort->pView->pCopList;
+        //tCopCmd *pCmdListBack = &pCopList->pBackBfr->pList[s_uwCopRawOffs];
+        static UBYTE txtcopinit = 0;
+        if (txtcopinit == 0 && s_ubMoveBalls == 0)
+        {
+            tCopCmd *pCmdListFront = &pCopList->pFrontBfr->pList[s_uwCopRawOffs];
+
+            ubCopIndex = ubCopSpritesColorIndex;
+
+            copSetMoveBackAndFront(&g_pCustom->color[16], 0x00CF);
+            copSetMoveBackAndFront(&g_pCustom->color[17], 0x00CF);
+            copSetMoveBackAndFront(&g_pCustom->color[18], 0x00CF);
+            copSetMoveBackAndFront(&g_pCustom->color[19], 0x00CF);
+
+            copSetMoveBackAndFront(&g_pCustom->color[20], 0x00CF);
+            copSetMoveBackAndFront(&g_pCustom->color[21], 0x00CF);
+            copSetMoveBackAndFront(&g_pCustom->color[22], 0x00CF);
+            copSetMoveBackAndFront(&g_pCustom->color[23], 0x00CF);
+
+            copSetMoveBackAndFront(&g_pCustom->color[24], 0x055F);
+            copSetMoveBackAndFront(&g_pCustom->color[25], 0x055F);
+            copSetMoveBackAndFront(&g_pCustom->color[26], 0x055F);
+            copSetMoveBackAndFront(&g_pCustom->color[27], 0x055F);
+
+            copSetMoveBackAndFront(&g_pCustom->color[28], 0x055F);
+            copSetMoveBackAndFront(&g_pCustom->color[29], 0x055F);
+            copSetMoveBackAndFront(&g_pCustom->color[30], 0x055F);
+            copSetMoveBackAndFront(&g_pCustom->color[31], 0x055F);
+
+            ubCopIndex = 7;
+            copSetMoveBackAndFront(&g_pCustom->color[7], 0x0FFF);
+            copSetMoveBackAndFront(&g_pCustom->color[8], 0x0FFF);
+            copSetMoveBackAndFront(&g_pCustom->color[9], 0x0FFF);
+            copSetMoveBackAndFront(&g_pCustom->color[10], 0x0FFF);
+            copSetMoveBackAndFront(&g_pCustom->color[11], 0x0FFF);
+            copSetMoveBackAndFront(&g_pCustom->color[12], 0x0FFF);
+
+            txtcopinit = 1;
+        }
+    }
 
     if (bX > 16)
     {
@@ -875,7 +1206,11 @@ void updateCamera2(BYTE bX)
         ulPlaneAddr += 2;
         ulPlaneAddr2 += 2;
         ulPlaneAddr3 += 2;
-        ulPlaneAddr4 += 2;
+        if (!ubTxtOverlayFlag && s_ubMoveBalls == 0)
+        {
+            ulPlaneAddr4 += 2;
+            ulPlaneAddr5 += 2;
+        }
         isBitplanesShifted = 1;
     }
 
@@ -891,6 +1226,9 @@ void updateCamera2(BYTE bX)
 
     copSetMove(&pCmdList[12].sMove, &g_pBplFetch[3].uwHi, ulPlaneAddr4 >> 16);
     copSetMove(&pCmdList[13].sMove, &g_pBplFetch[3].uwLo, ulPlaneAddr4 & 0xFFFF);
+
+    copSetMove(&pCmdList[14].sMove, &g_pBplFetch[4].uwHi, ulPlaneAddr5 >> 16);
+    copSetMove(&pCmdList[15].sMove, &g_pBplFetch[4].uwLo, ulPlaneAddr5 & 0xFFFF);
 
     if (bX > 0)
     {
@@ -999,10 +1337,19 @@ void updateCamera2(BYTE bX)
     }
 
     ubCopIndex = 1; // must be one because at zero we would get wait instruction
-    SETBARCOLORSBACK;
+
+    // if da togliere è solo un test
+    if (ubTxtOverlayFlag == 0 && s_ubMoveBalls == 0)
+    {
+        SETBARCOLORSBACK;
+    }
+    else
+    {
+        SETBARCOLORSBACKREDUCED;
+    }
 
     ubCopIndex = s_ubBarColorsCopPositionsBorder[0];
-    SETBARCOLORSBACK;
+    SETBARCOLORSBACKBORDERSTD;
 
     ubCopIndex = s_ubBarColorsCopPositionsPerspective[0];
     SETBARCOLORSBACKPERSPECTIVE;
@@ -1100,7 +1447,7 @@ void printPerspectiveRow2(tSimpleBufferTestManager *s_pMainBuffer, const UWORD u
     bitplanes[3].p_ubBitplaneEndPointer = p_ubBitplane3StartPointer + 48;
     bitplanes[3].p_ubBitplanePointer = p_ubBitplane3Pointer;
 
-    for (UBYTE ubBitplaneCounter = 0; ubBitplaneCounter < BITPLANES; ubBitplaneCounter++)
+    for (UBYTE ubBitplaneCounter = 0; ubBitplaneCounter < BITPLANES - 1; ubBitplaneCounter++)
     {
         UWORD uwSpaceBetweenColsCounter = 0;
         UWORD uwBarWidthCounter = 0;
@@ -1500,61 +1847,6 @@ UBYTE buildPerspectiveCopperlist(UBYTE ubCopIndex)
     return ubCopIndex;
 }
 
-// Mask the 4th bitplane filling with 0xFF
-void MaskScreen(UBYTE ubOffset)
-{
-    UWORD uwMask = 0x3414 - ubOffset;
-    blitWait();
-    g_pCustom->bltcon0 = 0x01FF;
-    g_pCustom->bltcon1 = 0x0000;
-    g_pCustom->bltafwm = 0xFFFF;
-    g_pCustom->bltalwm = 0xFFFF;
-    g_pCustom->bltamod = 0x0000;
-    g_pCustom->bltbmod = 0x0000;
-    g_pCustom->bltcmod = 0x0000;
-    g_pCustom->bltdmod = 0x0008;
-    //g_pCustom->bltapt = (UBYTE*)((ULONG)&pData[40*224*ubBitplaneCounter]);
-    g_pCustom->bltdpt = (UBYTE *)((ULONG)s_pMainBuffer->pBack->Planes[3]);
-    g_pCustom->bltsize = uwMask;
-    return;
-}
-
-// Mask the 4th bitplane filling with 0xFF
-void unMaskScreen(UBYTE ubMask)
-{
-    blitWait();
-    g_pCustom->bltcon0 = 0x0100;
-    g_pCustom->bltcon1 = 0x0000;
-    g_pCustom->bltafwm = 0xFFFF;
-    g_pCustom->bltalwm = 0xFFFF;
-    g_pCustom->bltamod = 0x0000;
-    g_pCustom->bltbmod = 0x0000;
-    g_pCustom->bltcmod = 0x0000;
-    g_pCustom->bltdmod = 0x002C;
-    //g_pCustom->bltapt = (UBYTE*)((ULONG)&pData[40*224*ubBitplaneCounter]);
-    g_pCustom->bltdpt = (UBYTE *)((ULONG)s_pMainBuffer->pBack->Planes[3] + ubMask);
-    g_pCustom->bltsize = 0x3402;
-    return;
-}
-UBYTE unMaskIntro(UBYTE bXCamera, UBYTE ubCmp)
-{
-    static UBYTE lastBx = 0;
-    static UBYTE ubMask = 38;
-
-    if (lastBx == bXCamera)
-        return 0;
-    lastBx = bXCamera;
-
-    if (bXCamera == ubCmp)
-    {
-        unMaskScreen(ubMask);
-        if (ubMask == 0)
-            return 1;
-        ubMask -= 2;
-    }
-    return 0;
-}
-
 void setHiddenRightBarColors(UWORD ubColorRectangle, UWORD ubColorPerspective, UWORD ubColorPerspectiveBack)
 {
     const BYTE bMaxCol = MAXCOLORS - 1;
@@ -1564,4 +1856,325 @@ void setHiddenRightBarColors(UWORD ubColorRectangle, UWORD ubColorPerspective, U
     s_pBarColors[bColorIndex] = ubColorRectangle;
     s_pBarColorsPerspective[bColorIndex] = ubColorPerspective;
     s_pBarColorsPerspectiveBack[bColorIndex] = ubColorPerspectiveBack;
+}
+
+void printTxtChar(UWORD uwXPos, UBYTE ubLetter)
+{
+    ubLetter -= 64;
+    UBYTE *goatfonts_data_bpl1 = (UBYTE *)(goatfonts_data + 128 * ubLetter);
+    UBYTE *goatfonts_data_bpl2 = (UBYTE *)(goatfonts_size / 2 + goatfonts_data + 128 * ubLetter);
+    for (int i = 0; i < 32; i++)
+    {
+        /* memcpy(g_pBitmapHelper2->Planes[0] + YTEXTCOORDINATE * 48 + uwXPos + i * 48, &obrush_data[i * 4], 4);
+        memcpy(g_pBitmapHelper1->Planes[0] + YTEXTCOORDINATE * 48 + uwXPos + i * 48, &obrush_data[i * 4 + 128], 4);
+
+        goatfonts_data*/
+
+        memcpy(g_pBitmapHelper2->Planes[0] + YTEXTCOORDINATE * 48 + uwXPos + i * 48, &goatfonts_data_bpl1[i * 4], 4);
+        memcpy(g_pBitmapHelper1->Planes[0] + YTEXTCOORDINATE * 48 + uwXPos + i * 48, &goatfonts_data_bpl2[i * 4], 4);
+    }
+}
+
+void printTxtCharEmpty(UWORD uwXPos)
+{
+    for (int i = 0; i < 32; i++)
+    {
+        memset(g_pBitmapHelper2->Planes[0] + YTEXTCOORDINATE * 48 + uwXPos + i * 48, 0, 4);
+        memset(g_pBitmapHelper1->Planes[0] + YTEXTCOORDINATE * 48 + uwXPos + i * 48, 0, 4);
+    }
+}
+
+void printTextMsg(BYTE bX)
+{
+    static UBYTE ubLastPosition = 0;
+    static UWORD uwCycleCounter = 0;
+    static UBYTE next = 0;
+
+    BYTE bCurrentPosition = bX - ubLastPosition;
+#ifdef ACE_DEBUG
+    logWrite("UpdateCamera2 Velocity: %u\n", bCurrentPosition);
+#endif
+
+    // If bCurrentposition is negative, one full cycle has been done
+    /*if (bCurrentPosition < 0)
+    {
+        g_pCustom->color[0]=0X0f00;
+        next = 1;
+    }*/
+    if (next)
+    {
+        blitWait();
+        g_pCustom->bltcon0 = 0x09F0;
+        g_pCustom->bltcon1 = 0x0000;
+        g_pCustom->bltafwm = 0xFFFF;
+        g_pCustom->bltalwm = 0xFFFF;
+        g_pCustom->bltamod = 0x0008;
+        g_pCustom->bltdmod = 0x0000;
+        g_pCustom->bltapt = (UBYTE *)((ULONG)g_pBitmapHelper1->Planes[0] + 4 + (48 * YTEXTCOORDINATE));
+        g_pCustom->bltdpt = (UBYTE *)((ULONG)g_pBitmapHelperTmp->Planes[0]);
+        g_pCustom->bltsize = 0x0814;
+        // copy to g_pBitmapHelperTmp
+
+        blitWait();
+        g_pCustom->bltcon0 = 0x09F0;
+        g_pCustom->bltcon1 = 0x0000;
+        g_pCustom->bltafwm = 0xFFFF;
+        g_pCustom->bltalwm = 0xFFFF;
+        g_pCustom->bltamod = 0x0008;
+        g_pCustom->bltdmod = 0x0000;
+        g_pCustom->bltapt = (UBYTE *)((ULONG)g_pBitmapHelper2->Planes[0] + 4 + (48 * YTEXTCOORDINATE));
+        g_pCustom->bltdpt = (UBYTE *)((ULONG)g_pBitmapHelperTmp->Planes[1]);
+        g_pCustom->bltsize = 0x0814;
+
+        next = 0;
+    }
+    if (bCurrentPosition < 0)
+    {
+
+        blitWait();
+        g_pCustom->bltcon0 = 0x09f0;
+        g_pCustom->bltcon1 = 0x0000;
+        g_pCustom->bltafwm = 0xFFFF;
+        g_pCustom->bltalwm = 0xFFFF;
+        g_pCustom->bltamod = 0x0000;
+        g_pCustom->bltdmod = 0x0008;
+        g_pCustom->bltapt = (UBYTE *)((ULONG)g_pBitmapHelperTmp->Planes[0]);
+        g_pCustom->bltdpt = (UBYTE *)((ULONG)g_pBitmapHelper1->Planes[0] + (48 * YTEXTCOORDINATE));
+        g_pCustom->bltsize = 0x0814;
+        // copy to g_pBitmapHelperTmp
+
+        blitWait();
+        g_pCustom->bltcon0 = 0x09f0;
+        g_pCustom->bltcon1 = 0x0000;
+        g_pCustom->bltafwm = 0xFFFF;
+        g_pCustom->bltalwm = 0xFFFF;
+        g_pCustom->bltamod = 0x0000;
+        g_pCustom->bltdmod = 0x0008;
+        g_pCustom->bltapt = (UBYTE *)((ULONG)g_pBitmapHelperTmp->Planes[1]);
+        g_pCustom->bltdpt = (UBYTE *)((ULONG)g_pBitmapHelper2->Planes[0] + (48 * YTEXTCOORDINATE));
+        g_pCustom->bltsize = 0x0814;
+
+        next = 1;
+        uwCycleCounter++;
+        {
+            static UBYTE ubTxtArrayOffset = 0;
+            static UBYTE pTxtArray[] = {'N', '@', 'O', '@', 'F', '@', 'F', '@', 'L', '@', 'I', '@', 'G', '@', 'H', '@', 'T', '@', '@', '@',
+                                        'I', '@', 'S', '@', '@', '@',
+                                        'A', '@', '@', '@',
+                                        'T', '@', 'R', '@', 'I', '@', 'B', '@', 'U', '@', 'T', '@', 'E', '@', '@', '@',
+                                        'T', '@', 'O', '@', '@', '@',
+                                        'N', '@', 'O', '@', 'I', '@', 'C', '@', 'E', '@', '@', '@', '@',
+                                        'O', '@', 'F', '@', 'F', '@', 'E', '@', 'N', '@', 'C', '@', 'E', '@', '@', '@',
+                                        'F', '@', 'A', '@', 'I', '@', 'R', '@', 'L', '@', 'I', '@', 'G', '@', 'H', '@', 'T', '@', '@', '@',
+                                        'R', '@', 'E', '@', 'L', '@', 'E', '@', 'A', '@', 'S', '@', 'E', '@', 'D', '@', 'T', '@', '@', '@',
+                                        'A', '@', 'T', '@', '@', '@',
+                                        'F', '@', 'L', '@', 'A', '@', 'S', '@', 'H', '@', 'P', '@', 'A', '@', 'R', '@', 'T', '@', 'Y', '@', '@', '@',
+                                        'T', '@', 'W', '@', 'E', '@', 'N', '@', 'T', '@', 'Y', '@', 'O', '@', 'N', '@', 'E', '@', '@', '@', '@', '@',
+
+                                        '@', '@', '@', '@', '@', '@', '@', '@'};
+            UBYTE *pPtrTxtArray = pTxtArray + ubTxtArrayOffset;
+            ubTxtArrayOffset++;
+
+            if (ubTxtArrayOffset >= sizeof(pTxtArray))
+            {
+                ubTxtArrayOffset = sizeof(pTxtArray) - 1; // repeat last char forever
+            }
+
+            if (uwCycleCounter > 10)
+                uwCycleCounter = 10;
+
+            printTxtChar(40, *pPtrTxtArray);
+            pPtrTxtArray--;
+        }
+
+#ifdef ACE_DEBUG
+        logWrite("UpdateCamera2 full cycle detected: %u\n", uwCycleCounter);
+#endif
+    }
+
+    ubLastPosition = bX;
+}
+
+void blitBitPlane(UBYTE *pSrc, UBYTE *pDst)
+{
+    blitWait();
+    g_pCustom->bltcon0 = 0x09f0;
+    g_pCustom->bltcon1 = 0x0000;
+    g_pCustom->bltafwm = 0xFFFF;
+    g_pCustom->bltalwm = 0xFFFF;
+    g_pCustom->bltamod = 0x0000;
+    g_pCustom->bltdmod = 0x0000;
+    g_pCustom->bltapt = pSrc + VBARHEIGHT * 48;
+    g_pCustom->bltdpt = pDst + VBARHEIGHT * 48;
+    g_pCustom->bltsize = 0x0C58;
+}
+
+void setSpriteBallsCopperlist()
+{
+    tCopList *pCopList = s_pMainBuffer->sCommon.pVPort->pView->pCopList;
+    tCopCmd *pCmdListBack = &pCopList->pBackBfr->pList[s_uwCopRawOffs];
+    tCopCmd *pCmdListFront = &pCopList->pFrontBfr->pList[s_uwCopRawOffs];
+    UBYTE ubCopIndex = ubCopSpritesColorIndex;
+
+    copSetMoveBackAndFront(&g_pCustom->color[16], 0x000F);
+    copSetMoveBackAndFront(&g_pCustom->color[17], 0x0edd);
+    copSetMoveBackAndFront(&g_pCustom->color[18], 0x0922);
+    copSetMoveBackAndFront(&g_pCustom->color[19], 0x0b77);
+
+    // Sprites 2 and 3
+    copSetMoveBackAndFront(&g_pCustom->color[20], 0x000F);
+    copSetMoveBackAndFront(&g_pCustom->color[21], 0x0edd);
+    copSetMoveBackAndFront(&g_pCustom->color[22], 0x0922);
+    copSetMoveBackAndFront(&g_pCustom->color[23], 0x0b77);
+
+    // Sprites 4 and 5
+    copSetMoveBackAndFront(&g_pCustom->color[24], 0x000F);
+    copSetMoveBackAndFront(&g_pCustom->color[25], 0x0edd);
+    copSetMoveBackAndFront(&g_pCustom->color[26], 0x0922);
+    copSetMoveBackAndFront(&g_pCustom->color[27], 0x0b77);
+
+    // Sprites 6 and 7 (7 is unused)
+    copSetMoveBackAndFront(&g_pCustom->color[28], 0x000F);
+    copSetMoveBackAndFront(&g_pCustom->color[29], 0x0edd);
+    copSetMoveBackAndFront(&g_pCustom->color[30], 0x0922);
+    copSetMoveBackAndFront(&g_pCustom->color[31], 0x0b77);
+    // Sprites colors end
+}
+
+void setSpriteBallsCopperlistBack()
+{
+    tCopList *pCopList = s_pMainBuffer->sCommon.pVPort->pView->pCopList;
+    tCopCmd *pCmdListBack = &pCopList->pBackBfr->pList[s_uwCopRawOffs];
+    //tCopCmd *pCmdListFront = &pCopList->pFrontBfr->pList[s_uwCopRawOffs];
+    UBYTE ubCopIndex = ubCopSpritesColorIndex;
+
+    copSetMoveBack(&g_pCustom->color[16], 0x000F);
+    copSetMoveBack(&g_pCustom->color[17], 0x0edd);
+    copSetMoveBack(&g_pCustom->color[18], 0x0922);
+    copSetMoveBack(&g_pCustom->color[19], 0x0b77);
+
+    // Sprites 2 and 3
+    copSetMoveBack(&g_pCustom->color[20], 0x000F);
+    copSetMoveBack(&g_pCustom->color[21], 0x0edd);
+    copSetMoveBack(&g_pCustom->color[22], 0x0922);
+    copSetMoveBack(&g_pCustom->color[23], 0x0b77);
+
+    // Sprites 4 and 5
+    copSetMoveBack(&g_pCustom->color[24], 0x000F);
+    copSetMoveBack(&g_pCustom->color[25], 0x0edd);
+    copSetMoveBack(&g_pCustom->color[26], 0x0922);
+    copSetMoveBack(&g_pCustom->color[27], 0x0b77);
+
+    // Sprites 6 and 7 (7 is unused)
+    copSetMoveBack(&g_pCustom->color[28], 0x000F);
+    copSetMoveBack(&g_pCustom->color[29], 0x0edd);
+    copSetMoveBack(&g_pCustom->color[30], 0x0922);
+    copSetMoveBack(&g_pCustom->color[31], 0x0b77);
+    // Sprites colors end
+}
+
+void setCopSpritesBigTxtColorIndex()
+{
+    tCopList *pCopList = s_pMainBuffer->sCommon.pVPort->pView->pCopList;
+    tCopCmd *pCmdListBack = &pCopList->pBackBfr->pList[s_uwCopRawOffs];
+    tCopCmd *pCmdListFront = &pCopList->pFrontBfr->pList[s_uwCopRawOffs];
+
+    UBYTE ubCopIndex = ubCopSpritesBigTxtColorIndex;
+    copSetMoveBackAndFront(&g_pCustom->color[17], 0x0FFF);
+    copSetMoveBackAndFront(&g_pCustom->color[18], 0x00CF);
+    copSetMoveBackAndFront(&g_pCustom->color[19], 0x055F);
+
+    copSetMoveBackAndFront(&g_pCustom->color[21], 0x0FFF);
+    copSetMoveBackAndFront(&g_pCustom->color[22], 0x00CF);
+    copSetMoveBackAndFront(&g_pCustom->color[23], 0x055F);
+
+    copSetMoveBackAndFront(&g_pCustom->color[25], 0x0FFF);
+    copSetMoveBackAndFront(&g_pCustom->color[26], 0x00CF);
+    copSetMoveBackAndFront(&g_pCustom->color[27], 0x055F);
+}
+
+void setCopSpritesBigTxtColorIndexReset()
+{
+    tCopList *pCopList = s_pMainBuffer->sCommon.pVPort->pView->pCopList;
+    tCopCmd *pCmdListBack = &pCopList->pBackBfr->pList[s_uwCopRawOffs];
+    tCopCmd *pCmdListFront = &pCopList->pFrontBfr->pList[s_uwCopRawOffs];
+
+    UBYTE ubCopIndex = ubCopSpritesBigTxtColorIndex;
+    copSetMoveBackAndFront(&g_pCustom->color[15], 0x0FFF);
+    copSetMoveBackAndFront(&g_pCustom->color[15], 0x00CF);
+    copSetMoveBackAndFront(&g_pCustom->color[15], 0x055F);
+
+    copSetMoveBackAndFront(&g_pCustom->color[15], 0x0FFF);
+    copSetMoveBackAndFront(&g_pCustom->color[15], 0x00CF);
+    copSetMoveBackAndFront(&g_pCustom->color[15], 0x055F);
+
+    copSetMoveBackAndFront(&g_pCustom->color[15], 0x0FFF);
+    copSetMoveBackAndFront(&g_pCustom->color[15], 0x00CF);
+    copSetMoveBackAndFront(&g_pCustom->color[15], 0x055F);
+}
+
+void initBigFont(UBYTE ubFontIndex,const unsigned char* pFirst,const unsigned char* pSecond,const unsigned char* pThird)
+{
+    pBigFonts[ubFontIndex].pChunk1 = (UBYTE *)pFirst;
+    pBigFonts[ubFontIndex].pChunk2 = (UBYTE *)pSecond;
+    pBigFonts[ubFontIndex].pChunk3 = (UBYTE *)pThird;
+}
+
+void initBigFonts()
+{
+    UBYTE ubFontIndex = 0;
+
+
+    
+    BIGFONT(A);
+    BIGFONT(B);
+    BIGFONT(C);
+    BIGFONT(D);
+    BIGFONT(E);
+    BIGFONT(F);
+    BIGFONT(G);
+    BIGFONT(H);
+    BIGFONT(I);
+    BIGFONT(J);
+    BIGFONT(K);
+    BIGFONT(L);
+    BIGFONT(M);
+    BIGFONT(N);
+    BIGFONT(O);
+    BIGFONT(P);
+    BIGFONT(Q);
+    BIGFONT(R);
+    BIGFONT(S);
+    BIGFONT(T);
+    BIGFONT(U);
+    BIGFONT(V);
+    BIGFONT(W);
+    BIGFONT(X);
+    BIGFONT(Y);
+    BIGFONT(Z);
+    BIGFONT(N0);
+    BIGFONT(N1);
+    BIGFONT(N2);
+    BIGFONT(Space);
+
+
+
+
+}
+
+void updateBigLetter(UBYTE ubSpriteNumber)
+{
+    //static char Phrase[] = {"[\\]ABCDEFGHIJKLMNOPQRSTUVWXYZ@"};
+    //static char Phrase[] = {"LOVE^FLASHPARTY^][]\\^EDITON^^GREETINGS^TO^OUR^FRIENDS^IN^BUENOS^AIRES^@"};
+    static char Phrase[] = {"THE^CULT^OF^AMIGA^NEVER^DIES^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^@"};
+    static char* pPhrase=Phrase;
+    char Lettera =*pPhrase;
+
+    tBigFontData *pCurrBigLetter = &pBigFonts[(UBYTE)Lettera - 65];
+
+    memcpy(s_pAceSprites[ubSpriteNumber++].pSpriteData + 4, pCurrBigLetter->pChunk1, A_1_combined_size);
+    memcpy(s_pAceSprites[ubSpriteNumber++].pSpriteData + 4, pCurrBigLetter->pChunk2, A_2_combined_size);
+    memcpy(s_pAceSprites[ubSpriteNumber++].pSpriteData + 4, pCurrBigLetter->pChunk3, A_3_combined_size);
+    pPhrase++;
+    if (*pPhrase=='@') pPhrase=Phrase;
 }
