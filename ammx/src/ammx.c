@@ -3,6 +3,7 @@
 #include <ace/managers/game.h> // For using gameExit
 #include <ace/managers/system.h> // For systemUnuse and systemUse
 #include <ace/managers/viewport/simplebuffer.h> // Simple buffer
+#include <stdio.h>
 
 #define BITPLANES 4
 
@@ -18,6 +19,7 @@ static UWORD s_uwCopRawOffs=0;
 static tCopCmd *pCopCmds;
 
 void ammxmainloop();
+void ammxmainloop2();
 
 void ammxGsCreate(void) {
   ULONG ulRawSize = (simpleBufferGetRawCopperlistInstructionCount(BITPLANES) +
@@ -74,6 +76,8 @@ void ammxGsCreate(void) {
 void ammxGsLoop(void) {
   // This will loop forever until you "pop" or change gamestate
   // or close the game
+  static UBYTE ubDraw=0;
+
   if(keyCheck(KEY_ESCAPE)) {
     gameExit();
     return ;
@@ -89,6 +93,32 @@ void ammxGsLoop(void) {
       g_pCustom->color[0]=0x000F;
     else  g_pCustom->color[0]=0x0F00;
   }
+
+  if (ubDraw || keyCheck(KEY_2))
+  {
+    static UBYTE ubOut[8];
+    memset(&ubOut,0xFF,8);
+    g_pCustom->color[0] = 0x0FF0;
+    ammxmainloop2((ULONG)s_pMainBuffer->pBack->Planes[0]);
+    g_pCustom->color[0] = 0x0000;
+    ubDraw=1;
+    //if (ubOut[0]==0xFF && ubOut[1]==0xFF && ubOut[2]==0xFF && ubOut[3]==0xFF) 
+    //if (ubOut[0]==0x00 && ubOut[1]==0x0b) 
+    //if (ubOut[0]==0x01 && ubOut[1]==0x00 && ubOut[2]==0x00 && ubOut[3]==0x00 && ubOut[4]==0x00 && ubOut[5]==0x00 && ubOut[6]==0x00 && ubOut[7]==0x00 ) 
+    //  g_pCustom->color[0]=0x00F0;
+    //else  g_pCustom->color[0]=0x0F00;
+    //systemUse();
+    /*FILE* fd = fopen("lol.bin","w+");
+    if (fd)
+    {
+      fwrite(ubOut,8,1,fd);
+      fclose(fd);
+    }*/
+    //printf("D0 %x %x %x %x %x %x %x %x\n",ubOut[0],ubOut[1],ubOut[2],ubOut[3],ubOut[4],ubOut[5],ubOut[6],ubOut[7]);
+    //systemUnuse();
+    //gameExit();
+  }
+
   vPortWaitForEnd(s_pVpMain);
 }
 
