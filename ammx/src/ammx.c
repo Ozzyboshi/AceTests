@@ -20,6 +20,7 @@ static tCopCmd *pCopCmds;
 
 void ammxmainloop();
 void ammxmainloop2();
+void ammxmainloop3();
 
 void ammxGsCreate(void) {
   ULONG ulRawSize = (simpleBufferGetRawCopperlistInstructionCount(BITPLANES) +
@@ -77,6 +78,7 @@ void ammxGsLoop(void) {
   // This will loop forever until you "pop" or change gamestate
   // or close the game
   static UBYTE ubDraw=0;
+  static UBYTE ubDraw3=0;
 
   if(keyCheck(KEY_ESCAPE)) {
     gameExit();
@@ -117,6 +119,16 @@ void ammxGsLoop(void) {
     //printf("D0 %x %x %x %x %x %x %x %x\n",ubOut[0],ubOut[1],ubOut[2],ubOut[3],ubOut[4],ubOut[5],ubOut[6],ubOut[7]);
     //systemUnuse();
     //gameExit();
+  }
+
+  if (ubDraw3 || keyCheck(KEY_3))
+  {
+    static UBYTE ubOut[8];
+    memset(&ubOut,0xFF,8);
+    g_pCustom->color[0] = 0x0F00;
+    ammxmainloop3((ULONG)s_pMainBuffer->pBack->Planes[0]);
+    g_pCustom->color[0] = 0x0000;
+    ubDraw3=1;
   }
 
   vPortWaitForEnd(s_pVpMain);
