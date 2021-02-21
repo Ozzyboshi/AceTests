@@ -25,6 +25,7 @@ void ammxmainloop4();
 void ammxmainloop5();
 void ammxmainloop6();
 void ammxmainloop7();
+void ammxmainloop8(UBYTE*,UBYTE*,ULONG);
 
 void ammxGsCreate(void)
 {
@@ -223,6 +224,44 @@ void ammxGsLoop(void)
     printf("Px8 %x %x %x %x\n", ubOut[28], ubOut[29], ubOut[30], ubOut[31]);
     systemUnuse();
     gameExit();
+  }
+
+  // vertical
+  if (keyUse(KEY_8))
+  {
+    static UBYTE ubOut[100];
+    static UBYTE ubOut2[100];
+    memset(&ubOut, 0xaa, 100);
+    memset(&ubOut2, 0xaa, 100);
+    g_pCustom->color[0] = 0x0F00;
+    // ammxmainloop4((ULONG)s_pMainBuffer->pBack->Planes[0]);
+    ammxmainloop8(ubOut,ubOut2,(ULONG)s_pMainBuffer->pBack->Planes[0]);
+    g_pCustom->color[0] = 0x0000;
+    
+    systemUse();
+    printf("Px1 %x %x %x %x \n", ubOut[0], ubOut[1], ubOut[2], ubOut[3]);
+    printf("Px2 %x %x %x %x\n", ubOut[4], ubOut[5], ubOut[6], ubOut[7]);
+    printf("Px3 %x %x %x %x\n", ubOut[8], ubOut[9], ubOut[10], ubOut[11]);
+    printf("Px4 %x %x %x %x\n", ubOut[12], ubOut[13], ubOut[14], ubOut[15]);
+    printf("Px5 %x %x %x %x\n", ubOut[16], ubOut[17], ubOut[18], ubOut[19]);
+    printf("Px6 %x %x %x %x\n", ubOut[20], ubOut[21], ubOut[22], ubOut[23]);
+    printf("Px7 %x %x %x %x\n", ubOut[24], ubOut[25], ubOut[26], ubOut[27]);
+    printf("Px8 %x %x %x %x\n", ubOut[28], ubOut[29], ubOut[30], ubOut[31]);
+
+    printf("-------------------------\n");
+
+    printf("Px1 %x %x %x %x \n", ubOut2[0], ubOut2[1], ubOut2[2], ubOut2[3]);
+    printf("Px2 %x %x %x %x\n", ubOut2[4], ubOut2[5], ubOut2[6], ubOut2[7]);
+    printf("Px3 %x %x %x %x\n", ubOut2[8], ubOut2[9], ubOut2[10], ubOut2[11]);
+    printf("Px4 %x %x %x %x\n", ubOut2[12], ubOut2[13], ubOut2[14], ubOut2[15]);
+    printf("Px5 %x %x %x %x\n", ubOut2[16], ubOut2[17], ubOut2[18], ubOut2[19]);
+    printf("Px6 %x %x %x %x\n", ubOut2[20], ubOut2[21], ubOut2[22], ubOut2[23]);
+    printf("Px7 %x %x %x %x\n", ubOut2[24], ubOut2[25], ubOut2[26], ubOut2[27]);
+    printf("Px8 %x %x %x %x\n", ubOut2[28], ubOut2[29], ubOut2[30], ubOut2[31]);
+    
+
+    systemUnuse();
+    //gameExit();
   }
 
   vPortWaitForEnd(s_pVpMain);

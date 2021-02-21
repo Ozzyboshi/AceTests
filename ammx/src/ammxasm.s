@@ -11,12 +11,17 @@ _NUMPOINTS EQU 7
 	XDEF _ammxmainloop5
 	XDEF _ammxmainloop6
 	XDEF _ammxmainloop7
+	XDEF _ammxmainloop8
 
 DATAIN:
     dc.l $AAAAAAAA
     dc.l $BBBBBBBB
 par1:
     dc.l 0
+par2:
+	dc.l 0
+bitplane0:
+	dc.l 0
 
 _ammxmainloop:
     move.l 4(sp),par1 ; bitplane poiner
@@ -747,3 +752,443 @@ LINEVERTEX_START_4:
 LINEVERTEX_END_4:
 	dc.w 5 ; X2
 	dc.w 1 ; Y2
+
+; Final round
+; - pick lowest x first
+; - check if both coords are between screen limits
+; - select one of the 4 drawing routines
+_ammxmainloop8:
+	move.l 4(sp),par1 ; argument save
+	move.l 8(sp),par2
+	move.l 12(sp),bitplane0
+	movem.l d0-d6/a0-a6,-(sp) ; stack save
+	move.l par1,a1
+	lea LINEVERTEX_START_PUSHED,a2
+	
+	; - pick lowest first x
+	move.l LINEVERTEX_START_FINAL,d2
+	cmp.l LINEVERTEX_END_FINAL,d2
+	blt.s ammxmainloop8_lowestless ;  check if first x is lower if this is the case jump to endammxmainloop8
+	move.l LINEVERTEX_START_FINAL,d3
+	move.l LINEVERTEX_END_FINAL,d2
+	bra.s endammxmainloop8phase1
+ammxmainloop8_lowestless:
+	move.l LINEVERTEX_END_FINAL,d3
+
+endammxmainloop8phase1 ; end of first check
+	; - pick lowest first x end
+	move.l d2,(a2)+
+	move.l d3,(a2)+
+	move.l d2,(a1)+
+	move.l d3,(a1)+
+
+	; - check if both coords are between screen limits start
+	; - check if both coords are between screen limits end
+
+	; select one of the 4 drawing routines start
+	PSUBW d2,d3,d4 ; d4 will contain deltas
+	PSUBW d3,d2,d5
+	pmaxsw  d5,d4,d4
+	move.l d4,(a1)+
+	vperm #$45454545,d4,d4,d5 ; move xdelta in the less sig word
+	; select one of the 4 drawing routines end
+	move.w d4,(a1)+
+	move.w d5,(a1)+
+	cmp.w d5,d4
+	blt.s dylessthan
+	move.w #2,(a1)+
+	cmp.w d2,d3
+	bls.s gotolessminus1
+	bsr.w linemgreater1		; vertical line
+	bra.s endammxmainloop8phase2
+gotolessminus1:
+	bsr.w linemlessminus1
+	bra.s endammxmainloop8phase2
+
+
+dylessthan:
+	move.w #1,(a1)+
+	cmp.w d2,d3
+	bls.s goto0tominus1
+	bsr.w linem0to1
+	bra.s endammxmainloop8phase2
+goto0tominus1:
+	bsr.w linem0tominus1
+endammxmainloop8phase2:
+endammxmainloop8:
+	movem.l (sp)+,d0-d6/a0-a6
+	rts
+
+LINEVERTEX_START_FINAL:
+	dc.w 2 ; X1
+	dc.w 1 ; Y1
+LINEVERTEX_END_FINAL:
+	dc.w 1 ; X2
+	dc.w 8 ; Y2
+
+; d0 ==> x
+; d1 ==> y
+; d2 ===> x1 y1
+; d3 ===> x2 y2
+; d4 ===> decision
+; e6 ===> I1
+
+linem0to1:
+	
+	movem.l d0-d6/a0-a6,-(sp) ; stack save
+	move.l par2,a1
+
+	move.l LINEVERTEX_START_PUSHED,d2
+	move.l LINEVERTEX_END_PUSHED,d3
+
+	;Calculate dx = x2-x1
+    ;Calculate dy = y2-y1
+	PSUBW d2,d3,E5 ; e5 will contain deltas
+
+	;Calculate i1=2*dy
+	PADDW E5,E5,E6 ; I1 is on the lower 2 bytes of E6
+	
+	VPERM #$45454545,E5,E5,E8 ; Put DeltaX in all e8
+	VPERM #$6767EFEF,E6,E5,E7 ; E7 = I1 I1 Dy Dy
+
+	PSUBW E8,E7,E9; E9 : first word  i1-dx and third word dy-dx
+	
+	;Calculate i2=2*(dy-dx)
+    ;Calculate d=i1-dx
+
+	; decision variable to D4
+	VPERM #$01010101,E9,E9,D4 ; d calculated  in D4
+	PADDW E9,E9,E9            ; i2 calculated in E9
+
+	vperm #$45454545,d2,d2,d0 ; x = x1 (x1 is the start)
+	vperm #$67676767,d2,d2,d1 ; y = y1 (y1 is the start)
+	VPERM #$45454545,d3,d3,d6 ; xend = x2
+
+	; print pixel routine
+	move.w d0,(a1)+
+	move.w d1,(a1)+
+	bsr.w plotpoint ; PLOT POINT!!
+
+LINESTARTITER_F:
+
+	; interate for each x until x<=xend
+	cmp.w d0,d6
+	blt.s ENDLINE_F ; if x>=xend exit
+
+	cmp.w #0,d4 ; check if d<0
+	blt.s POINT_D_LESS_0_F ; branch if id<0
+
+	; we are here if d>=0
+	paddw e9,d4,d4 ; d = i2+ d
+	addq #1,d1 ; y = y+1
+	bra.s POINT_D_END_F
+
+POINT_D_LESS_0_F:
+	; we are here if d<0
+	paddw e6,d4,d4 ; d = i1+ d 
+	
+POINT_D_END_F:
+	addq #1,d0
+
+	; print pixel routine
+	move.w d0,(a1)+
+	move.w d1,(a1)+
+	bsr.w plotpoint ; PLOT POINT!!
+
+	bra.s LINESTARTITER_F
+
+ENDLINE_F:
+	movem.l (sp)+,d0-d6/a0-a6
+	rts
+
+LINEVERTEX_START_PUSHED:
+	dc.w 0 ; X1
+	dc.w 0 ; Y1
+LINEVERTEX_END_PUSHED:
+	dc.w 0 ; X2
+	dc.w 0 ; Y2
+
+; build line from 8 5 to 1 1 (down in cartesian plane but up on screen)
+; d0 ==> x
+; d1 ==> y
+; d2 ===> x1 y1
+; d3 ===> x2 y2
+; d4 ===> decision
+; e6 ===> I1
+
+linem0tominus1:
+	
+	movem.l d0-d6/a0-a6,-(sp) ; stack save
+	move.l par2,a1
+
+	move.l LINEVERTEX_START_PUSHED,d2
+	move.l LINEVERTEX_END_PUSHED,d3
+
+	move.w d2,d4
+	move.w d3,d2
+	move.w d4,d3
+
+	;Calculate dx = x2-x1
+    ;Calculate dy = y2-y1
+	PSUBW d2,d3,E5 ; e5 will contain deltas
+
+	;Calculate i1=2*dy
+	PADDW E5,E5,E6 ; I1 is on the lower 2 bytes of E6
+
+	VPERM #$45454545,E5,E5,E8 ; Put DeltaX in all e8
+	VPERM #$6767EFEF,E6,E5,E7 ; E7 = I1 I1 Dy Dy
+
+	PSUBW E8,E7,E9; E9 : first word  i1-dx and third word dy-dx
+	
+	;Calculate i2=2*(dy-dx)
+    ;Calculate d=i1-dx
+
+	; decision variable to D4
+	VPERM #$01010101,E9,E9,D4 ; d calculated  in D4
+	PADDW E9,E9,E9            ; i2 calculated in E9
+
+	vperm #$45454545,d2,d2,d0 ; x = x1 (x1 is the start)
+	vperm #$67676767,d3,d3,d1 ; y = y1 (y1 is the start)
+	VPERM #$45454545,d3,d3,d6 ; xend = x2
+
+	; print pixel routine
+	move.w d0,(a1)+
+	move.w d1,(a1)+
+	bsr.w plotpoint ; PLOT POINT!!
+
+LINESTARTITER_F2:
+
+	; interate for each x until x<=xend
+	cmp.w d0,d6
+	blt.s ENDLINE_F2 ; if x>=xend exit
+
+	cmp.w #0,d4 ; check if d<0
+	blt.s POINT_D_LESS_0_F2 ; branch if id<0
+
+	; we are here if d>=0
+	paddw e9,d4,d4 ; d = i2+ d
+	subq #1,d1 ; y = y-1
+	bra.s POINT_D_END_F2
+
+POINT_D_LESS_0_F2:
+	; we are here if d<0
+	paddw e6,d4,d4 ; d = i1+ d 
+	
+POINT_D_END_F2:
+	addq #1,d0
+
+	; print pixel routine
+	move.w d0,(a1)+
+	move.w d1,(a1)+
+	bsr.w plotpoint ; PLOT POINT!!
+
+	bra.s LINESTARTITER_F2
+
+ENDLINE_F2:
+	movem.l (sp)+,d0-d6/a0-a6
+	rts
+
+; start of vertical routines
+linemgreater1:
+	
+	movem.l d0-d6/a0-a6,-(sp) ; stack save
+	move.l par2,a1
+	
+	move.l LINEVERTEX_START_PUSHED,d2
+	move.l LINEVERTEX_END_PUSHED,d3
+
+	swap d2
+	swap d3
+
+	;Calculate dx = x2-x1
+    ;Calculate dy = y2-y1
+	PSUBW d2,d3,E5 ; e5 will contain deltas
+
+	;Calculate i1=2*dy
+	PADDW E5,E5,E6 ; I1 is on the lower 2 bytes of E6
+
+	VPERM #$45454545,E5,E5,E8 ; Put DeltaX in all e8
+	VPERM #$6767EFEF,E6,E5,E7 ; E7 = I1 I1 Dy Dy
+
+	PSUBW E8,E7,E9; E9 : first word  i1-dx and third word dy-dx
+	
+	;Calculate i2=2*(dy-dx)
+    ;Calculate d=i1-dx
+
+	; decision variable to D4
+	VPERM #$01010101,E9,E9,D4 ; d calculated  in D4
+	PADDW E9,E9,E9            ; i2 calculated in E9
+
+	; check if dx < or > 0
+	VPERM #$45454545,e5,e5,d5
+	
+	; We are here if point greather than zero
+	vperm #$45454545,d2,d2,d0 ; x = x1 (x1 is the start)
+	vperm #$67676767,d2,d2,d1 ; y = y1 (y1 is the start)
+	VPERM #$45454545,d3,d3,d6 ; xend = x2
+
+	; print pixel routine
+	move.w d1,(a1)+
+	move.w d0,(a1)+
+	bsr.w plotpointv ; PLOT POINT!!
+
+LINESTARTITER_F3:
+
+	; interate for each x until x<=xend
+	cmp.w d0,d6
+	blt.s ENDLINE_F3 ; if x>=xend exit
+
+	cmp.w #0,d4 ; check if d<0
+	blt.s POINT_D_LESS_0_F3 ; branch if id<0
+
+	; we are here if d>=0
+	paddw e9,d4,d4 ; d = i2+ d
+	addq #1,d1 ; y = y+1
+	bra.s POINT_D_END_F3
+
+POINT_D_LESS_0_F3:
+	; we are here if d<0
+	paddw e6,d4,d4 ; d = i1+ d 
+
+POINT_D_END_F3:
+	addq #1,d0
+
+	; print pixel routine
+	move.w d1,(a1)+
+	move.w d0,(a1)+
+	bsr.w plotpointv ; PLOT POINT!!
+
+	bra.s LINESTARTITER_F3
+
+ENDLINE_F3:
+	movem.l (sp)+,d0-d6/a0-a6
+	rts
+
+linemlessminus1:
+	movem.l d0-d6/a0-a6,-(sp) ; stack save
+	move.l par2,a1
+	
+	move.l LINEVERTEX_START_PUSHED,d2
+	move.l LINEVERTEX_END_PUSHED,d3
+
+	move.w d2,d4
+	move.w d3,d2
+	move.w d4,d3
+
+	swap d2
+	swap d3
+
+	;Calculate dx = x2-x1
+    ;Calculate dy = y2-y1
+	PSUBW d2,d3,E5 ; e5 will contain deltas
+
+	;Calculate i1=2*dy
+	PADDW E5,E5,E6 ; I1 is on the lower 2 bytes of E6
+
+	VPERM #$45454545,E5,E5,E8 ; Put DeltaX in all e8
+	VPERM #$6767EFEF,E6,E5,E7 ; E7 = I1 I1 Dy Dy
+
+	PSUBW E8,E7,E9; E9 : first word  i1-dx and third word dy-dx
+	
+	;Calculate i2=2*(dy-dx)
+    ;Calculate d=i1-dx
+
+	; decision variable to D4
+	VPERM #$01010101,E9,E9,D4 ; d calculated  in D4
+	PADDW E9,E9,E9            ; i2 calculated in E9
+
+	vperm #$45454545,d2,d2,d0 ; x = x1 (x1 is the start)
+	vperm #$67676767,d3,d3,d1 ; y = y1 (y1 is the start)
+	VPERM #$45454545,d3,d3,d6 ; xend = x2
+	
+	; print pixel routine
+	move.w d1,(a1)+
+	move.w d0,(a1)+
+	bsr.w plotpointv ; PLOT POINT!!
+
+LINESTARTITER_F4:
+
+	; interate for each x until x<=xend
+	cmp.w d0,d6
+	blt.s ENDLINE_F4 ; if x>=xend exit
+
+	cmp.w #0,d4 ; check if d<0
+	blt.s POINT_D_LESS_0_F4 ; branch if id<0
+
+	; we are here if d>=0
+	paddw e9,d4,d4 ; d = i2+ d
+	subq #1,d1 ; y = y-1
+	bra.s POINT_D_END_F4
+
+POINT_D_LESS_0_F4:
+	; we are here if d<0
+	paddw e6,d4,d4 ; d = i1+ d 
+	
+
+POINT_D_END_F4:
+	addq #1,d0
+
+	; print pixel routine
+	move.w d1,(a1)+
+	move.w d0,(a1)+
+	bsr.w plotpointv ; PLOT POINT!!
+
+	bra.s LINESTARTITER_F4
+
+ENDLINE_F4:
+	movem.l (sp)+,d0-d6/a0-a6
+	rts
+
+; plotpoint routine
+; before calling this routine set
+; x ==> d0 (word)
+; y ==> d1 (word)
+; also place bitplane address in bitplane0 variable
+; plotrefs bust be build precalculated
+; a4 and a5 are overwritten
+plotpoint:
+	movem.l d0-d6/a0-a6,-(sp) ; stack save
+	lea PLOTREFS,a4
+	move.l bitplane0,a5
+
+	; translate
+	add.w #160,d0
+	add.w #128,d1
+
+	; start plot routine
+	add.w d1,d1
+	move.w 0(a4,d1.w),d1
+	move.w d0,d2
+	lsr.w #3,d2
+	add.w d2,d1
+	not.b d0
+	bset d0,0(a5,d1.w)
+	movem.l (sp)+,d0-d6/a0-a6
+	rts
+
+; plotpoint routine
+; before calling this routine set
+; x ==> d0 (word)
+; y ==> d1 (word)
+; also place bitplane address in bitplane0 variable
+; plotrefs bust be build precalculated
+; a4 and a5 are overwritten
+plotpointv:
+	movem.l d0-d6/a0-a6,-(sp) ; stack save
+	lea PLOTREFS,a4
+	move.l bitplane0,a5
+
+	; translate
+	add.w #160,d1
+	add.w #128,d0
+
+	; start plot routine
+	add.w d0,d0
+	move.w 0(a4,d0.w),d0
+	move.w d1,d2
+	lsr.w #3,d2
+	add.w d2,d0
+	not.b d1
+	bset d1,0(a5,d0.w)
+	movem.l (sp)+,d0-d6/a0-a6
+	rts
