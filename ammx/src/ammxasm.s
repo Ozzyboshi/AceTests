@@ -1,3 +1,12 @@
+DEBUG EQU 1
+	IIF DEBUG moveq #0,d0
+	IFEQ DEBUG
+	moveq #0,d0
+	ENDIF
+LOL=1
+	IFD LOL
+	ENDIF
+
 _NUMPOINTS EQU 7
 
 	SECTION AMMX,CODE_F
@@ -12,6 +21,7 @@ _NUMPOINTS EQU 7
 	XDEF _ammxmainloop6
 	XDEF _ammxmainloop7
 	XDEF _ammxmainloop8
+	XDEF _ammxmainloop9
 
 DATAIN:
     dc.l $AAAAAAAA
@@ -758,9 +768,12 @@ LINEVERTEX_END_4:
 ; - check if both coords are between screen limits
 ; - select one of the 4 drawing routines
 _ammxmainloop8:
+	IFD ASM_DEBUG
 	move.l 4(sp),par1 ; argument save
 	move.l 8(sp),par2
 	move.l 12(sp),bitplane0
+	ENDIF
+	
 	movem.l d0-d6/a0-a6,-(sp) ; stack save
 	move.l par1,a1
 	lea LINEVERTEX_START_PUSHED,a2
@@ -779,8 +792,10 @@ endammxmainloop8phase1 ; end of first check
 	; - pick lowest first x end
 	move.l d2,(a2)+
 	move.l d3,(a2)+
+	IFD ASM_DEBUG
 	move.l d2,(a1)+
 	move.l d3,(a1)+
+	ENDIF
 
 	; - check if both coords are between screen limits start
 	; - check if both coords are between screen limits end
@@ -789,14 +804,20 @@ endammxmainloop8phase1 ; end of first check
 	PSUBW d2,d3,d4 ; d4 will contain deltas
 	PSUBW d3,d2,d5
 	pmaxsw  d5,d4,d4
+	IFD ASM_DEBUG
 	move.l d4,(a1)+
+	ENDIF
 	vperm #$45454545,d4,d4,d5 ; move xdelta in the less sig word
 	; select one of the 4 drawing routines end
+	IFD ASM_DEBUG
 	move.w d4,(a1)+
 	move.w d5,(a1)+
+	ENDIF
 	cmp.w d5,d4
 	blt.s dylessthan
+	IFD ASM_DEBUG
 	move.w #2,(a1)+
+	ENDIF
 	cmp.w d2,d3
 	bls.s gotolessminus1
 	bsr.w linemgreater1		; vertical line
@@ -807,7 +828,9 @@ gotolessminus1:
 
 
 dylessthan:
+	IFD ASM_DEBUG
 	move.w #1,(a1)+
+	ENDIF
 	cmp.w d2,d3
 	bls.s goto0tominus1
 	bsr.w linem0to1
@@ -836,7 +859,9 @@ LINEVERTEX_END_FINAL:
 linem0to1:
 	
 	movem.l d0-d6/a0-a6,-(sp) ; stack save
+	IFD ASM_DEBUG
 	move.l par2,a1
+	ENDIF
 
 	move.l LINEVERTEX_START_PUSHED,d2
 	move.l LINEVERTEX_END_PUSHED,d3
@@ -865,8 +890,10 @@ linem0to1:
 	VPERM #$45454545,d3,d3,d6 ; xend = x2
 
 	; print pixel routine
+	IFD ASM_DEBUG
 	move.w d0,(a1)+
 	move.w d1,(a1)+
+	ENDIF
 	bsr.w plotpoint ; PLOT POINT!!
 
 LINESTARTITER_F:
@@ -891,8 +918,10 @@ POINT_D_END_F:
 	addq #1,d0
 
 	; print pixel routine
+	IFD ASM_DEBUG
 	move.w d0,(a1)+
 	move.w d1,(a1)+
+	ENDIF
 	bsr.w plotpoint ; PLOT POINT!!
 
 	bra.s LINESTARTITER_F
@@ -919,7 +948,9 @@ LINEVERTEX_END_PUSHED:
 linem0tominus1:
 	
 	movem.l d0-d6/a0-a6,-(sp) ; stack save
+	IFD ASM_DEBUG
 	move.l par2,a1
+	ENDIF
 
 	move.l LINEVERTEX_START_PUSHED,d2
 	move.l LINEVERTEX_END_PUSHED,d3
@@ -952,8 +983,10 @@ linem0tominus1:
 	VPERM #$45454545,d3,d3,d6 ; xend = x2
 
 	; print pixel routine
+	IFD ASM_DEBUG
 	move.w d0,(a1)+
 	move.w d1,(a1)+
+	ENDIF
 	bsr.w plotpoint ; PLOT POINT!!
 
 LINESTARTITER_F2:
@@ -978,8 +1011,10 @@ POINT_D_END_F2:
 	addq #1,d0
 
 	; print pixel routine
+	IFD ASM_DEBUG
 	move.w d0,(a1)+
 	move.w d1,(a1)+
+	ENDIF
 	bsr.w plotpoint ; PLOT POINT!!
 
 	bra.s LINESTARTITER_F2
@@ -992,7 +1027,9 @@ ENDLINE_F2:
 linemgreater1:
 	
 	movem.l d0-d6/a0-a6,-(sp) ; stack save
+	IFD ASM_DEBUG
 	move.l par2,a1
+	ENDIF
 	
 	move.l LINEVERTEX_START_PUSHED,d2
 	move.l LINEVERTEX_END_PUSHED,d3
@@ -1028,8 +1065,10 @@ linemgreater1:
 	VPERM #$45454545,d3,d3,d6 ; xend = x2
 
 	; print pixel routine
+	IFD ASM_DEBUG
 	move.w d1,(a1)+
 	move.w d0,(a1)+
+	ENDIF
 	bsr.w plotpointv ; PLOT POINT!!
 
 LINESTARTITER_F3:
@@ -1054,8 +1093,10 @@ POINT_D_END_F3:
 	addq #1,d0
 
 	; print pixel routine
+	IFD ASM_DEBUG
 	move.w d1,(a1)+
 	move.w d0,(a1)+
+	ENDIF
 	bsr.w plotpointv ; PLOT POINT!!
 
 	bra.s LINESTARTITER_F3
@@ -1066,7 +1107,9 @@ ENDLINE_F3:
 
 linemlessminus1:
 	movem.l d0-d6/a0-a6,-(sp) ; stack save
+	IFD ASM_DEBUG
 	move.l par2,a1
+	ENDIF
 	
 	move.l LINEVERTEX_START_PUSHED,d2
 	move.l LINEVERTEX_END_PUSHED,d3
@@ -1102,8 +1145,10 @@ linemlessminus1:
 	VPERM #$45454545,d3,d3,d6 ; xend = x2
 	
 	; print pixel routine
+	IFD ASM_DEBUG
 	move.w d1,(a1)+
 	move.w d0,(a1)+
+	ENDIF
 	bsr.w plotpointv ; PLOT POINT!!
 
 LINESTARTITER_F4:
@@ -1129,8 +1174,10 @@ POINT_D_END_F4:
 	addq #1,d0
 
 	; print pixel routine
+	IFD ASM_DEBUG
 	move.w d1,(a1)+
 	move.w d0,(a1)+
+	ENDIF
 	bsr.w plotpointv ; PLOT POINT!!
 
 	bra.s LINESTARTITER_F4
@@ -1190,5 +1237,18 @@ plotpointv:
 	add.w d2,d0
 	not.b d1
 	bset d1,0(a5,d0.w)
+	movem.l (sp)+,d0-d6/a0-a6
+	rts
+
+
+	_ammxmainloop9:
+	move.l 4(sp),bitplane0
+	movem.l d0-d6/a0-a6,-(sp) ; stack save
+	lea LINEVERTEX_START_FINAL,a1
+	move.w #10,(a1)+
+	move.w #70,(a1)+
+	move.w #00,(a1)+
+	move.w #00,(a1)+
+	bsr.w _ammxmainloop8
 	movem.l (sp)+,d0-d6/a0-a6
 	rts

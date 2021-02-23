@@ -26,6 +26,7 @@ void ammxmainloop5();
 void ammxmainloop6();
 void ammxmainloop7();
 void ammxmainloop8(UBYTE*,UBYTE*,ULONG);
+void ammxmainloop9();
 
 void ammxGsCreate(void)
 {
@@ -262,6 +263,13 @@ void ammxGsLoop(void)
 
     systemUnuse();
     //gameExit();
+  }
+
+  if (keyUse(KEY_9))
+  {
+    g_pCustom->color[0] = 0x0F00;
+    ammxmainloop9((ULONG)s_pMainBuffer->pBack->Planes[0]);
+    g_pCustom->color[0] = 0x0000;
   }
 
   vPortWaitForEnd(s_pVpMain);
