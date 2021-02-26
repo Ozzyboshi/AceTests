@@ -7,6 +7,36 @@ LOL=1
 	IFD LOL
 	ENDIF
 
+BITPLANE_MEM_OPT:
+	dc.w 0
+
+BITPLANE_OPT MACRO
+	lea BITPLANE_MEM_OPT,a1
+	move.w \1,(a1)+
+ENDM
+
+TRANSLATE_MEM_2D:
+TRANSLATE_MEM_2D_X:
+	dc.w 0
+TRANSLATE_MEM_2D_Y:
+	dc.w 0
+
+TRANSLATE2D MACRO
+	lea TRANSLATE_MEM_2D,a1
+	move.w \1,(a1)+
+	move.w \2,(a1)+
+	ENDM
+
+DRAWLINE2D	MACRO
+	lea LINEVERTEX_START_FINAL,a1
+	move.w \1,(a1)+
+	move.w \2,(a1)+
+	move.w \3,(a1)+
+	move.w \4,(a1)+
+	load \5,e23
+	bsr.w _ammxmainloop8
+	ENDM
+
 _NUMPOINTS EQU 7
 
 	SECTION AMMX,CODE_F
@@ -22,6 +52,9 @@ _NUMPOINTS EQU 7
 	XDEF _ammxmainloop7
 	XDEF _ammxmainloop8
 	XDEF _ammxmainloop9
+	XDEF _ammxmainloop10
+	XDEF _wait1
+	XDEF _wait2
 
 DATAIN:
     dc.l $AAAAAAAA
@@ -30,7 +63,11 @@ par1:
     dc.l 0
 par2:
 	dc.l 0
+bitplanelist:
+	dc.l 99999999
 bitplane0:
+	dc.l 0
+bitplane1:
 	dc.l 0
 
 _ammxmainloop:
@@ -788,6 +825,14 @@ _ammxmainloop8:
 ammxmainloop8_lowestless:
 	move.l LINEVERTEX_END_FINAL,d3
 
+; apply translation
+	move.l TRANSLATE_MEM_2D_X,d4
+	paddw d2,d4,d2
+	paddw d3,d4,d3
+
+	;add.w TRANSLATE_MEM_2D_X,d2
+	;add.w TRANSLATE_MEM_2D_Y,d3
+
 endammxmainloop8phase1 ; end of first check
 	; - pick lowest first x end
 	move.l d2,(a2)+
@@ -1188,67 +1233,145 @@ ENDLINE_F4:
 
 ; plotpoint routine
 ; before calling this routine set
-; x ==> d0 (word)
-; y ==> d1 (word)
-; also place bitplane address in bitplane0 variable
+; x ==> d1 (word)
+; y ==> d0 (word)
 ; plotrefs bust be build precalculated
-; a4 and a5 are overwritten
+; e23 filled with bitplane flags
+; bitplaneX must be loaded with real bitplane addresses
 plotpoint:
 	movem.l d0-d6/a0-a6,-(sp) ; stack save
-	lea PLOTREFS,a4
-	move.l bitplane0,a5
-
-	; translate
-	add.w #160,d0
-	add.w #128,d1
+	lea PLOTREFS,a6
+	
+	;load e23,d6
+	vperm #$FFFFFFFF,e23,e23,d6
 
 	; start plot routine
 	add.w d1,d1
-	move.w 0(a4,d1.w),d1
+	move.w 0(a6,d1.w),d1
 	move.w d0,d2
 	lsr.w #3,d2
 	add.w d2,d1
 	not.b d0
-	bset d0,0(a5,d1.w)
+
+	; First bitplane
+	btst #0,d6
+	move.l bitplane0,a0
+	beq.s plotpoint_nofirstbitplane
+	bset d0,0(a0,d1.w)
+plotpoint_nofirstbitplane:
+
+	; Second bitplane
+	btst #1,d6
+	beq.s plotpoint_nosecondbitplane
+	move.l bitplane1,a1
+	bset d0,0(a1,d1.w)
+plotpoint_nosecondbitplane:
+
+	;exit plotpoint
 	movem.l (sp)+,d0-d6/a0-a6
 	rts
 
 ; plotpoint routine
 ; before calling this routine set
-; x ==> d0 (word)
-; y ==> d1 (word)
-; also place bitplane address in bitplane0 variable
+; x ==> d1 (word)
+; y ==> d0 (word)
 ; plotrefs bust be build precalculated
-; a4 and a5 are overwritten
+; e23 filled with bitplane flags
+; bitplaneX must be loaded with real bitplane addresses
 plotpointv:
 	movem.l d0-d6/a0-a6,-(sp) ; stack save
-	lea PLOTREFS,a4
-	move.l bitplane0,a5
-
-	; translate
-	add.w #160,d1
-	add.w #128,d0
+	lea PLOTREFS,a6
+	vperm #$FFFFFFFF,e23,e23,d6
 
 	; start plot routine
 	add.w d0,d0
-	move.w 0(a4,d0.w),d0
+	move.w 0(a6,d0.w),d0
 	move.w d1,d2
 	lsr.w #3,d2
 	add.w d2,d0
 	not.b d1
-	bset d1,0(a5,d0.w)
+
+	; First bitplane
+	btst #0,d6
+	move.l bitplane0,a0
+	beq.s plotpointv_nofirstbitplane
+	bset d1,0(a0,d0.w)
+plotpointv_nofirstbitplane:
+
+	; Second bitplane
+	btst #1,d6
+	beq.s plotpointv_nosecondbitplane
+	move.l bitplane1,a1
+	bset d1,0(a1,d0.w)
+plotpointv_nosecondbitplane:
+
 	movem.l (sp)+,d0-d6/a0-a6
 	rts
 
 
 	_ammxmainloop9:
-	move.l 4(sp),bitplane0
+	;move.l 4(sp),bitplane0
+	move.l 4(sp),par1
+	;move.l 8(sp),bitplanelist
 	movem.l d0-d6/a0-a6,-(sp) ; stack save
-	lea LINEVERTEX_START_FINAL,a1
-	move.w #10,(a1)+
-	move.w #70,(a1)+
-	move.w #00,(a1)+
-	move.w #00,(a1)+
-	bsr.w _ammxmainloop8
+	move.l par1,A0
+	;move.l (a0),a2
+	move.l (a0)+,bitplane0
+	move.l (a0),bitplane1
+
+	;lea LINEVERTEX_START_FINAL,a1
+	;move.w #10,(a1)+
+	;move.w #10,(a1)+
+	;move.w #30,(a1)+
+	;move.w #30,(a1)+
+	;bsr.w _ammxmainloop8
+
+	;move.l (bitplanelist),bitplane0
+
+	BITPLANE_OPT #$23
+
+	TRANSLATE2D #160,#128
+	
+	DRAWLINE2D #10,#10,#30,#30,#2
+	TRANSLATE2D #0,#0
+	DRAWLINE2D #10,#10,#90,#11,#3
+	movem.l (sp)+,d0-d6/a0-a6
+	rts
+
+
+
+_wait1:
+	move.l	#$1ff00,D1	; bit per la selezione tramite AND
+	MOVE.L	#$13000,d2	; linea da aspettare = $130, ossia 304
+Waity1:
+	MOVE.L	$dff004,D0	; VPOSR e VHPOSR - $dff004/$dff006
+	AND.L	D1,D0		; Seleziona solo i bit della pos. verticale
+	CMP.L	D2,D0		; aspetta la linea $130 (304)
+	BNE.S	Waity1
+	rts
+
+_wait2:
+	MOVE.L	#$1ff00,d1	; bit per la selezione tramite AND
+	MOVE.L	#$13000,d2	; linea da aspettare = $130, ossia 304
+Aspetta:
+	MOVE.L	$dff004,D0	; VPOSR e VHPOSR - $dff004/$dff006
+	AND.L	D1,D0		; Seleziona solo i bit della pos. verticale
+	CMP.L	D2,D0		; aspetta la linea $130 (304)
+	BEQ.S	Aspetta
+	rts
+
+_ammxmainloop10:
+	;move.l 4(sp),bitplane0
+	move.l 4(sp),par1
+	move.l 8(sp),bitplanelist
+	movem.l d0-d6/a0-a6,-(sp) ; stack save
+	move.l par1,A0
+	move.l (bitplanelist),(a0)+
+	move.l (bitplanelist),a2
+	;move.l a2,a3
+	move.l (a2),(a0)+
+	move.l 4(a2),(a0)+
+	;move.l (a3),(a0)
+	;move.l (a1),(a0)
 	movem.l (sp)+,d0-d6/a0-a6
 	rts

@@ -27,6 +27,11 @@ void ammxmainloop6();
 void ammxmainloop7();
 void ammxmainloop8(UBYTE*,UBYTE*,ULONG);
 void ammxmainloop9();
+void ammxmainloop10();
+void wait1();
+void wait2();
+
+ULONG BPLADDR[5];
 
 void ammxGsCreate(void)
 {
@@ -79,6 +84,10 @@ void ammxGsCreate(void)
 
   // Load the view
   viewLoad(s_pView);
+
+  BPLADDR[0] = (ULONG)s_pMainBuffer->pBack->Planes[0];
+  BPLADDR[1] = (ULONG)s_pMainBuffer->pBack->Planes[1];
+  BPLADDR[2] = 0;
 }
 
 void ammxGsLoop(void)
@@ -87,6 +96,8 @@ void ammxGsLoop(void)
   // or close the game
   static UBYTE ubDraw = 0;
   static UBYTE ubDraw3 = 0;
+  static UBYTE ubDraw9 = 0;
+  wait1();
 
   if (keyCheck(KEY_ESCAPE))
   {
@@ -265,14 +276,43 @@ void ammxGsLoop(void)
     //gameExit();
   }
 
-  if (keyUse(KEY_9))
+  if (ubDraw9 || keyUse(KEY_9))
   {
+    ubDraw9=1;
     g_pCustom->color[0] = 0x0F00;
-    ammxmainloop9((ULONG)s_pMainBuffer->pBack->Planes[0]);
+    ammxmainloop9((ULONG)s_pMainBuffer->pBack->Planes);
     g_pCustom->color[0] = 0x0000;
   }
 
-  vPortWaitForEnd(s_pVpMain);
+  if (keyUse(KEY_SPACE))
+  {
+    static UBYTE ubOut[1000];
+    memset(&ubOut, 0xaa, 100);
+    g_pCustom->color[0] = 0x0F00;
+    // ammxmainloop4((ULONG)s_pMainBuffer->pBack->Planes[0]);
+    BPLADDR[0]=1;
+    ammxmainloop10(ubOut,s_pMainBuffer->pBack->Planes);
+    g_pCustom->color[0] = 0x0000;
+    systemUse();
+    //printf("%x\n",BPLADDR);
+    printf("%x\n",s_pMainBuffer->pBack->Planes);
+    printf("%x\n",s_pMainBuffer->pBack->Planes[0]);
+    printf("%x\n",s_pMainBuffer->pBack->Planes[1]);
+    printf("Px1 %x %x %x %x \n", ubOut[0], ubOut[1], ubOut[2], ubOut[3]);
+    printf("Px2 %x %x %x %x\n", ubOut[4], ubOut[5], ubOut[6], ubOut[7]);
+    printf("Px3 %x %x %x %x\n", ubOut[8], ubOut[9], ubOut[10], ubOut[11]);
+    printf("Px4 %x %x %x %x\n", ubOut[12], ubOut[13], ubOut[14], ubOut[15]);
+    printf("Px5 %x %x %x %x\n", ubOut[16], ubOut[17], ubOut[18], ubOut[19]);
+    printf("Px6 %x %x %x %x\n", ubOut[20], ubOut[21], ubOut[22], ubOut[23]);
+    printf("Px7 %x %x %x %x\n", ubOut[24], ubOut[25], ubOut[26], ubOut[27]);
+    printf("Px8 %x %x %x %x\n", ubOut[28], ubOut[29], ubOut[30], ubOut[31]);
+    systemUnuse();
+    gameExit();
+  }
+
+  
+  wait2();
+  //vPortWaitForEnd(s_pVpMain);
 }
 
 void ammxGsDestroy(void)
