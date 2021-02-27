@@ -28,6 +28,7 @@ void ammxmainloop7();
 void ammxmainloop8(UBYTE*,UBYTE*,ULONG);
 void ammxmainloop9();
 void ammxmainloop10();
+void ammxmainloopclear(ULONG);
 void wait1();
 void wait2();
 
@@ -77,7 +78,7 @@ void ammxGsCreate(void)
   s_pVpMain->pPalette[0] = 0x0000; // First color is also border color
   s_pVpMain->pPalette[1] = 0x0888; // Gray
   s_pVpMain->pPalette[2] = 0x0800; // Red - not max, a bit dark
-  s_pVpMain->pPalette[3] = 0x0008; // Blue - same brightness as red
+  s_pVpMain->pPalette[3] = 0x000F; // Blue - same brightness as red
 
   // We don't need anything from OS anymore
   systemUnuse();
@@ -97,6 +98,7 @@ void ammxGsLoop(void)
   static UBYTE ubDraw = 0;
   static UBYTE ubDraw3 = 0;
   static UBYTE ubDraw9 = 0;
+  static UBYTE ubDrawClear = 0;
   wait1();
 
   if (keyCheck(KEY_ESCAPE))
@@ -308,6 +310,14 @@ void ammxGsLoop(void)
     printf("Px8 %x %x %x %x\n", ubOut[28], ubOut[29], ubOut[30], ubOut[31]);
     systemUnuse();
     gameExit();
+  }
+
+  if (ubDrawClear || keyUse(KEY_C))
+  {
+    ubDrawClear=1;
+    g_pCustom->color[0] = 0x0F00;
+    ammxmainloopclear((ULONG)s_pMainBuffer->pBack->Planes);
+    g_pCustom->color[0] = 0x0000;
   }
 
   

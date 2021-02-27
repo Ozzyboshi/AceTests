@@ -53,6 +53,7 @@ _NUMPOINTS EQU 7
 	XDEF _ammxmainloop8
 	XDEF _ammxmainloop9
 	XDEF _ammxmainloop10
+	XDEF _ammxmainloopclear
 	XDEF _wait1
 	XDEF _wait2
 
@@ -1239,36 +1240,36 @@ ENDLINE_F4:
 ; e23 filled with bitplane flags
 ; bitplaneX must be loaded with real bitplane addresses
 plotpoint:
-	movem.l d0-d6/a0-a6,-(sp) ; stack save
-	lea PLOTREFS,a6
+	movem.l d0-d3/a0-a1,-(sp) ; stack save
+	lea PLOTREFS,a1
 	
 	;load e23,d6
-	vperm #$FFFFFFFF,e23,e23,d6
+	vperm #$FFFFFFFF,e23,e23,d3
 
 	; start plot routine
 	add.w d1,d1
-	move.w 0(a6,d1.w),d1
+	move.w 0(a1,d1.w),d1
 	move.w d0,d2
 	lsr.w #3,d2
 	add.w d2,d1
 	not.b d0
 
 	; First bitplane
-	btst #0,d6
-	move.l bitplane0,a0
+	btst #0,d3
 	beq.s plotpoint_nofirstbitplane
+	lea SCREEN_0,a0
 	bset d0,0(a0,d1.w)
 plotpoint_nofirstbitplane:
 
 	; Second bitplane
-	btst #1,d6
+	btst #1,d3
 	beq.s plotpoint_nosecondbitplane
-	move.l bitplane1,a1
-	bset d0,0(a1,d1.w)
+	lea SCREEN_1,a0
+	bset d0,0(a0,d1.w)
 plotpoint_nosecondbitplane:
 
 	;exit plotpoint
-	movem.l (sp)+,d0-d6/a0-a6
+	movem.l (sp)+,d0-d3/a0-a1
 	rts
 
 ; plotpoint routine
@@ -1279,33 +1280,33 @@ plotpoint_nosecondbitplane:
 ; e23 filled with bitplane flags
 ; bitplaneX must be loaded with real bitplane addresses
 plotpointv:
-	movem.l d0-d6/a0-a6,-(sp) ; stack save
-	lea PLOTREFS,a6
-	vperm #$FFFFFFFF,e23,e23,d6
+	movem.l d0-d3/a0-a1,-(sp) ; stack save
+	lea PLOTREFS,a1
+	vperm #$FFFFFFFF,e23,e23,d3
 
 	; start plot routine
 	add.w d0,d0
-	move.w 0(a6,d0.w),d0
+	move.w 0(a1,d0.w),d0
 	move.w d1,d2
 	lsr.w #3,d2
 	add.w d2,d0
 	not.b d1
 
 	; First bitplane
-	btst #0,d6
-	move.l bitplane0,a0
+	btst #0,d3
 	beq.s plotpointv_nofirstbitplane
+	lea SCREEN_0,a0
 	bset d1,0(a0,d0.w)
 plotpointv_nofirstbitplane:
 
 	; Second bitplane
-	btst #1,d6
+	btst #1,d3
 	beq.s plotpointv_nosecondbitplane
-	move.l bitplane1,a1
-	bset d1,0(a1,d0.w)
+	lea SCREEN_1,a0
+	bset d1,0(a0,d0.w)
 plotpointv_nosecondbitplane:
 
-	movem.l (sp)+,d0-d6/a0-a6
+	movem.l (sp)+,d0-d3/a0-a1
 	rts
 
 
@@ -1330,11 +1331,29 @@ plotpointv_nosecondbitplane:
 
 	BITPLANE_OPT #$23
 
-	TRANSLATE2D #160,#128
+	moveq #100-1,d3
+LINECYCLE:
+	TRANSLATE2D #160,#140
 	
-	DRAWLINE2D #10,#10,#30,#30,#2
+	DRAWLINE2D #10,#10,#30,#30,#3
 	TRANSLATE2D #0,#0
-	DRAWLINE2D #10,#10,#90,#11,#3
+	DRAWLINE2D #10,#10,#200,#16,#3
+	dbra d3,LINECYCLE
+
+	move.l #5*255,d3
+	lea SCREEN_0,a0
+	lea SCREEN_1,a4
+
+	move.l bitplane0,a1
+	move.l bitplane1,a2
+
+ammxloopclearline:
+	load (a0)+,e20
+	load (a4)+,e21
+	store e20,(a1)+
+	store e21,(a2)+
+	dbra d3,ammxloopclearline
+
 	movem.l (sp)+,d0-d6/a0-a6
 	rts
 
@@ -1375,3 +1394,26 @@ _ammxmainloop10:
 	;move.l (a1),(a0)
 	movem.l (sp)+,d0-d6/a0-a6
 	rts
+
+_ammxmainloopclear:
+	move.l 4(sp),par1
+	movem.l d0-d6/a0-a6,-(sp) ; stack save
+	move.l par1,A0
+	move.l (a0),bitplane0
+	move.l 4(a0),bitplane1
+	LOAD #0000000000000000,d0
+
+	move.l #5*256,d3
+	move.l bitplane0,a0
+ammxloopclear:
+	store d0,(a0)+
+	dbra d3,ammxloopclear
+
+	movem.l (sp)+,d0-d6/a0-a6
+	rts
+
+SCREEN_0
+    dcb.b 40*256,$00
+
+SCREEN_1
+    dcb.b 40*256,$00
