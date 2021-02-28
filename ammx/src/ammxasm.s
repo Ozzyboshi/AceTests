@@ -34,6 +34,7 @@ DRAWLINE2D	MACRO
 	move.w \3,(a1)+
 	move.w \4,(a1)+
 	load \5,e22
+	load #0000000000000000,e21 ;optimisation
 	bsr.w _ammxmainloop8
 	ENDM
 
@@ -911,8 +912,6 @@ linem0to1:
 	movem.l d0-d7/a2,-(sp) ; stack save
 	ENDIF
 
-	load #0000000000000000,e21 ;optimisation
-
 	move.l LINEVERTEX_START_PUSHED,d2
 	move.l LINEVERTEX_END_PUSHED,d3
 
@@ -1026,10 +1025,12 @@ LINEVERTEX_END_PUSHED:
 ; e6 ===> I1
 
 linem0tominus1:
-	
-	movem.l d0-d6/a0-a6,-(sp) ; stack save
+
 	IFD ASM_DEBUG
+	movem.l d0-d6/a0-a6,-(sp) ; stack save
 	move.l par2,a1
+	ELSE
+	movem.l d0-d7/a2,-(sp) ; stack save
 	ENDIF
 
 	move.l LINEVERTEX_START_PUSHED,d2
@@ -1067,6 +1068,7 @@ linem0tominus1:
 	move.w d0,(a1)+
 	move.w d1,(a1)+
 	ENDIF
+
 	bsr.w plotpoint ; PLOT POINT!!
 
 LINESTARTITER_F2:
@@ -1081,6 +1083,7 @@ LINESTARTITER_F2:
 	; we are here if d>=0
 	paddw e9,d4,d4 ; d = i2+ d
 	subq #1,d1 ; y = y-1
+	suba.l #$00000028,a2 ; optimization , go to next line in bitplane
 	bra.s POINT_D_END_F2
 
 POINT_D_LESS_0_F2:
@@ -1095,12 +1098,38 @@ POINT_D_END_F2:
 	move.w d0,(a1)+
 	move.w d1,(a1)+
 	ENDIF
-	bsr.w plotpoint ; PLOT POINT!!
+	;bsr.w plotpoint ; PLOT POINT!!
+
+	; start optimization
+	subq.b #1,d5
+	move.b d5,d7
+	andi.l #$00000007,d7
+	addq.b #1,d7
+	lsr.b #3,d7
+	adda.l d7,a2
+	vperm #$000000000000000F,e21,e22,d7
+	btst #0,d7
+	beq.s ENDLINEBPL0_F2
+	bset d5,(a2) ; plot optimized!!!
+
+	; opt bitplane 1
+ENDLINEBPL0_F2:
+	btst #1,d7
+	beq.s ENDLINEBPL1_F2
+	move.l a2,a3
+	adda.w #10240,a3
+	bset d5,(a3) ; plot optimized!!!
+ENDLINEBPL1_F2
 
 	bra.s LINESTARTITER_F2
 
+
 ENDLINE_F2:
+	IFD ASM_DEBUG
 	movem.l (sp)+,d0-d6/a0-a6
+	ELSE
+	movem.l (sp)+,d0-d7/a2
+	ENDIF
 	rts
 
 ; start of vertical routines
@@ -1413,7 +1442,7 @@ LINECYCLE:
 	
 	DRAWLINE2D #10,#10,#30,#30,#3
 	TRANSLATE2D #0,#0
-	DRAWLINE2D #10,#10,#200,#16,#2
+	DRAWLINE2D #10,#10,#200,#5,#2
 	dbra d3,LINECYCLE
 	movem.l (sp)+,d0-d6/a0-a6
 	rts
