@@ -33,7 +33,7 @@ DRAWLINE2D	MACRO
 	move.w \2,(a1)+
 	move.w \3,(a1)+
 	move.w \4,(a1)+
-	load \5,e23
+	load \5,e22
 	bsr.w _ammxmainloop8
 	ENDM
 
@@ -904,10 +904,14 @@ LINEVERTEX_END_FINAL:
 
 linem0to1:
 	
-	movem.l d0-d6/a0-a6,-(sp) ; stack save
 	IFD ASM_DEBUG
+	movem.l d0-d6/a0-a6,-(sp) ; stack save
 	move.l par2,a1
+	ELSE
+	movem.l d0-d7/a2,-(sp) ; stack save
 	ENDIF
+
+	load #0000000000000000,e21 ;optimisation
 
 	move.l LINEVERTEX_START_PUSHED,d2
 	move.l LINEVERTEX_END_PUSHED,d3
@@ -954,6 +958,7 @@ LINESTARTITER_F:
 	; we are here if d>=0
 	paddw e9,d4,d4 ; d = i2+ d
 	addq #1,d1 ; y = y+1
+	adda.l #$00000028,a2 ; optimization , go to next line in bitplane
 	bra.s POINT_D_END_F
 
 POINT_D_LESS_0_F:
@@ -968,12 +973,41 @@ POINT_D_END_F:
 	move.w d0,(a1)+
 	move.w d1,(a1)+
 	ENDIF
-	bsr.w plotpoint ; PLOT POINT!!
+
+	; here d5 is available and pushed
+	; d7 available but not pushed
+	; aX all availables except a1 but not pushed
+	; bsr.w plotpoint ; PLOT POINT!!
+	; here we have in d5 = position of first bit plotted
+	; a2 = address where the first bit was plotted
+	subq.b #1,d5
+	move.b d5,d7
+	andi.l #$00000007,d7
+	addq.b #1,d7
+	lsr.b #3,d7
+	adda.l d7,a2
+	vperm #$000000000000000F,e21,e22,d7
+	btst #0,d7
+	beq.s ENDLINEBPL0_F
+	bset d5,(a2) ; plot optimized!!!
+
+	; opt bitplane 1
+ENDLINEBPL0_F:
+	btst #1,d7
+	beq.s ENDLINEBPL1_F
+	move.l a2,a3
+	adda.w #10240,a3
+	bset d5,(a3) ; plot optimized!!!
+ENDLINEBPL1_F
 
 	bra.s LINESTARTITER_F
 
 ENDLINE_F:
+	IFD ASM_DEBUG
 	movem.l (sp)+,d0-d6/a0-a6
+	ELSE
+	movem.l (sp)+,d0-d7/a2
+	ENDIF
 	rts
 
 LINEVERTEX_START_PUSHED:
@@ -1237,14 +1271,14 @@ ENDLINE_F4:
 ; x ==> d1 (word)
 ; y ==> d0 (word)
 ; plotrefs bust be build precalculated
-; e23 filled with bitplane flags
+; e22 filled with bitplane flags
 ; bitplaneX must be loaded with real bitplane addresses
 plotpoint:
 	movem.l d0-d3/a0-a1,-(sp) ; stack save
 	lea PLOTREFS,a1
 	
 	;load e23,d6
-	vperm #$FFFFFFFF,e23,e23,d3
+	vperm #$000000000000000F,e21,e22,d3 ; optimisation, e21 must be all zeroes from the caller
 
 	; start plot routine
 	add.w d1,d1
@@ -1258,15 +1292,20 @@ plotpoint:
 	btst #0,d3
 	beq.s plotpoint_nofirstbitplane
 	lea SCREEN_0,a0
-	bset d0,0(a0,d1.w)
+	bset d0,(a0,d1.w)
 plotpoint_nofirstbitplane:
 
 	; Second bitplane
 	btst #1,d3
 	beq.s plotpoint_nosecondbitplane
 	lea SCREEN_1,a0
-	bset d0,0(a0,d1.w)
+	bset d0,(a0,d1.w)
 plotpoint_nosecondbitplane:
+
+	; WARNING!!!!!! line optimization, save d0 in d5 so that the caller can calculate the next X without reentering here
+	move.b d0,d5
+	lea SCREEN_0,a2
+	adda.w d1,a2
 
 	;exit plotpoint
 	movem.l (sp)+,d0-d3/a0-a1
@@ -1320,6 +1359,20 @@ plotpointv_nosecondbitplane:
 	move.l (a0)+,bitplane0
 	move.l (a0),bitplane1
 
+	; copy from fast bitplanes to slow bitplanes
+	move.l #5*255,d3
+	lea SCREEN_0,a0
+	lea SCREEN_1,a4
+
+	move.l bitplane0,a1
+	move.l bitplane1,a2
+ammxloopclearline:
+	load (a0)+,e20
+	load (a4)+,e21
+	store e20,(a1)+
+	store e21,(a2)+
+	dbra d3,ammxloopclearline
+
 	;lea LINEVERTEX_START_FINAL,a1
 	;move.w #10,(a1)+
 	;move.w #10,(a1)+
@@ -1329,35 +1382,45 @@ plotpointv_nosecondbitplane:
 
 	;move.l (bitplanelist),bitplane0
 
+	; clear fast bitplanes
+	move.l #5*256,d3
+	lea SCREEN_0,a0
+	lea SCREEN_1,a1
+	load #0,e0
+drawlineammxloopclear:
+	store e0,(a0)+
+	store e0,(a1)+
+	dbra d3,drawlineammxloopclear
+	; end clear fast bitplanes
+
 	BITPLANE_OPT #$23
 
 	moveq #100-1,d3
+	addi.w #1,DYNTRANSLATEY
+	cmpi.w #200,DYNTRANSLATEY
+	bls.s avanti
+	move.w #0,DYNTRANSLATEY
+avanti:
+	;lea DYNTRANSLATEY,A0
+	;addi.b #1,(a0)
 LINECYCLE:
-	TRANSLATE2D #160,#140
+
+
+	move.w DYNTRANSLATEX,d0
+	move.w DYNTRANSLATEY,d1
+	
+	TRANSLATE2D #0,#143
 	
 	DRAWLINE2D #10,#10,#30,#30,#3
 	TRANSLATE2D #0,#0
-	DRAWLINE2D #10,#10,#200,#16,#3
+	DRAWLINE2D #10,#10,#200,#16,#2
 	dbra d3,LINECYCLE
-
-	move.l #5*255,d3
-	lea SCREEN_0,a0
-	lea SCREEN_1,a4
-
-	move.l bitplane0,a1
-	move.l bitplane1,a2
-
-ammxloopclearline:
-	load (a0)+,e20
-	load (a4)+,e21
-	store e20,(a1)+
-	store e21,(a2)+
-	dbra d3,ammxloopclearline
-
 	movem.l (sp)+,d0-d6/a0-a6
 	rts
 
-
+DYNTRANSLATE:
+DYNTRANSLATEX: dc.w 0
+DYNTRANSLATEY: dc.w 0
 
 _wait1:
 	move.l	#$1ff00,D1	; bit per la selezione tramite AND

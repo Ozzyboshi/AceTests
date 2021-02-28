@@ -89,6 +89,8 @@ void ammxGsCreate(void)
   BPLADDR[0] = (ULONG)s_pMainBuffer->pBack->Planes[0];
   BPLADDR[1] = (ULONG)s_pMainBuffer->pBack->Planes[1];
   BPLADDR[2] = 0;
+
+  //g_pCustom->dmacon = DMAF_SETCLR | DMAF_MASTER | DMAF_BLITTER;
 }
 
 void ammxGsLoop(void)
@@ -297,7 +299,7 @@ void ammxGsLoop(void)
     g_pCustom->color[0] = 0x0000;
     systemUse();
     //printf("%x\n",BPLADDR);
-    printf("%x\n",s_pMainBuffer->pBack->Planes);
+    /*printf("%x\n",s_pMainBuffer->pBack->Planes);
     printf("%x\n",s_pMainBuffer->pBack->Planes[0]);
     printf("%x\n",s_pMainBuffer->pBack->Planes[1]);
     printf("Px1 %x %x %x %x \n", ubOut[0], ubOut[1], ubOut[2], ubOut[3]);
@@ -309,7 +311,7 @@ void ammxGsLoop(void)
     printf("Px7 %x %x %x %x\n", ubOut[24], ubOut[25], ubOut[26], ubOut[27]);
     printf("Px8 %x %x %x %x\n", ubOut[28], ubOut[29], ubOut[30], ubOut[31]);
     systemUnuse();
-    gameExit();
+    gameExit();*/
   }
 
   if (ubDrawClear || keyUse(KEY_C))
@@ -322,7 +324,10 @@ void ammxGsLoop(void)
 
   
   wait2();
-  //vPortWaitForEnd(s_pVpMain);
+  /*vPortWaitForEnd(s_pVpMain);
+  vPortWaitForEnd(s_pVpMain);
+  vPortWaitForEnd(s_pVpMain);
+  vPortWaitForEnd(s_pVpMain);*/
 }
 
 void ammxGsDestroy(void)
