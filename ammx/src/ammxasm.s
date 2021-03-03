@@ -957,7 +957,7 @@ LINESTARTITER_F:
 	; we are here if d>=0
 	paddw e9,d4,d4 ; d = i2+ d
 	addq #1,d1 ; y = y+1
-	adda.l #$00000028,a2 ; optimization , go to next line in bitplane
+	adda.w #$0028,a2 ; optimization , go to next line in bitplane
 	bra.s POINT_D_END_F
 
 POINT_D_LESS_0_F:
@@ -1083,7 +1083,7 @@ LINESTARTITER_F2:
 	; we are here if d>=0
 	paddw e9,d4,d4 ; d = i2+ d
 	subq #1,d1 ; y = y-1
-	suba.l #$00000028,a2 ; optimization , go to next line in bitplane
+	suba.w #$0028,a2 ; optimization , go to next line in bitplane
 	bra.s POINT_D_END_F2
 
 POINT_D_LESS_0_F2:
@@ -1135,9 +1135,11 @@ ENDLINE_F2:
 ; start of vertical routines
 linemgreater1:
 	
-	movem.l d0-d6/a0-a6,-(sp) ; stack save
 	IFD ASM_DEBUG
+	movem.l d0-d6/a0-a6,-(sp) ; stack save
 	move.l par2,a1
+	ELSE
+	movem.l d0-d7/a2,-(sp) ; stack save
 	ENDIF
 	
 	move.l LINEVERTEX_START_PUSHED,d2
@@ -1191,7 +1193,15 @@ LINESTARTITER_F3:
 
 	; we are here if d>=0
 	paddw e9,d4,d4 ; d = i2+ d
-	addq #1,d1 ; y = y+1
+	addq #1,d1 ; x = x+1
+	; start optimization
+	subq.w #1,d5
+	move.b d5,d7
+	andi.l #$00000007,d7
+	addq.b #1,d7
+	lsr.b #3,d7
+	adda.l d7,a2
+	;end optimization
 	bra.s POINT_D_END_F3
 
 POINT_D_LESS_0_F3:
@@ -1206,18 +1216,43 @@ POINT_D_END_F3:
 	move.w d1,(a1)+
 	move.w d0,(a1)+
 	ENDIF
-	bsr.w plotpointv ; PLOT POINT!!
+	;bsr.w plotpointv ; PLOT POINT!!
+	; start optimization
+	;subq.b #1,d5
+	;move.b d5,d7
+	;andi.l #$00000007,d7
+	;addq.b #1,d7
+	;lsr.b #3,d7
+	;adda.l d7,a2
+	adda.w #$0028,a2
+	vperm #$000000000000000F,e21,e22,d7
+	btst #0,d7
+	beq.s ENDLINEBPL0_F3
+	bset d5,(a2) ; plot optimized!!!
+ENDLINEBPL0_F3:
+	btst #1,d7
+	beq.s ENDLINEBPL1_F3
+	move.l a2,a3
+	adda.w #10240,a3
+	bset d5,(a3) ; plot optimized!!!
+ENDLINEBPL1_F3
 
 	bra.s LINESTARTITER_F3
 
 ENDLINE_F3:
+	IFD ASM_DEBUG
 	movem.l (sp)+,d0-d6/a0-a6
+	ELSE
+	movem.l (sp)+,d0-d7/a2
+	ENDIF
 	rts
 
 linemlessminus1:
-	movem.l d0-d6/a0-a6,-(sp) ; stack save
 	IFD ASM_DEBUG
+	movem.l d0-d6/a0-a6,-(sp) ; stack save
 	move.l par2,a1
+	ELSE
+	movem.l d0-d7/a2,-(sp) ; stack save
 	ENDIF
 	
 	move.l LINEVERTEX_START_PUSHED,d2
@@ -1272,6 +1307,14 @@ LINESTARTITER_F4:
 	; we are here if d>=0
 	paddw e9,d4,d4 ; d = i2+ d
 	subq #1,d1 ; y = y-1
+	; start optimization
+	subq.w #1,d5
+	move.b d5,d7
+	andi.l #$00000007,d7
+	addq.b #1,d7
+	lsr.b #3,d7
+	adda.l d7,a2
+	;end optimization
 	bra.s POINT_D_END_F4
 
 POINT_D_LESS_0_F4:
@@ -1287,12 +1330,29 @@ POINT_D_END_F4:
 	move.w d1,(a1)+
 	move.w d0,(a1)+
 	ENDIF
-	bsr.w plotpointv ; PLOT POINT!!
+	;bsr.w plotpointv ; PLOT POINT!!
+
+	suba.w #$0028,a2
+	vperm #$000000000000000F,e21,e22,d7
+	btst #0,d7
+	beq.s ENDLINEBPL0_F4
+	bset d5,(a2) ; plot optimized!!!
+ENDLINEBPL0_F4:
+	btst #1,d7
+	beq.s ENDLINEBPL1_F4
+	move.l a2,a3
+	adda.w #10240,a3
+	bset d5,(a3) ; plot optimized!!!
+ENDLINEBPL1_F4
 
 	bra.s LINESTARTITER_F4
 
 ENDLINE_F4:
+	IFD ASM_DEBUG
 	movem.l (sp)+,d0-d6/a0-a6
+	ELSE
+	movem.l (sp)+,d0-d7/a2
+	ENDIF
 	rts
 
 ; plotpoint routine
@@ -1350,7 +1410,7 @@ plotpoint_nosecondbitplane:
 plotpointv:
 	movem.l d0-d3/a0-a1,-(sp) ; stack save
 	lea PLOTREFS,a1
-	vperm #$FFFFFFFF,e23,e23,d3
+	vperm #$000000000000000F,e21,e22,d3 ; optimisation, e21 must be all zeroes from the caller
 
 	; start plot routine
 	add.w d0,d0
@@ -1374,9 +1434,13 @@ plotpointv_nofirstbitplane:
 	bset d1,0(a0,d0.w)
 plotpointv_nosecondbitplane:
 
+	; WARNING!!!!!! line optimization, save d0 in d5 so that the caller can calculate the next X without reentering here
+	move.b d1,d5
+	lea SCREEN_0,a2
+	adda.w d0,a2
+
 	movem.l (sp)+,d0-d3/a0-a1
 	rts
-
 
 	_ammxmainloop9:
 	;move.l 4(sp),bitplane0
@@ -1440,7 +1504,7 @@ LINECYCLE:
 	
 	TRANSLATE2D #0,#143
 	
-	DRAWLINE2D #10,#10,#30,#30,#3
+	DRAWLINE2D #10,#10,#11,#90,#3
 	TRANSLATE2D #0,#0
 	DRAWLINE2D #10,#10,#200,#5,#2
 	dbra d3,LINECYCLE
