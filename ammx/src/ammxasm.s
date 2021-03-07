@@ -1333,10 +1333,10 @@ LINESTARTITER_F4:
 	addq.b #1,d5
 	move.b d5,d7
 	subq.b #1,d7
-	andi.b #7,d7
+	andi.w #$0007,d7
 	addq.b #1,d7
 	lsr.b #3,d7
-	suba.w d7,a2
+	sub.w d7,a2
 	;end optimization
 	bra.s POINT_D_END_F4
 
@@ -1360,6 +1360,7 @@ POINT_D_END_F4:
 	btst #0,d7
 	beq.s ENDLINEBPL0_F4
 	bset d5,(a2) ; plot optimized!!!
+	nop
 ENDLINEBPL0_F4:
 	btst #1,d7
 	beq.s ENDLINEBPL1_F4
@@ -1616,7 +1617,7 @@ _ammxmainloopQ:
 	move.w #0000,COORDY_2
 	;move.w #91,ANGLE
 	move.w ANGLE,D0 ; set angle
-	cmp.w #180,d0
+	cmp.w #359,d0
 	bls.s noresetangleq
 	moveq #0,d0
 	move.w #0,ANGLE
@@ -1642,6 +1643,10 @@ noresetangleq:
 	asr.w #8,d0
     asr.w #8,d1
 
+	; save old d0 and d1
+	move.w d0,d3
+	move.w d1,d4
+
 	add.w #160,d0
 	add.w #128,d1
 
@@ -1650,9 +1655,42 @@ noresetangleq:
 	TRANSLATE2D #0,#0
 	DRAWLINE2D #160,#128,d0,d1,#2
 
+
+	move.w d3,d0
+	move.w d4,d1
+	add.w #170,d0
+	add.w #108,d1
+	DRAWLINE2D #170,#108,d0,d1,#1
+
+	move.w d3,d0
+	move.w d4,d1
+	add.w #180,d0
+	add.w #118,d1
+	DRAWLINE2D #180,#118,d0,d1,#3
+
+	move.w d3,d0
+	move.w d4,d1
+	add.w #190,d0
+	add.w #128,d1
+	DRAWLINE2D #190,#128,d0,d1,#2
+
+	move.w d3,d0
+	move.w d4,d1
+	add.w #200,d0
+	add.w #138,d1
+	DRAWLINE2D #200,#138,d0,d1,#1
+
+	move.w d3,d0
+	move.w d4,d1
+	add.w #210,d0
+	add.w #148,d1
+	DRAWLINE2D #210,#148,d0,d1,#3
+
 	;DRAWLINE2D #159,#128+90,#160,#128,#2
 
 	;DRAWLINE2D #159,#128,#160,#128+90,#3
+
+	;DRAWLINE2D #160,#128,#110,#178,#3
 
 
 	movem.l (sp)+,d0-d7/a0-a6
