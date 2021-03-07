@@ -847,6 +847,8 @@ _ammxmainloop8:
 	bra.s endammxmainloop8phase1
 ammxmainloop8_lowestless:
 	move.l LINEVERTEX_END_FINAL,d3
+endammxmainloop8phase1 : ; end of first check
+
 
 ; apply translation
 	move.l TRANSLATE_MEM_2D_X,d4
@@ -856,7 +858,6 @@ ammxmainloop8_lowestless:
 	;add.w TRANSLATE_MEM_2D_X,d2
 	;add.w TRANSLATE_MEM_2D_Y,d3
 
-endammxmainloop8phase1 ; end of first check
 	; - pick lowest first x end
 	move.l d2,(a2)+
 	move.l d3,(a2)+
@@ -1647,13 +1648,22 @@ noresetangleq:
 	move.w d0,d3
 	move.w d1,d4
 
+	TRANSLATE2D #140,#128
+	DRAWLINE2D #0,#0,d0,d1,#2
+
+	TRANSLATE2D #160,#128
+	DRAWLINE2D #0,#0,d0,d1,#2
+
+	;DRAWLINE2D #160,#128,#159,#188,#2
+
+
+
 	add.w #160,d0
 	add.w #128,d1
 
 
 	
 	TRANSLATE2D #0,#0
-	DRAWLINE2D #160,#128,d0,d1,#2
 
 
 	move.w d3,d0
@@ -1673,6 +1683,7 @@ noresetangleq:
 	add.w #190,d0
 	add.w #128,d1
 	DRAWLINE2D #190,#128,d0,d1,#2
+
 
 	move.w d3,d0
 	move.w d4,d1
