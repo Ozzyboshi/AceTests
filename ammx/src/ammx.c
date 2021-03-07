@@ -25,10 +25,11 @@ void ammxmainloop4();
 void ammxmainloop5();
 void ammxmainloop6();
 void ammxmainloop7();
-void ammxmainloop8(UBYTE*,UBYTE*,ULONG);
+void ammxmainloop8();
 void ammxmainloop9();
 void ammxmainloop10();
-void ammxmainloopclear(ULONG);
+void ammxmainloopQ();
+void ammxmainloopclear();
 void wait1();
 void wait2();
 
@@ -101,6 +102,7 @@ void ammxGsLoop(void)
   static UBYTE ubDraw3 = 0;
   static UBYTE ubDraw9 = 0;
   static UBYTE ubDrawClear = 0;
+  static UBYTE ubDrawQ = 0;
   wait1();
 
   if (keyCheck(KEY_ESCAPE))
@@ -282,10 +284,12 @@ void ammxGsLoop(void)
 
   if (ubDraw9 || keyUse(KEY_9))
   {
+    Disable();
     ubDraw9=1;
     g_pCustom->color[0] = 0x0F00;
     ammxmainloop9((ULONG)s_pMainBuffer->pBack->Planes);
     g_pCustom->color[0] = 0x0000;
+    Enable();
   }
 
   if (keyUse(KEY_SPACE))
@@ -320,6 +324,16 @@ void ammxGsLoop(void)
     g_pCustom->color[0] = 0x0F00;
     ammxmainloopclear((ULONG)s_pMainBuffer->pBack->Planes);
     g_pCustom->color[0] = 0x0000;
+  }
+
+  if (ubDrawQ || keyCheck(KEY_Q))
+  {
+    Disable();
+    g_pCustom->color[0] = 0x0FF0;
+    ammxmainloopQ((ULONG)s_pMainBuffer->pBack->Planes);
+    g_pCustom->color[0] = 0x0000;
+    ubDrawQ = 1;
+    Enable();
   }
 
   

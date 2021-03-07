@@ -58,6 +58,7 @@ preparescreenclearline:
 	dbra d3,preparescreenclearline
 	ENDM
 
+
 _NUMPOINTS EQU 7
 
 	SECTION AMMX,CODE_F
@@ -853,9 +854,6 @@ ammxmainloop8_lowestless:
 	paddw d2,d4,d2
 	paddw d3,d4,d3
 
-	;add.w TRANSLATE_MEM_2D_X,d2
-	;add.w TRANSLATE_MEM_2D_Y,d3
-
 endammxmainloop8phase1 ; end of first check
 	; - pick lowest first x end
 	move.l d2,(a2)+
@@ -901,10 +899,11 @@ dylessthan:
 	ENDIF
 	cmp.w d2,d3
 	bls.s goto0tominus1
-	bsr.w linem0to1
+	;bsr.w linem0to1
 	bra.s endammxmainloop8phase2
 goto0tominus1:
-	bsr.w linem0tominus1
+	;bsr.w linem0tominus1
+	nop
 endammxmainloop8phase2:
 endammxmainloop8:
 	movem.l (sp)+,d0-d6/a0-a6
@@ -1201,7 +1200,11 @@ linemgreater1:
 	move.w d1,(a1)+
 	move.w d0,(a1)+
 	ENDIF
+	moveq #8,d0
+	moveq #8,d1
 	bsr.w plotpointv ; PLOT POINT!!
+	;movem.l (sp)+,d0-d7/a2
+	;rts
 
 LINESTARTITER_F3:
 
@@ -1286,6 +1289,8 @@ linemlessminus1:
 	swap d2
 	swap d3
 
+	load #-0000000000000040,e10
+
 	;Calculate dx = x2-x1
     ;Calculate dy = y2-y1
 	PSUBW d2,d3,E5 ; e5 will contain deltas
@@ -1314,7 +1319,11 @@ linemlessminus1:
 	move.w d1,(a1)+
 	move.w d0,(a1)+
 	ENDIF
+
 	bsr.w plotpointv ; PLOT POINT!!
+
+	;movem.l (sp)+,d0-d7/a2
+	;rts
 
 LINESTARTITER_F4:
 
@@ -1327,16 +1336,14 @@ LINESTARTITER_F4:
 
 	; we are here if d>=0
 	paddw e9,d4,d4 ; d = i2+ d
-	subq #1,d1 ; x = x-1
-
+	subq #1,d1 ; y = y-1
 	; start optimization
-	addq.b #1,d5
+	subq.w #1,d5
 	move.b d5,d7
-	subq.b #1,d7
-	andi.b #7,d7
+	andi.l #$00000007,d7
 	addq.b #1,d7
 	lsr.b #3,d7
-	suba.w d7,a2
+	adda.l d7,a2
 	;end optimization
 	bra.s POINT_D_END_F4
 
@@ -1355,7 +1362,8 @@ POINT_D_END_F4:
 	ENDIF
 	;bsr.w plotpointv ; PLOT POINT!!
 
-	adda.w #$0028,a2
+	vperm #$45674567,e10,e10,d7
+	suba.w d7,a2
 	vperm #$000000000000000F,e21,e22,d7
 	btst #0,d7
 	beq.s ENDLINEBPL0_F4
@@ -1442,10 +1450,6 @@ plotpointv:
 	lsr.w #3,d2
 	add.w d2,d0
 	not.b d1
-	
-
-	;cmp.b #7,d1
-	;bne.s plotpointv_nosecondbitplane
 
 	; First bitplane
 	btst #0,d3
@@ -1463,8 +1467,6 @@ plotpointv_nosecondbitplane:
 
 	; WARNING!!!!!! line optimization, save d0 in d5 so that the caller can calculate the next X without reentering here
 	move.b d1,d5
-	;andi.b #07,d5 ; opt
-
 	lea SCREEN_0,a2
 	adda.w d0,a2
 
@@ -1607,21 +1609,14 @@ _ammxmainloopQ:
 	move.l (a0),bitplane1
 
 	PREPARESCREEN
-
 	; start of increase angle routine - each frame the angle will be increased by 1 deg 
 	addi.w #1,ANGLE
-	move.w #90,COORDX
-	move.w #0000,COORDY
-	move.w #90,COORDX_2
-	move.w #0000,COORDY_2
-	;move.w #91,ANGLE
 	move.w ANGLE,D0 ; set angle
-	cmp.w #180,d0
+	cmp.w #10,d0
 	bls.s noresetangleq
 	moveq #0,d0
 	move.w #0,ANGLE
 noresetangleq:
-
 	
 	LOAD COORDS,E4 ; Load XY input data in register for pmula
 	lea COS_SIN_SIN_COSINV_TABLE,b1   ; Cos and SIN in b1 (precalculated * 256)
@@ -1642,18 +1637,8 @@ noresetangleq:
 	asr.w #8,d0
     asr.w #8,d1
 
-	add.w #160,d0
-	add.w #128,d1
-
-
-	
-	TRANSLATE2D #0,#0
-	DRAWLINE2D #160,#128,d0,d1,#2
-
-	;DRAWLINE2D #159,#128+90,#160,#128,#2
-
-	;DRAWLINE2D #159,#128,#160,#128+90,#3
-
+	TRANSLATE2D #160,#0
+	DRAWLINE2D #10,#20,#20,#100,#3
 
 	movem.l (sp)+,d0-d7/a0-a6
     rts
