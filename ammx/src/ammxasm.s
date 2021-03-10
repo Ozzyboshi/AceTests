@@ -1,3 +1,5 @@
+CLEAR_NONSET_PIXELS = 1 ; disable to non clear set pixels
+
 DEBUG EQU 1
 	IIF DEBUG moveq #0,d0
 	IFEQ DEBUG
@@ -33,9 +35,15 @@ DRAWLINE2D	MACRO
 	move.w \2,(a1)+
 	move.w \3,(a1)+
 	move.w \4,(a1)+
-	load \5,e22
+	;load \5,e22
 	load #0000000000000000,e21 ;optimisation
 	bsr.w _ammxmainloop8
+	ENDM
+
+STROKE MACRO
+	PAND #$FFFFFFFFFFFFFF00,e22,e22 ; last byte zeroed
+	POR \1,e22,e22 ; last byte reserved for bitplanes
+	;vperm #$012345
 	ENDM
 
 PREPARESCREEN MACRO
@@ -78,6 +86,12 @@ _NUMPOINTS EQU 7
 	XDEF _ammxmainloopclear
 	XDEF _wait1
 	XDEF _wait2
+	XDEF _DRAW_INIT
+
+_DRAW_INIT:
+	load #0000000000000001,e22 ; drawing flags
+	load #0000000000000000,e21 ; zero register
+	rts
 
 DATAIN:
     dc.l $AAAAAAAA
@@ -1008,16 +1022,26 @@ POINT_D_END_F:
 	lsr.b #3,d7
 	adda.l d7,a2
 	vperm #$000000000000000F,e21,e22,d7
+	IFD CLEAR_NONSET_PIXELS
+	bclr d5,(a2)
+	ENDIF
 	btst #0,d7
 	beq.s ENDLINEBPL0_F
 	bset d5,(a2) ; plot optimized!!!
 
 	; opt bitplane 1
 ENDLINEBPL0_F:
-	btst #1,d7
-	beq.s ENDLINEBPL1_F
+	IFD CLEAR_NONSET_PIXELS
 	move.l a2,a3
 	adda.w #10240,a3
+	bclr d5,(a3)
+	ENDIF
+	btst #1,d7
+	beq.s ENDLINEBPL1_F
+	IFND CLEAR_NONSET_PIXELS
+	move.l a2,a3
+	adda.w #10240,a3
+	ENDIF
 	bset d5,(a3) ; plot optimized!!!
 ENDLINEBPL1_F
 
@@ -1130,16 +1154,27 @@ POINT_D_END_F2:
 	lsr.b #3,d7
 	adda.l d7,a2
 	vperm #$000000000000000F,e21,e22,d7
+
+	IFD CLEAR_NONSET_PIXELS
+	bclr d5,(a2) ; plot optimized!!!
+	ENDIF
 	btst #0,d7
 	beq.s ENDLINEBPL0_F2
 	bset d5,(a2) ; plot optimized!!!
 
 	; opt bitplane 1
 ENDLINEBPL0_F2:
-	btst #1,d7
-	beq.s ENDLINEBPL1_F2
+	IFD CLEAR_NONSET_PIXELS
 	move.l a2,a3
 	adda.w #10240,a3
+	bclr d5,(a3)
+	ENDIF
+	btst #1,d7
+	beq.s ENDLINEBPL1_F2
+	IFND CLEAR_NONSET_PIXELS
+	move.l a2,a3
+	adda.w #10240,a3
+	ENDIF
 	bset d5,(a3) ; plot optimized!!!
 ENDLINEBPL1_F2
 
@@ -1248,14 +1283,25 @@ POINT_D_END_F3:
 	;adda.l d7,a2
 	adda.w #$0028,a2
 	vperm #$000000000000000F,e21,e22,d7
+
+	IFD CLEAR_NONSET_PIXELS
+	bclr d5,(a2) ; plot optimized!!!
+	ENDIF
 	btst #0,d7
 	beq.s ENDLINEBPL0_F3
 	bset d5,(a2) ; plot optimized!!!
 ENDLINEBPL0_F3:
-	btst #1,d7
-	beq.s ENDLINEBPL1_F3
+	IFD CLEAR_NONSET_PIXELS
 	move.l a2,a3
 	adda.w #10240,a3
+	bclr d5,(a3)
+	ENDIF
+	btst #1,d7
+	beq.s ENDLINEBPL1_F3
+	IFND CLEAR_NONSET_PIXELS
+	move.l a2,a3
+	adda.w #10240,a3
+	ENDIF
 	bset d5,(a3) ; plot optimized!!!
 ENDLINEBPL1_F3
 
@@ -1358,15 +1404,25 @@ POINT_D_END_F4:
 
 	adda.w #$0028,a2
 	vperm #$000000000000000F,e21,e22,d7
+	IFD CLEAR_NONSET_PIXELS
+	bclr d5,(a2)
+	ENDIF
 	btst #0,d7
 	beq.s ENDLINEBPL0_F4
 	bset d5,(a2) ; plot optimized!!!
 	nop
 ENDLINEBPL0_F4:
-	btst #1,d7
-	beq.s ENDLINEBPL1_F4
+	IFD CLEAR_NONSET_PIXELS
 	move.l a2,a3
 	adda.w #10240,a3
+	bclr d5,(a3)
+	ENDIF
+	btst #1,d7
+	beq.s ENDLINEBPL1_F4
+	IFND CLEAR_NONSET_PIXELS
+	move.l a2,a3
+	adda.w #10240,a3
+	ENDIF
 	bset d5,(a3) ; plot optimized!!!
 ENDLINEBPL1_F4
 
@@ -1403,16 +1459,28 @@ plotpoint:
 	not.b d0
 
 	; First bitplane
+	IFD CLEAR_NONSET_PIXELS
+	lea SCREEN_0,a0
+	bclr d0,(a0,d1.w)
+	ENDIF
 	btst #0,d3
 	beq.s plotpoint_nofirstbitplane
+	IFND CLEAR_NONSET_PIXELS
 	lea SCREEN_0,a0
+	ENDIF
 	bset d0,(a0,d1.w)
 plotpoint_nofirstbitplane:
 
 	; Second bitplane
+	IFD CLEAR_NONSET_PIXELS
+	lea SCREEN_1,a0
+	bclr d0,(a0,d1.w)
+	ENDIF
 	btst #1,d3
 	beq.s plotpoint_nosecondbitplane
+	IFND CLEAR_NONSET_PIXELS
 	lea SCREEN_1,a0
+	ENDIF
 	bset d0,(a0,d1.w)
 plotpoint_nosecondbitplane:
 
@@ -1450,16 +1518,28 @@ plotpointv:
 	;bne.s plotpointv_nosecondbitplane
 
 	; First bitplane
+	IFD CLEAR_NONSET_PIXELS
+	lea SCREEN_0,a0
+	bclr d1,0(a0,d0.w)
+	ENDIF
 	btst #0,d3
 	beq.s plotpointv_nofirstbitplane
+	IFND CLEAR_NONSET_PIXELS
 	lea SCREEN_0,a0
+	ENDIF
 	bset d1,0(a0,d0.w)
 plotpointv_nofirstbitplane:
 
 	; Second bitplane
+	IFD CLEAR_NONSET_PIXELS
+	lea SCREEN_1,a0
+	bclr d1,0(a0,d0.w)
+	ENDIF
 	btst #1,d3
 	beq.s plotpointv_nosecondbitplane
+	IFND CLEAR_NONSET_PIXELS
 	lea SCREEN_1,a0
+	ENDIF
 	bset d1,0(a0,d0.w)
 plotpointv_nosecondbitplane:
 
@@ -1535,12 +1615,12 @@ LINECYCLE:
 	
 	TRANSLATE2D #0,#143
 	
-	DRAWLINE2D #10,#10,#11,#90,#3
+	DRAWLINE2D #10,#10,#11,#90;,#3
 	TRANSLATE2D #0,#0
-	DRAWLINE2D #10,#10,#200,#5,#2
+	DRAWLINE2D #10,#10,#200,#5;,#2
 	dbra d3,LINECYCLE
 	TRANSLATE2D #160,#0
-	DRAWLINE2D #10,#100,#20,#20,#3
+	DRAWLINE2D #10,#100,#20,#20;,#3
 	movem.l (sp)+,d0-d6/a0-a6
 	rts
 
@@ -1649,10 +1729,16 @@ noresetangleq:
 	move.w d1,d4
 
 	TRANSLATE2D #140,#128
-	DRAWLINE2D #0,#0,d0,d1,#2
+	DRAWLINE2D #0,#0,d0,d1;,#2
 
 	TRANSLATE2D #160,#128
-	DRAWLINE2D #0,#0,d0,d1,#2
+	DRAWLINE2D #0,#0,d0,d1;,#2
+
+	STROKE #2
+	DRAWLINE2D #0,#0,#30,#30;,#2
+	DRAWLINE2D #-10,#-10,#90,#60;,#2
+
+	STROKE #1
 
 	;DRAWLINE2D #160,#128,#159,#188,#2
 
@@ -1670,32 +1756,32 @@ noresetangleq:
 	move.w d4,d1
 	add.w #170,d0
 	add.w #108,d1
-	DRAWLINE2D #170,#108,d0,d1,#1
+	DRAWLINE2D #170,#108,d0,d1;,#1
 
 	move.w d3,d0
 	move.w d4,d1
 	add.w #180,d0
 	add.w #118,d1
-	DRAWLINE2D #180,#118,d0,d1,#3
+	DRAWLINE2D #180,#118,d0,d1;,#3
 
 	move.w d3,d0
 	move.w d4,d1
 	add.w #190,d0
 	add.w #128,d1
-	DRAWLINE2D #190,#128,d0,d1,#2
+	DRAWLINE2D #190,#128,d0,d1;,#2
 
 
 	move.w d3,d0
 	move.w d4,d1
 	add.w #200,d0
 	add.w #138,d1
-	DRAWLINE2D #200,#138,d0,d1,#1
+	DRAWLINE2D #200,#138,d0,d1;,#1
 
 	move.w d3,d0
 	move.w d4,d1
 	add.w #210,d0
 	add.w #148,d1
-	DRAWLINE2D #210,#148,d0,d1,#3
+	DRAWLINE2D #210,#148,d0,d1;,#3
 
 	;DRAWLINE2D #159,#128+90,#160,#128,#2
 
@@ -1706,6 +1792,28 @@ noresetangleq:
 
 	movem.l (sp)+,d0-d7/a0-a6
     rts
+
+ROTATEZ:
+	LOAD COORDS,E4 ; Load XY input data in register for pmula
+	lea COS_SIN_SIN_COSINV_TABLE,b1   ; Cos and SIN in b1 (precalculated * 256)
+	LOAD (b1,D0.w*8),E5 ; Load precalculated sin/cos values to register E5
+
+    PMULL E4,E5,E7 ; Calculate rotation with formula x*cos(a) ## y*sin(a) ## x*sin(a) ## -y*cos(a)
+
+    ;ammx mode - copy the result in E8 but 16bit shifted
+    dc.w $fe7c,$f038,$0000,$0000,$0000,$0010  ; LSL.Q  #16,E7,E8
+    PADDW    E7,E8,E9 ; add x*cos(a) + y*sin(a) and x*sin(a) -y*cos(a) in one shot
+
+    ;STORE   E7,(a1) debug commented
+
+    VPERM #$01010101,E9,E9,D0 ; result of first addition to d0
+    VPERM #$45454545,E9,E9,D1 ; result of first addition to d1
+    
+    ; divide by eight
+	asr.w #8,d0
+    asr.w #8,d1
+	rts
+
 
 SCREEN_0
     dcb.b 40*256,$00

@@ -32,6 +32,7 @@ void ammxmainloopQ();
 void ammxmainloopclear();
 void wait1();
 void wait2();
+void DRAW_INIT();
 
 ULONG BPLADDR[5];
 
@@ -90,6 +91,8 @@ void ammxGsCreate(void)
   BPLADDR[0] = (ULONG)s_pMainBuffer->pBack->Planes[0];
   BPLADDR[1] = (ULONG)s_pMainBuffer->pBack->Planes[1];
   BPLADDR[2] = 0;
+
+  DRAW_INIT();
 
   //g_pCustom->dmacon = DMAF_SETCLR | DMAF_MASTER | DMAF_BLITTER;
 }
@@ -329,7 +332,7 @@ void ammxGsLoop(void)
   if (ubDrawQ || keyCheck(KEY_Q))
   {
     Disable();
-    //g_pCustom->color[0] = 0x0FF0;
+    g_pCustom->color[0] = 0x0FF0;
     ammxmainloopQ((ULONG)s_pMainBuffer->pBack->Planes);
     g_pCustom->color[0] = 0x0000;
     ubDrawQ = 1;
