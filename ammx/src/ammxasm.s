@@ -56,14 +56,14 @@ PREPARESCREEN MACRO
 
 	move.l bitplane0,a1
 	move.l bitplane1,a2
-preparescreenclearline:
+.preparescreenclearline:
 	load (a0),e20
 	load (a4),e21
 	store e20,(a1)+
 	store e21,(a2)+
 	store e0,(a0)+
 	store e0,(a4)+
-	dbra d3,preparescreenclearline
+	dbra d3,.preparescreenclearline
 	ENDM
 
 _NUMPOINTS EQU 7
@@ -83,6 +83,7 @@ _NUMPOINTS EQU 7
 	XDEF _ammxmainloop9
 	XDEF _ammxmainloop10
 	XDEF _ammxmainloopQ
+	XDEF _ammxmainloopW
 	XDEF _ammxmainloopclear
 	XDEF _wait1
 	XDEF _wait2
@@ -1704,7 +1705,6 @@ _ammxmainloopQ:
 	move.w #0,ANGLE
 noresetangleq:
 
-	
 	LOAD COORDS,E4 ; Load XY input data in register for pmula
 	lea COS_SIN_SIN_COSINV_TABLE,b1   ; Cos and SIN in b1 (precalculated * 256)
 	LOAD (b1,D0.w*8),E5 ; Load precalculated sin/cos values to register E5
@@ -1723,6 +1723,9 @@ noresetangleq:
     ; divide by eight
 	asr.w #8,d0
     asr.w #8,d1
+
+	
+	;bsr.w ROTATE2D_Z
 
 	; save old d0 and d1
 	move.w d0,d3
@@ -1793,10 +1796,15 @@ noresetangleq:
 	movem.l (sp)+,d0-d7/a0-a6
     rts
 
-ROTATEZ:
-	LOAD COORDS,E4 ; Load XY input data in register for pmula
+; INPUT d2 => ANGLE IN DEGREES (word)
+;		d0 => X to rotate (word)
+;		d1 => Y to rotate (word)
+; New coords on d0 and d1
+ROTATE2D_Z:
+	;LOAD COORDS,E4 ; Load XY input data in register for pmula
+	VPERM #$67EF67EF,d0,d1,E4
 	lea COS_SIN_SIN_COSINV_TABLE,b1   ; Cos and SIN in b1 (precalculated * 256)
-	LOAD (b1,D0.w*8),E5 ; Load precalculated sin/cos values to register E5
+	LOAD (b1,D3.w*8),E5 ; Load precalculated sin/cos values to register E5
 
     PMULL E4,E5,E7 ; Calculate rotation with formula x*cos(a) ## y*sin(a) ## x*sin(a) ## -y*cos(a)
 
@@ -1804,14 +1812,48 @@ ROTATEZ:
     dc.w $fe7c,$f038,$0000,$0000,$0000,$0010  ; LSL.Q  #16,E7,E8
     PADDW    E7,E8,E9 ; add x*cos(a) + y*sin(a) and x*sin(a) -y*cos(a) in one shot
 
-    ;STORE   E7,(a1) debug commented
-
     VPERM #$01010101,E9,E9,D0 ; result of first addition to d0
     VPERM #$45454545,E9,E9,D1 ; result of first addition to d1
     
     ; divide by eight
 	asr.w #8,d0
     asr.w #8,d1
+	rts
+
+_ammxmainloopW:
+    move.l 4(sp),par1 ; argument save
+	movem.l d0-d7/a0-a6,-(sp) ; stack save
+    move.l par1,a0 ; argument address in a1 (bitplane 0 addr)
+	move.l (a0)+,bitplane0
+	move.l (a0),bitplane1
+
+	PREPARESCREEN
+
+	addi.w #1,ANGLE
+	move.w ANGLE,D0 ; set angle
+	cmp.w #359,d0
+	bls.s noresetanglew
+	moveq #0,d0
+	move.w #0,ANGLE
+noresetanglew:
+
+	move.w #-30,d0
+	move.w #0,d1
+	move.w ANGLE,d3
+	bsr.w ROTATE2D_Z
+
+	move.w d0,d4
+	move.w d1,d5
+
+	move.w #30,d0
+	move.w #0,d1
+	move.w ANGLE,d3
+	bsr.w ROTATE2D_Z
+
+	TRANSLATE2D #160,#128
+	DRAWLINE2D d4,d5,d0,d1
+	
+	movem.l (sp)+,d0-d7/a0-a6
 	rts
 
 
