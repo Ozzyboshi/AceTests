@@ -71,6 +71,9 @@ _NUMPOINTS EQU 7
 	SECTION AMMX,CODE_F
 
 	include "tables.i"
+	include "ammxmacros.i"
+	include "matrix.i"
+	include "ammxrasterizers.i"
 
     XDEF _ammxmainloop
     XDEF _ammxmainloop2
@@ -84,6 +87,7 @@ _NUMPOINTS EQU 7
 	XDEF _ammxmainloop10
 	XDEF _ammxmainloopQ
 	XDEF _ammxmainloopW
+	XDEF _ammxmainloopE
 	XDEF _ammxmainloopclear
 	XDEF _wait1
 	XDEF _wait2
@@ -922,7 +926,6 @@ dylessthan:
 goto0tominus1:
 	bsr.w linem0tominus1
 endammxmainloop8phase2:
-endammxmainloop8:
 	movem.l (sp)+,d0-d6/a0-a6
 	rts
 
@@ -1829,32 +1832,48 @@ _ammxmainloopW:
 
 	PREPARESCREEN
 
-	addi.w #1,ANGLE
-	move.w ANGLE,D0 ; set angle
-	cmp.w #359,d0
-	bls.s noresetanglew
-	moveq #0,d0
-	move.w #0,ANGLE
-noresetanglew:
+	TRANSFORM #160,#128
+	LINE #-30,#0,#30,#0
 
-	move.w #-30,d0
-	move.w #0,d1
-	move.w ANGLE,d3
-	bsr.w ROTATE2D_Z
+;	addi.w #1,ANGLE
+;	move.w ANGLE,D0 ; set angle
+;	cmp.w #359,d0
+;	bls.s noresetanglew
+;	moveq #0,d0
+;	move.w #0,ANGLE
+;noresetanglew:
 
-	move.w d0,d4
-	move.w d1,d5
+;	move.w #-30,d0
+;	move.w #0,d1
+;	move.w ANGLE,d3
+;	bsr.w ROTATE2D_Z
 
-	move.w #30,d0
-	move.w #0,d1
-	move.w ANGLE,d3
-	bsr.w ROTATE2D_Z
+;	move.w d0,d4
+;	move.w d1,d5
 
-	TRANSLATE2D #160,#128
-	DRAWLINE2D d4,d5,d0,d1
+;	move.w #30,d0
+;	move.w #0,d1
+;	move.w ANGLE,d3
+;	bsr.w ROTATE2D_Z
+
+;	TRANSLATE2D #160,#128
+;	DRAWLINE2D d4,d5,d0,d1
 	
 	movem.l (sp)+,d0-d7/a0-a6
 	rts
+
+
+; ------------------ test 2 - draw some concentric circles
+_ammxmainloopE:
+	move.l 4(sp),par1 ; argument save
+	movem.l d0-d6/a0-a6,-(sp) ; stack save
+    move.l par1,a1 ; argument address in a1 (bitplane 0 addr)
+	TRANSFORM #160,#128
+	LINE #-30,#0,#30,#0
+	
+
+    movem.l (sp)+,d0-d6/a0-a6
+    rts
 
 
 SCREEN_0
