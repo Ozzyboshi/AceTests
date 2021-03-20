@@ -47,12 +47,64 @@ LINE	MACRO
 	vperm #$23452345,e13,e13,d0
     move.l d0,(a1)+
 
-	
     ; start line drawing routine
 	load #0000000000000000,e21 ;optimisation
     ;lea LINEVERTEX_START_FINAL,a1
     ;move.l #$0A0A0B0B,(a1)
-	bsr.w bresenham_line_draw
+	bsr.w _ammxmainloop8
+	ENDM
+
+POINTDEBUG MACRO
+	move.w \1,d0
+	;move.l #$0001FFFF,d1
+	move.w \2,d1
+
+	vperm #$0067EFAB,d0,d1,e1
+	pand #$00FFFFFF,e1,e1
+	por #$00000001,e1,e1
+	REG_ZERO e2
+	REG_ZERO e3
+
+	LOAD_CURRENT_TRANSFORMATION_MATRIX e4,e5,e6
+
+	DEBUG_FIRST_INPUT_TRANSFORMATION_MATRIX #0*0
+	DEBUG_SECOND_INPUT_TRANSFORMATION_MATRIX #4*8
+
+	bsr.w ammxmatrixmul1X3
+	UPDATE_CURRENT_TRANSFORMATION_MATRIX e13,e14,e15
+
+	DEBUG_CURRENT_TRANSFORMATION_MATRIX #8*8
+
+	ENDM
+
+POINT MACRO
+	move.w \1,d0
+	move.w \2,d1
+
+	vperm #$0067EFAB,d0,d1,e1
+	pand #$00FFFFFF,e1,e1
+	por #$00000001,e1,e1
+	REG_ZERO e2
+	REG_ZERO e3
+
+	LOAD_CURRENT_TRANSFORMATION_MATRIX e4,e5,e6
+
+	bsr.w ammxmatrixmul1X3
+
+	vperm #$FFFFFF23,e13,e2,d0
+	vperm #$FFFFFF45,e13,e2,d1
+
+	; start plot routine
+	lea PLOTREFS,a1
+	add.w d1,d1
+	move.w 0(a1,d1.w),d1
+	move.w d0,d2
+	lsr.w #3,d2
+	add.w d2,d1
+	not.b d0
+	lea SCREEN_0,a0
+	bset d0,(a0,d1.w)
+
 	ENDM
 
 ; Final round
@@ -80,11 +132,6 @@ bendammxmainloop8phase1 : ; end of first check
 	; - pick lowest first x end
 	move.l d2,(a2)+
 	move.l d3,(a2)+
-
-	;move.l d2,(a1)+
-	;move.l d3,(a1)+
-    ;movem.l (sp)+,d0-d6/a0-a6
-	;rts
 
 	; - check if both coords are between screen limits start
 	; - check if both coords are between screen limits end
@@ -120,10 +167,131 @@ bdylessthan:
 	ENDIF
 	cmp.w d2,d3
 	bls.s bgoto0tominus1
-	bsr.w linem0to1
+	;bsr.w linem0to1
 	bra.s bendammxmainloop8phase2
 bgoto0tominus1:
-	bsr.w linem0tominus1
+	bsr.w blinem0tominus1
 bendammxmainloop8phase2:
 	movem.l (sp)+,d0-d6/a0-a6
+	rts
+
+
+; build line from 8 5 to 1 1 (down in cartesian plane but up on screen)
+; d0 ==> x
+; d1 ==> y
+; d2 ===> x1 y1
+; d3 ===> x2 y2
+; d4 ===> decision
+; e6 ===> I1
+blinem0tominus1:
+	movem.l d0-d7/a2,-(sp) ; stack save
+
+	move.l LINEVERTEX_START_PUSHED,d2
+	move.l LINEVERTEX_END_PUSHED,d3
+
+	move.w d2,d4
+	move.w d3,d2
+	move.w d4,d3
+
+	;Calculate dx = x2-x1
+    ;Calculate dy = y2-y1
+	PSUBW d2,d3,E5 ; e5 will contain deltas
+
+	;Calculate i1=2*dy
+	PADDW E5,E5,E6 ; I1 is on the lower 2 bytes of E6
+
+	VPERM #$45454545,E5,E5,E8 ; Put DeltaX in all e8
+	VPERM #$6767EFEF,E6,E5,E7 ; E7 = I1 I1 Dy Dy
+
+	PSUBW E8,E7,E9; E9 : first word  i1-dx and third word dy-dx
+	
+	;Calculate i2=2*(dy-dx)
+    ;Calculate d=i1-dx
+
+	; decision variable to D4
+	VPERM #$01010101,E9,E9,D4 ; d calculated  in D4
+	PADDW E9,E9,E9            ; i2 calculated in E9
+
+	vperm #$45454545,d2,d2,d0 ; x = x1 (x1 is the start)
+	vperm #$67676767,d3,d3,d1 ; y = y1 (y1 is the start)
+	VPERM #$45454545,d3,d3,d6 ; xend = x2
+
+	
+	bsr.w bplotpoint ; PLOT POINT!!
+
+BENDLINE_F2:
+	movem.l (sp)+,d0-d7/a2
+	rts
+
+; plotpoint routine
+; before calling this routine set
+; x ==> d1 (word)
+; y ==> d0 (word)
+; plotrefs bust be build precalculated
+; e22 filled with bitplane flags
+; bitplaneX must be loaded with real bitplane addresses
+bplotpoint:
+	movem.l d0-d3/a0-a1,-(sp) ; stack save
+	lea PLOTREFS,a1
+	
+	;load e23,d6
+	vperm #$000000000000000F,e21,e22,d3 ; optimisation, e21 must be all zeroes from the caller
+
+	
+
+	; start plot routine
+	add.w d1,d1
+	move.w 0(a1,d1.w),d1
+
+	
+
+	move.w d0,d2
+	lsr.w #3,d2
+	add.w d2,d1
+	not.b d0
+
+	;moveq #0,d0
+	;move.l par1,a2 
+	;store d0,(a2)+
+    ;store d1,(a2)+
+	;movem.l (sp)+,d0-d3/a0-a1
+	;rts
+	;moveq #0,d1
+
+	
+
+	; First bitplane
+	IFD CLEAR_NONSET_PIXELS
+	lea SCREEN_0,a0
+	bclr d0,(a0,d1.w)
+	ENDIF
+	btst #0,d3
+	beq.s bplotpoint_nofirstbitplane
+	IFND CLEAR_NONSET_PIXELS
+	lea SCREEN_0,a0
+	ENDIF
+	lea SCREEN_0,a0
+	bset d0,(a0,d1.w)
+bplotpoint_nofirstbitplane:
+
+	; Second bitplane
+	IFD CLEAR_NONSET_PIXELS
+	lea SCREEN_1,a0
+	;bclr d0,(a0,d1.w)
+	ENDIF
+	btst #1,d3
+	beq.s bplotpoint_nosecondbitplane
+	IFND CLEAR_NONSET_PIXELS
+	lea SCREEN_1,a0
+	ENDIF
+	bset d0,(a0,d1.w)
+bplotpoint_nosecondbitplane:
+
+	; WARNING!!!!!! line optimization, save d0 in d5 so that the caller can calculate the next X without reentering here
+	move.b d0,d5
+	lea SCREEN_0,a2
+	adda.w d1,a2
+
+	;exit plotpoint
+	movem.l (sp)+,d0-d3/a0-a1
 	rts

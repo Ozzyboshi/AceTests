@@ -72,7 +72,7 @@ _NUMPOINTS EQU 7
 
 	include "tables.i"
 	include "ammxmacros.i"
-	include "matrix.i"
+	include "ammxmatrix.i"
 	include "ammxrasterizers.i"
 
     XDEF _ammxmainloop
@@ -1832,8 +1832,17 @@ _ammxmainloopW:
 
 	PREPARESCREEN
 
-	TRANSFORM #160,#128
-	LINE #-30,#0,#30,#0
+	RESET_CURRENT_TRANFORMATION_MATRIX
+	TRANSLATE #100,#100
+	ROTATE #350 ; (-45)
+	TRANSLATE #160,#128
+	POINT #0,#0
+
+	;DRAWLINE2D #10,#10,#20,#20
+	;RESET_CURRENT_TRANFORMATION_MATRIX
+	;TRANSFORM #160,#128
+	;ROTATE #45
+	;LINE #-30,#0,#30,#0
 
 ;	addi.w #1,ANGLE
 ;	move.w ANGLE,D0 ; set angle
@@ -1868,8 +1877,11 @@ _ammxmainloopE:
 	move.l 4(sp),par1 ; argument save
 	movem.l d0-d6/a0-a6,-(sp) ; stack save
     move.l par1,a1 ; argument address in a1 (bitplane 0 addr)
-	TRANSFORM #160,#128
-	LINE #-30,#0,#30,#0
+	TRANSLATEDEBUG #100,#100
+	ROTATEDEBUG #350 ; (-45)
+	TRANSLATEDEBUG #160,#128
+	POINTDEBUG #0,#0
+	;LINE #-30,#0,#30,#0
 	
 
     movem.l (sp)+,d0-d6/a0-a6

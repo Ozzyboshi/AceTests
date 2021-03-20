@@ -13,7 +13,7 @@ REG_ADD_LESS_SIG_3_WORDS MACRO
 	ENDM
 
 REG_ZERO MACRO
-	load #0000000000000000,\1 ; zero register
+	load #$0000000000000000,\1 ; zero register
 	ENDM
 
    ; XDEF _ammxmatrixmul3X3
