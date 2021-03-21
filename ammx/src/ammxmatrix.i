@@ -80,7 +80,7 @@ ROTATE MACRO
 	LOAD_CURRENT_TRANSFORMATION_MATRIX e1,e2,e3
 
 	move.w \1,d0
-	lea ROT_Z_MATRIX_128,b1   ; Cos and SIN in b1 (precalculated * 2^15)
+	lea ROT_Z_MATRIX_128,b1   ; Cos and SIN in b1 (precalculated * 2^7)
 	LOAD (b1,D0.w*8),E10 ; Load precalculated sin/cos values to register E10
 
 	; rotation matrix
@@ -119,6 +119,7 @@ ROTATEDEBUG MACRO
 	;pmull #$0002000200020002,e6,e6
 
 	DEBUG_CURRENT_TRANSFORMATION_MATRIX #0*8
+
 
 	DEBUG_SECOND_INPUT_TRANSFORMATION_MATRIX #4*8
 
@@ -173,9 +174,11 @@ TRANSLATEDEBUG MACRO
 	
     vperm #$4567EFCD,d0,d1,e6
 	REG_LOADI 0000,0001,0001,0001,e0  ; 0 1 0 0
-	pmull e6,e0,e6 ; Y sign inverted and first word zeroed
+	pmull e6,e0,e6 ; first word zeroed
 
-    ;DEBUG_SECOND_INPUT_TRANSFORMATION_MATRIX #0*0
+	DEBUG_CURRENT_TRANSFORMATION_MATRIX #0*8
+
+	DEBUG_SECOND_INPUT_TRANSFORMATION_MATRIX #4*8
 
     bsr.w ammxmatrixmul3X3
 
@@ -295,7 +298,7 @@ ammxmatrixmul1X3:
     store e2,(a1)+
     store e3,(a1)+
 
-    load #$FFFFFFFFFFFFFFFF,e0
+    load #$FFFFFFFFFFFFFFF3,e0
     store e0,(a1)+
 
     store e4,(a1)+

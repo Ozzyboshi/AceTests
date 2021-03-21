@@ -56,12 +56,10 @@ LINE	MACRO
 
 POINTDEBUG MACRO
 	move.w \1,d0
-	;move.l #$0001FFFF,d1
+	move.l #$0001FFFF,d1
 	move.w \2,d1
 
-	vperm #$0067EFAB,d0,d1,e1
-	pand #$00FFFFFF,e1,e1
-	por #$00000001,e1,e1
+	vperm #$8967EFCD,d0,d1,e1
 	REG_ZERO e2
 	REG_ZERO e3
 
@@ -79,11 +77,10 @@ POINTDEBUG MACRO
 
 POINT MACRO
 	move.w \1,d0
+	move.l #$0001FFFF,d1
 	move.w \2,d1
 
-	vperm #$0067EFAB,d0,d1,e1
-	pand #$00FFFFFF,e1,e1
-	por #$00000001,e1,e1
+	vperm #$8967EFCD,d0,d1,e1
 	REG_ZERO e2
 	REG_ZERO e3
 
