@@ -88,6 +88,8 @@ _NUMPOINTS EQU 7
 	XDEF _ammxmainloopQ
 	XDEF _ammxmainloopW
 	XDEF _ammxmainloopE
+	XDEF _ammxmainloopR
+	XDEF _ammxmainloopT
 	XDEF _ammxmainloopclear
 	XDEF _wait1
 	XDEF _wait2
@@ -1833,40 +1835,28 @@ _ammxmainloopW:
 	PREPARESCREEN
 
 	RESET_CURRENT_TRANFORMATION_MATRIX
-	TRANSLATE #69,#40
-	ROTATE #350 ; (-45)
-	TRANSLATE #160,#128
-	POINT #6,#10
 
-	;DRAWLINE2D #10,#10,#20,#20
-	;RESET_CURRENT_TRANFORMATION_MATRIX
-	;TRANSFORM #160,#128
-	;ROTATE #45
-	;LINE #-30,#0,#30,#0
 
-;	addi.w #1,ANGLE
-;	move.w ANGLE,D0 ; set angle
-;	cmp.w #359,d0
-;	bls.s noresetanglew
-;	moveq #0,d0
-;	move.w #0,ANGLE
-;noresetanglew:
+	; start of increase angle routine - each frame the angle will be increased by 1 deg 
+	addi.w #1,ANGLE
+	
+	cmp.w #359,ANGLE
+	bls.s noresetanglew
+	move.w #0,ANGLE
+noresetanglew:
 
-;	move.w #-30,d0
-;	move.w #0,d1
-;	move.w ANGLE,d3
-;	bsr.w ROTATE2D_Z
+	;move.w #45,ANGLE
 
-;	move.w d0,d4
-;	move.w d1,d5
+	TRANSLATE_INV #160,#128
+	ROTATE_INV ANGLE
+	TRANSLATE_INV #69,#40
+	POINT #0,#10
+	POINT #26,#25
 
-;	move.w #30,d0
-;	move.w #0,d1
-;	move.w ANGLE,d3
-;	bsr.w ROTATE2D_Z
-
-;	TRANSLATE2D #160,#128
-;	DRAWLINE2D d4,d5,d0,d1
+	;TRANSLATE #69,#40
+	;ROTATE #350 ; (-45)
+	;TRANSLATE #160,#128
+	;POINT #6,#10
 	
 	movem.l (sp)+,d0-d7/a0-a6
 	rts
@@ -1877,17 +1867,166 @@ _ammxmainloopE:
 	move.l 4(sp),par1 ; argument save
 	movem.l d0-d6/a0-a6,-(sp) ; stack save
     move.l par1,a1 ; argument address in a1 (bitplane 0 addr)
-	
+
+	; Inverse processing like flavour - start;
 	RESET_CURRENT_TRANFORMATION_MATRIX
-	TRANSLATEDEBUG #6,#10
-	TRANSLATEDEBUG #69,#40
-	ROTATEDEBUG #350 ; (-45)
-	TRANSLATEDEBUG #160,#128
-	POINTDEBUG #0,#0
+	TRANSLATE_INV_DEBUG #160,#128
+	ROTATE_INV_DEBUG #45
+	;TRANSLATE_INV_DEBUG #69,#40
+	;POINTDEBUG #6,#10
+	;NORMALIZE_64
+	;ROTATE_INV_DEBUG #350
+	;POINTDEBUG #26,#30
+	
+	; Inverse processing like flavour - end;
+	
+	;RESET_CURRENT_TRANFORMATION_MATRIX
+	;TRANSLATEDEBUG #6,#10
+	;TRANSLATEDEBUG #69,#40
+	;ROTATEDEBUG #350 ; (-45)
+	;TRANSLATEDEBUG #160,#128
+	;POINTDEBUG #0,#0
 	;LINE #-30,#0,#30,#0
 	
 
     movem.l (sp)+,d0-d6/a0-a6
+    rts
+
+; ------------------ test 2 - draw some concentric circles
+_ammxmainloopR:
+	move.l 4(sp),par1 ; argument save
+	movem.l d0-d7/a0-a6,-(sp) ; stack save
+    move.l par1,a1 ; argument address in a1 (bitplane 0 addr)
+
+	REG_ZERO d0
+	REG_ZERO d1
+	move.w #%0111110100010000,d0 ; 500.25
+
+	move.w #-160,d0 ; let's try 160
+	lsl.l #6,d0
+
+	move.w #160,d1
+	lsl.l #6,D1
+
+	move.w #50,d2
+	lsl.l #6,D2
+
+	move.w #0,d3
+	lsl.l #6,D3
+
+	vperm #$0123EF67,d0,d1,d0
+	vperm #$0123EF67,d2,d3,d1
+	vperm #$CDEF4567,d0,d1,d0
+
+	;move.w #%101001,d0
+	move.w #%0000000000100000,d1 ; 0.5
+	move.w #$FFE0,d1 ; trying to represent -0.5
+	move.w #$FFD4,d1  ; trying to represent -0.7 => positive binary 00000000 00101100 => Compliment 1 => 11111111 11010011 + 1 =      11111111 1101 0100
+	
+	move.w #$FFC1,d1; tryin g to represent -0.99 => positive binary 00000000 00111111 => compliment 1 => 11111111 11 000000 +1 = 11111111 11 00 0001
+	
+	; trying to represent cos(130 deg)
+	lea ROT_Z_MATRIX_Q5_11,a2
+	adda.l #130*8,a2
+	move.w (a2),d1
+	move.w #$0040,d1
+	vperm #$EFEFEFEF,d1,d1,d1
+
+	REG_LOADI 0040,0040,0040,0040,d0
+
+	; PERFORM 4 multiplications in a row and add all the product and normalize it in Q5.11 FORMAT
+	; INPUTS:
+	;   Multiplicand in d0
+	;	Multiplier in d1
+	;   Output into lowest word of d0
+	; All D registers are overwritten
+	;MULT_ROW_Q_5_11 d7
+
+	pmull d0,d1,d2
+	pmulh d0,d1,d3
+
+	; recompose full 32 bit number
+	vperm #$CD45EF67,d2,d3,d4
+	dc.w $fe3c,$4739,$0000,$0000,$0000,$00B ;LSR.Q  #11,d4,d7
+
+	 vperm #$8901AB23,d2,d3,d4
+	dc.w $fe3c,$4639,$0000,$0000,$0000,$00B ;LSR.Q  #11,d4,d6
+
+	paddw d6,d7,d5
+	;vperm #$23232323,d5,d5,d0
+	;add.w d5,d0 ; final result in the lowest word of d0
+
+	store d0,(a1)+
+	store d1,(a1)+
+	store d2,(a1)+
+	store d3,(a1)+
+	store d4,(a1)+
+	store d5,(a1)+
+	store d6,(a1)+
+	store d7,(a1)+
+
+	; expectations;
+	; d0 => 0000 0000 0000 D706
+	; d1 => 0000 0000 0000 002C
+	; d2 => 0000 0000 0000 7D08
+	; d3 => 0000 0000 0000 0015
+	; d4 => 0000 0000 0015 7D08
+	; d5 => 0000 0000 0000 0157
+	
+
+
+    movem.l (sp)+,d0-d7/a0-a6
+    rts
+
+_ammxmainloopT:
+	move.l 4(sp),par1 ; argument save
+	movem.l d0-d7/a0-a6,-(sp) ; stack save
+
+	move.l par1,a1 ; argument address in a1 (bitplane 0 addr)
+
+
+	RESET_CURRENT_TRANFORMATION_MATRIX_Q_10_6
+	TRANSLATE_INV_DEBUG_Q_10_6 #160*64,#128*64
+	ROTATE_INV_DEBUG_Q_5_11 #10
+	TRANSLATE_INV_DEBUG_Q_10_6  #69*64,#40*64
+	POINTDEBUG_Q_10_6 #6*64,#10*64
+
+	;REG_ZERO d0
+	;REG_ZERO d1
+
+	;move.w #-160,d0 ; let's try 160
+	;lsl.l #6,d0
+
+	;move.w #160,d1
+	;lsl.l #6,D1
+
+	;move.w #50,d2
+	;lsl.l #6,D2
+
+	;move.w #0,d3
+	;lsl.l #6,D3
+
+	;vperm #$0123EF67,d0,d1,d0
+	;vperm #$0123EF67,d2,d3,d1
+	;vperm #$CDEF4567,d0,d1,d0
+
+	; trying to represent cos(130 deg)
+	;lea ROT_Z_MATRIX_Q5_11,a2
+	;adda.l #130*8,a2
+	;move.w (a2),d1
+	;vperm #$EFEFEFEF,d1,d1,d1
+
+	;load d0,e1
+	;load d1,e4
+	;load d1,e5
+	;load d1,e6
+	;bsr.w ammxmatrixmul1X3_q5_11
+
+	;store e13,(a1)+
+	;store e14,(a1)+
+	;store e15,(a1)+
+
+    movem.l (sp)+,d0-d7/a0-a6
     rts
 
 
