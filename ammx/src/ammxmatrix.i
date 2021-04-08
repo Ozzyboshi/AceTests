@@ -329,6 +329,29 @@ ROTATE_INV_DEBUG_Q_5_11 MACRO
 	DEBUG_CURRENT_TRANSFORMATION_MATRIX #8*8
 	ENDM
 
+ROTATE_INV_Q_5_11 MACRO
+
+	; Current transformation matrix is the Multiplier (second factor)
+	LOAD_CURRENT_TRANSFORMATION_MATRIX e4,e5,e6
+
+	; read angle from input and load trig data
+	move.w \1,d0
+	lea ROT_Z_MATRIX_Q5_11,b1   ; Cos and -SIN SIN COS in b1
+	LOAD (b1,D0.w*8),E10 ; Load precalculated sin/cos values to register E10
+
+	; Rotation matrix is the Multiplicand
+	REG_ZERO e21
+    vperm  #$FF0123FF,e10,e21,e1     ; first  row of the matrix  0 cos -sin 0
+    vperm  #$FF4567FF,e10,e21,e2     ; second row of the matrix  0 sin  cos 0
+	REG_LOADI 0000,0000,0000,0800,e3 ; NOTE!!!!!!!!!!, last word must be 1* table multiplier!!!!
+	; end loading matrix
+	
+	bsr.w ammxmatrixmul3X3_q5_11
+
+	UPDATE_CURRENT_TRANSFORMATION_MATRIX e13,e14,e15
+
+	ENDM
+
 ; use d0 and d1 as input for x and y
 TRANSLATE MACRO
 
@@ -456,6 +479,28 @@ TRANSLATE_INV_DEBUG_Q_10_6 MACRO
 	UPDATE_CURRENT_TRANSFORMATION_MATRIX e13,e14,e15
 
 	DEBUG_CURRENT_TRANSFORMATION_MATRIX #8*8
+
+    ENDM
+
+; use d0 and d1 as input for x and y
+TRANSLATE_INV_Q_10_6 MACRO
+
+	; Current transformation matrix is the Multiplier (second factor)
+	LOAD_CURRENT_TRANSFORMATION_MATRIX e4,e5,e6
+
+	; Transformation matrix is the Multiplicand
+    REG_LOADI 0000,0040,0000,0000,e1  ; 0 1 0 0
+    REG_LOADI 0000,0000,0040,0000,e2  ; 0 0 1 0
+	
+    move.w \1,d0
+    move.l #$0040FFFF,d1
+    move.w \2,d1	
+	
+    vperm #$8867EFCD,d0,d1,e3
+
+    bsr.w ammxmatrixmul3X3_q10_6
+
+	UPDATE_CURRENT_TRANSFORMATION_MATRIX e13,e14,e15
 
     ENDM
 

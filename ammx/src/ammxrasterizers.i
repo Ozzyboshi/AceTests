@@ -2,7 +2,7 @@ COORDSBUFFER:
     dc.l 0
     dc.l 0
 
-LINE	MACRO
+LINEBROKEN	MACRO
 
     lea COORDSBUFFER,a0
     move.w #0000,(a0)+
@@ -115,6 +115,270 @@ POINTDEBUG_Q_10_6 MACRO
 	
 	DEBUG_COORDS #12*8
 
+	ENDM
+
+
+POINT_Q_10_6 MACRO
+	move.w \1,d0
+	move.l #$0040FFFF,d1
+	move.w \2,d1
+
+	vperm #$8967EFCD,d0,d1,e1
+	REG_ZERO e2
+	REG_ZERO e3
+
+	LOAD_CURRENT_TRANSFORMATION_MATRIX e4,e5,e6
+
+	bsr.w ammxmatrixmul1X3_q10_6
+
+	vperm #$FFFFFF23,e13,e2,d0
+	vperm #$FFFFFF45,e13,e2,d1
+
+	lsr.l #6,d0
+	lsr.l #6,d1
+
+	; start plot routine
+	lea PLOTREFS,a1
+	add.w d1,d1
+	move.w 0(a1,d1.w),d1
+	move.w d0,d2
+	lsr.w #3,d2
+	add.w d2,d1
+	not.b d0
+	lea SCREEN_0,a0
+	bset d0,(a0,d1.w)
+	
+	ENDM
+
+LINE_Q_10_6 MACRO
+	move.w \1,d0
+	move.l #$0040FFFF,d1
+	move.w \2,d1
+
+	vperm #$8967EFCD,d0,d1,e1
+	REG_ZERO e2
+	REG_ZERO e3
+
+	LOAD_CURRENT_TRANSFORMATION_MATRIX e4,e5,e6
+
+	bsr.w ammxmatrixmul1X3_q10_6
+
+	vperm #$FFFFFF23,e13,e2,d0
+	vperm #$FFFFFF45,e13,e2,d1
+
+	
+
+	lsr.l #6,d0
+	lsr.l #6,d1
+
+	lea LINEVERTEX_START_FINAL,a2
+	move.w d0,(a2)+
+	move.w d1,(a2)+
+
+	move.w \3,d0
+	move.l #$0040FFFF,d1
+	move.w \4,d1
+
+	vperm #$8967EFCD,d0,d1,e1
+
+	bsr.w ammxmatrixmul1X3_q10_6
+	vperm #$FFFFFF23,e13,e2,d0
+	vperm #$FFFFFF45,e13,e2,d1
+	lsr.l #6,d0
+	lsr.l #6,d1
+
+	move.w d0,(a2)+
+	move.w d1,(a2)+
+
+
+	; start bresen routine
+	load #0000000000000000,e21 ;optimisation
+	bsr.w _ammxmainloop8
+	
+	ENDM
+
+TRIANGLE_Q_10_6 MACRO
+	move.w \1,d1
+	move.w \2,d2
+
+	move.w \3,d3
+	move.w \4,d4
+
+	LINE_Q_10_6 d1,d2,d3,d4
+
+	move.w \1,d1
+	move.w \2,d2
+
+	move.w \5,d3
+	move.w \6,d4
+
+	LINE_Q_10_6 d1,d2,d3,d4
+
+	move.w \3,d1
+	move.w \4,d2
+
+	move.w \5,d3
+	move.w \6,d4
+
+	LINE_Q_10_6 d1,d2,d3,d4
+
+
+	ENDM
+
+RECT_Q_10_6 MACRO
+	move.w \1,d3
+	add.w \3,d3
+	move.w \2,d4
+	LINE_Q_10_6 \1,\2,d3,d4
+
+	move.w \1,d3
+	move.w \2,d4
+	add.w \4,d4
+	LINE_Q_10_6 \1,\2,d3,d4
+
+	move.w \1,d3
+	add.w \3,d3
+	move.w \2,d4
+
+	move.w \2,d5
+	add.w \4,d5
+
+	LINE_Q_10_6 d3,d4,d3,d5
+
+	move.w \1,d3
+	move.w \2,d4
+	add.w \4,d4
+
+	move.w \1,d5
+	add.w \3,d5
+
+	move.w \2,d6
+	add.w \4,d6
+
+	LINE_Q_10_6 d3,d4,d5,d6
+
+
+ENDM
+
+RECT_Q_10_6_BROKEN MACRO
+	move.w \1,d0
+	move.l #$0040FFFF,d1
+	move.w \2,d1
+
+	vperm #$8967EFCD,d0,d1,e1
+	REG_ZERO e2
+	REG_ZERO e3
+
+	LOAD_CURRENT_TRANSFORMATION_MATRIX e4,e5,e6
+
+	bsr.w ammxmatrixmul1X3_q10_6
+
+	vperm #$FFFFFF23,e13,e2,d0
+	vperm #$FFFFFF45,e13,e2,d1
+
+	lsr.l #6,d0
+	lsr.l #6,d1
+
+	lea LINEVERTEX_START_FINAL,a2
+	move.w d0,(a2)+
+	move.w d1,(a2)+
+	lea LINEVERTEX_TMP2,a3
+	move.w d0,(a3)+
+	move.w d1,(a3)+
+
+	move.w \1,d1
+	add.w \3,d0
+	move.l #$0040FFFF,d1
+	move.w \2,d1
+
+	vperm #$8967EFCD,d0,d1,e1
+
+	bsr.w ammxmatrixmul1X3_q10_6
+	vperm #$FFFFFF23,e13,e2,d0
+	vperm #$FFFFFF45,e13,e2,d1
+	lsr.l #6,d0
+	lsr.l #6,d1
+
+	move.w d0,(a2)+
+	move.w d1,(a2)+
+
+	lea LINEVERTEX_TMP,a3
+	move.w d0,(a3)+
+	move.w d1,(a3)+
+
+	; start bresen routine
+	REG_ZERO e21
+	bsr.w _ammxmainloop8
+
+	; second line bottom one
+	move.w \1,d0
+	move.l #$0040FFFF,d1
+	move.w \2,d1
+	add.w \4,d1
+
+	vperm #$8967EFCD,d0,d1,e1
+
+	LOAD_CURRENT_TRANSFORMATION_MATRIX e4,e5,e6
+
+	bsr.w ammxmatrixmul1X3_q10_6
+
+	vperm #$FFFFFF23,e13,e2,d0
+	vperm #$FFFFFF45,e13,e2,d1
+
+	lsr.l #6,d0
+	lsr.l #6,d1
+
+	lea LINEVERTEX_START_FINAL,a2
+	move.w d0,(a2)+
+	move.w d1,(a2)+
+	lea LINEVERTEX_TMP3,a3
+	move.w d0,(a3)+
+	move.w d1,(a3)+
+	
+
+	move.w \1,d0
+	move.l #$0040FFFF,d1
+	move.w \2,d1
+	add.w \3,d0
+	add.w \4,d1
+
+	vperm #$8967EFCD,d0,d1,e1
+
+	LOAD_CURRENT_TRANSFORMATION_MATRIX e4,e5,e6
+
+	bsr.w ammxmatrixmul1X3_q10_6
+
+	vperm #$FFFFFF23,e13,e2,d0
+	vperm #$FFFFFF45,e13,e2,d1
+
+	lsr.l #6,d0
+	lsr.l #6,d1
+
+	move.w d0,(a2)+
+	move.w d1,(a2)+
+
+	; start bresen routine
+	bsr.w _ammxmainloop8
+
+	lea LINEVERTEX_START_FINAL,a2
+	lea LINEVERTEX_TMP,a3
+	move.w (a3)+,(a2)+
+	move.w (a3)+,(a2)+
+
+	
+	; start bresen routine
+	bsr.w _ammxmainloop8
+
+	lea LINEVERTEX_START_FINAL,a2
+	lea LINEVERTEX_TMP2,a3
+	move.w (a3)+,(a2)+
+	move.w (a3)+,(a2)+
+	lea LINEVERTEX_TMP3,a3
+	move.w (a3)+,(a2)+
+	move.w (a3)+,(a2)+
+
+	bsr.w _ammxmainloop8
+	
 	ENDM
 
 POINT MACRO
