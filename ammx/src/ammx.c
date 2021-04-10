@@ -33,6 +33,7 @@ void ammxmainloopW();
 void ammxmainloopE();
 void ammxmainloopR();
 void ammxmainloopT();
+void ammxmainloopY();
 void ammxmainloopclear();
 void wait1();
 void wait2();
@@ -484,7 +485,48 @@ void ammxGsLoop(void)
     gameExit();
   }
 
+  if (keyCheck(KEY_Y))
+  {
+    static UBYTE ubOut[1000];
+    memset(&ubOut, 0xaa, 100);
+    g_pCustom->color[0] = 0x0F00;
+    ammxmainloopY(ubOut);
+    g_pCustom->color[0] = 0x0000;
+    systemUse();
+    int i =0,j=0;
+    for (j=0;j<3;j++)
+    {
+      printf("Row %d %02x%02x %02x%02x %02x%02x %02x%02x \n",j+1, ubOut[i+0], ubOut[i+1], ubOut[i+2], ubOut[i+3],ubOut[i+4], ubOut[i+5], ubOut[i+6], ubOut[i+7]);
+      i+=8;
+    }
 
+  printf("--- %02x%02x %02x%02x %02x%02x %02x%02x \n", ubOut[i+0], ubOut[i+1], ubOut[i+2], ubOut[i+3],ubOut[i+4], ubOut[i+5], ubOut[i+6], ubOut[i+7]);
+      i+=8;    
+
+    for (j=0;j<3;j++)
+    {
+      printf("Row %d %02x%02x %02x%02x %02x%02x %02x%02x \n",j+1, ubOut[i+0], ubOut[i+1], ubOut[i+2], ubOut[i+3],ubOut[i+4], ubOut[i+5], ubOut[i+6], ubOut[i+7]);
+      i+=8;
+    }
+    printf("--- %02x%02x %02x%02x %02x%02x %02x%02x \n", ubOut[i+0], ubOut[i+1], ubOut[i+2], ubOut[i+3],ubOut[i+4], ubOut[i+5], ubOut[i+6], ubOut[i+7]);
+      i+=8;    
+
+    for (j=0;j<3;j++)
+    {
+      printf("Row %d %02x%02x %02x%02x %02x%02x %02x%02x \n",j+1, ubOut[i+0], ubOut[i+1], ubOut[i+2], ubOut[i+3],ubOut[i+4], ubOut[i+5], ubOut[i+6], ubOut[i+7]);
+      i+=8;
+    }
+    printf("--- %02x%02x %02x%02x %02x%02x %02x%02x \n", ubOut[i+0], ubOut[i+1], ubOut[i+2], ubOut[i+3],ubOut[i+4], ubOut[i+5], ubOut[i+6], ubOut[i+7]);
+      i+=8;    
+
+    for (j=0;j<3;j++)
+    {
+      printf("Row %d %02x%02x %02x%02x %02x%02x %02x%02x \n",j+1, ubOut[i+0], ubOut[i+1], ubOut[i+2], ubOut[i+3],ubOut[i+4], ubOut[i+5], ubOut[i+6], ubOut[i+7]);
+      i+=8;
+    }
+    systemUnuse();
+    gameExit();
+  }
 
   
   //wait2();

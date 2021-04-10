@@ -1,5 +1,12 @@
 ;MATRIX_DEBUG=1
 
+; Allocate space for 256 matrix
+MATRIX_STACK_START:
+	dcb.b 24*256,$00
+MATRIX_STACK_END:
+
+MATRIX_STACK_PTR: dc.l MATRIX_STACK_START
+
 CURRENT_TRANSFORMATION_MATRIX:
     dc.w 0,1,0,0
     dc.w 0,0,1,0
@@ -17,6 +24,39 @@ TRANSFORMATIONS_MATRIX:
     dc.w 0,0,0,0
     dc.w 0,0,0,0
 
+; Saves current transformation matrix into the MATRIX STACK
+PUSH MACRO
+	lea CURRENT_TRANSFORMATION_MATRIX,b0
+	movea.l MATRIX_STACK_PTR,a2
+	load (b0)+,e0
+	store e0,(a2)+
+	load (b0)+,e0
+	store e0,(a2)+
+	load (b0)+,e0
+	store e0,(a2)+
+	move.l a2,MATRIX_STACK_PTR
+ENDM
+
+; restore matrix stack transformation matrix into transformation matrix
+POP MACRO
+	lea CURRENT_TRANSFORMATION_MATRIX,b0
+	movea.l MATRIX_STACK_PTR,a2
+	suba.l #24,a2
+	move.l a2,MATRIX_STACK_PTR
+	load (a2)+,e0
+	store e0,(b0)+
+	load (a2)+,e0
+	store e0,(b0)+
+	load (a2),e0
+	store e0,(b0)
+	
+	;load (b1)+,e0
+	;store e0,(b0)+
+	;load (b1)+,e0
+	;store e0,(b0)+
+	
+	ENDM
+
 LOAD_TRASFORMATION_MATRIX MACRO
     lea CURRENT_TRANSFORMATION_MATRIX,b0
     LOAD (b0)+,\1
@@ -24,7 +64,13 @@ LOAD_TRASFORMATION_MATRIX MACRO
     LOAD (b0),\3
     ENDM
 
+RESET_MATRIX_STACK MACRO
+	; reset matrix stack
+	move.l #MATRIX_STACK_START,MATRIX_STACK_PTR
+	ENDM
+
 RESET_CURRENT_TRANFORMATION_MATRIX MACRO
+	RESET_MATRIX_STACK
 	lea CURRENT_TRANSFORMATION_MATRIX,b0
 	REG_LOADI 0000,0001,0000,0000,e0
     store e0,(b0)+
@@ -35,6 +81,7 @@ RESET_CURRENT_TRANFORMATION_MATRIX MACRO
 	ENDM
 
 RESET_CURRENT_TRANFORMATION_MATRIX_Q_10_6 MACRO
+	RESET_MATRIX_STACK
 	lea CURRENT_TRANSFORMATION_MATRIX,b0
 	REG_LOADI 0000,0040,0000,0000,e0
     store e0,(b0)+
@@ -57,6 +104,19 @@ UPDATE_CURRENT_TRANSFORMATION_MATRIX MACRO
 	store \2,(b0)+
 	store \3,(b0)+
 	ENDM
+
+DEBUG_STACK_TRANSFORMATION_MATRIX MACRO
+	move.l par1,a1
+	adda.l \1,a1
+    lea MATRIX_STACK_START,b0
+    load (b0)+,e0
+    store e0,(a1)+
+    load (b0)+,e0
+    store e0,(a1)+
+    load (b0)+,e0
+    store e0,(a1)+
+	ENDM
+
 
 DEBUG_CURRENT_TRANSFORMATION_MATRIX MACRO
 	move.l par1,a1
