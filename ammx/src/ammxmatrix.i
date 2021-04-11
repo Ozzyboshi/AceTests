@@ -25,7 +25,7 @@ TRANSFORMATIONS_MATRIX:
     dc.w 0,0,0,0
 
 ; Saves current transformation matrix into the MATRIX STACK
-PUSH MACRO
+PUSHMATRIX MACRO
 	lea CURRENT_TRANSFORMATION_MATRIX,b0
 	movea.l MATRIX_STACK_PTR,a2
 	load (b0)+,e0
@@ -38,7 +38,7 @@ PUSH MACRO
 ENDM
 
 ; restore matrix stack transformation matrix into transformation matrix
-POP MACRO
+POPMATRIX MACRO
 	lea CURRENT_TRANSFORMATION_MATRIX,b0
 	movea.l MATRIX_STACK_PTR,a2
 	suba.l #24,a2
@@ -412,6 +412,29 @@ ROTATE_INV_Q_5_11 MACRO
 
 	ENDM
 
+ROTATE_X_INV_Q_5_11 MACRO
+
+	; Current transformation matrix is the Multiplier (second factor)
+	LOAD_CURRENT_TRANSFORMATION_MATRIX e4,e5,e6
+
+	; read angle from input and load trig data
+	move.w \1,d0
+	lea ROT_Z_MATRIX_Q5_11,b1   ; Cos and -SIN SIN COS in b1
+	LOAD (b1,D0.w*8),E10 ; Load precalculated sin/cos values to register E10
+
+	; Rotation matrix is the Multiplicand
+	REG_ZERO e21
+	REG_LOADI 0000,0800,0000,0000,e1 ; first  row of the matrix  0 1*X 0 0
+    vperm  #$FFFF0123,e10,e21,e2     ; second row of the matrix  0 0 cos  -sin
+	vperm  #$FFFF4567,e10,e21,e3     ; third row of the matrix  0 0  sin  cos
+	; end loading matrix
+	
+	bsr.w ammxmatrixmul3X3_q5_11
+
+	UPDATE_CURRENT_TRANSFORMATION_MATRIX e13,e14,e15
+
+	ENDM
+
 ; use d0 and d1 as input for x and y
 TRANSLATE MACRO
 
@@ -557,6 +580,27 @@ TRANSLATE_INV_Q_10_6 MACRO
     move.w \2,d1	
 	
     vperm #$8867EFCD,d0,d1,e3
+
+    bsr.w ammxmatrixmul3X3_q10_6
+
+	UPDATE_CURRENT_TRANSFORMATION_MATRIX e13,e14,e15
+
+    ENDM
+
+; use d0 and d1 as input for x and y
+SCALE_INV_Q_10_6 MACRO
+
+	; Current transformation matrix is the Multiplier (second factor)
+	LOAD_CURRENT_TRANSFORMATION_MATRIX e4,e5,e6
+
+	move.w \1,d0
+    move.l #$0040FFFF,d1
+    move.w \2,d1	
+
+	; Transformation matrix is the Multiplicand
+	vperm #$88678888,d0,d1,e1 ; 0 a 0 0  - a is the horizontal scaling factor
+	vperm #$8888EF88,d0,d1,e2	; 0 0 d 0  - d is the vertical scaling factor
+    REG_LOADI 0000,0000,0000,0040,e3
 
     bsr.w ammxmatrixmul3X3_q10_6
 
