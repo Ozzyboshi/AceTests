@@ -348,7 +348,7 @@ void ammxGsLoop(void)
   if (ubDrawW || keyCheck(KEY_W))
   {
     Disable();
-    g_pCustom->color[0] = 0x0FF0;
+    //g_pCustom->color[0] = 0x0FF0;
     ammxmainloopW((ULONG)s_pMainBuffer->pBack->Planes);
     g_pCustom->color[0] = 0x0000;
     ubDrawW = 1;

@@ -608,6 +608,46 @@ SCALE_INV_Q_10_6 MACRO
 
     ENDM
 
+; use d0 and d1 as input for x and y
+SHEARX_INV_Q_10_6 MACRO
+
+	; Current transformation matrix is the Multiplier (second factor)
+	LOAD_CURRENT_TRANSFORMATION_MATRIX e4,e5,e6
+
+	move.w \1,d0
+    move.l #$00000040,d1
+
+	; Transformation matrix is the Multiplicand
+	REG_LOADI 0000,0040,0000,0000,e1 ; 0 1 0 0  - fixed
+	vperm #$8867ef88,d0,d1,e2	; 0 c 1 0  - c is the horizontal shear factor
+    REG_LOADI 0000,0000,0000,0040,e3 ; 0 0 0 1  - fixed
+
+    bsr.w ammxmatrixmul3X3_q10_6
+
+	UPDATE_CURRENT_TRANSFORMATION_MATRIX e13,e14,e15
+
+    ENDM
+
+; use d0 and d1 as input for x and y
+SHEARY_INV_Q_10_6 MACRO
+
+	; Current transformation matrix is the Multiplier (second factor)
+	LOAD_CURRENT_TRANSFORMATION_MATRIX e4,e5,e6
+
+	move.w \1,d0
+    move.l #$00000040,d1
+
+	; Transformation matrix is the Multiplicand
+	vperm #$88ef6788,d0,d1,e1	; 0 1 b 0  - c is the vertical shear factor
+	REG_LOADI 0000,0000,0040,0000,e2 ; 0 0 1 0  - fixed
+    REG_LOADI 0000,0000,0000,0040,e3 ; 0 0 0 1  - fixed
+
+    bsr.w ammxmatrixmul3X3_q10_6
+
+	UPDATE_CURRENT_TRANSFORMATION_MATRIX e13,e14,e15
+
+    ENDM
+
 ; INPUT (LOAD BEFORE USING IT)
 ; MATRIX 1 data must be put on e1,e2,e3 (todo)
 ; MATRIX 2 data must be put on e4,e5,d6
