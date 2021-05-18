@@ -1,4 +1,4 @@
-CLEAR_NONSET_PIXELS = 1 ; disable to non clear set pixels
+;CLEAR_NONSET_PIXELS = 1 ; disable to non clear set pixels
 
 DEBUG EQU 1
 	IIF DEBUG moveq #0,d0
@@ -92,6 +92,7 @@ _NUMPOINTS EQU 7
 	XDEF _ammxmainloopR
 	XDEF _ammxmainloopT
 	XDEF _ammxmainloopY
+	XDEF _ammxmainloopU
 	XDEF _ammxmainloopclear
 	XDEF _wait1
 	XDEF _wait2
@@ -476,7 +477,7 @@ LINESTARTITER:
 
 	; interate for each x until x<=xend
 	cmp.w d0,d6
-	blt.s ENDLINE ; if x>=xend exit
+	ble.s ENDLINE ; if x>=xend exit
 
 	cmp.w #0,d4 ; check if d<0
 	blt.s POINT_D_LESS_0 ; branch if id<0
@@ -593,7 +594,7 @@ LINESTARTITER_2:
 
 	; interate for each x until x<=xend
 	cmp.w d0,d6
-	blt.s ENDLINE_2 ; if x>=xend exit
+	ble.s ENDLINE_2 ; if x>=xend exit
 
 	cmp.w #0,d4 ; check if d<0
 	blt.s POINT_D_LESS_0_2 ; branch if id<0
@@ -685,7 +686,7 @@ LINESTARTITER_3:
 
 	; interate for each x until x<=xend
 	cmp.w d0,d6
-	blt.s ENDLINE_3 ; if x>=xend exit
+	ble.s ENDLINE_3 ; if x>=xend exit
 
 	cmp.w #0,d4 ; check if d<0
 	blt.s POINT_D_LESS_0_3 ; branch if id<0
@@ -812,7 +813,7 @@ LINESTARTITER_4:
 
 	; interate for each x until x<=xend
 	cmp.w d0,d6
-	blt.s ENDLINE_4 ; if x>=xend exit
+	ble.s ENDLINE_4 ; if x>=xend exit
 
 	cmp.w #0,d4 ; check if d<0
 	blt.s POINT_D_LESS_0_4 ; branch if id<0
@@ -1001,7 +1002,7 @@ LINESTARTITER_F:
 
 	; interate for each x until x<=xend
 	cmp.w d0,d6
-	blt.s ENDLINE_F ; if x>=xend exit
+	ble.s ENDLINE_F ; if x>=xend exit
 
 	cmp.w #0,d4 ; check if d<0
 	blt.s POINT_D_LESS_0_F ; branch if id<0
@@ -1137,7 +1138,7 @@ LINESTARTITER_F2:
 
 	; interate for each x until x<=xend
 	cmp.w d0,d6
-	blt.s ENDLINE_F2 ; if x>=xend exit
+	ble.s ENDLINE_F2 ; if x>=xend exit
 
 	cmp.w #0,d4 ; check if d<0
 	blt.s POINT_D_LESS_0_F2 ; branch if id<0
@@ -1259,7 +1260,7 @@ LINESTARTITER_F3:
 
 	; interate for each x until x<=xend
 	cmp.w d0,d6
-	blt.s ENDLINE_F3 ; if x>=xend exit
+	ble.s ENDLINE_F3 ; if x>=xend exit
 
 	cmp.w #0,d4 ; check if d<0
 	blt.s POINT_D_LESS_0_F3 ; branch if id<0
@@ -1383,7 +1384,7 @@ LINESTARTITER_F4:
 
 	; interate for each x until x<=xend
 	cmp.w d0,d6
-	blt.s ENDLINE_F4 ; if x>=xend exit
+	ble.s ENDLINE_F4 ; if x>=xend exit
 
 	cmp.w #0,d4 ; check if d<0
 	blt.s POINT_D_LESS_0_F4 ; branch if id<0
@@ -2180,11 +2181,29 @@ _ammxmainloopY:
 
 	RESET_CURRENT_TRANFORMATION_MATRIX_Q_10_6
 	
-	move.w #10*64,d0
-	move.w #10*64,d1
-	move.w #10*64,d2
-	move.w #30,d7
-	bsr.w CIRCLEDEBUG_Q_10_6
+	lea FILL_TABLE,a0
+	move.w #15,(a0)+
+	move.w #102,(a0)+
+	;move.w #16,(a1)+
+	;move.w #102,(a1)+
+	;move.w #17,(a1)+
+	;move.w #102,(a1)+
+	;move.w #16,(a1)+
+	;move.w #102,(a1)+
+	;move.w #15,(a1)+
+	;move.w #102,(a1)+
+	bsr.w ammx_fill_table
+
+	;LINEDEBUG_Q_10_6 #16*64,#6*64,#16*64,#25*64
+	;LINEDEBUG_Q_10_6 #80*64,#6*64,#80*64,#25*64
+	;LINEDEBUG_Q_10_6 #96*64,#6*64,#96*64,#25*64
+	
+	
+	;move.w #10*64,d0
+	;move.w #10*64,d1
+	;move.w #10*64,d2
+	;move.w #30,d7
+	;bsr.w CIRCLEDEBUG_Q_10_6
 	
 	;PUSHMATRIX
 	;TRANSLATE_INV_Q_10_6 #160*64,#128*64
@@ -2215,6 +2234,262 @@ _ammxmainloopY:
 	;DEBUG_CURRENT_TRANSFORMATION_MATRIX #0*8
     movem.l (sp)+,d0-d7/a0-a6
     rts
+
+_ammxmainloopU:
+    move.l 4(sp),par1 ; argument save
+	movem.l d0-d7/a0-a6,-(sp) ; stack save
+    move.l par1,a0 ; argument address in a1 (bitplane 0 addr)
+	move.l (a0)+,bitplane0
+	move.l (a0),bitplane1
+
+	PREPARESCREEN
+
+	;move.w #10,LINEVERTEX_START_PUSHED
+	;move.w #10,LINEVERTEX_START_PUSHED+2
+	;move.w #30,LINEVERTEX_END_PUSHED
+	;move.w #15,LINEVERTEX_END_PUSHED+2
+	STROKE #1
+	lea LINEVERTEX_START_FINAL,a1
+	move.w #10,(a1)+
+	move.w #10,(a1)+
+	move.w #30,(a1)+
+	move.w #15,(a1)+
+	bsr.w ammxlinefill
+
+	lea LINEVERTEX_START_FINAL,a1
+	move.w #40,(a1)+
+	move.w #10,(a1)+
+	move.w #70,(a1)+
+	move.w #15,(a1)+
+	bsr.w ammxlinefill
+
+	lea FILL_TABLE,a1
+	move.w #15,(a1)+
+	move.w #102,(a1)+
+	move.w #16,(a1)+
+	move.w #102,(a1)+
+	move.w #17,(a1)+
+	move.w #102,(a1)+
+	move.w #16,(a1)+
+	move.w #102,(a1)+
+	move.w #15,(a1)+
+	move.w #102,(a1)+
+	bsr.w ammx_fill_table
+
+	STROKE #1
+	RESET_CURRENT_TRANFORMATION_MATRIX_Q_10_6
+	LINE_Q_10_6 #15*64,#6*64,#15*64,#25*64
+	LINE_Q_10_6 #16*64,#6*64,#16*64,#25*64
+	LINE_Q_10_6 #80*64,#6*64,#80*64,#25*64
+	LINE_Q_10_6 #96*64,#6*64,#96*64,#25*64
+	LINE_Q_10_6 #15*64,#28*64,#96*64,#28*64
+
+	STROKE #2
+	LINE_Q_10_6 #15*64,#0*64,#15*64,#10*64
+	;LINE_Q_10_6 #16*64,#0*64,#16*64,#10*64
+	;LINE_Q_10_6 #79*64,#0*64,#79*64,#10*64
+	LINE_Q_10_6 #102*64,#0*64,#102*64,#10*64
+	lea LINEVERTEX_START_FINAL,a1
+	move.w #80,(a1)+
+	move.w #6,(a1)+
+	move.w #80,(a1)+
+	move.w #25,(a1)+
+	;bsr.w ammxlinefill	
+
+	lea LINEVERTEX_START_FINAL,a1
+	move.w #96,(a1)+
+	move.w #6,(a1)+
+	move.w #96,(a1)+
+	move.w #25,(a1)+
+	;bsr.w ammxlinefill
+	
+	;LINE_Q_10_6 #15*64,#25*64,#102*64,#25*64
+
+	; plotpoint routine
+; before calling this routine set
+; x ==> d1 (word)
+; y ==> d0 (word)
+; plotrefs bust be build precalculated
+; e22 filled with bitplane flags
+; bitplaneX must be loaded with real bitplane addresses
+	;move.w #102,d0
+	;move.w #4,d1
+	;bsr.w plotpoint
+	
+	movem.l (sp)+,d0-d7/a0-a6
+	rts
+
+AMMXFILLTABLE_CURRENT_ROW:
+	dc.w 0
+
+ammx_fill_table:
+	movem.l d0-d7/a0-a1,-(sp) ; stack save
+	move.w #0,AMMXFILLTABLE_CURRENT_ROW
+
+	lea FILL_TABLE,a0
+ammx_fill_table_nextline:
+	move.w (a0),d6 ; start of fill line
+	move.w #$FFFF,(a0)+
+	move.w (a0),d7 ; end of fill line
+	move.w #$FFFF,(a0)+
+
+	; end when leftx OR rightX are equal to -1 (to be modified)
+	cmpi.w #$FFFF,d6
+	beq.s ammx_fill_table_end
+	cmpi.w #$FFFF,d7
+	beq.s ammx_fill_table_end
+	
+	bsr.w ammx_fill_table_single_line
+	add.w #1,AMMXFILLTABLE_CURRENT_ROW
+	
+	bra.w ammx_fill_table_nextline
+ammx_fill_table_end:
+	movem.l (sp)+,d0-d7/a0-a1
+	rts
+
+ammx_fill_table_single_line:
+	movem.l d0-d7/a0-a1,-(sp) ; stack save
+
+	
+
+	; d5 => totalcount
+	; d3 / d4 => tmp
+
+	; d6 => left X
+	; d7 => right X
+
+	;lea FILL_TABLE,a0
+	;move.w (a0)+,d6 ; start of fill line
+	;move.w (a0)+,d7 ; end of fill line
+
+	move.w d7,d5 ; alternative to psubw
+	sub.w d6,d5
+	addq #1,d5
+
+	; debug da cancellare
+	;move.l par1,a3
+	;move.w d5,(a3)+
+
+	;psubw d7,d6,d5 ; d2 is now how many pixel we must fill
+
+	; phaze 1 => align to nearest byte
+	; address of the first point
+	move.w d6,d0
+	move.w AMMXFILLTABLE_CURRENT_ROW,d1
+	lea PLOTREFS,a1
+
+	add.w d1,d1
+	move.w 0(a1,d1.w),d1
+	move.w d0,d2
+	lsr.w #3,d2
+	add.w d2,d1
+	;not.b d0
+	lea SCREEN_0,a0
+	;bset d0,(a0,d1.w) 
+	
+	; d1.w now has the address of the first byte let's calculate the fill for this byte
+	move.w d6,d4
+	andi.w #$0007,d4
+	move.b #$FF,d3
+	lsl.b d4,d3 
+	lsr.b d4,d3
+
+	add.l d1,a0
+	;or.b d3,(a0)+
+	;or.b d3,(a0,d1.w)
+
+	; ALESSIO START MODIFICA (OR è STATO SPOSTATO SOTTO)
+	;or.b d3,(a0,d1.w)
+
+	; bitprocessed = 8-d4
+	subi.b #8,d4 ; d4 must always be negative here!!!!
+	add.b d4,d5 ; totalcount must be decremented by written bits (susing add because d4 is always negative)
+	
+	; special case -  if d5 is negative we plotted too much
+	;cmpi.w #0,d5
+	;bls.s ammx_fill_table_no_special_case
+	bpl.s ammx_fill_table_no_special_case
+    subq #1,d5
+	not d5
+	lsr.b d5,d3
+	lsl.b d5,d3
+	or.b d3,(a0)+ ; Plot points!!
+	movem.l (sp)+,d0-d7/a0-a1
+	rts
+
+ammx_fill_table_no_special_case:
+    ; end special case
+    
+    or.b d3,(a0)+ ; Plot points!!
+    ; ALESSIO END MODIFICA
+
+
+	; bitprocessed = 8-d4 ma che ci stai a fare??? da cancellare
+	;move.w d4,(a3)+
+	;subi.b #8,d4 ; d4 must always be negative here!!!!
+	;move.w d4,(a3)+
+	;add.b d4,d5 ; totalcount must be decremented by written bits (susing add because d4 is always negative)
+	;move.w d5,(a3)+
+
+; start iteration until we are at the end
+ammx_fill_table_startiter:
+
+	; now we are byte aligned, evaluate how many bits we still have to fill
+	cmpi.w #64,d5
+	bcs.w ammx_fill_table_no64 ; branch if lower (it will continue if we have at least 64 bits to fill)
+	; here starts the code to fill 64 bits
+	load #$FFFFFFFFFFFFFFFF,e0
+	store e0,(a0)+
+	
+	;move.l  #$FFFFFFFF,(a0)+
+	;move.l  #$FFFFFFFF,(a0)+
+	
+	subi.w #64,d5
+	bra.w ammx_fill_table_check_if_other
+ammx_fill_table_no64:
+
+	cmpi.w #32,d5
+	bcs.w ammx_fill_table_no32 ; branch if lower (it will continue if we have at least 32 bits to fill)
+	move.l  #$FFFFFFFF,(a0)+
+	subi.w #32,d5
+	bra.w ammx_fill_table_check_if_other
+ammx_fill_table_no32:
+
+	cmpi.w #16,d5
+	bcs.w ammx_fill_table_no16 ; branch if lower (it will continue if we have at least 16 bits to fill)
+	move.w  #$FFFF,(a0)+
+	subi.w #16,d5
+	bra.w ammx_fill_table_check_if_other
+ammx_fill_table_no16:
+
+	cmpi.w #8,d5
+	bcs.w ammx_fill_table_no8 ; branch if lower (it will continue if we have at least 8 bits to fill)
+	move.b  #$FF,(a0)+
+	subi.w #8,d5
+	bra.w ammx_fill_table_check_if_other
+ammx_fill_table_no8:
+
+	; we get here only and only if there is less then a byte to fill, in other words, d5<8
+	; in this case we must fill the MSG bytes of the byte wit a 1
+	move.b #$FF,d3
+	moveq #8,d4
+	sub.w d5,d4
+	lsl.b d4,d3
+	or.b d3,(a0)
+	moveq #0,d5
+
+
+
+
+
+	; if we still have bit to fill repeat the process
+ammx_fill_table_check_if_other;
+	cmpi.w #0,d5
+	bhi.w ammx_fill_table_startiter
+
+
+	movem.l (sp)+,d0-d7/a0-a1
+	rts
 
 
 SCREEN_0

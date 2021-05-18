@@ -34,6 +34,7 @@ void ammxmainloopE();
 void ammxmainloopR();
 void ammxmainloopT();
 void ammxmainloopY();
+void ammxmainloopU();
 void ammxmainloopclear();
 void wait1();
 void wait2();
@@ -112,6 +113,7 @@ void ammxGsLoop(void)
   static UBYTE ubDrawClear = 0;
   static UBYTE ubDrawQ = 0;
   static UBYTE ubDrawW = 0;
+  static UBYTE ubDrawU = 0;
   //wait1();
 
   if (keyCheck(KEY_ESCAPE))
@@ -526,6 +528,16 @@ void ammxGsLoop(void)
     }
     systemUnuse();
     gameExit();
+  }
+
+  if (ubDrawU || keyCheck(KEY_U))
+  {
+    Disable();
+    //g_pCustom->color[0] = 0x0FF0;
+    ammxmainloopU((ULONG)s_pMainBuffer->pBack->Planes);
+    g_pCustom->color[0] = 0x0000;
+    ubDrawU = 1;
+    Enable();
   }
 
   

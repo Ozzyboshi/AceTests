@@ -150,7 +150,7 @@ POINT_Q_10_6 MACRO
 	
 	ENDM
 
-LINE_Q_10_6 MACRO
+LINE_Q_10_6_TEST MACRO
 	move.w \1,d0
 	move.l #$0040FFFF,d1
 	move.w \2,d1
@@ -181,9 +181,121 @@ LINE_Q_10_6 MACRO
 
 	vperm #$8967EFCD,d0,d1,e1
 
+	REG_ZERO e2
+	REG_ZERO e3
+
+	LOAD_CURRENT_TRANSFORMATION_MATRIX e4,e5,e6
+
 	bsr.w ammxmatrixmul1X3_q10_6
 	vperm #$FFFFFF23,e13,e2,d0
 	vperm #$FFFFFF45,e13,e2,d1
+	lsr.l #6,d0
+	lsr.l #6,d1
+
+	move.w d0,(a2)+
+	move.w d1,(a2)+
+
+
+	; start bresen routine
+	load #0000000000000000,e21 ;optimisation
+
+	lea LINEVERTEX_START_FINAL,a1
+	move.w #96,(a1)+
+	move.w #6,(a1)+
+	move.w #96,(a1)+
+	move.w #25,(a1)+
+	;bsr.w ammxlinefill
+	bsr.w _ammxmainloop8
+	
+	ENDM
+
+LINE_Q_10_6 MACRO
+	move.w \1,d0
+	move.l #$0040FFFF,d1
+	move.w \2,d1
+
+	vperm #$CC67EFCD,d0,d1,e1
+	REG_ZERO e2
+	REG_ZERO e3
+
+	LOAD_CURRENT_TRANSFORMATION_MATRIX e4,e5,e6
+
+	bsr.w ammxmatrixmul1X3_q10_6
+
+	vperm #$FFFFFF23,e13,e2,d0
+	vperm #$FFFFFF45,e13,e2,d1
+
+	
+
+	lsr.l #6,d0
+	lsr.l #6,d1
+
+	lea LINEVERTEX_START_FINAL,a2
+	move.w d0,(a2)+
+	move.w d1,(a2)+
+
+	move.w \3,d0
+	move.l #$0040FFFF,d1
+	move.w \4,d1
+
+	vperm #$CC67EFCD,d0,d1,e1
+
+	bsr.w ammxmatrixmul1X3_q10_6
+	vperm #$FFFFFF23,e13,e2,d0
+	vperm #$FFFFFF45,e13,e2,d1
+	lsr.l #6,d0
+	lsr.l #6,d1
+
+	move.w d0,(a2)+
+	move.w d1,(a2)+
+
+
+	; start bresen routine
+	load #0000000000000000,e21 ;optimisation
+	bsr.w _ammxmainloop8
+	
+	ENDM
+
+LINEDEBUG_Q_10_6 MACRO
+	move.w \1,d0
+	move.l #$0040FFFF,d1
+	move.w \2,d1
+
+	vperm #$CC67EFCD,d0,d1,e1
+	REG_ZERO e2
+	REG_ZERO e3
+
+	LOAD_CURRENT_TRANSFORMATION_MATRIX e4,e5,e6
+
+	DEBUG_FIRST_INPUT_TRANSFORMATION_MATRIX #0*0
+	DEBUG_SECOND_INPUT_TRANSFORMATION_MATRIX #4*8
+
+	bsr.w ammxmatrixmul1X3_q10_6
+
+	vperm #$FFFFFF23,e13,e2,d0
+	vperm #$FFFFFF45,e13,e2,d1
+
+	DEBUG_OUTPUT_TRANSFORMATION_MATRIX #8*8
+
+	
+
+	lsr.l #6,d0
+	lsr.l #6,d1
+
+	lea LINEVERTEX_START_FINAL,a2
+	move.w d0,(a2)+
+	move.w d1,(a2)+
+
+	move.w \3,d0
+	move.l #$0040FFFF,d1
+	move.w \4,d1
+
+	vperm #$8967EFCD,d0,d1,e1
+
+	bsr.w ammxmatrixmul1X3_q10_6
+	vperm #$FFFFFF23,e13,e2,d0
+	vperm #$FFFFFF45,e13,e2,d1
+	DEBUG_OUTPUT_TRANSFORMATION_MATRIX #12*8
 	lsr.l #6,d0
 	lsr.l #6,d1
 
@@ -882,3 +994,291 @@ bplotpoint_nosecondbitplane:
 	;exit plotpoint
 	movem.l (sp)+,d0-d3/a0-a1
 	rts
+
+ammxlinefill:
+	movem.l d0-d6/a0-a6,-(sp) ; stack save
+	move.l par1,a1
+	lea LINEVERTEX_START_PUSHED,a2
+	
+	; - pick lowest first x
+	move.l LINEVERTEX_START_FINAL,d2
+	cmp.l LINEVERTEX_END_FINAL,d2
+	blt.s ammxlinefill_lowestless ;  check if first x is lower if this is the case jump to endammxlinefill
+	move.l LINEVERTEX_START_FINAL,d3
+	move.l LINEVERTEX_END_FINAL,d2
+	bra.s endammxlinefillphase1
+ammxlinefill_lowestless:
+	move.l LINEVERTEX_END_FINAL,d3
+endammxlinefillphase1 : ; end of first check
+
+
+; apply translation (ma questa per me non serve piu)
+	;move.l TRANSLATE_MEM_2D_X,d4
+	;paddw d2,d4,d2
+	;paddw d3,d4,d3
+
+	; - pick lowest first x end
+	move.l d2,(a2)+
+	move.l d3,(a2)+
+
+	; - check if both coords are between screen limits start
+	; - check if both coords are between screen limits end
+
+	; select one of the 4 drawing routines start
+	PSUBW d2,d3,d4 ; d4 will contain deltas
+	PSUBW d3,d2,d5
+	pmaxsw  d5,d4,d4
+	
+	vperm #$45454545,d4,d4,d5 ; move xdelta in the less sig word
+	; select one of the 4 drawing routines end
+	
+	cmp.w d5,d4
+	blt.s ammxlinefill_dylessthan
+	
+	cmp.w d2,d3
+	bls.s ammxlinefill_gotolessminus1
+	nop
+	bsr.w ammxlinefill_linemgreater1		; vertical line
+	bra.s ammxlinefill_endammxlinefillphase2
+
+ammxlinefill_gotolessminus1:
+	;bsr.w ammxlinefill_linemlessminus1
+	bra.s ammxlinefill_endammxlinefillphase2
+
+
+ammxlinefill_dylessthan:
+	
+	cmp.w d2,d3
+	bls.s ammxlinefill_goto0tominus1
+	bsr.w ammxlinefill_linem0to1
+	nop
+	bra.s ammxlinefill_endammxlinefillphase2
+ammxlinefill_goto0tominus1:
+	;bsr.w ammxlinefill_linem0tominus1
+	nop
+ammxlinefill_endammxlinefillphase2:
+	movem.l (sp)+,d0-d6/a0-a6
+
+	rts
+
+
+; d0 ==> x
+; d1 ==> y
+; d2 ===> x1 y1
+; d3 ===> x2 y2
+; d4 ===> decision
+; e6 ===> I1
+
+ammxlinefill_linem0to1:
+	
+	IFD ASM_DEBUG
+	movem.l d0-d6/a0-a6,-(sp) ; stack save
+	move.l par2,a1
+	ELSE
+	movem.l d0-d7/a2,-(sp) ; stack save
+	ENDIF
+
+	move.l LINEVERTEX_START_PUSHED,d2
+	move.l LINEVERTEX_END_PUSHED,d3
+
+	;Calculate dx = x2-x1
+    ;Calculate dy = y2-y1
+	PSUBW d2,d3,E5 ; e5 will contain deltas
+
+	;Calculate i1=2*dy
+	PADDW E5,E5,E6 ; I1 is on the lower 2 bytes of E6
+	
+	VPERM #$45454545,E5,E5,E8 ; Put DeltaX in all e8
+	VPERM #$6767EFEF,E6,E5,E7 ; E7 = I1 I1 Dy Dy
+
+	PSUBW E8,E7,E9; E9 : first word  i1-dx and third word dy-dx
+
+	VPERM #$01010101,E9,E9,D4 ; d calculated  in D4
+	PADDW E9,E9,E9            ; i2 calculated in E9
+
+	vperm #$45454545,d2,d2,d0 ; x = x1 (x1 is the start)
+	vperm #$67676767,d2,d2,d1 ; y = y1 (y1 is the start)
+	VPERM #$45454545,d3,d3,d6 ; xend = x2
+
+	bsr.w plotpoint ; PLOT POINT!!
+
+ammxlinefill_LINESTARTITER_F:
+
+	; interate for each x until x<=xend
+	cmp.w d0,d6
+	blt.s ammxlinefill_ENDLINE_F ; if x>=xend exit
+
+	cmp.w #0,d4 ; check if d<0
+	blt.s ammxlinefill_POINT_D_LESS_0_F ; branch if id<0
+
+	; we are here if d>=0
+	paddw e9,d4,d4 ; d = i2+ d
+	addq #1,d1 ; y = y+1
+	adda.w #$0028,a2 ; optimization , go to next line in bitplane
+	bra.s ammxlinefill_POINT_D_END_F
+
+ammxlinefill_POINT_D_LESS_0_F:
+	; we are here if d<0
+	paddw e6,d4,d4 ; d = i1+ d 
+	
+ammxlinefill_POINT_D_END_F:
+	addq #1,d0
+
+	; here d5 is available and pushed
+	; d7 available but not pushed
+	; aX all availables except a1 but not pushed
+	; bsr.w plotpoint ; PLOT POINT!!
+	; here we have in d5 = position of first bit plotted
+	; a2 = address where the first bit was plotted
+	subq.b #1,d5
+	move.b d5,d7
+	andi.l #$00000007,d7
+	addq.b #1,d7
+	lsr.b #3,d7
+	adda.l d7,a2
+	vperm #$000000000000000F,e21,e22,d7
+	IFD CLEAR_NONSET_PIXELS
+	bclr d5,(a2)
+	ENDIF
+	btst #0,d7
+	beq.s ammxlinefill_ENDLINEBPL0_F
+	bset d5,(a2) ; plot optimized!!!
+
+	; opt bitplane 1
+ammxlinefill_ENDLINEBPL0_F:
+	IFD CLEAR_NONSET_PIXELS
+	move.l a2,a3
+	adda.w #10240,a3
+	bclr d5,(a3)
+	ENDIF
+	btst #1,d7
+	beq.s ammxlinefill_ENDLINEBPL1_F
+	IFND CLEAR_NONSET_PIXELS
+	move.l a2,a3
+	adda.w #10240,a3
+	ENDIF
+	bset d5,(a3) ; plot optimized!!!
+ammxlinefill_ENDLINEBPL1_F
+
+	bra.s ammxlinefill_LINESTARTITER_F
+
+ammxlinefill_ENDLINE_F:
+	IFD ASM_DEBUG
+	movem.l (sp)+,d0-d6/a0-a6
+	ELSE
+	movem.l (sp)+,d0-d7/a2
+	ENDIF
+	rts
+
+; start of vertical routines
+ammxlinefill_linemgreater1:
+	
+	movem.l d0-d7/a2,-(sp) ; stack save
+	
+	move.l LINEVERTEX_START_PUSHED,d2
+	move.l LINEVERTEX_END_PUSHED,d3
+
+	swap d2
+	swap d3
+
+	;Calculate dx = x2-x1
+    ;Calculate dy = y2-y1
+	PSUBW d2,d3,E5 ; e5 will contain deltas
+
+	;Calculate i1=2*dy
+	PADDW E5,E5,E6 ; I1 is on the lower 2 bytes of E6
+
+	VPERM #$45454545,E5,E5,E8 ; Put DeltaX in all e8
+	VPERM #$6767EFEF,E6,E5,E7 ; E7 = I1 I1 Dy Dy
+
+	PSUBW E8,E7,E9; E9 : first word  i1-dx and third word dy-dx
+	
+	;Calculate i2=2*(dy-dx)
+    ;Calculate d=i1-dx
+
+	; decision variable to D4
+	VPERM #$01010101,E9,E9,D4 ; d calculated  in D4
+	PADDW E9,E9,E9            ; i2 calculated in E9
+
+	; check if dx < or > 0
+	VPERM #$45454545,e5,e5,d5
+	
+	; We are here if point greather than zero
+	vperm #$45454545,d2,d2,d0 ; x = x1 (x1 is the start)
+	vperm #$67676767,d2,d2,d1 ; y = y1 (y1 is the start)
+	VPERM #$45454545,d3,d3,d6 ; xend = x2
+
+	; print pixel routine
+	bsr.w plotpointv ; PLOT POINT!!
+ammxlinefill_LINESTARTITER_F3:
+
+	; interate for each x until x<=xend
+	cmp.w d0,d6
+	blt.s ammxlinefill_ENDLINE_F3 ; if x>=xend exit
+
+	cmp.w #0,d4 ; check if d<0
+	blt.s ammxlinefill_POINT_D_LESS_0_F3 ; branch if id<0
+
+	; we are here if d>=0
+	paddw e9,d4,d4 ; d = i2+ d
+	addq #1,d1 ; x = x+1
+	; start optimization
+	subq.w #1,d5
+	move.b d5,d7
+	andi.l #$00000007,d7
+	addq.b #1,d7
+	lsr.b #3,d7
+	adda.l d7,a2
+	;end optimization
+	bra.s ammxlinefill_POINT_D_END_F3
+
+ammxlinefill_POINT_D_LESS_0_F3:
+	; we are here if d<0
+	paddw e6,d4,d4 ; d = i1+ d 
+
+ammxlinefill_POINT_D_END_F3:
+	addq #1,d0
+
+	; print pixel routine
+	;bsr.w plotpointv ; PLOT POINT!!
+	; start optimization
+	;subq.b #1,d5
+	;move.b d5,d7
+	;andi.l #$00000007,d7
+	;addq.b #1,d7
+	;lsr.b #3,d7
+	;adda.l d7,a2
+	adda.w #$0028,a2
+	vperm #$000000000000000F,e21,e22,d7
+
+	IFD CLEAR_NONSET_PIXELS
+	bclr d5,(a2) ; plot optimized!!!
+	ENDIF
+	btst #0,d7
+	beq.s ammxlinefill_ENDLINEBPL0_F3
+	bset d5,(a2) ; plot optimized!!!
+ammxlinefill_ENDLINEBPL0_F3:
+	IFD CLEAR_NONSET_PIXELS
+	move.l a2,a3
+	adda.w #10240,a3
+	bclr d5,(a3)
+	ENDIF
+	btst #1,d7
+	beq.s ammxlinefill_ENDLINEBPL1_F3
+	IFND CLEAR_NONSET_PIXELS
+	move.l a2,a3
+	adda.w #10240,a3
+	ENDIF
+	bset d5,(a3) ; plot optimized!!!
+ammxlinefill_ENDLINEBPL1_F3
+
+	bra.s ammxlinefill_LINESTARTITER_F3
+
+ammxlinefill_ENDLINE_F3:
+	movem.l (sp)+,d0-d7/a2
+	rts
+
+
+FILL_TABLE:
+	dcb.b 4*256,$FF
+
