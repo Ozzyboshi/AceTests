@@ -1072,7 +1072,10 @@ ammxmatrixmul3X3_q5_11:
 ;	move.w #28,d1
 ;	bsr.w TRANSLATE
 TRANSLATE:
+	andi.l #$0000FFFF,d0
+	andi.l #$0000FFFF,d1
 	movem.l d0-d2,-(sp) ; stack save
+	
 	IFD VAMPIRE
 	LOAD_CURRENT_TRANSFORMATION_MATRIX e4,e5,e6
 	REG_LOADI 0000,0040,0000,0000,e1  ; 0 1 0 0
