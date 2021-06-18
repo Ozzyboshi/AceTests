@@ -18,10 +18,7 @@ ANGLE:	dc.w 0
 
 _ammxmainloop:
 	move.l 4(sp),par1
-	movem.l d0-d7/a0-a6,-(sp)
-
-	;CLEARFASTBITPLANES ; Clear fast bitplanes
-	
+	movem.l d0-d7/a0-a6,-(sp)	
 
 	move.l par1,a0 ; argument address in a1 (bitplane 0 addr)
 	move.l (a0)+,bitplane0
@@ -39,17 +36,9 @@ _ammxmainloop:
 	bls.s noresetanglew
 	move.w #0,ANGLE
 noresetanglew:
-
-
 	
 	ROTATE ANGLE
 
-	POINT #-5,#-5
-	POINT #5,#-5
-	POINT #-5,#5
-	POINT #5,#5
-	
-    
     ; Start of line 1
 	move.w #-50,d0
 	move.w #-50,d1

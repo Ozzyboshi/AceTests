@@ -54,11 +54,10 @@ POINT_Q_10_6 MACRO
 	ENDM
 
 POINT MACRO
-	move.w \1,d0
-	move.w \2,d1
-
 	and.l #$0000FFFF,d0
 	and.l #$0000FFFF,d1
+	move.w \1,d0
+	move.w \2,d1
 
 	bsr.w point_execute_transformation
 
@@ -77,17 +76,21 @@ POINT MACRO
 
 point_execute_transformation:
 	;movem.l d0-d1,-(sp)
+	IFD VAMPIRE
+	move.l d2,-(sp)
+	ENDIF
 
 	and.l #$0000FFFF,d0
 	and.l #$0000FFFF,d1
-	
+
 	IFD VAMPIRE
 
 	asl.w #6,d0
-	move.l #$0040FFFF,d1
+	move.l #$0040FFFF,d2
 	asl.w #6,d1
+	move.w d1,d2
 
-	vperm #$8967EFCD,d0,d1,e1
+	vperm #$8967EFCD,d0,d2,e1
 	REG_ZERO e2
 	REG_ZERO e3
 
@@ -121,4 +124,7 @@ point_execute_transformation:
 	lsr.l #6,d1
 
 	;movem.l (sp)+,d0-d1
+	IFD VAMPIRE
+	move.l (sp)+,d2
+	ENDIF
 	rts
