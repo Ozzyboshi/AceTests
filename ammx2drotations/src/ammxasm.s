@@ -44,7 +44,7 @@ noresetanglew:
 	move.w #-50,d1
 	move.w #100,d5
 
-	STROKE #3
+	STROKE #2
 
 	bsr.w SQUARE ;#-5,#-5,#10
 	
