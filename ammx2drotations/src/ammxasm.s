@@ -7,8 +7,9 @@
 	include "aprocessing/matrix/matrix.s"
 	include "aprocessing/trigtables.i"
 	include "aprocessing/rasterizers/processingclearfunctions.s"
-	include "aprocessing/rasterizers/square.s"
 	include "aprocessing/rasterizers/point.s"
+	include "aprocessing/rasterizers/square.s"
+	include "aprocessing/rasterizers/triangle.s"
 	include "aprocessing/rasterizers/processing_bitplanes_fast.s"
 	include "aprocessing/rasterizers/processing_table_plotrefs.s"
 	;include "aprocessing/rasterizers/processingclearfunctions.s"
@@ -30,7 +31,7 @@ _ammxmainloop:
 	move.w #160,d0
 	move.w #128,d1
 	bsr.w TRANSLATE
-
+	IFND LALLA
 	addi.w #1,ANGLE
 	cmp.w #359,ANGLE
 	bls.s noresetanglew
@@ -38,15 +39,31 @@ _ammxmainloop:
 noresetanglew:
 	
 	ROTATE ANGLE
+	ENDIF
+
+	IFD LOL
 
     ; Start of line 1
-	move.w #-50,d0
-	move.w #-50,d1
-	move.w #100,d5
+	move.l #-5,d0
+	move.l #-5,d1
+	move.l #10,d5
 
 	STROKE #2
 
 	bsr.w SQUARE ;#-5,#-5,#10
+	ENDIF
+
+	move.l #0,d0
+	move.l #-50,d1
+
+	move.l #-50,d6
+	move.l #50,d3
+
+	move.l #50,d4
+	move.l #50,d5
+
+	STROKE #1
+	bsr.w TRIANGLE
 	
 	movem.l (sp)+,d0-d7/a0-a6
 	rts

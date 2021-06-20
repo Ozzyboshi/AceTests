@@ -78,6 +78,23 @@ void ammx2drotationsGsLoop(void) {
     gameExit();
     return ;
   }
+/*for (int lol = 0;lol <1000; lol++)
+  vPortWaitForEnd(s_pVpMain);
+  vPortWaitForEnd(s_pVpMain);
+  vPortWaitForEnd(s_pVpMain);
+  vPortWaitForEnd(s_pVpMain);
+  vPortWaitForEnd(s_pVpMain);
+  vPortWaitForEnd(s_pVpMain);
+  vPortWaitForEnd(s_pVpMain);
+  vPortWaitForEnd(s_pVpMain);
+  vPortWaitForEnd(s_pVpMain);
+  vPortWaitForEnd(s_pVpMain);
+  vPortWaitForEnd(s_pVpMain);
+  vPortWaitForEnd(s_pVpMain);
+  vPortWaitForEnd(s_pVpMain);
+  vPortWaitForEnd(s_pVpMain);
+  vPortWaitForEnd(s_pVpMain);
+  vPortWaitForEnd(s_pVpMain);*/
 
 
   g_pCustom->color[0] = 0x0FFF;
@@ -85,6 +102,21 @@ void ammx2drotationsGsLoop(void) {
     g_pCustom->color[0] = 0x0000;
   
   vPortWaitForEnd(s_pVpMain);
+  /*vPortWaitForEnd(s_pVpMain);
+  vPortWaitForEnd(s_pVpMain);
+  vPortWaitForEnd(s_pVpMain);
+  vPortWaitForEnd(s_pVpMain);
+  vPortWaitForEnd(s_pVpMain);
+  vPortWaitForEnd(s_pVpMain);
+  vPortWaitForEnd(s_pVpMain);
+  vPortWaitForEnd(s_pVpMain);
+  vPortWaitForEnd(s_pVpMain);
+  vPortWaitForEnd(s_pVpMain);
+  vPortWaitForEnd(s_pVpMain);
+  vPortWaitForEnd(s_pVpMain);
+  vPortWaitForEnd(s_pVpMain);
+  vPortWaitForEnd(s_pVpMain);
+  vPortWaitForEnd(s_pVpMain);*/
 }
 
 void ammx2drotationsGsDestroy(void) {
