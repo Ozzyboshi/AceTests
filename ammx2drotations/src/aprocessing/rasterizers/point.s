@@ -4,9 +4,6 @@ POINT_TRANSFORM_AND_STORE_IN_FILLTABLE MACRO
     move.w \1,d0
     move.w \2,d1
 
-	and.l #$0000FFFF,d0
-	and.l #$0000FFFF,d1
-
     bsr.w point_execute_transformation
 
     move.w d0,(a1)+
@@ -15,7 +12,6 @@ POINT_TRANSFORM_AND_STORE_IN_FILLTABLE MACRO
     MINUWORD d1,AMMXFILLTABLE_CURRENT_ROW
     MAXUWORD d1,AMMXFILLTABLE_END_ROW
 
-    ;bsr.w ammxlinefill
     ENDM
 
 
@@ -25,9 +21,6 @@ POINT_TRANSFORM_AND_STORE_IN_FILLTABLE_FIRST MACRO
     move.w \1,d0
     move.w \2,d1
 
-	;and.l #$0000FFFF,d0
-	;and.l #$0000FFFF,d1
-
     bsr.w point_execute_transformation
 
     move.w d0,(a1)+
@@ -35,9 +28,6 @@ POINT_TRANSFORM_AND_STORE_IN_FILLTABLE_FIRST MACRO
 
     move.w d1,AMMXFILLTABLE_CURRENT_ROW
     move.w d1,AMMXFILLTABLE_END_ROW
-
-    ;bsr.w ammxlinefill
-    ; End of Line 3
 
     ENDM
 

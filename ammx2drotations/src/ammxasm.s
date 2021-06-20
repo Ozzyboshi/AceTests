@@ -28,10 +28,11 @@ _ammxmainloop:
 	PREPARESCREEN
 	RESET_CURRENT_TRANSFORMATION_MATRIX_Q_10_6
 
-	move.w #160,d0
+	PUSHMATRIX
+
+	move.w #240,d0
 	move.w #128,d1
 	bsr.w TRANSLATE
-	IFND LALLA
 	addi.w #1,ANGLE
 	cmp.w #359,ANGLE
 	bls.s noresetanglew
@@ -39,28 +40,31 @@ _ammxmainloop:
 noresetanglew:
 	
 	ROTATE ANGLE
-	ENDIF
 
-	IFD LOL
 
     ; Start of line 1
-	move.l #-5,d0
-	move.l #-5,d1
-	move.l #10,d5
+	move.l #-50,d0
+	move.l #-50,d1
+	move.l #100,d5
 
 	STROKE #2
 
 	bsr.w SQUARE ;#-5,#-5,#10
-	ENDIF
 
-	move.l #0,d0
-	move.l #-50,d1
+	POPMATRIX
+	move.w #80,d0
+	move.w #128,d1
+	bsr.w TRANSLATE
+	ROTATE ANGLE
 
-	move.l #-50,d6
-	move.l #50,d3
+	move.w #0,d0
+	move.w #-50,d1
 
-	move.l #50,d4
-	move.l #50,d5
+	move.w #-50,d6
+	move.w #50,d3
+
+	move.w #50,d4
+	move.w #50,d5
 
 	STROKE #1
 	bsr.w TRIANGLE

@@ -69,15 +69,19 @@ void ammx2drotationsGsCreate(void) {
 
   // Load the view
   viewLoad(s_pView);
+  
 }
 
 void ammx2drotationsGsLoop(void) {
   // This will loop forever until you "pop" or change gamestate
   // or close the game
+  //Forbid();
+  //Enable();
   if(keyCheck(KEY_ESCAPE)) {
     gameExit();
     return ;
   }
+  //Disable();
 /*for (int lol = 0;lol <1000; lol++)
   vPortWaitForEnd(s_pVpMain);
   vPortWaitForEnd(s_pVpMain);
