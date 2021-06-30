@@ -5,17 +5,25 @@
 	include "aprocessing/rasterizers/globaloptions.s"
 	include "aprocessing/ammxmacros.i"
 	include "aprocessing/matrix/matrix.s"
+	include "aprocessing/matrix/scale.s"
+	include "aprocessing/matrix/shear.s"
 	include "aprocessing/trigtables.i"
 	include "aprocessing/rasterizers/processingclearfunctions.s"
 	include "aprocessing/rasterizers/point.s"
 	include "aprocessing/rasterizers/square.s"
 	include "aprocessing/rasterizers/triangle.s"
+	include "aprocessing/rasterizers/rectangle.s"
+	include "aprocessing/rasterizers/circle.s"
 	include "aprocessing/rasterizers/processing_bitplanes_fast.s"
 	include "aprocessing/rasterizers/processing_table_plotrefs.s"
 	;include "aprocessing/rasterizers/processingclearfunctions.s"
 	include "aprocessing/rasterizers/processingfill.s"
 
 ANGLE:	dc.w 0
+SCALEX: dc.w 0
+SCALEY: dc.w 0
+SCALEDIRECTIONX: dc.w 1
+SCALEDIRECTIONY: dc.w 1
 
 _ammxmainloop:
 	move.l 4(sp),par1
@@ -27,6 +35,28 @@ _ammxmainloop:
 
 	PREPARESCREEN
 	RESET_CURRENT_TRANSFORMATION_MATRIX_Q_10_6
+	STROKE #2
+	move.w                                        #160,d0
+  move.w                                        #128,d1
+  bsr.w                                         TRANSLATE
+
+  move.w                                        #0,d0
+  move.w                                        #0,d1
+
+  move.w                                        #10,d2
+
+  bsr.w                                         CIRCLE
+
+	STROKE #1
+  move.w                                        #-15,d0
+  move.w                                        #-15,d1
+  move.w                                        #30,d5
+
+  bsr.w                                         SQUARE  
+
+  STROKE #1
+
+  RESET_CURRENT_TRANSFORMATION_MATRIX_Q_10_6
 
 	PUSHMATRIX
 
@@ -42,19 +72,68 @@ noresetanglew:
 	ROTATE ANGLE
 
 
-    ; Start of line 1
-	move.l #-50,d0
-	move.l #-50,d1
-	move.l #100,d5
+	;move.l #-50,d0
+	;move.l #-50,d1
+	;move.l #100,d5
 
 	STROKE #2
 
-	bsr.w SQUARE ;#-5,#-5,#10
+	;bsr.w SQUARE ;#-5,#-5,#10
+
+	move.w #-5,d0
+	move.w #-10,d1
+
+	move.w #10,d5
+	move.w #20,d6
+
+	bsr.w RECT
 
 	POPMATRIX
 	move.w #80,d0
 	move.w #128,d1
 	bsr.w TRANSLATE
+
+	; start scaling
+	move.w SCALEX,d0
+	move.w SCALEY,d1
+	add.w SCALEDIRECTIONX,d0
+	add.w SCALEDIRECTIONY,d1
+	
+	cmp.w #0,d0
+	bne.s resetx2
+	move.w #1,SCALEDIRECTIONX
+resetx2
+	cmp.w #%0000000001000000,d0
+	bne.s resetx
+	;moveq #0,d0
+	;neg.w SCALEDIRECTIONX
+	move.w #-1,SCALEDIRECTIONX
+resetx:
+
+	cmp.w #0,d1
+	bne.s resety2
+	move.w #1,SCALEDIRECTIONY
+resety2:
+	cmp.w #%0000000001000000,d1
+	bne.s resety
+	;moveq #0,d1
+	;neg.w d1
+	move.w #-1,SCALEDIRECTIONY
+resety
+	move.w d0,SCALEX
+	move.w d1,SCALEY
+	;moveq #0,d1
+	bsr.w SCALE
+	;end scaling
+
+	move.w SCALEX,d0
+	move.w SCALEY,d1
+	lsr.w #2,d0
+	lsr.w #2,d1
+	bsr.w SHEAR
+
+	
+
 	ROTATE ANGLE
 
 	move.w #0,d0
