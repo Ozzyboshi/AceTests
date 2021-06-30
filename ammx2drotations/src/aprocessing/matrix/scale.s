@@ -1,8 +1,9 @@
 ; Q_10_6 implementation
 ; Usage examples : 
-;	move.w #60,d0
-;	move.w #28,d1
-;	bsr.w SCALE
+; scale 0,5 on Y axis
+;move.w #%0000000001000000,d0
+;move.w #%0000000000100000,d1
+;bsr.w SCALE
 SCALE:
   movem.l                                 d0-d2,-(sp)                              ; stack save
   IFD                                     VAMPIRE
@@ -14,8 +15,8 @@ SCALE:
     	
 
 	; Transformation matrix is the Multiplicand
-  vperm                                   #$88678888,d0,d2,e1                      ; 0 a 0 0  - a is the horizontal scaling factor
-  vperm                                   #$8888EF88,d0,d2,e2                      ; 0 0 d 0  - d is the vertical scaling factor
+  vperm                                   #$CC67CCCC,d0,d2,e1                      ; 0 a 0 0  - a is the horizontal scaling factor
+  vperm                                   #$CCCCEFCC,d0,d2,e2                      ; 0 0 d 0  - d is the vertical scaling factor
   REG_LOADI                               0000,0000,0000,0040,e3
 
   ENDIF

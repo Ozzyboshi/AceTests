@@ -29,6 +29,10 @@ _ammxmainloop:
 	move.l 4(sp),par1
 	movem.l d0-d7/a0-a6,-(sp)	
 
+	IFD VAMPIRE
+	move.w $00FF,$dff180
+	ENDIF
+
 	move.l par1,a0 ; argument address in a1 (bitplane 0 addr)
 	move.l (a0)+,bitplane0
 	move.l (a0),bitplane1
@@ -43,7 +47,7 @@ _ammxmainloop:
   move.w                                        #0,d0
   move.w                                        #0,d1
 
-  move.w                                        #10,d2
+  move.w                                        #45,d2
 
   bsr.w                                         CIRCLE
 
