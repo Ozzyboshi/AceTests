@@ -1,10 +1,21 @@
 ; Routines to fill areas inside polygons
 ; FILL_TABLE must contain correct values
+LINEVERTEX_CLIP_X_OFFSET:
+    dc.w 0
+
+AMMX_FILL_TABLE_FIRST_DRAW:
+	dc.w 1
 
 AMMXFILLTABLE_CURRENT_ROW:
 	dc.w 0
 
 AMMXFILLTABLE_END_ROW:
+	dc.w -1
+
+AMMXFILLTABLE_CURRENT_ROW_LINE:
+	dc.w 0
+
+AMMXFILLTABLE_END_ROW_LINE:
 	dc.w 0
 
 	IFND VAMPIRE 
@@ -17,6 +28,7 @@ AMMXFILLTABLE_FILLDATA_BPL_1:
 ammx_fill_table:
 	movem.l d0-d7/a0-a1,-(sp) ; stack save
 	;move.w #0,AMMXFILLTABLE_CURRENT_ROW
+	move.w #1,AMMX_FILL_TABLE_FIRST_DRAW
 
 	lea FILL_TABLE,a0
 
@@ -33,9 +45,9 @@ ammx_fill_table_nextline:
 	bhi.s ammx_fill_table_end
 
 	move.w (a0),d6 ; start of fill line
-	move.w #$FFFF,(a0)+
+	move.w #$7FFF,(a0)+
 	move.w (a0),d7 ; end of fill line
-	move.w #$FFFF,(a0)+
+	move.w #$8000,(a0)+
 
 	; end when leftx OR rightX are equal to -1 (to be modified)
 	;cmpi.w #$FFFF,d6
@@ -49,8 +61,73 @@ ammx_fill_table_nextline:
 	
 	bra.w ammx_fill_table_nextline
 ammx_fill_table_end:
+	move.w #-1,AMMXFILLTABLE_END_ROW
 	movem.l (sp)+,d0-d7/a0-a1
 	rts
+
+	IFD USE_CLIPPING
+ammx_fill_table_clip:
+	movem.l d0-d7/a0-a1,-(sp) ; stack save
+	move.w #1,AMMX_FILL_TABLE_FIRST_DRAW
+
+	lea FILL_TABLE,a0
+
+	; Reposition inside the fill table according to the starting row
+	move.w AMMXFILLTABLE_CURRENT_ROW,d6
+	mulu.w #4,d6
+	add.w d6,a0
+	move.w AMMXFILLTABLE_CURRENT_ROW,d5
+	; end of repositioning
+
+ammx_fill_table_nextline_clip:
+
+	cmp.w AMMXFILLTABLE_END_ROW,d5
+	bgt.s ammx_fill_table_end_clip
+
+	move.w (a0),d6 ; start of fill line
+	move.w #$7FFF,(a0)+
+	move.l #$013F0000,d7
+	move.w (a0),d7 ; end of fill line
+	move.w #$8000,(a0)+
+
+	;btst #15,d7
+	;bne.s 
+	
+	
+	; clip start
+	; if left is negative left is zero
+	IFD VAMPIRE
+	pmaxsw #0,d6,d6
+	ELSE
+	btst #15,d6
+	seq d0
+	ext.w d0
+	and.w d0,d6
+	ENDC
+	
+	; if right > screen resolution then right = screen resolution
+	IFD VAMPIRE
+	pminsw #319,d7,d7
+	ELSE
+	cmpi.w #319,d7
+	sgt d0
+	move.w #16,d1
+	and.w d0,d1
+	lsr.l d1,d7
+	ENDC
+	; clip end
+	
+	bsr.w ammx_fill_table_single_line
+	add.w #1,d5
+	move.w d5,AMMXFILLTABLE_CURRENT_ROW
+	
+	bra.w ammx_fill_table_nextline_clip
+ammx_fill_table_end_clip:
+	move.w #-1,AMMXFILLTABLE_END_ROW
+	movem.l (sp)+,d0-d7/a0-a1
+	rts
+
+	ENDIF
 
 ammx_fill_table_single_line:
 	movem.l d0-d7/a0-a2,-(sp) ; stack save
@@ -63,11 +140,13 @@ ammx_fill_table_single_line:
 
 	move.w d7,d5 ; alternative to psubw
 	sub.w d6,d5
+	bmi.w ammx_fill_table_no_end_0 ; if Xright<0 we are sure that no pixel must be drawn so jump to whatever exit
 	addq #1,d5
 
 	; phaze 1 => align to nearest byte
 	; address of the first point
 	move.w d6,d0
+
 	move.w AMMXFILLTABLE_CURRENT_ROW,d1
 	lea PLOTREFS,a1
 
@@ -85,7 +164,7 @@ ammx_fill_table_single_line:
 	lsl.b d4,d3 
 	lsr.b d4,d3
 
-	add.l d1,a0
+	add.w d1,a0
 
 	; bitprocessed = 8-d4
 	subi.b #8,d4 ; d4 must always be negative here!!!!
@@ -354,10 +433,14 @@ ammx_fill_table_check_if_other: ;
 
 
 LINEVERTEX_START_PUSHED:
+LINEVERTEX_START_PUSHED_X:
 	dc.w 0 ; X1
+LINEVERTEX_START_PUSHED_Y:
 	dc.w 0 ; Y1
 LINEVERTEX_END_PUSHED:
+LINEVERTEX_END_PUSHED_X:
 	dc.w 0 ; X2
+LINEVERTEX_END_PUSHED_Y:
 	dc.w 0 ; Y2
 
 LINEVERTEX_START_FINAL:
@@ -391,9 +474,6 @@ endammxlinefillphase1:  ; end of first check
 	; - pick lowest first x end
 	move.l d2,(a2)+
 	move.l d3,(a2)+
-
-	; - check if both coords are between screen limits start
-	; - check if both coords are between screen limits end
 
 	; select one of the 4 drawing routines start
 	; take the delta (abs value of the difference) between lowest 2 words from d2 and d3 and put them in d4
@@ -429,14 +509,92 @@ endammxlinefillphase1_max:
 	;vperm #$45454545,d4,d4,d5 ; move xdelta in the less sig word
 	;ENDIF
 
-	; select one of the 4 drawing routines end
+	; - check if both coords are between screen limits start
+	IFD USE_CLIPPING
+	IFD VAMPIRE
+	vperm #$EEEEEEEE,e22,e22,d0
+	btst  #0,d0
+	beq.s ammxlinefill_clip_done
+	ENDIF
+	IFND VAMPIRE
+	btst  #0,DRAWING_OPTIONS
+	beq.s ammxlinefill_clip_done
+	ENDIF
+	bsr.w ammxlinefill_clip
+
+	cmpi.w #$FFFF,d0
+    bne.s ammxlinefill_clip_ok
+    movem.l (sp)+,d0-d7/a0-a6
+	rts
+ammxlinefill_clip_ok:
+
+	; d0 will contain the min(X) and d1 the max(X)
+    move.w LINEVERTEX_START_PUSHED_X,d0
+	move.w LINEVERTEX_END_PUSHED_X,d1
+	cmp.w d0,d1
+	bge.s ammxlinefill_noswap_x
+	exg d1,d0
+ammxlinefill_noswap_x:
+
+	; if x<0 we shift to right to normalize
+    move.w #0,LINEVERTEX_CLIP_X_OFFSET
+    cmpi.w #0,d0
+    bge.s ammxlinefill_no_clip_offset
+    neg d0
+    move.w d0,LINEVERTEX_CLIP_X_OFFSET
+    add.w d0,LINEVERTEX_START_PUSHED_X
+    add.w d0,LINEVERTEX_END_PUSHED_X
+ammxlinefill_no_clip_offset:
+    move.l LINEVERTEX_START_PUSHED,d2
+	move.l LINEVERTEX_END_PUSHED,d3
+    move.w LINEVERTEX_END_PUSHED_X,d5 ; recalculate deltax
+	sub.w LINEVERTEX_START_PUSHED_X,d5
+    move.w LINEVERTEX_END_PUSHED_Y,d4 ; recalculate deltay
+    sub.w  LINEVERTEX_START_PUSHED_Y,d4
+    bpl.s  ammxlinefill_no_clip_offset_1
+    neg d4
+ammxlinefill_no_clip_offset_1:
+	
+ammxlinefill_clip_done:
+	ENDIF
+
+	; save Y MIN and MAX
+	move.w LINEVERTEX_START_PUSHED_Y,d0
+	move.w LINEVERTEX_END_PUSHED_Y,d1
+	IFD VAMPIRE
+	pminuw d0,d1,e0
+	pmaxuw d0,d1,e1
+	vperm #$000067EF,e0,e1,d0
+	move.l d0,AMMXFILLTABLE_CURRENT_ROW_LINE
+	ENDIF
+	IFND VAMPIRE
+	cmp.w d0,d1
+	bge.s ammxlinefill_noswap_y
+	exg d0,d1
+ammxlinefill_noswap_y:
+	move.w d0,AMMXFILLTABLE_CURRENT_ROW_LINE
+    move.w d1,AMMXFILLTABLE_END_ROW_LINE
+	ENDIF
+	
+	; recalculate deltay
+	cmpi.w #0,AMMX_FILL_TABLE_FIRST_DRAW
+    beq.s ammxfill_firstdraw_update
+    move.w      AMMXFILLTABLE_CURRENT_ROW_LINE,AMMXFILLTABLE_CURRENT_ROW
+    move.w      AMMXFILLTABLE_END_ROW_LINE,AMMXFILLTABLE_END_ROW
+	move.w      #0,AMMX_FILL_TABLE_FIRST_DRAW
+    bra.w ammxfill_endfirstdraw
+ammxfill_firstdraw_update:
+    move.w      AMMXFILLTABLE_CURRENT_ROW_LINE,d0
+    MINUWORD    d0,AMMXFILLTABLE_CURRENT_ROW
+    move.w      AMMXFILLTABLE_END_ROW_LINE,d0
+    MAXUWORD    d0,AMMXFILLTABLE_END_ROW
+ammxfill_endfirstdraw:
 	
 	cmp.w d5,d4
 	blt.s ammxlinefill_dylessthan
 	
 	cmp.w d2,d3
 	bls.s ammxlinefill_gotolessminus1
-	;nop
 	bsr.w ammxlinefill_linemgreater1		; vertical line
 	bra.s ammxlinefill_endammxlinefillphase2
 
@@ -453,8 +611,8 @@ ammxlinefill_dylessthan:
 	bra.s ammxlinefill_endammxlinefillphase2
 ammxlinefill_goto0tominus1:
 	bsr.w ammxlinefill_linem0tominus1
-	;nop
 ammxlinefill_endammxlinefillphase2:
+
 	movem.l (sp)+,d0-d7/a0-a6
 
 	rts
@@ -518,15 +676,18 @@ ammxlinefill_linem0to1:
 	add.w d3,a2
 	
 	; Save d0 X point into FILL_TABLE start
+	IFD USE_CLIPPING
+	sub.w LINEVERTEX_CLIP_X_OFFSET,d0 ; ONLY IF CLIPPING
+	ENDIF
 	IFD VAMPIRE
-	pminuw  -6(a2),d0,e0
+	pminsw  -6(a2),d0,e0
 	pmaxsw  -4(a2),d0,e1
 	vperm #$67EF67EF,e0,e1,e2
 	storec E2,E4,(a2)
 	ENDIF
 	IFND VAMPIRE
 	cmp.w (a2),d0
-	bcc.s ammxlinefill_linem0to1_1            ; if (a2)<=d0 branch (dont update the memory)
+	bge.s ammxlinefill_linem0to1_1            ; if (a2)<=d0 branch (dont update the memory)
     move.w d0,(a2)      ; we save only if is less     
 ammxlinefill_linem0to1_1:
     cmp.w 2(a2),d0
@@ -534,6 +695,9 @@ ammxlinefill_linem0to1_1:
     move.w d0,2(a2)
 ammxlinefill_linem0to1_2:
     ; Save d0 X point into FILL_TABLE end
+	ENDIF
+	IFD USE_CLIPPING
+	add.w LINEVERTEX_CLIP_X_OFFSET,d0 ; ONLY IF CLIPPING
 	ENDIF
 
 ammxlinefill_LINESTARTITER_F:
@@ -552,27 +716,39 @@ ammxlinefill_LINESTARTITER_F:
 	add.w d7,d4 ; d = i2+d
     addq #1,d1 ; y = y+1
 
+	IFD USE_CLIPPING
+	; CLIPPING FEATURE if Y > 255 (or a negative number) exit
+    cmpi.w #255,d1
+    bhi.s ammxlinefill_ENDLINE_F
+	ENDIF
+
 	addq #1,d0
 	
 	addq #4,a2
 
 	
 	; Save d0 X point into FILL_TABLE start
+	IFD USE_CLIPPING
+	sub.w LINEVERTEX_CLIP_X_OFFSET,d0 ; ONLY IF CLIPPING
+	ENDIF
 	IFD VAMPIRE
-	pminuw  -6(a2),d0,e0
+	pminsw  -6(a2),d0,e0
 	pmaxsw  -4(a2),d0,e1
 	vperm #$67EF67EF,e0,e1,e2
 	storec E2,E4,(a2)
 	ENDIF
 	IFND VAMPIRE
     cmp.w (a2),d0
-	bcc.s ammxlinefill_linem0to1_3            ; if (a2)<=d0 branch (dont update the memory)
+	bge.s ammxlinefill_linem0to1_3            ; if (a2)<=d0 branch (dont update the memory)
     move.w d0,(a2)      ; we save only if is less     
 ammxlinefill_linem0to1_3:
     cmp.w 2(a2),d0
     ble.s ammxlinefill_linem0to1_4
     move.w d0,2(a2)
 ammxlinefill_linem0to1_4:
+	ENDIF
+	IFD USE_CLIPPING
+	add.w LINEVERTEX_CLIP_X_OFFSET,d0 ; ONLY IF CLIPPING
 	ENDIF
     ; Save d0 X point into FILL_TABLE end
     
@@ -586,6 +762,9 @@ ammxlinefill_POINT_D_LESS_0_F:
 	addq #1,d0
 	
 	; Save d0 X point into FILL_TABLE start
+	IFD USE_CLIPPING
+	sub.w LINEVERTEX_CLIP_X_OFFSET,d0 ; ONLY IF CLIPPING
+	ENDIF
 	IFD VAMPIRE
 	;pminuw  -6(a2),d0,e0
 	pmaxsw  -4(a2),d0,e1
@@ -594,19 +773,15 @@ ammxlinefill_POINT_D_LESS_0_F:
 	ENDIF
 
 	IFND VAMPIRE
-ammxlinefill_linem0to1_5:
     cmp.w 2(a2),d0
     ble.s ammxlinefill_linem0to1_6
     move.w d0,2(a2)
 ammxlinefill_linem0to1_6:
     ; Save d0 X point into FILL_TABLE end
-	bra.s ammxlinefill_LINESTARTITER_F
 	ENDIF
-
-	;IFND
-	
-ammxlinefill_ENDLINEBPL1_F
-
+	IFD USE_CLIPPING
+	add.w LINEVERTEX_CLIP_X_OFFSET,d0 ; ONLY IF CLIPPING
+	ENDIF
 	bra.s ammxlinefill_LINESTARTITER_F
 
 ammxlinefill_ENDLINE_F:
@@ -614,7 +789,7 @@ ammxlinefill_ENDLINE_F:
 	
 	rts
 
- ; start of vertical routines
+; start of vertical routines
 ammxlinefill_linemgreater1:
 	
 	movem.l d0-d7/a2,-(sp) ; stack save
@@ -655,22 +830,28 @@ ammxlinefill_linemgreater1:
 	add.w d3,a2
 	
 	; Save d0 X point into FILL_TABLE start
+	IFD USE_CLIPPING
+	sub.w LINEVERTEX_CLIP_X_OFFSET,d1 ; ONLY IF CLIPPING
+	ENDIF
 	IFD VAMPIRE
 	load #$0000000000000004,e4 ; never change e4, we will need later
-	pminuw  -6(a2),d1,e0
+	pminsw  -6(a2),d1,e0
 	pmaxsw  -4(a2),d1,e1
 	vperm #$67EF67EF,e0,e1,e2
 	storec e2,E4,(a2)
 	ENDIF
 	IFND VAMPIRE
 	cmp.w (a2),d1
-	bcc.s ammxlinefill_linemgreater1_1            ; if (a2)<=d0 branch (dont update the memory)
+	bge.s ammxlinefill_linemgreater1_1            ; if (a2)<=d0 branch (dont update the memory)
     move.w d1,(a2)      ; we save only if is less     
 ammxlinefill_linemgreater1_1:
     cmp.w 2(a2),d1
     ble.s ammxlinefill_linemgreater1_2
     move.w d1,2(a2)
 ammxlinefill_linemgreater1_2:
+	ENDIF
+	IFD USE_CLIPPING
+	add.w LINEVERTEX_CLIP_X_OFFSET,d1 ; ONLY IF CLIPPING
 	ENDIF
     ; Save d0 X point into FILL_TABLE end
 	
@@ -689,8 +870,11 @@ ammxlinefill_LINESTARTITER_F3:
 	add.w d7,d4 ; d = i2+d
     addq #1,d1 ; x = x+1
 
+	IFD USE_CLIPPING
+	sub.w LINEVERTEX_CLIP_X_OFFSET,d1 ; ONLY IF CLIPPING
+	ENDIF
 	IFD VAMPIRE
-	pminuw  -6(a2),d1,e0
+	pminsw  -6(a2),d1,e0
 	pmaxsw  -4(a2),d1,e1
 	vperm #$67EF67EF,e0,e1,e2
 	storec e2,E4,(a2)
@@ -698,13 +882,16 @@ ammxlinefill_LINESTARTITER_F3:
 
 	IFND VAMPIRE
     cmp.w (a2),d1
-	bcc.s ammxlinefill_linemgreater1_3            ; if (a2)<=d0 branch (dont update the memory)
+	bge.s ammxlinefill_linemgreater1_3            ; if (a2)<=d0 branch (dont update the memory)
     move.w d1,(a2)      ; we save only if is less     
 ammxlinefill_linemgreater1_3:
     cmp.w 2(a2),d1
     ble.s ammxlinefill_linemgreater1_4
     move.w d1,2(a2)
 ammxlinefill_linemgreater1_4:
+	ENDIF
+	IFD USE_CLIPPING
+	add.w LINEVERTEX_CLIP_X_OFFSET,d1 ; ONLY IF CLIPPING
 	ENDIF
 
     bra.s ammxlinefill_POINT_D_END_F3
@@ -717,8 +904,11 @@ ammxlinefill_POINT_D_LESS_0_F3:
 ammxlinefill_POINT_D_END_F3:
 	addq #1,d0
 
+	IFD USE_CLIPPING
+	sub.w LINEVERTEX_CLIP_X_OFFSET,d1 ; ONLY IF CLIPPING
+	ENDIF
 	IFD VAMPIRE
-	pminuw  -6(a2),d1,e0
+	pminsw  -6(a2),d1,e0
 	pmaxsw  -4(a2),d1,e1
 	vperm #$67EF67EF,e0,e1,e2
 	storec e2,E4,(a2)
@@ -726,13 +916,16 @@ ammxlinefill_POINT_D_END_F3:
 
 	IFND VAMPIRE
 	cmp.w (a2),d1
-	bcc.s ammxlinefill_linemgreater1_5            ; if (a2)<=d0 branch (dont update the memory)
+	bge.s ammxlinefill_linemgreater1_5            ; if (a2)<=d0 branch (dont update the memory)
     move.w d1,(a2)      ; we save only if is less     
 ammxlinefill_linemgreater1_5:
     cmp.w 2(a2),d1
     ble.s ammxlinefill_linemgreater1_6
     move.w d1,2(a2)
 ammxlinefill_linemgreater1_6:
+	ENDIF
+	IFD USE_CLIPPING
+	add.w LINEVERTEX_CLIP_X_OFFSET,d1 ; ONLY IF CLIPPING
 	ENDIF
 	    
 	bra.s ammxlinefill_LINESTARTITER_F3
@@ -786,8 +979,11 @@ ammxlinefill_linemlessminus1:
 	add.w d3,a2
 	
 	; Save d0 X point into FILL_TABLE start
+	IFD USE_CLIPPING
+	sub.w LINEVERTEX_CLIP_X_OFFSET,d1 ; ONLY IF CLIPPING
+	ENDIF
 	IFD VAMPIRE
-	pminuw  -6(a2),d1,e0
+	pminsw  -6(a2),d1,e0
 	pmaxsw  -4(a2),d1,e1
 	vperm #$67EF67EF,e0,e1,e2
 	load #$0000000000000004,e4 ; never change e4, we will need later
@@ -795,13 +991,16 @@ ammxlinefill_linemlessminus1:
 	ENDIF
 	IFND VAMPIRE
 	cmp.w (a2),d1
-	bcc.s ammxlinefill_linemminus1_1            ; if (a2)<=d0 branch (dont update the memory)
+	bge.s ammxlinefill_linemminus1_1            ; if (a2)<=d0 branch (dont update the memory)
     move.w d1,(a2)      ; we save only if is less     
 ammxlinefill_linemminus1_1:
     cmp.w 2(a2),d1
     ble.s ammxlinefill_linemminus1_2
     move.w d1,2(a2)
 ammxlinefill_linemminus1_2:
+	ENDIF
+	IFD USE_CLIPPING
+	add.w LINEVERTEX_CLIP_X_OFFSET,d1 ; ONLY IF CLIPPING
 	ENDIF
 
 ammxlinefill_LINESTARTITER_F4:
@@ -823,7 +1022,6 @@ ammxlinefill_LINESTARTITER_F4:
 	bra.s ammxlinefill_POINT_D_END_F4
 
 POINT_D_LESS_0_F4:
-    nop
 	; we are here if d<0
 	;paddw e6,d4,d4 ; d = i1+ d 
 	add.w d5,d4 ; d = i1 +d
@@ -832,8 +1030,11 @@ POINT_D_LESS_0_F4:
 ammxlinefill_POINT_D_END_F4:
 	addq #1,d0 ; process next y
 
+	IFD USE_CLIPPING
+	sub.w LINEVERTEX_CLIP_X_OFFSET,d1 ; ONLY IF CLIPPING
+	ENDIF
 	IFD VAMPIRE
-	pminuw  -6(a2),d1,e0
+	pminsw  -6(a2),d1,e0
 	pmaxsw  -4(a2),d1,e1
 	vperm #$67EF67EF,e0,e1,e2
 	storec E2,E4,(a2)
@@ -841,13 +1042,16 @@ ammxlinefill_POINT_D_END_F4:
 
 	IFND VAMPIRE
 	cmp.w (a2),d1
-	bcc.s ammxlinefill_linemminus1_5            ; if (a2)<=d0 branch (dont update the memory)
+	bge.s ammxlinefill_linemminus1_5            ; if (a2)<=d0 branch (dont update the memory)
     move.w d1,(a2)      ; we save only if is less     
 ammxlinefill_linemminus1_5:
     cmp.w 2(a2),d1
     ble.s ammxlinefill_linemminus1_6
     move.w d1,2(a2)
 ammxlinefill_linemminus1_6:
+	ENDIF
+	IFD USE_CLIPPING
+	add.w LINEVERTEX_CLIP_X_OFFSET,d1 ; ONLY IF CLIPPING
 	ENDIF
 
 	
@@ -908,21 +1112,27 @@ ammxlinefill_linem0tominus1:
 	add.w d3,a2
 	; print pixel routine
 	
+	IFD USE_CLIPPING
+	sub.w LINEVERTEX_CLIP_X_OFFSET,d0 ; ONLY IF CLIPPING
+	ENDIF
 	IFD VAMPIRE
-	pminuw  -6(a2),d0,e0
+	pminsw  -6(a2),d0,e0
 	pmaxsw  -4(a2),d0,e1
 	vperm #$67EF67EF,e0,e1,e2
 	storec E2,E4,(a2)
 	ENDIF
 	IFND VAMPIRE
 	cmp.w (a2),d0
-	bcc.s ammxlinefill_linem0tominus1_1            ; if (a2)<=d0 branch (dont update the memory)
+	bge.s ammxlinefill_linem0tominus1_1            ; if (a2)<=d0 branch (dont update the memory)
     move.w d0,(a2)      ; we save only if is less     
 ammxlinefill_linem0tominus1_1:
     cmp.w 2(a2),d0
     ble.s ammxlinefill_linem0tominus1_2
     move.w d0,2(a2)
 ammxlinefill_linem0tominus1_2:
+	ENDIF
+	IFD USE_CLIPPING
+	add.w LINEVERTEX_CLIP_X_OFFSET,d0 ; ONLY IF CLIPPING
 	ENDIF
 
    	;bsr.w plotpoint ; PLOT POINT!!
@@ -946,21 +1156,27 @@ ammxlinefill_LINESTARTITER_F2:
 	
     subq #4,a2
 
+	IFD USE_CLIPPING
+	sub.w LINEVERTEX_CLIP_X_OFFSET,d0 ; ONLY IF CLIPPING
+	ENDIF
 	IFD VAMPIRE
-	pminuw  -6(a2),d0,e0
+	pminsw  -6(a2),d0,e0
 	pmaxsw  -4(a2),d0,e1
 	vperm #$67EF67EF,e0,e1,e2
 	storec E2,E4,(a2)
 	ENDIF
 	IFND VAMPIRE
 	cmp.w (a2),d0
-	bcc.s ammxlinefill_linem0tominus1_3            ; if (a2)<=d0 branch (dont update the memory)
+	bge.s ammxlinefill_linem0tominus1_3            ; if (a2)<=d0 branch (dont update the memory)
     move.w d0,(a2)      ; we save only if is less     
 ammxlinefill_linem0tominus1_3:
     cmp.w 2(a2),d0
     ble.s ammxlinefill_linem0tominus1_4
     move.w d0,2(a2)
 ammxlinefill_linem0tominus1_4:
+	ENDIF
+	IFD USE_CLIPPING
+	add.w LINEVERTEX_CLIP_X_OFFSET,d0 ; ONLY IF CLIPPING
 	ENDIF
 	
 	bra.s ammxlinefill_LINESTARTITER_F2
@@ -971,6 +1187,9 @@ ammxlinefill_POINT_D_LESS_0_F2:
 	
 	addq #1,d0
 
+	IFD USE_CLIPPING
+	sub.w LINEVERTEX_CLIP_X_OFFSET,d0 ; ONLY IF CLIPPING
+	ENDIF
 	IFD VAMPIRE
 	;pminuw  -6(a2),d0,e0
 	pmaxsw  -4(a2),d0,e1
@@ -983,6 +1202,9 @@ ammxlinefill_POINT_D_LESS_0_F2:
     move.w d0,2(a2)
 ammxlinefill_linem0tominus1_6:
 	ENDIF
+	IFD USE_CLIPPING
+	add.w LINEVERTEX_CLIP_X_OFFSET,d0 ; ONLY IF CLIPPING
+	ENDIF
 	
 	bra.s ammxlinefill_LINESTARTITER_F2
 
@@ -990,10 +1212,9 @@ ammxlinefill_ENDLINE_F2:
 	movem.l (sp)+,d0-d7/a2
 	rts
 
-
-
 FILL_TABLE:
-        dcb.b 4*256,$FF
+        ;dcb.b 4*256,$FF
+		dcb.l 4*256,$7FFF8000
 
 processing_fill_table_addr:
 	move.l #FILL_TABLE,d0

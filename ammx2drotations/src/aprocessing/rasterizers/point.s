@@ -9,30 +9,7 @@ POINT_TRANSFORM_AND_STORE_IN_FILLTABLE MACRO
     move.w d0,(a1)+
     move.w d1,(a1)+
 
-    MINUWORD d1,AMMXFILLTABLE_CURRENT_ROW
-    MAXUWORD d1,AMMXFILLTABLE_END_ROW
-
     ENDM
-
-
-POINT_TRANSFORM_AND_STORE_IN_FILLTABLE_FIRST MACRO
-    lea LINEVERTEX_START_FINAL+\3,a1
-
-    move.w \1,d0
-    move.w \2,d1
-
-    bsr.w point_execute_transformation
-
-    move.w d0,(a1)+
-    move.w d1,(a1)+
-
-    move.w d1,AMMXFILLTABLE_CURRENT_ROW
-    move.w d1,AMMXFILLTABLE_END_ROW
-
-    ENDM
-
-
-
 
 POINT_Q_10_6 MACRO
 
@@ -159,6 +136,9 @@ point_execute_transformation:
 	move.w OPERATOR3_TR_MATRIX_ROW1+4,d1
 	ENDIF
 
+	ext.l d0
+	ext.l d1
+	
 	lsr.l #6,d0
 	lsr.l #6,d1
 

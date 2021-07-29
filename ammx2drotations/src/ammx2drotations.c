@@ -82,7 +82,7 @@ void ammx2drotationsGsLoop(void) {
     return ;
   }
   //Disable();
-/*for (int lol = 0;lol <1000; lol++)
+/*for (int lol = 0;lol <1000; lol++)*/
   vPortWaitForEnd(s_pVpMain);
   vPortWaitForEnd(s_pVpMain);
   vPortWaitForEnd(s_pVpMain);
@@ -98,7 +98,7 @@ void ammx2drotationsGsLoop(void) {
   vPortWaitForEnd(s_pVpMain);
   vPortWaitForEnd(s_pVpMain);
   vPortWaitForEnd(s_pVpMain);
-  vPortWaitForEnd(s_pVpMain);*/
+  vPortWaitForEnd(s_pVpMain);
 
 
   g_pCustom->color[0] = 0x0FFF;
