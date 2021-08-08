@@ -18,6 +18,8 @@ static UWORD s_uwCopRawOffs=0;
 static tCopCmd *pCopCmds;
 
 void ammxmainloop();
+void ammxmainloop2();
+void ammxmainloop3();
 
 void ammx2drotationsGsCreate(void) {
   ULONG ulRawSize = (simpleBufferGetRawCopperlistInstructionCount(BITPLANES) +
@@ -73,6 +75,7 @@ void ammx2drotationsGsCreate(void) {
 }
 
 void ammx2drotationsGsLoop(void) {
+  static UBYTE stage = 2;
   // This will loop forever until you "pop" or change gamestate
   // or close the game
   //Forbid();
@@ -81,8 +84,11 @@ void ammx2drotationsGsLoop(void) {
     gameExit();
     return ;
   }
+  if(keyCheck(KEY_1)) stage=1;
+  if(keyCheck(KEY_2)) stage=2;
   //Disable();
 /*for (int lol = 0;lol <1000; lol++)*/
+  /*vPortWaitForEnd(s_pVpMain);
   vPortWaitForEnd(s_pVpMain);
   vPortWaitForEnd(s_pVpMain);
   vPortWaitForEnd(s_pVpMain);
@@ -97,12 +103,13 @@ void ammx2drotationsGsLoop(void) {
   vPortWaitForEnd(s_pVpMain);
   vPortWaitForEnd(s_pVpMain);
   vPortWaitForEnd(s_pVpMain);
-  vPortWaitForEnd(s_pVpMain);
-  vPortWaitForEnd(s_pVpMain);
+  vPortWaitForEnd(s_pVpMain);*/
 
 
   g_pCustom->color[0] = 0x0FFF;
-    ammxmainloop((ULONG)s_pMainBuffer->pBack->Planes);
+    if (stage==0) ammxmainloop((ULONG)s_pMainBuffer->pBack->Planes);
+    else if (stage==1) ammxmainloop2((ULONG)s_pMainBuffer->pBack->Planes);
+    else if (stage==2) ammxmainloop3((ULONG)s_pMainBuffer->pBack->Planes);
     g_pCustom->color[0] = 0x0000;
   
   vPortWaitForEnd(s_pVpMain);
