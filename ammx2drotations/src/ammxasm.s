@@ -1,3 +1,5 @@
+                  include                                       "aprocessing/rasterizers/processing_bitplanes_fast.s"
+
                   XDEF                                          _ammxmainloop
                   XDEF                                          _ammxmainloop2
                   XDEF                                          _ammxmainloop3
@@ -20,7 +22,6 @@
                   include                                       "aprocessing/rasterizers/rectangle.s"
                   include                                       "aprocessing/rasterizers/circle.s"
                   include                                       "aprocessing/rasterizers/line.s"
-                  include                                       "aprocessing/rasterizers/processing_bitplanes_fast.s"
                   include                                       "aprocessing/rasterizers/processing_table_plotrefs.s"
 	;include "aprocessing/rasterizers/processingclearfunctions.s"
                   include                                       "aprocessing/rasterizers/processingfill.s"
@@ -282,8 +283,8 @@ ZCOORD:
 
 _ammxmainloop3:
                   move.l                                        4(sp),par1
-                  movem.l                                       d0-d7/a0-a6,-(sp)	
-                  ENABLE_CLIPPING
+                  ;movem.l                                       d0-d7/a0-a6,-(sp)	
+                  ;ENABLE_CLIPPING
                   
 
                   IFD                                           VAMPIRE
@@ -292,24 +293,18 @@ _ammxmainloop3:
                   move.w                                        $00F0,$dff180
                   ENDIF
 
-                  move.l                                        par1,a0                                                  ; argument address in a1 (bitplane 0 addr)
+                   move.l                                        par1,a0                                                  ; argument address in a1 (bitplane 0 addr)
                   move.l                                        (a0)+,bitplane0
                   move.l                                        (a0),bitplane1
+                  ;move.l #SCREEN_0,par1
 
-                  ;PREPARESCREEN
-
-                  ;CLEARFASTBITPLANES   
+                  CLEARFASTBITPLANES   
                                                                                           ; Clear fast bitplanes
-                  COPYBITPLANESANDCLEAR
+                  ;COPYBITPLANESANDCLEAR
                        
-                  RESETFILLTABLE
+                  ;RESETFILLTABLE
                   LOADIDENTITY
                   
-
-                  move.w                                        #160,d0
-                  move.w                                        #128,d1
-                  ;jsr                                           TRANSLATE
-
                   add.w #1,ZCOORD
                   cmp.w #360,ZCOORD
                   bne.s znoreset2
@@ -320,19 +315,6 @@ znoreset2:
                    ROTATE_X_INV_Q_5_11                                        ZCOORD
                   STROKE                                        #1
 
-
-                  ;move.w                                        #160,d0
-                  ;move.w                                        #128,d1
-                  ;jsr                                           TRANSLATE
-
-                  ;move.w                                        #0,d0
-                  ;move.w                                        #-50,d1
-
-                  ;move.w                                        #-50,d6
-                  ;move.w                                        #50,d3
-
-                  ;move.w                                        #50,d4
-                  ;move.w                                        #50,d5
                   VERTEX_INIT           1,#0,#-50,#0
                   VERTEX_INIT           2,#50,#50,#0
                   VERTEX_INIT           3,#-50,#50,#0
@@ -346,9 +328,9 @@ znoreset2:
                   
                   bsr.w                 TRIANGLE3D
 
-                  ;bsr.w                                         TRIANGLE
-                  DISABLE_CLIPPING
-                  movem.l                                       (sp)+,d0-d7/a0-a6
+                  ;DISABLE_CLIPPING
+                  ;movem.l                                       (sp)+,d0-d7/a0-a6
+                  move.l #SCREEN_0,d0
                   rts
 
 par1:

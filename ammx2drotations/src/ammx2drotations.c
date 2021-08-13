@@ -19,11 +19,10 @@ static tCopCmd *pCopCmds;
 
 void ammxmainloop();
 void ammxmainloop2();
-void ammxmainloop3();
+ULONG ammxmainloop3();
 
 void ammx2drotationsGsCreate(void) {
   ULONG ulRawSize = (simpleBufferGetRawCopperlistInstructionCount(BITPLANES) +
-                 32 * 3 + // 32 bars - each consists of WAIT + 2 MOVE instruction
                  1 +      // Final WAIT
                  1        // Just to be sure
     );
@@ -62,7 +61,7 @@ void ammx2drotationsGsCreate(void) {
   // Since we've set up global CLUT, palette will be loaded from first viewport
   // Colors are 0x0RGB, each channel accepts values from 0 to 15 (0 to F).
   s_pVpMain->pPalette[0] = 0x0000; // First color is also border color
-  s_pVpMain->pPalette[1] = 0x0888; // Gray
+  s_pVpMain->pPalette[1] = 0x0F00; // Gray
   s_pVpMain->pPalette[2] = 0x0800; // Red - not max, a bit dark
   s_pVpMain->pPalette[3] = 0x0008; // Blue - same brightness as red
 
@@ -109,7 +108,51 @@ void ammx2drotationsGsLoop(void) {
   g_pCustom->color[0] = 0x0FFF;
     if (stage==0) ammxmainloop((ULONG)s_pMainBuffer->pBack->Planes);
     else if (stage==1) ammxmainloop2((ULONG)s_pMainBuffer->pBack->Planes);
-    else if (stage==2) ammxmainloop3((ULONG)s_pMainBuffer->pBack->Planes);
+    else if (stage==2) 
+    {
+      ULONG screen0;
+      screen0 = ammxmainloop3((ULONG)s_pMainBuffer->pBack->Planes);
+//screen0=0xAAAABBBB;
+      tCopList *pCopList = s_pMainBuffer->sCommon.pVPort->pView->pCopList;
+    tCopCmd *pCmdListBack = &pCopList->pBackBfr->pList[0];
+    tCopCmd *pCmdListFront = &pCopList->pFrontBfr->pList[0];
+copSetMove(&pCmdListBack[6].sMove, &g_pBplFetch[0].uwHi, screen0 >> 16);
+			copSetMove(&pCmdListBack[7].sMove, &g_pBplFetch[0].uwLo, screen0 & 0xFFFF);
+      copSetMove(&pCmdListFront[6].sMove, &g_pBplFetch[0].uwHi, screen0 >> 16);
+			copSetMove(&pCmdListFront[7].sMove, &g_pBplFetch[0].uwLo, screen0 & 0xFFFF);
+      
+screen0+=40*256;
+      copSetMove(&pCmdListBack[8].sMove, &g_pBplFetch[1].uwHi, screen0 >> 16);
+			copSetMove(&pCmdListBack[9].sMove, &g_pBplFetch[1].uwLo, screen0 & 0xFFFF);
+      copSetMove(&pCmdListFront[8].sMove, &g_pBplFetch[1].uwHi, screen0 >> 16);
+			copSetMove(&pCmdListFront[9].sMove, &g_pBplFetch[1].uwLo, screen0 & 0xFFFF);
+
+
+      //tCopList *pCopList = s_pMainBuffer->sCommon.pVPort->pView->pCopList;
+      //tCopCmd *pCmdList = &pCopList->pBackBfr->pList[s_pMainBuffer->uwCopperOffset];
+      //tCopBfr *pCopBfr = s_pView->pCopList->pBackBfr;
+      //pCopCmds = &pCopBfr->pList[0];
+
+     /* tCopBfr *pCopBfr = s_pView->pCopList->pBackBfr;
+  pCopCmds = &pCopBfr->pList[0];*/
+      /*copSetMove(&pCopCmds[0].sMove, &g_pBplFetch[0].uwHi, screen0 >> 16);
+			copSetMove(&pCopCmds[1].sMove, &g_pBplFetch[0].uwLo, screen0 & 0xFFFF);
+      copSetMove(&pCopCmds[2].sMove, &g_pBplFetch[0].uwHi, screen0 >> 16);
+			copSetMove(&pCopCmds[3].sMove, &g_pBplFetch[0].uwLo, screen0 & 0xFFFF);
+      copSetMove(&pCopCmds[4].sMove, &g_pBplFetch[0].uwHi, screen0 >> 16);*/
+			//copSetMove(&pCopCmds[5].sMove, &g_pBplFetch[0].uwLo, screen0 & 0xFFFF);
+      
+
+      copSwapBuffers();
+  	//copProcessBlocks();
+
+      //copSetMove(&pCopCmds[8 + 0 + 0].sMove, &g_pBplFetch[0].uwHi, screen0 >> 16);
+			//copSetMove(&pCopCmds[8 + 0 + 1].sMove, &g_pBplFetch[0].uwLo, screen0 & 0xFFFF);
+
+     //*(s_pMainBuffer->pBack->Planes[0]) = screen0;
+     //*(s_pMainBuffer->pFront->Planes[0]) = screen0;
+
+    }
     g_pCustom->color[0] = 0x0000;
   
   vPortWaitForEnd(s_pVpMain);

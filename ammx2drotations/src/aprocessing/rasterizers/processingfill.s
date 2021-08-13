@@ -26,6 +26,7 @@ AMMXFILLTABLE_FILLDATA_BPL_1:
 	ENDIF
 
 ammx_fill_table:
+	 move.w                                        #$0FF,$dff180
 	movem.l d0-d7/a0-a1,-(sp) ; stack save
 	;move.w #0,AMMXFILLTABLE_CURRENT_ROW
 	move.w #1,AMMX_FILL_TABLE_FIRST_DRAW
@@ -63,6 +64,7 @@ ammx_fill_table_nextline:
 ammx_fill_table_end:
 	move.w #-1,AMMXFILLTABLE_END_ROW
 	movem.l (sp)+,d0-d7/a0-a1
+	move.w                                        #$00F0,$dff180
 	rts
 
 	IFD USE_CLIPPING

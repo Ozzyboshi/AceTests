@@ -1,5 +1,6 @@
 ; Fast bitplanes
 ; This bitplanes will be copied into chip ram by PREPARESCREEN MACRO
+    SECTION ".data_chip",data
 
 SCREEN_0
     dcb.b 40*256,$00
