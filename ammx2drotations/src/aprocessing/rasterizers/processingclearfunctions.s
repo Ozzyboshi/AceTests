@@ -61,6 +61,7 @@ FILLFASTBITPLANES MACRO
 	dbra d3,.clearfastbitplanesmacro
 	ENDM
 
+
 COPYBITPLANESANDCLEAR MACRO
 	lea SCREEN_0,a0
 	lea SCREEN_1,a4
@@ -82,7 +83,7 @@ COPYBITPLANESANDCLEAR MACRO
 
 	dbra d3,.copybpnsandclearmacro
 	ENDM
-
+	
 PREPARESCREEN MACRO
 
 	; copy from fast bitplanes to slow bitplanes

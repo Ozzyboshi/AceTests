@@ -67,6 +67,7 @@ void ammx2drotationsGsCreate(void) {
 
   // We don't need anything from OS anymore
   systemUnuse();
+  //Disable();
 
   // Load the view
   viewLoad(s_pView);
@@ -106,10 +107,10 @@ void ammx2drotationsGsLoop(void) {
 
 
   g_pCustom->color[0] = 0x0FFF;
-    if (stage==0) ammxmainloop((ULONG)s_pMainBuffer->pBack->Planes);
+   /* if (stage==0) ammxmainloop((ULONG)s_pMainBuffer->pBack->Planes);
     else if (stage==1) ammxmainloop2((ULONG)s_pMainBuffer->pBack->Planes);
     else if (stage==2) 
-    {
+    {*/
       ULONG screen0;
       screen0 = ammxmainloop3((ULONG)s_pMainBuffer->pBack->Planes);
 //screen0=0xAAAABBBB;
@@ -143,7 +144,7 @@ screen0+=40*256;
 			//copSetMove(&pCopCmds[5].sMove, &g_pBplFetch[0].uwLo, screen0 & 0xFFFF);
       
 
-      copSwapBuffers();
+     // copSwapBuffers();
   	//copProcessBlocks();
 
       //copSetMove(&pCopCmds[8 + 0 + 0].sMove, &g_pBplFetch[0].uwHi, screen0 >> 16);
@@ -152,7 +153,7 @@ screen0+=40*256;
      //*(s_pMainBuffer->pBack->Planes[0]) = screen0;
      //*(s_pMainBuffer->pFront->Planes[0]) = screen0;
 
-    }
+    //}
     g_pCustom->color[0] = 0x0000;
   
   vPortWaitForEnd(s_pVpMain);
