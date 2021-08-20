@@ -84,6 +84,7 @@ void ammx2drotationsGsLoop(void) {
     gameExit();
     return ;
   }
+  if(keyCheck(KEY_0)) stage=0;
   if(keyCheck(KEY_1)) stage=1;
   if(keyCheck(KEY_2)) stage=2;
   //Disable();
@@ -106,15 +107,16 @@ void ammx2drotationsGsLoop(void) {
   vPortWaitForEnd(s_pVpMain);*/
 
 
-  g_pCustom->color[0] = 0x0FFF;
-   /* if (stage==0) ammxmainloop((ULONG)s_pMainBuffer->pBack->Planes);
+  //g_pCustom->color[0] = 0x00F0;
+    if (stage==0) ammxmainloop((ULONG)s_pMainBuffer->pBack->Planes);
     else if (stage==1) ammxmainloop2((ULONG)s_pMainBuffer->pBack->Planes);
     else if (stage==2) 
-    {*/
-      ULONG screen0;
-      screen0 = ammxmainloop3((ULONG)s_pMainBuffer->pBack->Planes);
-//screen0=0xAAAABBBB;
-      tCopList *pCopList = s_pMainBuffer->sCommon.pVPort->pView->pCopList;
+    {
+      //ULONG screen0;
+      //screen0 = 
+      ammxmainloop3((ULONG)s_pMainBuffer->pBack->Planes);
+    //  g_pCustom->color[0] = 0x0000;
+/*      tCopList *pCopList = s_pMainBuffer->sCommon.pVPort->pView->pCopList;
     tCopCmd *pCmdListBack = &pCopList->pBackBfr->pList[0];
     tCopCmd *pCmdListFront = &pCopList->pFrontBfr->pList[0];
 copSetMove(&pCmdListBack[6].sMove, &g_pBplFetch[0].uwHi, screen0 >> 16);
@@ -127,7 +129,7 @@ screen0+=40*256;
 			copSetMove(&pCmdListBack[9].sMove, &g_pBplFetch[1].uwLo, screen0 & 0xFFFF);
       copSetMove(&pCmdListFront[8].sMove, &g_pBplFetch[1].uwHi, screen0 >> 16);
 			copSetMove(&pCmdListFront[9].sMove, &g_pBplFetch[1].uwLo, screen0 & 0xFFFF);
-
+*/
 
       //tCopList *pCopList = s_pMainBuffer->sCommon.pVPort->pView->pCopList;
       //tCopCmd *pCmdList = &pCopList->pBackBfr->pList[s_pMainBuffer->uwCopperOffset];
@@ -153,8 +155,8 @@ screen0+=40*256;
      //*(s_pMainBuffer->pBack->Planes[0]) = screen0;
      //*(s_pMainBuffer->pFront->Planes[0]) = screen0;
 
-    //}
-    g_pCustom->color[0] = 0x0000;
+    }
+    //g_pCustom->color[0] = 0x0000;
   
   vPortWaitForEnd(s_pVpMain);
   /*vPortWaitForEnd(s_pVpMain);

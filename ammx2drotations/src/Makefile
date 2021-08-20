@@ -577,7 +577,10 @@ uninstall-am: uninstall-binPROGRAMS
 
 
 ammxasm.o: ammxasm.s
-	vasmm68k_mot -devpac -Fhunk -quiet -esc  -m68080  -DUSE_VIDEOCHIP -DUSE_CLIPPING -DUSE_3D ./ammxasm.s  -o ./ammxasm.o -I/usr/local/amiga/os-include
+
+	vasmm68k_mot -devpac -Fhunk -quiet -esc  -m68080  -DUSE_DBLBUF -DUSE_CLIPPING -DUSE_3D ./ammxasm.s  -o ./ammxasm.o -I/usr/local/amiga/os-include
+	 echo "m68k"
+	echo "	vasmm68k_mot -devpac -Fhunk -quiet -esc  -m68080 -DUSE_VIDEOCHIP -DUSE_CLIPPING -DUSE_3D ./ammxasm.s  -o ./ammxasm.o -I/usr/local/amiga/os-include"
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

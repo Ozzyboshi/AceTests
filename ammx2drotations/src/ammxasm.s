@@ -1,3 +1,4 @@
+DEBUG_COLORS=1;
                   include                                       "aprocessing/rasterizers/processing_bitplanes_fast.s"
 
                   XDEF                                          _ammxmainloop
@@ -35,6 +36,11 @@ SCALEDIRECTIONX:  dc.w                                          1
 SCALEDIRECTIONY:  dc.w                                          1
 
 _ammxmainloop:
+                  IFD                                           VAMPIRE
+                  move.w                                        #$0F00,$dff180
+                  ELSE
+                  move.w                                        #$00F0,$dff180
+                  ENDIF
                   move.l                                        4(sp),par1
                   movem.l                                       d0-d7/a0-a6,-(sp)	
 
@@ -69,13 +75,13 @@ _ammxmainloop:
                   ROTATE                                        ANGLE
                   move.w                                        #160,d0
                   move.w                                        #128,d1
-                  jsr                                         TRANSLATE
+                  jsr                                           TRANSLATE
 
                  
                   ROTATE                                        ANGLE2
                   move.w                                        #0,d0
                   move.w                                        #0,d1
-                  jsr                                         TRANSLATE
+                  jsr                                           TRANSLATE
 
 
                   move.w                                        #0,d0
@@ -244,9 +250,15 @@ resety
                
 	
                   movem.l                                       (sp)+,d0-d7/a0-a6
+                  move.w                                        #$0000,$dff180
                   rts
 
 _ammxmainloop2:
+                  IFD                                           VAMPIRE
+                  move.w                                        #$0F00,$dff180
+                  ELSE
+                  move.w                                        #$00F0,$dff180
+                  ENDIF
                   move.l                                        4(sp),par1
                   movem.l                                       d0-d7/a0-a6,-(sp)	
 
@@ -264,10 +276,10 @@ _ammxmainloop2:
                   RESETFILLTABLE
                   LOADIDENTITY
 
-                  sub.w #1,ZCOORD
-                  cmp.w #-235,ZCOORD
-                  bne.s znoreset
-                  move.w #0,ZCOORD
+                  sub.w                                         #1,ZCOORD
+                  cmp.w                                         #-235,ZCOORD
+                  bne.s                                         znoreset
+                  move.w                                        #0,ZCOORD
 
 znoreset:
 
@@ -276,61 +288,103 @@ znoreset:
                   VERTEX_INIT                                   3,#-10,#10,#0
 
                   bsr.w                                         TRIANGLE3D
+                  move.w                                        #$0000,$dff180
                   movem.l                                       (sp)+,d0-d7/a0-a6
                   rts
 ZCOORD:
-   dc.w 0
+                  dc.w                                          0
 
 _ammxmainloop3:
+                  IFD DEBUG_COLORS
+                  IFD                                           VAMPIRE
+                  move.w                                        #$0F00,$dff180
+                  ELSE
+                  move.w                                        #$00F0,$dff180
+                  ENDIF
+                  ENDIF
+;.loop; Wait for vblank
+;                  move.l                                        $dff004,d0
+;                  and.l                                         #$1ff00,d0
+;                  cmp.l                                         #303<<8,d0
+;                  bne.b                                         .loop
+
                   move.l                                        4(sp),par1
                   ;movem.l                                       d0-d7/a0-a6,-(sp)	
                   ;ENABLE_CLIPPING
+
                   
 
-                  IFD                                           VAMPIRE
-                  move.w                                        $00FF,$dff180
-                  ELSE
-                  move.w                                        $00F0,$dff180
-                  ENDIF
+                 
 
-                   move.l                                        par1,a0                                                  ; argument address in a1 (bitplane 0 addr)
+                  move.l                                        par1,a0                                                  ; argument address in a1 (bitplane 0 addr)
                   move.l                                        (a0)+,bitplane0
                   move.l                                        (a0),bitplane1
+            
                   ;move.l #SCREEN_0,par1
 
-                  CLEARFASTBITPLANES   
+                  ;CLEARFASTBITPLANES   
                                                                                           ; Clear fast bitplanes
                   ;COPYBITPLANESANDCLEAR
-                       
+
+                  ;PREPARESCREEN
+                  ;move.l                                        #5*255,d3
+                  ;move.l                                        SCREEN_PTR_0,a4
+                  ;move.l                                        SCREEN_PTR_1,a4
+                  ;CLEARFASTBITPLANES   
+                  IFD DEBUG_COLORS
+                  move.w                                        #$00FF,$dff180
+                  ENDIF
+                  jsr F_PREPARESCREEN  
+                  RESETFILLYVALS
+
+                     IFD DEBUG_COLORS
+                  IFD                                           VAMPIRE
+                  move.w                                        #$0F00,$dff180
+                  ELSE
+                  move.w                                        #$00F0,$dff180
+                  ENDIF
+                  ENDIF
                   ;RESETFILLTABLE
                   LOADIDENTITY
                   
-                  add.w #1,ZCOORD
-                  cmp.w #360,ZCOORD
-                  bne.s znoreset2
-                  move.w #0,ZCOORD
+                  add.w                                         #1,ZCOORD
+                  cmp.w                                         #360,ZCOORD
+                  bne.s                                         znoreset2
+                  move.w                                        #0,ZCOORD
 
 znoreset2:
 
-                   ROTATE_X_INV_Q_5_11                                        ZCOORD
+                  ROTATE_X_INV_Q_5_11                           ZCOORD
                   STROKE                                        #1
 
-                  VERTEX_INIT           1,#0,#-50,#0
-                  VERTEX_INIT           2,#50,#50,#0
-                  VERTEX_INIT           3,#-50,#50,#0
+                  VERTEX_INIT                                   1,#0,#-50,#0
+                  VERTEX_INIT                                   2,#50,#50,#0
+                  VERTEX_INIT                                   3,#-50,#50,#0
 
-                  bsr.w                 TRIANGLE3D
+                  bsr.w                                         TRIANGLE3D
 
-                  VERTEX_INIT           1,#0,#50,#0
-                  VERTEX_INIT           2,#50,#-50,#0
-                  VERTEX_INIT           3,#-50,#-50,#0
+                  VERTEX_INIT                                   1,#0,#50,#0
+                  VERTEX_INIT                                   2,#50,#-50,#0
+                  VERTEX_INIT                                   3,#-50,#-50,#0
                   STROKE                                        #2
                   
-                  bsr.w                 TRIANGLE3D
+                  ;bsr.w                                         TRIANGLE3D
+
+                  ;SWAP_BPL 
+
 
                   ;DISABLE_CLIPPING
                   ;movem.l                                       (sp)+,d0-d7/a0-a6
-                  move.l #SCREEN_0,d0
+                  ;move.l                                        SCREEN_PTR,d0
+                  IFD DEBUG_COLORS
+                  move.w                                        #$0000,$dff180
+                  ENDIF
+
+;.loopend ; Wait to exit vblank row (for faster processors like 68040)
+;                  move.l                                        $dff004,d0
+;                  and.l                                         #$1ff00,d0
+;                  cmp.l                                         #303<<8,d0
+;                  beq.b                                         .loopend
                   rts
 
 par1:
@@ -340,3 +394,134 @@ bitplane0:
 bitplane1:
                   dc.l                                          0
 
+
+F_PREPARESCREEN:
+	movem.l d0/d1/d2/d3/a0-a4,-(sp) ; stack save
+
+	;move.w #0+80,AMMXFILLTABLE_CURRENT_ROW
+	;move.w #255-80,AMMXFILLTABLE_END_ROW
+
+	add.w #7,FILLTABLE_FRAME_MAX_Y
+
+	move.w FILLTABLE_FRAME_MIN_Y,d1
+	;subq #4,d1
+	move.w FILLTABLE_FRAME_MAX_Y,d3
+	;addq #4,d3
+
+	sub.w d1,d3
+	;subq #1,d2
+	;move.w d2,d3
+
+	move.l SCREEN_PTR_0,a0
+	move.l SCREEN_PTR_1,a4
+	move.l bitplane0,a1
+	move.l bitplane1,a2
+
+	muls.w #40,d1
+	add.w d1,a0
+	add.w d1,a4 
+	add.w d1,a1
+	add.w d1,a2 
+
+	; copy from fast bitplanes to slow bitplanes
+	IFD VAMPIRE
+    ;move.l #1279,d3
+	load #0,e0
+    ENDIF
+    IFND VAMPIRE
+	moveq #0,d0
+    ;move.l #256-1,d3
+    ENDIF
+	
+	
+	
+.preparescreenclearline:
+	IFD VAMPIRE
+	load (a0),e20
+	load (a4),e21
+	store e20,(a1)+
+	store e21,(a2)+
+	store e0,(a0)+
+	store e0,(a4)+
+
+	load (a0),e20
+	load (a4),e21
+	store e20,(a1)+
+	store e21,(a2)+
+	store e0,(a0)+
+	store e0,(a4)+
+
+	load (a0),e20
+	load (a4),e21
+	store e20,(a1)+
+	store e21,(a2)+
+	store e0,(a0)+
+	store e0,(a4)+
+
+	load (a0),e20
+	load (a4),e21
+	store e20,(a1)+
+	store e21,(a2)+
+	store e0,(a0)+
+	store e0,(a4)+
+
+	load (a0),e20
+	load (a4),e21
+	store e20,(a1)+
+	store e21,(a2)+
+	store e0,(a0)+
+	store e0,(a4)+
+	ELSE
+	move.l (a0),(a1)+
+	move.l (a4),(a2)+
+	move.l d0,(a0)+
+	move.l d0,(a4)+
+
+	move.l (a0),(a1)+
+	move.l (a4),(a2)+
+	move.l d0,(a0)+
+	move.l d0,(a4)+
+
+	move.l (a0),(a1)+
+	move.l (a4),(a2)+
+	move.l d0,(a0)+
+	move.l d0,(a4)+
+
+	move.l (a0),(a1)+
+	move.l (a4),(a2)+
+	move.l d0,(a0)+
+	move.l d0,(a4)+
+
+	move.l (a0),(a1)+
+	move.l (a4),(a2)+
+	move.l d0,(a0)+
+	move.l d0,(a4)+
+
+	move.l (a0),(a1)+
+	move.l (a4),(a2)+
+	move.l d0,(a0)+
+	move.l d0,(a4)+
+
+	move.l (a0),(a1)+
+	move.l (a4),(a2)+
+	move.l d0,(a0)+
+	move.l d0,(a4)+
+
+	move.l (a0),(a1)+
+	move.l (a4),(a2)+
+	move.l d0,(a0)+
+	move.l d0,(a4)+
+
+	move.l (a0),(a1)+
+	move.l (a4),(a2)+
+	move.l d0,(a0)+
+	move.l d0,(a4)+
+
+	move.l (a0),(a1)+
+	move.l (a4),(a2)+
+	move.l d0,(a0)+
+	move.l d0,(a4)+
+	ENDIF
+	dbra d3,.preparescreenclearline
+	movem.l (sp)+,d0/d1/d2/d3/a0-a4
+	rts
