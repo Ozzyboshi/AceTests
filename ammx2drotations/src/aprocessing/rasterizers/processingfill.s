@@ -18,6 +18,42 @@ AMMXFILLTABLE_CURRENT_ROW_LINE:
 AMMXFILLTABLE_END_ROW_LINE:
 	dc.w 0
 
+
+ammx_fill_table_noreset:
+	rts
+	movem.l d1/d5-d7/a0,-(sp) ; stack save
+	move.w #1,AMMX_FILL_TABLE_FIRST_DRAW
+	move.w AMMXFILLTABLE_END_ROW,d5
+
+	lea FILL_TABLE,a0
+
+	; Reposition inside the fill table according to the starting row
+	move.w AMMXFILLTABLE_CURRENT_ROW,d6
+	move.w d6,d1
+	lsl.w #2,d6
+	add.w d6,a0
+	; end of repositioning
+
+	MINUWORD d1,FILLTABLE_FRAME_MIN_Y
+	MAXUWORD d5,FILLTABLE_FRAME_MAX_Y
+
+ammx_fill_table_nextline_noreset:
+	cmp.w d5,d1
+	bhi.s ammx_fill_table_end_noreset
+
+	move.w (a0)+,d6 ; start of fill line
+	move.w (a0)+,d7 ; end of fill line	
+	bsr.w ammx_fill_table_single_line
+	addq #1,d1
+	
+	bra.s ammx_fill_table_nextline_noreset
+ammx_fill_table_end_noreset:
+	move.w #-1,AMMXFILLTABLE_END_ROW
+	movem.l (sp)+,d1/d5-d7/a0
+	rts
+
+
+
 ammx_fill_table:
 	movem.l d1/d5-d7/a0,-(sp) ; stack save
 	move.w #1,AMMX_FILL_TABLE_FIRST_DRAW
@@ -39,16 +75,16 @@ ammx_fill_table_nextline:
 	cmp.w d5,d1
 	bhi.s ammx_fill_table_end
 
-	move.w (a0),d6 ; start of fill line
-	move.w 2(a0),d7 ; end of fill line
-	move.l #$7FFF8000,(a0)+
+	move.w (a0)+,d6 ; start of fill line
+	move.w (a0)+,d7 ; end of fill line
+	;move.l #$7FFF8000,(a0)+
 	
 	bsr.w ammx_fill_table_single_line
 	addq #1,d1
 	
 	bra.s ammx_fill_table_nextline
 ammx_fill_table_end:
-	move.w #-1,AMMXFILLTABLE_END_ROW
+	;move.w #-1,AMMXFILLTABLE_END_ROW
 	movem.l (sp)+,d1/d5-d7/a0
 	rts
 

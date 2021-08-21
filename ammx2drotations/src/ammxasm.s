@@ -4,7 +4,7 @@ DEBUG_COLORS=1;
                   XDEF                                          _ammxmainloop
                   XDEF                                          _ammxmainloop2
                   XDEF                                          _ammxmainloop3
-
+                    XDEF                                          _ammxmainloop3_init
 
                   SECTION                                       PROCESSING,CODE_F
 
@@ -294,6 +294,15 @@ znoreset:
 ZCOORD:
                   dc.w                                          0
 
+_ammxmainloop3_init:
+                    move.l  #ammx_fill_table_end_noreset,AMMX_FILL_FUNCT_ADDR
+                    LOADIDENTITY
+                     VERTEX_INIT                                   1,#0,#-50,#0
+                  VERTEX_INIT                                   2,#50,#50,#0
+                  VERTEX_INIT                                   3,#-50,#50,#0
+
+                  bsr.w                                         TRIANGLE3D
+                    rts
 _ammxmainloop3:
                   IFD DEBUG_COLORS
                   IFD                                           VAMPIRE
@@ -334,8 +343,10 @@ _ammxmainloop3:
                   IFD DEBUG_COLORS
                   move.w                                        #$00FF,$dff180
                   ENDIF
+                  IFD PESANTE    
                   jsr F_PREPARESCREEN  
                   RESETFILLYVALS
+                  ENDIF
 
                      IFD DEBUG_COLORS
                   IFD                                           VAMPIRE
@@ -345,8 +356,9 @@ _ammxmainloop3:
                   ENDIF
                   ENDIF
                   ;RESETFILLTABLE
+
+    IFD PESANTE                  
                   LOADIDENTITY
-                  
                   add.w                                         #1,ZCOORD
                   cmp.w                                         #360,ZCOORD
                   bne.s                                         znoreset2
@@ -355,8 +367,9 @@ _ammxmainloop3:
 znoreset2:
 
                   ROTATE_X_INV_Q_5_11                           ZCOORD
+    ENDIF
                   STROKE                                        #1
-
+    IFD PESANTE    
                   VERTEX_INIT                                   1,#0,#-50,#0
                   VERTEX_INIT                                   2,#50,#50,#0
                   VERTEX_INIT                                   3,#-50,#50,#0
@@ -367,7 +380,7 @@ znoreset2:
                   VERTEX_INIT                                   2,#50,#-50,#0
                   VERTEX_INIT                                   3,#-50,#-50,#0
                   STROKE                                        #2
-                  
+    ENDIF   
                   ;bsr.w                                         TRIANGLE3D
 
                   ;SWAP_BPL 
@@ -377,7 +390,7 @@ znoreset2:
                   ;movem.l                                       (sp)+,d0-d7/a0-a6
                   ;move.l                                        SCREEN_PTR,d0
                   IFD DEBUG_COLORS
-                  move.w                                        #$0000,$dff180
+                  move.w                                        #$0FF0,$dff180
                   ENDIF
 
 ;.loopend ; Wait to exit vblank row (for faster processors like 68040)
@@ -385,6 +398,13 @@ znoreset2:
 ;                  and.l                                         #$1ff00,d0
 ;                  cmp.l                                         #303<<8,d0
 ;                  beq.b                                         .loopend
+                   ; move.w #255,AMMXFILLTABLE_END_ROW
+                   ; move.w #10,AMMX_FILL_TABLE_FIRST_DRAW
+
+                    jsr ammx_fill_table
+                     IFD DEBUG_COLORS
+                  move.w                                        #$0000,$dff180
+                  ENDIF
                   rts
 
 par1:

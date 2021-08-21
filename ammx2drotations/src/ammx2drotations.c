@@ -20,6 +20,7 @@ static tCopCmd *pCopCmds;
 void ammxmainloop();
 void ammxmainloop2();
 ULONG ammxmainloop3();
+void ammxmainloop3_init();
 
 void ammx2drotationsGsCreate(void) {
   ULONG ulRawSize = (simpleBufferGetRawCopperlistInstructionCount(BITPLANES) +
@@ -71,6 +72,8 @@ void ammx2drotationsGsCreate(void) {
 
   // Load the view
   viewLoad(s_pView);
+
+  ammxmainloop3_init();
   
 }
 
@@ -112,9 +115,8 @@ void ammx2drotationsGsLoop(void) {
     else if (stage==1) ammxmainloop2((ULONG)s_pMainBuffer->pBack->Planes);
     else if (stage==2) 
     {
-      //ULONG screen0;
-      //screen0 = 
-      ammxmainloop3((ULONG)s_pMainBuffer->pBack->Planes);
+      ULONG screen0;
+      screen0 = ammxmainloop3((ULONG)s_pMainBuffer->pBack->Planes);
     //  g_pCustom->color[0] = 0x0000;
 /*      tCopList *pCopList = s_pMainBuffer->sCommon.pVPort->pView->pCopList;
     tCopCmd *pCmdListBack = &pCopList->pBackBfr->pList[0];
