@@ -40,6 +40,7 @@ void ammx2drotationsGsCreate(void) {
     TAG_VPORT_VIEW, s_pView,
     TAG_VPORT_BPP, BITPLANES, // 4 bits per pixel, 16 colors
     // We won't specify height here - viewport will take remaining space.
+    //TAG_VPORT_HEIGHT,128,
   TAG_END);
   s_pMainBuffer = simpleBufferCreate(0,
     TAG_SIMPLEBUFFER_VPORT, s_pVpMain, // Required: parent viewport
@@ -74,6 +75,11 @@ void ammx2drotationsGsCreate(void) {
   viewLoad(s_pView);
 
   ammxmainloop3_init();
+
+   //g_pCustom->diwstrt = 0x2c81;
+   //g_pCustom->diwstop = 0x00c1;
+
+   //g_pCustom->dmacon = DMAF_RASTER;
   
 }
 
@@ -117,21 +123,23 @@ void ammx2drotationsGsLoop(void) {
     {
       ULONG screen0;
       screen0 = ammxmainloop3((ULONG)s_pMainBuffer->pBack->Planes);
+        //vPortWaitForEnd(s_pVpMain);
+
     //  g_pCustom->color[0] = 0x0000;
-/*      tCopList *pCopList = s_pMainBuffer->sCommon.pVPort->pView->pCopList;
+      tCopList *pCopList = s_pMainBuffer->sCommon.pVPort->pView->pCopList;
     tCopCmd *pCmdListBack = &pCopList->pBackBfr->pList[0];
     tCopCmd *pCmdListFront = &pCopList->pFrontBfr->pList[0];
-copSetMove(&pCmdListBack[6].sMove, &g_pBplFetch[0].uwHi, screen0 >> 16);
-			copSetMove(&pCmdListBack[7].sMove, &g_pBplFetch[0].uwLo, screen0 & 0xFFFF);
+/*copSetMove(&pCmdListBack[6].sMove, &g_pBplFetch[0].uwHi, screen0 >> 16);
+			copSetMove(&pCmdListBack[7].sMove, &g_pBplFetch[0].uwLo, screen0 & 0xFFFF);*/
       copSetMove(&pCmdListFront[6].sMove, &g_pBplFetch[0].uwHi, screen0 >> 16);
 			copSetMove(&pCmdListFront[7].sMove, &g_pBplFetch[0].uwLo, screen0 & 0xFFFF);
       
 screen0+=40*256;
-      copSetMove(&pCmdListBack[8].sMove, &g_pBplFetch[1].uwHi, screen0 >> 16);
-			copSetMove(&pCmdListBack[9].sMove, &g_pBplFetch[1].uwLo, screen0 & 0xFFFF);
+      /*copSetMove(&pCmdListBack[8].sMove, &g_pBplFetch[1].uwHi, screen0 >> 16);
+			copSetMove(&pCmdListBack[9].sMove, &g_pBplFetch[1].uwLo, screen0 & 0xFFFF);*/
       copSetMove(&pCmdListFront[8].sMove, &g_pBplFetch[1].uwHi, screen0 >> 16);
 			copSetMove(&pCmdListFront[9].sMove, &g_pBplFetch[1].uwLo, screen0 & 0xFFFF);
-*/
+
 
       //tCopList *pCopList = s_pMainBuffer->sCommon.pVPort->pView->pCopList;
       //tCopCmd *pCmdList = &pCopList->pBackBfr->pList[s_pMainBuffer->uwCopperOffset];
@@ -161,6 +169,7 @@ screen0+=40*256;
     //g_pCustom->color[0] = 0x0000;
   
   vPortWaitForEnd(s_pVpMain);
+  //copSwapBuffers();
   /*vPortWaitForEnd(s_pVpMain);
   vPortWaitForEnd(s_pVpMain);
   vPortWaitForEnd(s_pVpMain);

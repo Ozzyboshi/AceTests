@@ -4,6 +4,6 @@ ammx2drotations_SOURCES = main.c ammx2drotations.c
 
 ammxasm.o: ammxasm.s
 	
-	vasmm68k_mot -devpac -Fhunk -quiet -esc  -m68080  -DUSE_DBLBUF -DUSE_CLIPPING -DUSE_3D ./ammxasm.s  -o ./ammxasm.o -I/usr/local/amiga/os-include
+	vasmm68k_mot -devpac -Fhunk -quiet -esc  -m68080  -DUSE_DBLBUF -DUSE_VIDEOCHIP -DUSE_CLIPPING -DUSE_3D ./ammxasm.s  -o ./ammxasm.o -I/usr/local/amiga/os-include
 	 echo "m68k"
 	echo "	vasmm68k_mot -devpac -Fhunk -quiet -esc  -m68080 -DUSE_VIDEOCHIP -DUSE_CLIPPING -DUSE_3D ./ammxasm.s  -o ./ammxasm.o -I/usr/local/amiga/os-include"

@@ -51,5 +51,31 @@ MAXUWORD MACRO
                       move.w    \1,\2
 .1\@
                       ENDM
-FILLTABLE_FRAME_MIN_Y: dc.w 0
+FILLTABLE_FRAME_MIN_Y: dc.w -1
 FILLTABLE_FRAME_MAX_Y: dc.w 0
+
+SAVEFILLTABLE MACRO
+    lea FILL_TABLE,a0
+    lea FILLTABLES,a1
+    adda.l #4*257*\1,a1
+    move.w AMMXFILLTABLE_CURRENT_ROW,(a1)+
+    move.w AMMXFILLTABLE_END_ROW,(a1)+
+    move.w #255,d3
+.1\@:
+    move.l (a0)+,(a1)+
+    dbra d3,.1\@
+    ENDM
+
+SAVE_FILL_TABLE MACRO
+    lea FILL_TABLE,a0
+    lea FILLTABLES,a1
+    move.l #4*257,d0
+    mulu.w \1,d0
+    adda.l d0,a1
+    move.w AMMXFILLTABLE_CURRENT_ROW,(a1)+
+    move.w AMMXFILLTABLE_END_ROW,(a1)+
+    move.w #255,d3
+.1\@:
+    move.l (a0)+,(a1)+
+    dbra d3,.1\@
+    ENDM

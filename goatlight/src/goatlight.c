@@ -20,10 +20,10 @@
 #include "../_res/discocrazy.h"
 //#include "../_res/obrush.h"
 
-#include "../_res/Goatfonts/IFF/goatfonts.h"
-/*#include "../_res/Goatfonts48/IFF/goatfonts48_1.h"
-#include "../_res/Goatfonts48/IFF/goatfonts48_2.h"
-#include "../_res/Goatfonts48/IFF/goatfonts48_3.h"*/
+#include "../_res/Goatfonts_z3k_corretti/goatfonts.h"
+//#include "../_res/Goatfonts48_z3k/48/goatfonts48_1.h"
+//#include "../_res/Goatfonts48_z3k/48/goatfonts48_2.h"
+//#include "../_res/Goatfonts48_z3k/48/goatfonts48_3.h"
 #include "bigfonts.h"
 
 #define BITPLANES 5 // 4 bitplanes
@@ -2080,17 +2080,17 @@ void setCopSpritesBigTxtColorIndex()
     tCopCmd *pCmdListFront = &pCopList->pFrontBfr->pList[s_uwCopRawOffs];
 
     UBYTE ubCopIndex = ubCopSpritesBigTxtColorIndex;
-    copSetMoveBackAndFront(&g_pCustom->color[17], 0x0FFF);
-    copSetMoveBackAndFront(&g_pCustom->color[18], 0x00CF);
-    copSetMoveBackAndFront(&g_pCustom->color[19], 0x055F);
+    copSetMoveBackAndFront(&g_pCustom->color[18], 0x0FFF);
+    copSetMoveBackAndFront(&g_pCustom->color[19], 0x00CF);
+    copSetMoveBackAndFront(&g_pCustom->color[17], 0x055F);
 
-    copSetMoveBackAndFront(&g_pCustom->color[21], 0x0FFF);
-    copSetMoveBackAndFront(&g_pCustom->color[22], 0x00CF);
-    copSetMoveBackAndFront(&g_pCustom->color[23], 0x055F);
+    copSetMoveBackAndFront(&g_pCustom->color[22], 0x0FFF);
+    copSetMoveBackAndFront(&g_pCustom->color[23], 0x00CF);
+    copSetMoveBackAndFront(&g_pCustom->color[21], 0x055F);
 
-    copSetMoveBackAndFront(&g_pCustom->color[25], 0x0FFF);
-    copSetMoveBackAndFront(&g_pCustom->color[26], 0x00CF);
-    copSetMoveBackAndFront(&g_pCustom->color[27], 0x055F);
+    copSetMoveBackAndFront(&g_pCustom->color[26], 0x0FFF);
+    copSetMoveBackAndFront(&g_pCustom->color[27], 0x00CF);
+    copSetMoveBackAndFront(&g_pCustom->color[25], 0x055F);
 }
 
 void setCopSpritesBigTxtColorIndexReset()
@@ -2166,7 +2166,7 @@ void updateBigLetter(UBYTE ubSpriteNumber)
 {
     //static char Phrase[] = {"[\\]ABCDEFGHIJKLMNOPQRSTUVWXYZ@"};
     //static char Phrase[] = {"LOVE^FLASHPARTY^][]\\^EDITON^^GREETINGS^TO^OUR^FRIENDS^IN^BUENOS^AIRES^@"};
-    static char Phrase[] = {"THE^CULT^OF^AMIGA^NEVER^DIES^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^@"};
+    static char Phrase[] = {"BHE^CULT^OF^AMIGA^NEVER^DIES^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^@"};
     static char* pPhrase=Phrase;
     char Lettera =*pPhrase;
 

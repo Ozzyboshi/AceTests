@@ -81,97 +81,97 @@ goatlight.o: goatlight.c goatlight.h \
  /opt/amiga/m68k-amigaos/sys-include/stdint.h \
  /opt/amiga/m68k-amigaos/sys-include/sys/_intsup.h simplebuffertest.h \
  sprites.h physics.h vectors.h ../_res/ball2bpl16x16_frame1.h globals.h \
- ../_res/discocrazy.h ../_res/Goatfonts/IFF/goatfonts.h bigfonts.h \
- ../_res/Goatfonts48/IFF/A_1_combined.h \
- ../_res/Goatfonts48/IFF/A_2_combined.h \
- ../_res/Goatfonts48/IFF/A_3_combined.h \
- ../_res/Goatfonts48/IFF/B_1_combined.h \
- ../_res/Goatfonts48/IFF/B_2_combined.h \
- ../_res/Goatfonts48/IFF/B_3_combined.h \
- ../_res/Goatfonts48/IFF/C_1_combined.h \
- ../_res/Goatfonts48/IFF/C_2_combined.h \
- ../_res/Goatfonts48/IFF/C_3_combined.h \
- ../_res/Goatfonts48/IFF/D_1_combined.h \
- ../_res/Goatfonts48/IFF/D_2_combined.h \
- ../_res/Goatfonts48/IFF/D_3_combined.h \
- ../_res/Goatfonts48/IFF/E_1_combined.h \
- ../_res/Goatfonts48/IFF/E_2_combined.h \
- ../_res/Goatfonts48/IFF/E_3_combined.h \
- ../_res/Goatfonts48/IFF/F_1_combined.h \
- ../_res/Goatfonts48/IFF/F_2_combined.h \
- ../_res/Goatfonts48/IFF/F_3_combined.h \
- ../_res/Goatfonts48/IFF/G_1_combined.h \
- ../_res/Goatfonts48/IFF/G_2_combined.h \
- ../_res/Goatfonts48/IFF/G_3_combined.h \
- ../_res/Goatfonts48/IFF/H_1_combined.h \
- ../_res/Goatfonts48/IFF/H_2_combined.h \
- ../_res/Goatfonts48/IFF/H_3_combined.h \
- ../_res/Goatfonts48/IFF/I_1_combined.h \
- ../_res/Goatfonts48/IFF/I_2_combined.h \
- ../_res/Goatfonts48/IFF/I_3_combined.h \
- ../_res/Goatfonts48/IFF/J_1_combined.h \
- ../_res/Goatfonts48/IFF/J_2_combined.h \
- ../_res/Goatfonts48/IFF/J_3_combined.h \
- ../_res/Goatfonts48/IFF/K_1_combined.h \
- ../_res/Goatfonts48/IFF/K_2_combined.h \
- ../_res/Goatfonts48/IFF/K_3_combined.h \
- ../_res/Goatfonts48/IFF/L_1_combined.h \
- ../_res/Goatfonts48/IFF/L_2_combined.h \
- ../_res/Goatfonts48/IFF/L_3_combined.h \
- ../_res/Goatfonts48/IFF/M_1_combined.h \
- ../_res/Goatfonts48/IFF/M_2_combined.h \
- ../_res/Goatfonts48/IFF/M_3_combined.h \
- ../_res/Goatfonts48/IFF/N_1_combined.h \
- ../_res/Goatfonts48/IFF/N_2_combined.h \
- ../_res/Goatfonts48/IFF/N_3_combined.h \
- ../_res/Goatfonts48/IFF/O_1_combined.h \
- ../_res/Goatfonts48/IFF/O_2_combined.h \
- ../_res/Goatfonts48/IFF/O_3_combined.h \
- ../_res/Goatfonts48/IFF/P_1_combined.h \
- ../_res/Goatfonts48/IFF/P_2_combined.h \
- ../_res/Goatfonts48/IFF/P_3_combined.h \
- ../_res/Goatfonts48/IFF/Q_1_combined.h \
- ../_res/Goatfonts48/IFF/Q_2_combined.h \
- ../_res/Goatfonts48/IFF/Q_3_combined.h \
- ../_res/Goatfonts48/IFF/R_1_combined.h \
- ../_res/Goatfonts48/IFF/R_2_combined.h \
- ../_res/Goatfonts48/IFF/R_3_combined.h \
- ../_res/Goatfonts48/IFF/S_1_combined.h \
- ../_res/Goatfonts48/IFF/S_2_combined.h \
- ../_res/Goatfonts48/IFF/S_3_combined.h \
- ../_res/Goatfonts48/IFF/T_1_combined.h \
- ../_res/Goatfonts48/IFF/T_2_combined.h \
- ../_res/Goatfonts48/IFF/T_3_combined.h \
- ../_res/Goatfonts48/IFF/U_1_combined.h \
- ../_res/Goatfonts48/IFF/U_2_combined.h \
- ../_res/Goatfonts48/IFF/U_3_combined.h \
- ../_res/Goatfonts48/IFF/V_1_combined.h \
- ../_res/Goatfonts48/IFF/V_2_combined.h \
- ../_res/Goatfonts48/IFF/V_3_combined.h \
- ../_res/Goatfonts48/IFF/W_1_combined.h \
- ../_res/Goatfonts48/IFF/W_2_combined.h \
- ../_res/Goatfonts48/IFF/W_3_combined.h \
- ../_res/Goatfonts48/IFF/X_1_combined.h \
- ../_res/Goatfonts48/IFF/X_2_combined.h \
- ../_res/Goatfonts48/IFF/X_3_combined.h \
- ../_res/Goatfonts48/IFF/Y_1_combined.h \
- ../_res/Goatfonts48/IFF/Y_2_combined.h \
- ../_res/Goatfonts48/IFF/Y_3_combined.h \
- ../_res/Goatfonts48/IFF/Z_1_combined.h \
- ../_res/Goatfonts48/IFF/Z_2_combined.h \
- ../_res/Goatfonts48/IFF/Z_3_combined.h \
- ../_res/Goatfonts48/IFF/Space_1_combined.h \
- ../_res/Goatfonts48/IFF/Space_2_combined.h \
- ../_res/Goatfonts48/IFF/Space_3_combined.h \
- ../_res/Goatfonts48/IFF/0_1_combined.h \
- ../_res/Goatfonts48/IFF/0_2_combined.h \
- ../_res/Goatfonts48/IFF/0_3_combined.h \
- ../_res/Goatfonts48/IFF/1_1_combined.h \
- ../_res/Goatfonts48/IFF/1_2_combined.h \
- ../_res/Goatfonts48/IFF/1_3_combined.h \
- ../_res/Goatfonts48/IFF/2_1_combined.h \
- ../_res/Goatfonts48/IFF/2_2_combined.h \
- ../_res/Goatfonts48/IFF/2_3_combined.h
+ ../_res/discocrazy.h ../_res/Goatfonts_z3k_corretti/goatfonts.h \
+ bigfonts.h ../_res/Goatfonts48_z3k/48/A_1_combined.h \
+ ../_res/Goatfonts48_z3k/48/A_2_combined.h \
+ ../_res/Goatfonts48_z3k/48/A_3_combined.h \
+ ../_res/Goatfonts48_z3k/48/B_1_combined.h \
+ ../_res/Goatfonts48_z3k/48/B_2_combined.h \
+ ../_res/Goatfonts48_z3k/48/B_3_combined.h \
+ ../_res/Goatfonts48_z3k/48/C_1_combined.h \
+ ../_res/Goatfonts48_z3k/48/C_2_combined.h \
+ ../_res/Goatfonts48_z3k/48/C_3_combined.h \
+ ../_res/Goatfonts48_z3k/48/D_1_combined.h \
+ ../_res/Goatfonts48_z3k/48/D_2_combined.h \
+ ../_res/Goatfonts48_z3k/48/D_3_combined.h \
+ ../_res/Goatfonts48_z3k/48/E_1_combined.h \
+ ../_res/Goatfonts48_z3k/48/E_2_combined.h \
+ ../_res/Goatfonts48_z3k/48/E_3_combined.h \
+ ../_res/Goatfonts48_z3k/48/F_1_combined.h \
+ ../_res/Goatfonts48_z3k/48/F_2_combined.h \
+ ../_res/Goatfonts48_z3k/48/F_3_combined.h \
+ ../_res/Goatfonts48_z3k/48/G_1_combined.h \
+ ../_res/Goatfonts48_z3k/48/G_2_combined.h \
+ ../_res/Goatfonts48_z3k/48/G_3_combined.h \
+ ../_res/Goatfonts48_z3k/48/H_1_combined.h \
+ ../_res/Goatfonts48_z3k/48/H_2_combined.h \
+ ../_res/Goatfonts48_z3k/48/H_3_combined.h \
+ ../_res/Goatfonts48_z3k/48/I_1_combined.h \
+ ../_res/Goatfonts48_z3k/48/I_2_combined.h \
+ ../_res/Goatfonts48_z3k/48/I_3_combined.h \
+ ../_res/Goatfonts48_z3k/48/J_1_combined.h \
+ ../_res/Goatfonts48_z3k/48/J_2_combined.h \
+ ../_res/Goatfonts48_z3k/48/J_3_combined.h \
+ ../_res/Goatfonts48_z3k/48/K_1_combined.h \
+ ../_res/Goatfonts48_z3k/48/K_2_combined.h \
+ ../_res/Goatfonts48_z3k/48/K_3_combined.h \
+ ../_res/Goatfonts48_z3k/48/L_1_combined.h \
+ ../_res/Goatfonts48_z3k/48/L_2_combined.h \
+ ../_res/Goatfonts48_z3k/48/L_3_combined.h \
+ ../_res/Goatfonts48_z3k/48/M_1_combined.h \
+ ../_res/Goatfonts48_z3k/48/M_2_combined.h \
+ ../_res/Goatfonts48_z3k/48/M_3_combined.h \
+ ../_res/Goatfonts48_z3k/48/N_1_combined.h \
+ ../_res/Goatfonts48_z3k/48/N_2_combined.h \
+ ../_res/Goatfonts48_z3k/48/N_3_combined.h \
+ ../_res/Goatfonts48_z3k/48/O_1_combined.h \
+ ../_res/Goatfonts48_z3k/48/O_2_combined.h \
+ ../_res/Goatfonts48_z3k/48/O_3_combined.h \
+ ../_res/Goatfonts48_z3k/48/P_1_combined.h \
+ ../_res/Goatfonts48_z3k/48/P_2_combined.h \
+ ../_res/Goatfonts48_z3k/48/P_3_combined.h \
+ ../_res/Goatfonts48_z3k/48/Q_1_combined.h \
+ ../_res/Goatfonts48_z3k/48/Q_2_combined.h \
+ ../_res/Goatfonts48_z3k/48/Q_3_combined.h \
+ ../_res/Goatfonts48_z3k/48/R_1_combined.h \
+ ../_res/Goatfonts48_z3k/48/R_2_combined.h \
+ ../_res/Goatfonts48_z3k/48/R_3_combined.h \
+ ../_res/Goatfonts48_z3k/48/S_1_combined.h \
+ ../_res/Goatfonts48_z3k/48/S_2_combined.h \
+ ../_res/Goatfonts48_z3k/48/S_3_combined.h \
+ ../_res/Goatfonts48_z3k/48/T_1_combined.h \
+ ../_res/Goatfonts48_z3k/48/T_2_combined.h \
+ ../_res/Goatfonts48_z3k/48/T_3_combined.h \
+ ../_res/Goatfonts48_z3k/48/U_1_combined.h \
+ ../_res/Goatfonts48_z3k/48/U_2_combined.h \
+ ../_res/Goatfonts48_z3k/48/U_3_combined.h \
+ ../_res/Goatfonts48_z3k/48/V_1_combined.h \
+ ../_res/Goatfonts48_z3k/48/V_2_combined.h \
+ ../_res/Goatfonts48_z3k/48/V_3_combined.h \
+ ../_res/Goatfonts48_z3k/48/W_1_combined.h \
+ ../_res/Goatfonts48_z3k/48/W_2_combined.h \
+ ../_res/Goatfonts48_z3k/48/W_3_combined.h \
+ ../_res/Goatfonts48_z3k/48/X_1_combined.h \
+ ../_res/Goatfonts48_z3k/48/X_2_combined.h \
+ ../_res/Goatfonts48_z3k/48/X_3_combined.h \
+ ../_res/Goatfonts48_z3k/48/Y_1_combined.h \
+ ../_res/Goatfonts48_z3k/48/Y_2_combined.h \
+ ../_res/Goatfonts48_z3k/48/Y_3_combined.h \
+ ../_res/Goatfonts48_z3k/48/Z_1_combined.h \
+ ../_res/Goatfonts48_z3k/48/Z_2_combined.h \
+ ../_res/Goatfonts48_z3k/48/Z_3_combined.h \
+ ../_res/Goatfonts48_z3k/48/Space_1_combined.h \
+ ../_res/Goatfonts48_z3k/48/Space_2_combined.h \
+ ../_res/Goatfonts48_z3k/48/Space_3_combined.h \
+ ../_res/Goatfonts48_z3k/48/0_1_combined.h \
+ ../_res/Goatfonts48_z3k/48/0_2_combined.h \
+ ../_res/Goatfonts48_z3k/48/0_3_combined.h \
+ ../_res/Goatfonts48_z3k/48/1_1_combined.h \
+ ../_res/Goatfonts48_z3k/48/1_2_combined.h \
+ ../_res/Goatfonts48_z3k/48/1_3_combined.h \
+ ../_res/Goatfonts48_z3k/48/2_1_combined.h \
+ ../_res/Goatfonts48_z3k/48/2_2_combined.h \
+ ../_res/Goatfonts48_z3k/48/2_3_combined.h
 
 goatlight.h:
 
@@ -355,186 +355,186 @@ globals.h:
 
 ../_res/discocrazy.h:
 
-../_res/Goatfonts/IFF/goatfonts.h:
+../_res/Goatfonts_z3k_corretti/goatfonts.h:
 
 bigfonts.h:
 
-../_res/Goatfonts48/IFF/A_1_combined.h:
+../_res/Goatfonts48_z3k/48/A_1_combined.h:
 
-../_res/Goatfonts48/IFF/A_2_combined.h:
+../_res/Goatfonts48_z3k/48/A_2_combined.h:
 
-../_res/Goatfonts48/IFF/A_3_combined.h:
+../_res/Goatfonts48_z3k/48/A_3_combined.h:
 
-../_res/Goatfonts48/IFF/B_1_combined.h:
+../_res/Goatfonts48_z3k/48/B_1_combined.h:
 
-../_res/Goatfonts48/IFF/B_2_combined.h:
+../_res/Goatfonts48_z3k/48/B_2_combined.h:
 
-../_res/Goatfonts48/IFF/B_3_combined.h:
+../_res/Goatfonts48_z3k/48/B_3_combined.h:
 
-../_res/Goatfonts48/IFF/C_1_combined.h:
+../_res/Goatfonts48_z3k/48/C_1_combined.h:
 
-../_res/Goatfonts48/IFF/C_2_combined.h:
+../_res/Goatfonts48_z3k/48/C_2_combined.h:
 
-../_res/Goatfonts48/IFF/C_3_combined.h:
+../_res/Goatfonts48_z3k/48/C_3_combined.h:
 
-../_res/Goatfonts48/IFF/D_1_combined.h:
+../_res/Goatfonts48_z3k/48/D_1_combined.h:
 
-../_res/Goatfonts48/IFF/D_2_combined.h:
+../_res/Goatfonts48_z3k/48/D_2_combined.h:
 
-../_res/Goatfonts48/IFF/D_3_combined.h:
+../_res/Goatfonts48_z3k/48/D_3_combined.h:
 
-../_res/Goatfonts48/IFF/E_1_combined.h:
+../_res/Goatfonts48_z3k/48/E_1_combined.h:
 
-../_res/Goatfonts48/IFF/E_2_combined.h:
+../_res/Goatfonts48_z3k/48/E_2_combined.h:
 
-../_res/Goatfonts48/IFF/E_3_combined.h:
+../_res/Goatfonts48_z3k/48/E_3_combined.h:
 
-../_res/Goatfonts48/IFF/F_1_combined.h:
+../_res/Goatfonts48_z3k/48/F_1_combined.h:
 
-../_res/Goatfonts48/IFF/F_2_combined.h:
+../_res/Goatfonts48_z3k/48/F_2_combined.h:
 
-../_res/Goatfonts48/IFF/F_3_combined.h:
+../_res/Goatfonts48_z3k/48/F_3_combined.h:
 
-../_res/Goatfonts48/IFF/G_1_combined.h:
+../_res/Goatfonts48_z3k/48/G_1_combined.h:
 
-../_res/Goatfonts48/IFF/G_2_combined.h:
+../_res/Goatfonts48_z3k/48/G_2_combined.h:
 
-../_res/Goatfonts48/IFF/G_3_combined.h:
+../_res/Goatfonts48_z3k/48/G_3_combined.h:
 
-../_res/Goatfonts48/IFF/H_1_combined.h:
+../_res/Goatfonts48_z3k/48/H_1_combined.h:
 
-../_res/Goatfonts48/IFF/H_2_combined.h:
+../_res/Goatfonts48_z3k/48/H_2_combined.h:
 
-../_res/Goatfonts48/IFF/H_3_combined.h:
+../_res/Goatfonts48_z3k/48/H_3_combined.h:
 
-../_res/Goatfonts48/IFF/I_1_combined.h:
+../_res/Goatfonts48_z3k/48/I_1_combined.h:
 
-../_res/Goatfonts48/IFF/I_2_combined.h:
+../_res/Goatfonts48_z3k/48/I_2_combined.h:
 
-../_res/Goatfonts48/IFF/I_3_combined.h:
+../_res/Goatfonts48_z3k/48/I_3_combined.h:
 
-../_res/Goatfonts48/IFF/J_1_combined.h:
+../_res/Goatfonts48_z3k/48/J_1_combined.h:
 
-../_res/Goatfonts48/IFF/J_2_combined.h:
+../_res/Goatfonts48_z3k/48/J_2_combined.h:
 
-../_res/Goatfonts48/IFF/J_3_combined.h:
+../_res/Goatfonts48_z3k/48/J_3_combined.h:
 
-../_res/Goatfonts48/IFF/K_1_combined.h:
+../_res/Goatfonts48_z3k/48/K_1_combined.h:
 
-../_res/Goatfonts48/IFF/K_2_combined.h:
+../_res/Goatfonts48_z3k/48/K_2_combined.h:
 
-../_res/Goatfonts48/IFF/K_3_combined.h:
+../_res/Goatfonts48_z3k/48/K_3_combined.h:
 
-../_res/Goatfonts48/IFF/L_1_combined.h:
+../_res/Goatfonts48_z3k/48/L_1_combined.h:
 
-../_res/Goatfonts48/IFF/L_2_combined.h:
+../_res/Goatfonts48_z3k/48/L_2_combined.h:
 
-../_res/Goatfonts48/IFF/L_3_combined.h:
+../_res/Goatfonts48_z3k/48/L_3_combined.h:
 
-../_res/Goatfonts48/IFF/M_1_combined.h:
+../_res/Goatfonts48_z3k/48/M_1_combined.h:
 
-../_res/Goatfonts48/IFF/M_2_combined.h:
+../_res/Goatfonts48_z3k/48/M_2_combined.h:
 
-../_res/Goatfonts48/IFF/M_3_combined.h:
+../_res/Goatfonts48_z3k/48/M_3_combined.h:
 
-../_res/Goatfonts48/IFF/N_1_combined.h:
+../_res/Goatfonts48_z3k/48/N_1_combined.h:
 
-../_res/Goatfonts48/IFF/N_2_combined.h:
+../_res/Goatfonts48_z3k/48/N_2_combined.h:
 
-../_res/Goatfonts48/IFF/N_3_combined.h:
+../_res/Goatfonts48_z3k/48/N_3_combined.h:
 
-../_res/Goatfonts48/IFF/O_1_combined.h:
+../_res/Goatfonts48_z3k/48/O_1_combined.h:
 
-../_res/Goatfonts48/IFF/O_2_combined.h:
+../_res/Goatfonts48_z3k/48/O_2_combined.h:
 
-../_res/Goatfonts48/IFF/O_3_combined.h:
+../_res/Goatfonts48_z3k/48/O_3_combined.h:
 
-../_res/Goatfonts48/IFF/P_1_combined.h:
+../_res/Goatfonts48_z3k/48/P_1_combined.h:
 
-../_res/Goatfonts48/IFF/P_2_combined.h:
+../_res/Goatfonts48_z3k/48/P_2_combined.h:
 
-../_res/Goatfonts48/IFF/P_3_combined.h:
+../_res/Goatfonts48_z3k/48/P_3_combined.h:
 
-../_res/Goatfonts48/IFF/Q_1_combined.h:
+../_res/Goatfonts48_z3k/48/Q_1_combined.h:
 
-../_res/Goatfonts48/IFF/Q_2_combined.h:
+../_res/Goatfonts48_z3k/48/Q_2_combined.h:
 
-../_res/Goatfonts48/IFF/Q_3_combined.h:
+../_res/Goatfonts48_z3k/48/Q_3_combined.h:
 
-../_res/Goatfonts48/IFF/R_1_combined.h:
+../_res/Goatfonts48_z3k/48/R_1_combined.h:
 
-../_res/Goatfonts48/IFF/R_2_combined.h:
+../_res/Goatfonts48_z3k/48/R_2_combined.h:
 
-../_res/Goatfonts48/IFF/R_3_combined.h:
+../_res/Goatfonts48_z3k/48/R_3_combined.h:
 
-../_res/Goatfonts48/IFF/S_1_combined.h:
+../_res/Goatfonts48_z3k/48/S_1_combined.h:
 
-../_res/Goatfonts48/IFF/S_2_combined.h:
+../_res/Goatfonts48_z3k/48/S_2_combined.h:
 
-../_res/Goatfonts48/IFF/S_3_combined.h:
+../_res/Goatfonts48_z3k/48/S_3_combined.h:
 
-../_res/Goatfonts48/IFF/T_1_combined.h:
+../_res/Goatfonts48_z3k/48/T_1_combined.h:
 
-../_res/Goatfonts48/IFF/T_2_combined.h:
+../_res/Goatfonts48_z3k/48/T_2_combined.h:
 
-../_res/Goatfonts48/IFF/T_3_combined.h:
+../_res/Goatfonts48_z3k/48/T_3_combined.h:
 
-../_res/Goatfonts48/IFF/U_1_combined.h:
+../_res/Goatfonts48_z3k/48/U_1_combined.h:
 
-../_res/Goatfonts48/IFF/U_2_combined.h:
+../_res/Goatfonts48_z3k/48/U_2_combined.h:
 
-../_res/Goatfonts48/IFF/U_3_combined.h:
+../_res/Goatfonts48_z3k/48/U_3_combined.h:
 
-../_res/Goatfonts48/IFF/V_1_combined.h:
+../_res/Goatfonts48_z3k/48/V_1_combined.h:
 
-../_res/Goatfonts48/IFF/V_2_combined.h:
+../_res/Goatfonts48_z3k/48/V_2_combined.h:
 
-../_res/Goatfonts48/IFF/V_3_combined.h:
+../_res/Goatfonts48_z3k/48/V_3_combined.h:
 
-../_res/Goatfonts48/IFF/W_1_combined.h:
+../_res/Goatfonts48_z3k/48/W_1_combined.h:
 
-../_res/Goatfonts48/IFF/W_2_combined.h:
+../_res/Goatfonts48_z3k/48/W_2_combined.h:
 
-../_res/Goatfonts48/IFF/W_3_combined.h:
+../_res/Goatfonts48_z3k/48/W_3_combined.h:
 
-../_res/Goatfonts48/IFF/X_1_combined.h:
+../_res/Goatfonts48_z3k/48/X_1_combined.h:
 
-../_res/Goatfonts48/IFF/X_2_combined.h:
+../_res/Goatfonts48_z3k/48/X_2_combined.h:
 
-../_res/Goatfonts48/IFF/X_3_combined.h:
+../_res/Goatfonts48_z3k/48/X_3_combined.h:
 
-../_res/Goatfonts48/IFF/Y_1_combined.h:
+../_res/Goatfonts48_z3k/48/Y_1_combined.h:
 
-../_res/Goatfonts48/IFF/Y_2_combined.h:
+../_res/Goatfonts48_z3k/48/Y_2_combined.h:
 
-../_res/Goatfonts48/IFF/Y_3_combined.h:
+../_res/Goatfonts48_z3k/48/Y_3_combined.h:
 
-../_res/Goatfonts48/IFF/Z_1_combined.h:
+../_res/Goatfonts48_z3k/48/Z_1_combined.h:
 
-../_res/Goatfonts48/IFF/Z_2_combined.h:
+../_res/Goatfonts48_z3k/48/Z_2_combined.h:
 
-../_res/Goatfonts48/IFF/Z_3_combined.h:
+../_res/Goatfonts48_z3k/48/Z_3_combined.h:
 
-../_res/Goatfonts48/IFF/Space_1_combined.h:
+../_res/Goatfonts48_z3k/48/Space_1_combined.h:
 
-../_res/Goatfonts48/IFF/Space_2_combined.h:
+../_res/Goatfonts48_z3k/48/Space_2_combined.h:
 
-../_res/Goatfonts48/IFF/Space_3_combined.h:
+../_res/Goatfonts48_z3k/48/Space_3_combined.h:
 
-../_res/Goatfonts48/IFF/0_1_combined.h:
+../_res/Goatfonts48_z3k/48/0_1_combined.h:
 
-../_res/Goatfonts48/IFF/0_2_combined.h:
+../_res/Goatfonts48_z3k/48/0_2_combined.h:
 
-../_res/Goatfonts48/IFF/0_3_combined.h:
+../_res/Goatfonts48_z3k/48/0_3_combined.h:
 
-../_res/Goatfonts48/IFF/1_1_combined.h:
+../_res/Goatfonts48_z3k/48/1_1_combined.h:
 
-../_res/Goatfonts48/IFF/1_2_combined.h:
+../_res/Goatfonts48_z3k/48/1_2_combined.h:
 
-../_res/Goatfonts48/IFF/1_3_combined.h:
+../_res/Goatfonts48_z3k/48/1_3_combined.h:
 
-../_res/Goatfonts48/IFF/2_1_combined.h:
+../_res/Goatfonts48_z3k/48/2_1_combined.h:
 
-../_res/Goatfonts48/IFF/2_2_combined.h:
+../_res/Goatfonts48_z3k/48/2_2_combined.h:
 
-../_res/Goatfonts48/IFF/2_3_combined.h:
+../_res/Goatfonts48_z3k/48/2_3_combined.h:
