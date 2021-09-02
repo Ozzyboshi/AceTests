@@ -6,7 +6,8 @@
                   XDEF                                          _ammxmainloop3
                     XDEF                                          _ammxmainloop3_init
 
-                  SECTION                                       PROCESSING,CODE_F
+                 ; SECTION                                       PROCESSING,CODE_F
+                 SECTION ".data_chip",data
 
                   include                                       "aprocessing/rasterizers/globaloptions.s"
                   include                                       "aprocessing/ammxmacros.i"
@@ -313,8 +314,8 @@ freemem:                    ; subroutine for deallocating. ML: freemem(a1,d0).
         movem.l	(a7)+,d0-d7/a0-a6   ; pop registers from the stack
         rts   
 
-FILLTABLES: dcb.b 4*257*360,$00
-FILLTABLES_END:
+;FILLTABLES: dcb.b 4*257*360,$00
+;FILLTABLES_END:
 
 
 BULD_FILLTABLE:
@@ -324,7 +325,8 @@ BULD_FILLTABLE:
 BULD_FILLTABLE_START:
         RESETFILLTABLE
         bsr.w BULD_ROTATION
-        SAVE_FILL_TABLE d6
+        ;SAVE_FILL_TABLE d6
+        SAVE_FILL_TABLE2 d6
         addq #1,d6
         dbra d5,BULD_FILLTABLE_START
         movem.l                                       (sp)+,d0-d7/a0-a6
@@ -348,9 +350,9 @@ _ammxmainloop3_init:
                 add.l #4*257*360,d0
                 move.l d0,FILLTABLES_ADDR_END
 
-                move.l #4*257*360,d0
-                move.l FILLTABLES_ADDR_START,a0
-                jsr freemem
+                ;move.l #4*257*360,d0
+                ;move.l FILLTABLES_ADDR_START,a0
+                ;jsr freemem
 
                 move.l  #ammx_fill_table_noreset,AMMX_FILL_FUNCT_ADDR
                 LOADIDENTITY
@@ -504,7 +506,8 @@ _ammxmainloop3_init:
                   
 
                   
-                move.l #FILLTABLES,FILLTABLES_PTR
+              ;  move.l #FILLTABLES,FILLTABLES_PTR
+              move.l FILLTABLES_ADDR_START,FILLTABLES_PTR
                     rts
 _ammxmainloop3: 
                   IFD DEBUG_COLORS
@@ -531,7 +534,6 @@ _ammxmainloop3:
                   move.l                                        (a0)+,bitplane0
                   move.l                                        (a0),bitplane1
 
-                                  SWAP_BPL
 
             
                   ;move.l #SCREEN_0,par1
@@ -587,6 +589,7 @@ znoreset2:
                   STROKE                                        #2
     ENDIF   
                   ;bsr.w                                         TRIANGLE3D
+                SWAP_BPL
                   bsr.w CLEAR
                   btst    #6,$dff002
 waitblit_copy5:
@@ -617,9 +620,11 @@ waitblit_copy5:
 
                     ; point the NEXT FILLTABLES record
                     adda.l #4*257*1,a0
-                    cmp.l #FILLTABLES_END,a0
+                    ;cmp.l #FILLTABLES_END,a0
+                    cmp.l FILLTABLES_ADDR_END,a0
                     bne.s filltablesdonotreset
-                    move.l #FILLTABLES,a0
+                    ;move.l #FILLTABLES,a0
+                    move.l FILLTABLES_ADDR_START,a0
 filltablesdonotreset
                     move.l a0,FILLTABLES_PTR
                     ;jsr ammx_fill_table_noreset

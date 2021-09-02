@@ -79,3 +79,17 @@ SAVE_FILL_TABLE MACRO
     move.l (a0)+,(a1)+
     dbra d3,.1\@
     ENDM
+
+SAVE_FILL_TABLE2 MACRO
+    lea FILL_TABLE,a0
+    move.l FILLTABLES_ADDR_START,a1
+    move.l #4*257,d0
+    mulu.w \1,d0
+    adda.l d0,a1
+    move.w AMMXFILLTABLE_CURRENT_ROW,(a1)+
+    move.w AMMXFILLTABLE_END_ROW,(a1)+
+    move.w #255,d3
+.1\@:
+    move.l (a0)+,(a1)+
+    dbra d3,.1\@
+    ENDM

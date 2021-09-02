@@ -169,7 +169,7 @@ screen0+=40*256;
     //g_pCustom->color[0] = 0x0000;
   
   vPortWaitForEnd(s_pVpMain);
-  //copSwapBuffers();
+  copSwapBuffers();
   /*vPortWaitForEnd(s_pVpMain);
   vPortWaitForEnd(s_pVpMain);
   vPortWaitForEnd(s_pVpMain);
