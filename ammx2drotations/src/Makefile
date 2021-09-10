@@ -100,7 +100,7 @@ am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_ammx2drotations_OBJECTS = main.$(OBJEXT) ammx2drotations.$(OBJEXT)
 ammx2drotations_OBJECTS = $(am_ammx2drotations_OBJECTS)
-ammx2drotations_DEPENDENCIES = ammxasm.o
+ammx2drotations_DEPENDENCIES = ammxasm.o music_ptr_linkable2.o
 AM_V_P = $(am__v_P_$(V))
 am__v_P_ = $(am__v_P_$(AM_DEFAULT_VERBOSITY))
 am__v_P_0 = false
@@ -251,7 +251,7 @@ target_alias =
 top_build_prefix = ../
 top_builddir = ..
 top_srcdir = ..
-ammx2drotations_LDADD = ammxasm.o
+ammx2drotations_LDADD = ammxasm.o music_ptr_linkable2.o
 ammx2drotations_SOURCES = main.c ammx2drotations.c
 all: all-am
 
@@ -578,9 +578,12 @@ uninstall-am: uninstall-binPROGRAMS
 
 ammxasm.o: ammxasm.s
 
-	vasmm68k_mot -devpac -Fhunk -quiet -esc  -m68080  -DUSE_DBLBUF -DUSE_VIDEOCHIP -DUSE_CLIPPING -DUSE_3D ./ammxasm.s  -o ./ammxasm.o -I/usr/local/amiga/os-include
+	vasmm68k_mot -devpac -Fhunk -quiet -esc  -DUSE_DBLBUF -DUSE_VIDEOCHIP -DUSE_CLIPPING -DUSE_3D ./ammxasm.s  -o ./ammxasm.o -I/usr/local/amiga/os-include
 	 echo "m68k"
 	echo "	vasmm68k_mot -devpac -Fhunk -quiet -esc  -m68080 -DUSE_VIDEOCHIP -DUSE_CLIPPING -DUSE_3D ./ammxasm.s  -o ./ammxasm.o -I/usr/local/amiga/os-include"
+
+music_ptr_linkable2.o: music_ptr_linkable2.s
+	vasmm68k_mot -devpac -unnamed-sections -chklabels -Fhunk -quiet -esc  -DINTERLACE=0 ./music_ptr_linkable2.s  -o ./music_ptr_linkable2.o -I/opt/amiga/m68k-amigaos/ndk-include/
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

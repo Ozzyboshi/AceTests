@@ -17,9 +17,10 @@ SWAP_BPL MACRO
     add.l d1,SCREEN_PTR_0
     add.l d1,SCREEN_PTR_1
     ENDM
+	section	"CHIPDATA2",data_c
 
     IFD USE_VIDEOCHIP
-    SECTION ".data_chip",data
+    ;SECTION ".data_chip",data
     ENDIF
 
 SCREEN_0

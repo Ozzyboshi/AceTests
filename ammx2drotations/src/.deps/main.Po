@@ -85,7 +85,8 @@ main.o: main.c /opt/amiga/include/ace/generic/main.h \
  /opt/amiga/m68k-amigaos/sys-include/stdint.h \
  /opt/amiga/m68k-amigaos/sys-include/sys/_intsup.h \
  /opt/amiga/include/ace/managers/key.h \
- /opt/amiga/include/ace/managers/state.h main.h ammx2drotations.h
+ /opt/amiga/include/ace/managers/state.h main.h ammx2drotations.h \
+ amazed_by_the_pokey.h
 
 /opt/amiga/include/ace/generic/main.h:
 
@@ -268,3 +269,5 @@ main.o: main.c /opt/amiga/include/ace/generic/main.h \
 main.h:
 
 ammx2drotations.h:
+
+amazed_by_the_pokey.h:

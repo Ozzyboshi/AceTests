@@ -90,18 +90,20 @@ PREPARESCREEN MACRO
 	move.l #5*255,d3
 	move.l SCREEN_PTR_0,a0
 	move.l SCREEN_PTR_1,a4
-	
+	IFD VAMPIRE
 	load #0,e0
-
+	ENDIF
 	move.l bitplane0,a1
 	move.l bitplane1,a2
 .preparescreenclearline:
+	IFD VAMPIRE
 	load (a0),e20
 	load (a4),e21
 	store e20,(a1)+
 	store e21,(a2)+
 	store e0,(a0)+
 	store e0,(a4)+
+	ENDIF
 	dbra d3,.preparescreenclearline
 	ENDM
 

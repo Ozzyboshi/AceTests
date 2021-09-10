@@ -74,7 +74,7 @@ void ammx2drotationsGsCreate(void) {
   // Load the view
   viewLoad(s_pView);
 
-  ammxmainloop3_init();
+  //ammxmainloop3_init();
 
    //g_pCustom->diwstrt = 0x2c81;
    //g_pCustom->diwstop = 0x00c1;
@@ -119,8 +119,9 @@ void ammx2drotationsGsLoop(void) {
   //g_pCustom->color[0] = 0x00F0;
     if (stage==0) ammxmainloop((ULONG)s_pMainBuffer->pBack->Planes);
     else if (stage==1) ammxmainloop2((ULONG)s_pMainBuffer->pBack->Planes);
-    else if (stage==2) 
+    else if (0 && stage==2) 
     {
+
       ULONG screen0;
       screen0 = ammxmainloop3((ULONG)s_pMainBuffer->pBack->Planes);
         //vPortWaitForEnd(s_pVpMain);
@@ -167,7 +168,7 @@ screen0+=40*256;
 
     }
     //g_pCustom->color[0] = 0x0000;
-  
+  mt_music();
   vPortWaitForEnd(s_pVpMain);
   copSwapBuffers();
   /*vPortWaitForEnd(s_pVpMain);
