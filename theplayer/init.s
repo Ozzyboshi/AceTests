@@ -75,6 +75,6 @@ BULD_ROTATION:
                         movem.l                d0-d7/a0-a6,-(sp)
                         LOADIDENTITY
                         ROTATE_X_INV_Q_5_11    d6
-                        jsr                    TRIANGLE3D
+                        jsr                    TRIANGLE3D_NODRAW
                         movem.l                (sp)+,d0-d7/a0-a6
                         rts

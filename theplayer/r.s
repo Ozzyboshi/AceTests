@@ -235,7 +235,6 @@ POINTBP:
 	sub.l a2,a2
 	moveq #0,d0
 
-	
 	;lea p61coppoke+3,a4		;only used in P61mode >=3
 	jsr P61_Init
 
