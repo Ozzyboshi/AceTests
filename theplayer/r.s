@@ -248,7 +248,9 @@ mouse:
 	jsr P61_Music			;and call the playroutine manually.
 	;move	#$003,$180(a6)
 
+	IFD DEBUGCOLORS
     move.w #$0F00,$dff180
+	ENDC
 	;STROKE #3
 	;or.w    #3,STROKE_DATA
 	jsr ammxmainloop3
@@ -266,16 +268,17 @@ mouse:
 	move.w d0,2(a0)
 	swap d0
 
-
+	IFD DEBUGCOLORS
 	move	#$003,$180(a6)
+	ENDC
 	;move.l SCREEN_PTR_OTHER_0,a0
 	;move.l #$FFFFFFFF,(a0)
 	;move.l SCREEN_PTR_0,a0
 	;move.l #$FFFFFFFF,(a0)
 	IFD EFFECTS
-	bsr.w	muovicopper	; barra rossa sotto linea $ff
-	bsr.w	CopperDestSin	; Routine di scorrimento destra/sinistra
-	BSR.w	scrollcolors	; scorrimento ciclico dei colori
+	jsr	muovicopper	; barra rossa sotto linea $ff
+	jsr	CopperDestSin	; Routine di scorrimento destra/sinistra
+	jsr	scrollcolors	; scorrimento ciclico dei colori
 	ENDC
 Aspetta:
 	cmpi.b	#$ff,$dff006	; Siamo alla linea 255?
@@ -442,6 +445,7 @@ scrollcolors:
 	include "AProcessing/libs/rasterizers/processingclearfunctions.s"
     include "AProcessing/libs/trigtables.i"
 	include "AProcessing/libs/rasterizers/point.s"
+	include "AProcessing/libs/rasterizers/triangle.s"
     include "AProcessing/libs/rasterizers/triangle3d.s"
 	include "AProcessing/libs/rasterizers/processing_bitplanes_fast.s"
 
@@ -572,7 +576,7 @@ col14:
 	dc.w	$0180,$000	; color0
 	dc.w	$0182,$475	; color1
 	dc.w	$0184,$fff	; color2
-	dc.w	$0186,$ccc	; color3
+	;dc.w	$0186,$ccc	; color3
 	dc.w	$0188,$999	; color4
 	dc.w	$018a,$232	; color5
 	dc.w	$018c,$777	; color6

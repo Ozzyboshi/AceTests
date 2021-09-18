@@ -483,6 +483,8 @@ Module1:
 	include "AProcessing/libs/rasterizers/processingclearfunctions.s"
     include "AProcessing/libs/trigtables.i"
 	include "AProcessing/libs/rasterizers/point.s"
+	include "AProcessing/libs/rasterizers/triangle.s"
+
     include "AProcessing/libs/rasterizers/triangle3d.s"
 	include "AProcessing/libs/rasterizers/processing_bitplanes_fast.s"
 
