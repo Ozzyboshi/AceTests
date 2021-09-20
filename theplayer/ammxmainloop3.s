@@ -66,7 +66,7 @@ waitblit_copy5:
 
                    move.l                 FILLTABLES_PTR,a0
                    jsr                    ammx_fill_table_precalc
-                   ;jsr                    ammx_fill_table_precalc
+                   jsr                    ammx_fill_table_precalc
 
 
   
@@ -304,9 +304,8 @@ ammx_fill_table_no_firstbyte_1_bpl1:
 
 	; start addr odd or even? store result on d4
 	IFND VAMPIRE
-	move.l a3,d4
-	btst #0,d4
-	beq.s ammx_fill_table_startiter_bpl1
+	btst #0,d2
+	bne.s ammx_fill_table_startiter_bpl1
 	cmpi.w #8,d5
 	bcs.w ammx_fill_table_no8_bpl1 ; branch if lower (it will continue if we have at least 8 bits to fill)
 	or.b  d7,(a3)+
